@@ -31,7 +31,7 @@ data copy and clone
 7
 00:00:16,266 --> 00:00:18,066
 effects of function and ownership
-函数与所有权的影响
+函数与所有权
 
 8
 00:00:19,600 --> 00:00:21,500
@@ -55,8 +55,8 @@ memory provided by the computer
 
 12
 00:00:31,900 --> 00:00:34,333
-Some languages ​​such as java, go
-一些语言比如java, go
+Some languages ​​such as Java, Go
+一些语言比如Java, Go
 
 13
 00:00:34,566 --> 00:00:36,499
@@ -81,7 +81,7 @@ Other languages ​​like
 17
 00:00:42,466 --> 00:00:43,533
 C and C++
-c语言和C++
+C语言和C++
 
 18
 00:00:43,533 --> 00:00:46,099
@@ -269,7 +269,7 @@ When we define
 55
 00:02:11,800 --> 00:02:13,566
 it will allocate the corresponding storage space
-它会分配对应存储空间
+它会分配对应的存储空间
 
 56
 00:02:14,500 --> 00:02:16,500
@@ -347,23 +347,23 @@ When we define, we will allocate storage accordingly
 
 71
 00:02:51,733 --> 00:02:54,399
-In the second line we copy S1 to S2
-第二行我们将S1复制给S2
+In the second line we copy s1 to s2
+第二行我们将s1复制给s2
 
 72
 00:02:55,066 --> 00:02:59,266
-At the same time, the ownership of the value of S1 is also transferred to S2
-同时S1对应值的所有权也转移至S2
+At the same time, the ownership of the value of S1 is also transferred to s2
+同时s1对应值的所有权也转移至s2
 
 73
 00:02:59,466 --> 00:03:02,299
-then S1 will be invalid
-那S1 会失效
+then s1 will be invalid
+那s1会失效
 
 74
 00:03:03,933 --> 00:03:08,933
 When S2 goes out of scope, the corresponding string storage space
-当S2退出作用域时会释放对应的
+当s2退出作用域时会释放对应的
 
 75
 00:03:08,933 --> 00:03:09,600
@@ -391,7 +391,7 @@ Char等等
 80
 00:03:17,800 --> 00:03:22,066
 assignment will involve copying the data
-赋值会引示的发生数据的拷贝的操作
+赋值会隐式地发生数据的拷贝操作
 
 81
 00:03:23,700 --> 00:03:25,333
@@ -401,17 +401,17 @@ instead of transferring ownership
 82
 00:03:25,700 --> 00:03:28,200
 The compiler will call function copy
-它是通过引示的来
+它是通过隐式地
 
 83
 00:03:28,200 --> 00:03:29,500
 The compiler will call function copy
-编译器会引示的
+编译器会隐式的
 
 84
 00:03:29,500 --> 00:03:31,133
 The compiler will call function copy
-调一个copy函数
+调用一个copy函数
 
 85
 00:03:32,866 --> 00:03:34,399
@@ -510,27 +510,27 @@ all primitive types
 
 105
 00:04:14,600 --> 00:04:17,000
-such as U32, bool, char and tuples etc.
-比如U32, bool, char
+such as u32, bool, char and tuples etc.
+比如u32, bool, char
 
 106
 00:04:17,000 --> 00:04:17,666
-such as U32, bool, char and tuples etc.
+such as u32, bool, char and tuples etc.
 
 107
 00:04:17,666 --> 00:04:19,099
-such as U32, bool, char and tuples etc.
+such as u32, bool, char and tuples etc.
 和tuples等等
 
 108
 00:04:20,100 --> 00:04:23,133
 The clone interface implements the data type of clone
-clone接口实现clone的数据类型
+clone接口, 实现clone的数据类型
 
 109
 00:04:23,300 --> 00:04:25,400
 When we call the function
-当我们在显示的调用
+当我们显示地调用
 
 110
 00:04:25,400 --> 00:04:27,733
@@ -569,23 +569,23 @@ We define a
 
 117
 00:04:48,066 --> 00:04:49,666
-string S1
-字符串S1
+string s1
+字符串s1
 
 118
 00:04:51,133 --> 00:04:54,666
-At the same time, clone S1 and assign it to S2
-同时将S1 clone并赋值给S2
+At the same time, clone s1 and assign it to s2
+同时将s1 clone并赋值给s2
 
 119
 00:04:55,100 --> 00:04:58,933
-When we print S1 S2 we can see
-当我们打印S1 S2时候可以看到
+When we print s1 s2 we can see
+当我们打印s1 s2时候可以看到
 
 120
 00:05:00,566 --> 00:05:02,733
 both S1 and S2 are valid
-S1 S2都是有效的
+s1 s2都是有效的
 
 121
 00:05:02,900 --> 00:05:05,200
@@ -599,18 +599,18 @@ re-run
 
 123
 00:05:07,066 --> 00:05:11,733
-we will find an exception S1 is no longer available
-我们会发现抛出异常S1已经不再可用
+we will find an exception s1 is no longer available
+我们会发现抛出异常 s1已经不再可用
 
 124
 00:05:12,066 --> 00:05:14,199
-because its ownership has been transferred to S2
-因为它的所有权已经转移至S2
+because its ownership has been transferred to s2
+因为它的所有权已经转移至s2
 
 125
 00:05:16,066 --> 00:05:18,666
 Similarly, we can test the vector
-同样的我们可以测试一下vector
+同样的 我们可以测试一下vector
 
 126
 00:05:19,266 --> 00:05:20,199
@@ -620,7 +620,7 @@ type of data
 127
 00:05:20,733 --> 00:05:24,133
 We define a variant x whose corresponding value is
-我们定义了一个变量x它对应的值是
+我们定义了一个变量x 它对应的值是
 
 128
 00:05:25,266 --> 00:05:26,699
@@ -629,8 +629,8 @@ vec![1,2]
 
 129
 00:05:28,200 --> 00:05:31,500
-copy x to y and transfer ownership
-将x复制给y同时发生所有权的转移
+assign x to y and transfer ownership
+将x赋值给y 同时发生所有权的转移
 
 130
 00:05:32,700 --> 00:05:35,366
@@ -640,7 +640,7 @@ success when we print y
 131
 00:05:36,666 --> 00:05:40,066
 When we try to print x, we will find a compilation exception
-当我们尝试去打印x会发现编译异常
+当我们尝试去打印x 会发现编译异常
 
 132
 00:05:40,066 --> 00:05:42,566
@@ -663,23 +663,23 @@ This is a simple comment on the code snippet we just talked about
 
 136
 00:05:49,966 --> 00:05:52,799
-We allocate its storage when defining S1
-我们在定义S1的时候分配它存储
+We allocate its storage when defining s1
+我们在定义s1的时候分配了它的存储
 
 137
 00:05:52,900 --> 00:05:58,800
-clone the same data from S1 to S2 via clone
-通过clone将S1同样的数据克隆至S2
+clone the same data from s1 to s2 via clone
+通过clone将s1同样的数据克隆至s2
 
 138
 00:06:00,100 --> 00:06:02,000
-Then S1 is still valid at the same time
-那S1同时还是有效的
+Then s1 is still valid at the same time
+那s1同时还是有效的
 
 139
 00:06:02,466 --> 00:06:04,733
-When S1 S2 go out of the scope
-当S1 S2作用域结束的时候
+When s1 s2 go out of the scope
+当s1 s2作用域结束的时候
 
 140
 00:06:04,733 --> 00:06:07,466
@@ -738,7 +738,7 @@ let's struct also be copied
 151
 00:06:28,166 --> 00:06:30,366
 Clone is slower than copy
-clone相比的copy来说它会更慢
+clone相比copy来说它会更慢
 
 152
 00:06:30,366 --> 00:06:32,199
@@ -926,7 +926,7 @@ the parameter scope ends and is popped from the stack
 189
 00:07:50,933 --> 00:07:54,699
 Here we define a variant x with value is 5
-这里我们定义了一个变量x它的值是5
+这里我们定义了一个变量x 它的值是5
 
 190
 00:07:55,200 --> 00:07:59,133
@@ -961,7 +961,7 @@ gives_ownership
 196
 00:08:13,966 --> 00:08:15,299
 it returns a string
-它返回来一个string
+它返回了一个string
 
 197
 00:08:15,800 --> 00:08:16,600
@@ -1005,13 +1005,13 @@ In the main function we call gives_ownership
 
 205
 00:08:32,533 --> 00:08:36,299
-assign the return value to the S1 variant
-将返回值赋给S1变量
+assign the return value to the s1 variant
+将返回值赋给s1变量
 
 206
 00:08:36,300 --> 00:08:37,966
-then S1 gets
-那S1就获得了
+then s1 gets
+那s1就获得了
 
 207
 00:08:37,966 --> 00:08:40,366
@@ -1050,13 +1050,13 @@ eliminate storage space
 
 214
 00:08:56,766 --> 00:08:59,333
-Here we define a string S2
-这里我们定义了一个字符串S2
+Here we define a string s2
+这里我们定义了一个字符串s2
 
 215
 00:08:59,666 --> 00:09:03,999
-and pass S2 to the function takes_and_gives_back
-并且将S2传递给函数takes_and_gives_back
+and pass s2 to the function takes_and_gives_back
+并且将s2传递给函数takes_and_gives_back
 
 216
 00:09:03,999 --> 00:09:04,000
@@ -1069,23 +1069,23 @@ and pass S2 to the function takes_and_gives_back
 
 218
 00:09:05,500 --> 00:09:07,900
-A transfer of ownership of the value of S2 has occurred
-发生了S2对应值的所有权转移
+A transfer of ownership of the value of s2 has occurred
+发生了s2对应值的所有权转移
 
 219
 00:09:08,500 --> 00:09:13,666
-and copy the result of the function to S3
-并将函数返回值的结果复制给S3
+and copy the result of the function to s3
+并将函数返回值的结果赋值给s3
 
 220
 00:09:14,300 --> 00:09:18,466
-thereby transferring the ownership of the result of the function to S3
-从而将函数返回值的授权转移至S3
+thereby transferring the ownership of the result of the function to s3
+从而将函数返回值的授权转移至s3
 
 221
 00:09:18,766 --> 00:09:22,166
-From now on, S3 is available and S2 is no longer available
-后面的话S3是可用的S2不再可用
+From now on, s3 is available and s2 is no longer available
+后面的话 s3是可用的 s2不再可用
 
 222
 00:09:22,266 --> 00:09:24,533
@@ -1094,8 +1094,8 @@ when at the end of the main function
 
 223
 00:09:24,766 --> 00:09:26,466
-S3 out of scope
-S3退出作用域
+s3 out of scope
+s3退出作用域
 
 224
 00:09:26,600 --> 00:09:28,900
@@ -1139,7 +1139,7 @@ We do this by prepending the variant name with a & symbol
 232
 00:09:50,766 --> 00:09:51,799
 We do this by prepending the variant name with a & symbol
-&的符号
+& 符号
 
 233
 00:09:52,066 --> 00:09:53,333
@@ -1173,12 +1173,12 @@ References are immutable by default
 239
 00:10:01,600 --> 00:10:04,566
 mutable references need to be indicated
-可变的引用是需要显示的
+可变的引用是需要显示的指定
 
 240
 00:10:04,700 --> 00:10:08,933
 specify by &mut, which is the abbreviation of mutable
-指定通过&mut也就是mutable缩写来指定
+通过&mut 也就是mutable的缩写来指定
 
 241
 00:10:09,300 --> 00:10:10,766
@@ -1277,12 +1277,12 @@ it will not release the storage space
 260
 00:10:50,966 --> 00:10:52,399
 In the function
-咱们函数里面
+在main函数里面
 
 261
 00:10:52,733 --> 00:10:55,933
-we define string S1 and allocate storage
-我们定义了字符串S1并分配了存储
+we define string s1 and allocate storage
+我们定义了字符串s1并分配了存储
 
 262
 00:10:56,733 --> 00:10:59,933
@@ -1291,23 +1291,23 @@ we call calculate_length
 
 263
 00:11:00,933 --> 00:11:02,866
-borrow the value of the S1 variant
-借用S1变量对应的值
+borrow the value of the s1 variant
+借用s1变量对应的值
 
 264
 00:11:03,166 --> 00:11:06,266
-then print S1 and the string length
-然后打印我们的S1和我们的
+then print s1 and the string length
+然后打印我们的s1和
 
 265
 00:11:06,266 --> 00:11:07,066
-then print S1 and the string length
+then print s1 and the string length
 字符串长度
 
 266
 00:11:07,066 --> 00:11:09,199
-You can see that S1 is still available
-可以看到S1依然是可用的
+You can see that s1 is still available
+可以看到s1依然是可用的
 
 267
 00:11:09,966 --> 00:11:12,566
@@ -1411,7 +1411,7 @@ and the created the mutable reference passed to our function
 287
 00:11:54,133 --> 00:11:57,366
 and the created the mutable reference passed to our function
-创建了可变引用传递给我们的函数
+创建了可变引用 传递给我们的函数
 
 288
 00:11:57,866 --> 00:11:59,199
@@ -1446,7 +1446,7 @@ It is similar to reference
 294
 00:12:13,666 --> 00:12:17,333
 does not have the ownership of the value
-很类似也不拥有值所对应的所有权
+很类似 也不拥有值所对应的所有权
 
 295
 00:12:17,533 --> 00:12:19,899
@@ -1456,12 +1456,12 @@ The advantage of using slice is that it will work with
 296
 00:12:20,300 --> 00:12:21,900
 empty storage space
-值进行绑定退出作用域时
+值进行绑定 退出作用域时
 
 297
 00:12:21,900 --> 00:12:22,100
 when value goes out of scope
-值进行绑定退出作用域时
+值进行绑定 退出作用域时
 
 298
 00:12:22,100 --> 00:12:23,400
@@ -1480,7 +1480,7 @@ slice也同时会失效
 301
 00:12:27,366 --> 00:12:31,266
 The way to define a slice is through the & symbol
-定义slice的方式是通过&符号变量名
+定义slice的方式是通过 &符号 变量名
 
 302
 00:12:31,666 --> 00:12:34,133
@@ -1490,12 +1490,12 @@ given initial and end positions
 303
 00:12:34,366 --> 00:12:37,066
 The ending position is not included
-那&的结束位置是不包含的
+end所对应的结束位置是不包含的
 
 304
 00:12:37,533 --> 00:12:40,099
 At the same time when our starting position is 0
-同时当我们开始位置是0的时候
+同时当开始位置是0的时候
 
 305
 00:12:40,100 --> 00:12:41,200
@@ -1505,7 +1505,7 @@ we can default
 306
 00:12:41,500 --> 00:12:44,366
 When the end position is the maximum length of our collection
-结束位置是我们的集合最大长度时
+结束位置是集合最大长度时
 
 307
 00:12:44,500 --> 00:12:45,700
@@ -1524,17 +1524,17 @@ When you need to reference the entire collection, start and end can be default
 310
 00:12:49,533 --> 00:12:50,333
 When you need to reference the entire collection, start and end can be default
-同时缺少
+同时缺省
 
 311
 00:12:51,000 --> 00:12:51,866
 Slice type signatur
-slice类型
+slice类型签名如
 
 312
 00:12:51,866 --> 00:12:53,733
 is a symbol & for strings
-签名有对于string slice
+对于string slice
 
 313
 00:12:53,733 --> 00:12:54,000
@@ -1553,16 +1553,16 @@ for vector and array slice is symbol &[T]
 316
 00:13:00,800 --> 00:13:03,400
 Let's look at an example of a slice
-我们来看一下slice定义的举例
+我们来看一下slice定义的例子
 
 317
 00:13:03,966 --> 00:13:06,466
 We define a string "hello world"
-我们定义了一个字符串"hello world"
+我们定义了一个字符串 "hello world"
 
 318
 00:13:07,133 --> 00:13:10,333
-assign it to the s variant
+assign it to the s variable
 把它赋值给s变量
 
 319
@@ -1588,7 +1588,7 @@ Assign to the hello variant
 323
 00:13:20,700 --> 00:13:24,300
 Similarly we define another string slice
-同理我们定义了另外一个string slice
+同理 我们定义了另外一个string slice
 
 324
 00:13:24,300 --> 00:13:26,766
@@ -1598,7 +1598,7 @@ It refers to positions from 6 to 11
 325
 00:13:26,800 --> 00:13:29,966
 Does not contain 11 and is assigned to the world variant
-不包含11并赋值给world变量
+不包含11 并赋值给world变量
 
 326
 00:13:30,733 --> 00:13:31,699
@@ -1613,7 +1613,7 @@ we create a slice of the array
 328
 00:13:35,466 --> 00:13:39,299
 We reference from position 1 to 3
-我们引用的是位置1开始到3结束
+我们引用的是 位置1开始到3结束
 
 329
 00:13:39,300 --> 00:13:40,300
@@ -1663,7 +1663,7 @@ it will convert the string slice into a collection of bytes
 338
 00:14:00,300 --> 00:14:02,800
 A collection of bytes calls iterator
-字节集合调用iterator
+对字节集合调用iterator
 
 339
 00:14:03,166 --> 00:14:04,399
@@ -1751,18 +1751,18 @@ We define in the main function
 
 356
 00:14:40,566 --> 00:14:42,366
-a string variant
+a string variable
 一个string变量
 
 357
 00:14:42,600 --> 00:14:46,500
 We call the first_word function to 
-我们调用first_word函数来计算第一个
+我们调用first_word函数来计算第一个单词
 
 358
 00:14:46,900 --> 00:14:50,733
 print the first word, run
-单词我们打印这样一个单词,运行
+我们打印这样一个单词, 运行
 
 359
 00:14:51,800 --> 00:14:53,800
@@ -1792,12 +1792,12 @@ When owned variant exits scope
 364
 00:15:06,533 --> 00:15:08,933
 it will automatically clear the memory space
-会自动清空值得内存空间
+会自动清空值的内存空间
 
 365
 00:15:08,933 --> 00:15:10,699
 We have just mentioned that it will
-我们刚才已经提到了它会
+我们刚才已经提到了
 
 366
 00:15:11,300 --> 00:15:11,800
@@ -1807,7 +1807,7 @@ automatically call drop function
 367
 00:15:11,800 --> 00:15:14,200
 automatically call drop function
-会自动把我们调用一个drop函数
+会自动帮我们调用一个drop函数
 
 368
 00:15:14,200 --> 00:15:16,566
@@ -1816,12 +1816,12 @@ free up storage space
 
 369
 00:15:17,000 --> 00:15:19,966
-and there can be one mutable reference at a time
-并且在同一时间最多只能有一个引用
+and there can only be one mutable reference
+并且在同一时间最多只能有一个可变引用
 
 370
 00:15:20,166 --> 00:15:22,333
-or multiple immutable references
+or multiple immutable references at a time
 或者是多个不可变引用
 
 371
@@ -1876,7 +1876,7 @@ Because when we use immutable references
 381
 00:15:40,400 --> 00:15:43,100
 the assumption is that the value is fixed
-假设的就是值是固定不变的
+假设的就是 值是固定不变的
 
 382
 00:15:43,500 --> 00:15:45,566
@@ -1896,7 +1896,7 @@ if the value is changed
 385
 00:15:50,666 --> 00:15:53,166
 The compiler does not allow the existence of null pointers
-编译器是不允许空指针的存在
+编译器不允许空指针的存在
 
 386
 00:15:53,866 --> 00:15:54,299
