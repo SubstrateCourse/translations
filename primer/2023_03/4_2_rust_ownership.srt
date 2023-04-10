@@ -5,12 +5,12 @@ Hello everyone, I am Kaichao
 
 2
 00:00:02,200 --> 00:00:05,133
-The content of this course is Rust ownership
+this course is about Rust ownership
 本次课程内容是Rust所有权
 
 3
 00:00:06,466 --> 00:00:07,933
-includes
+the content includes
 课程内容包括
 
 4
@@ -20,7 +20,7 @@ introduction to the concepts and rules of ownership
 
 5
 00:00:11,600 --> 00:00:13,466
-what is transfer of ownership
+what is the transfer of ownership
 所有权转移是什么
 
 6
@@ -30,7 +30,7 @@ data copy and clone
 
 7
 00:00:16,266 --> 00:00:18,066
-effects of function and ownership
+function and ownership
 函数与所有权
 
 8
@@ -55,12 +55,12 @@ memory provided by the computer
 
 12
 00:00:31,900 --> 00:00:34,333
-Some languages ​​such as Java, Go
+Some languages such as Java, Go
 一些语言比如Java, Go
 
 13
 00:00:34,566 --> 00:00:36,499
-use garbage collection reclaim
+use garbage collector to recycle
 通过垃圾回收器来检测
 
 14
@@ -70,12 +70,12 @@ unused memory
 
 15
 00:00:38,166 --> 00:00:39,733
-and release the memory
+and release these memory
 并且释放这些内存
 
 16
 00:00:40,766 --> 00:00:42,166
-Other languages ​​like
+Other languages like
 其他语言比如
 
 17
@@ -145,37 +145,37 @@ But rest assured it's pretty simple
 
 30
 00:01:18,100 --> 00:01:20,333
-as you write more and more Rust code
+as you write more Rust code
 随着你写的Rust代码越来越多
 
 31
 00:01:20,333 --> 00:01:21,533
-more and more familiar
+get familiar with it
 越来越熟悉
 
 32
 00:01:21,766 --> 00:01:24,066
-you will have more understanding and experience
+you will have better understanding about ownership
 你会有更多的理解和体会
 
 33
 00:01:25,333 --> 00:01:27,599
-Ownership is what sets Rust apart from other languages
+Ownership is the core feature that sets Rust apart from other languages
 所有权是Rust区别其他语言最独特
 
 34
 00:01:27,600 --> 00:01:28,533
-the core feature
+Ownership is the core feature that sets Rust apart from other languages
 最核心的特性
 
 35
 00:01:28,533 --> 00:01:29,533
-understanding ownership is an extremely important
+understanding ownership is extremely important when writing Rust code
 理解所有权
 
 36
 00:01:29,533 --> 00:01:32,066
-understanding ownership is an extremely important
+understanding ownership is extremely important when writing Rust code
 是Rust编程极为重要的一个部分
 
 37
@@ -190,12 +190,12 @@ each value in memory
 
 39
 00:01:40,200 --> 00:01:41,966
-there is a variant corresponding to it
+has a variable corresponding to it
 都有一个变量与之对应
 
 40
 00:01:41,966 --> 00:01:43,666
-called owner
+called its owner
 称之为它的owner
 
 41
@@ -229,26 +229,26 @@ the compiler will automatically call a function for us
 
 47
 00:01:56,733 --> 00:01:57,533
-it's called drop
+the function is named drop
 叫做drop
 
 48
 00:01:57,533 --> 00:01:57,700
-it's called drop
+the function is named drop
 
 49
 00:01:57,700 --> 00:01:58,600
-it's called drop
+to clean the value
 进行丢弃
 
 50
 00:02:00,533 --> 00:02:02,399
-Here we look at this code snippet
+Here let's look at a code snippet
 这里我们看一个代码片段
 
 51
 00:02:03,133 --> 00:02:05,733
-We define a variant s
+We define a variable s
 我们定义了一个变量s
 
 52
@@ -258,17 +258,17 @@ its data type is string
 
 53
 00:02:07,766 --> 00:02:09,566
-saved a string "hello"
+and contains a string "hello"
 保存着一个字符串是hello
 
 54
 00:02:10,133 --> 00:02:11,699
-When we define
+When we define s
 那我们在定义的时候
 
 55
 00:02:11,800 --> 00:02:13,566
-it will allocate the corresponding storage space
+the corresponding memory space will be allocated
 它会分配对应的存储空间
 
 56
@@ -278,7 +278,7 @@ Before defining s
 
 57
 00:02:16,566 --> 00:02:18,699
-that s is not available
+s is not available
 那s是不可用的
 
 58
@@ -288,12 +288,12 @@ after defining s
 
 59
 00:02:21,533 --> 00:02:23,333
-variant s is available
+variable s is available
 变量s都是可用的
 
 60
 00:02:24,600 --> 00:02:27,133
-When we at the end of the curly brace
+When it meets the end of the curly brace
 当遇到了大括号结尾的位置
 
 61
@@ -303,26 +303,26 @@ s就退出了作用域
 
 62
 00:02:30,300 --> 00:02:32,366
-free the corresponding storage space
+the corresponding memory space will be released
 释放对应的存储空间
 
 63
 00:02:33,933 --> 00:02:36,866
-When we assign a value to a variant
+When we assign a value to a variable
 当我们对变量进行赋值时
 
 64
 00:02:37,100 --> 00:02:37,900
-some changes will happen
+something happened
 会发生
 
 65
 00:02:37,900 --> 00:02:38,255
-some changes will happen
+something happened
 
 66
 00:02:38,766 --> 00:02:40,733
-the transfer of ownership, which is move
+the ownership gets transfered to a new owner, which is called move
 所有权的转移也就是move
 
 67
@@ -332,17 +332,17 @@ Let's look at another code snippet
 
 68
 00:02:43,200 --> 00:02:45,300
-here we define a variant that is S1
-这里我们定义了一个变量是S1
+here we define a variable, s1
+这里我们定义了一个变量是s1
 
 69
 00:02:45,300 --> 00:02:46,733
-its type is string
+the type is string
 它的类型是string
 
 70
 00:02:47,566 --> 00:02:50,133
-When we define, we will allocate storage accordingly
+When define it, we will allocate space accordingly
 在我们定义的时候会对应的分配存储
 
 71
@@ -352,45 +352,45 @@ In the second line we copy s1 to s2
 
 72
 00:02:55,066 --> 00:02:59,266
-At the same time, the ownership of the value of S1 is also transferred to s2
+At the same time, the ownership of the value in s1 is transferred to s2
 同时s1对应值的所有权也转移至s2
 
 73
 00:02:59,466 --> 00:03:02,299
-then s1 will be invalid
+s1 gets invalid
 那s1会失效
 
 74
 00:03:03,933 --> 00:03:08,933
-When S2 goes out of scope, the corresponding string storage space
+When s2 goes out of scope, the corresponding space for string will be released
 当s2退出作用域时会释放对应的
 
 75
 00:03:08,933 --> 00:03:09,600
-When S2 goes out of scope, the corresponding string storage space
+When s2 goes out of scope, the corresponding space for string will be released
 
 76
 00:03:09,600 --> 00:03:10,933
-When S2 goes out of scope, the corresponding string storage space
+When s2 goes out of scope, the corresponding space for string will be released
 字符串存储空间
 
 77
 00:03:12,533 --> 00:03:15,866
-If it is a simple type such as number, boolean, char and etc.
+For simple types such as number, boolean, char etc
 如果是简单的类型比如数值，布尔
 
 78
 00:03:15,866 --> 00:03:16,333
-If it is a simple type such as number, boolean, char and etc.
+For simple types such as number, boolean, char etc
 
 79
 00:03:16,333 --> 00:03:17,799
-If it is a simple type such as number, boolean, char and etc.
+For simple types such as number, boolean, char etc
 Char等等
 
 80
 00:03:17,800 --> 00:03:22,066
-assignment will involve copying the data
+assignment involves copying the data implicitly
 赋值会隐式地发生数据的拷贝操作
 
 81
@@ -400,69 +400,69 @@ instead of transferring ownership
 
 82
 00:03:25,700 --> 00:03:28,200
-The compiler will call function copy
+implicitly
 它是通过隐式地
 
 83
 00:03:28,200 --> 00:03:29,500
-The compiler will call function copy
+The compiler will call copy function implicitly
 编译器会隐式的
 
 84
 00:03:29,500 --> 00:03:31,133
-The compiler will call function copy
+The compiler will call copy function implicitly
 调用一个copy函数
 
 85
 00:03:32,866 --> 00:03:34,399
-We don't want the original variant dropped immediately when assigning
+We just saw it
 我们刚才看到了
 
 86
 00:03:34,399 --> 00:03:34,466
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 
 87
 00:03:34,466 --> 00:03:35,766
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 我们并不希望
 
 88
 00:03:35,766 --> 00:03:37,166
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 
 89
 00:03:37,166 --> 00:03:41,199
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 我们并不希望在赋值时让原有的变量
 
 90
 00:03:41,199 --> 00:03:41,566
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 
 91
 00:03:41,566 --> 00:03:42,499
-We don't want the original variant dropped immediately when assigning
+We don't want the original variable gets invalid immediately after assignment
 立即失效
 
 92
 00:03:42,800 --> 00:03:45,366
-Then we can copy and clone the data
+by copy and clone the data
 那我们可以通过数据的拷贝和克隆
 
 93
 00:03:45,366 --> 00:03:48,666
-that is, the interfaces copy and clone
+that is, the copy and clone trait
 也就是copy和clone这两个接口
 
 94
 00:03:48,666 --> 00:03:51,299
-the two interfaces correspond to two functions
+each trait has a specific function
 两个接口会对应的有两个函数
 
 95
 00:03:51,333 --> 00:03:53,199
-the function copy and the function clone
+the copy function and the clone function
 是copy函数和clone函数
 
 96
@@ -472,30 +472,30 @@ use them to
 
 97
 00:03:56,266 --> 00:03:57,133
-copy a new data withou transfer of ownership
+duplicate the same data withou transfer the ownership
 不把
 
 98
 00:03:57,133 --> 00:03:57,400
-copy a new data withou transfer of ownership
+duplicate the same data withou transfer the ownership
 
 99
 00:03:57,400 --> 00:04:00,866
-copy a new data withou transfer of ownership
+duplicate the same data withou transfer the ownership
 当前变量对应值的所有权进行转移
 
 100
 00:04:00,866 --> 00:04:01,666
-copy a new data withou transfer of ownership
+duplicate the same data withou transfer the ownership
 
 101
 00:04:01,666 --> 00:04:04,399
-copy a new data withou transfer of ownership
+duplicate the same data withou transfer the ownership
 而是复制一份新的数据
 
 102
 00:04:05,400 --> 00:04:07,600
-The copy interface works for basically
+The copy interface works for almost
 copy接口适用于基本上
 
 103
@@ -505,7 +505,7 @@ all primitive types
 
 104
 00:04:10,966 --> 00:04:13,966
- and complex types made of primitive types
+and complex types made of primitive types
 基本类型构成的复杂类型
 
 105
@@ -524,22 +524,22 @@ such as u32, bool, char and tuples etc.
 
 108
 00:04:20,100 --> 00:04:23,133
-The clone interface implements the data type of clone
+For data types that implements the clone trait
 clone接口, 实现clone的数据类型
 
 109
 00:04:23,300 --> 00:04:25,400
-When we call the function
+when we call the function clone explicitly
 当我们显示地调用
 
 110
 00:04:25,400 --> 00:04:27,733
-the clone function will
+it will clone the same data on the heap
 clone函数的时候会把数据
 
 111
 00:04:27,933 --> 00:04:31,299
-clone a new one on the heap
+it will clone the same data on the heap
 在堆上重新clone一份新的
 
 112
@@ -574,17 +574,17 @@ string s1
 
 118
 00:04:51,133 --> 00:04:54,666
-At the same time, clone s1 and assign it to s2
+at the same time, clone s1 and assign it to s2
 同时将s1 clone并赋值给s2
 
 119
 00:04:55,100 --> 00:04:58,933
-When we print s1 s2 we can see
+When we print s1 s2, we can see
 当我们打印s1 s2时候可以看到
 
 120
 00:05:00,566 --> 00:05:02,733
-both S1 and S2 are valid
+both s1 and s2 are valid
 s1 s2都是有效的
 
 121
@@ -594,12 +594,12 @@ When we remove the clone function
 
 122
 00:05:05,933 --> 00:05:07,066
-re-run
+re-run it
 重新执行
 
 123
 00:05:07,066 --> 00:05:11,733
-we will find an exception s1 is no longer available
+we will get an error, s1 is no longer available
 我们会发现抛出异常 s1已经不再可用
 
 124
@@ -614,12 +614,12 @@ Similarly, we can test the vector
 
 126
 00:05:19,266 --> 00:05:20,199
-type of data
+data type
 数据类型
 
 127
 00:05:20,733 --> 00:05:24,133
-We define a variant x whose corresponding value is
+We define a variable x whose value is
 我们定义了一个变量x 它对应的值是
 
 128
@@ -634,56 +634,56 @@ assign x to y and transfer ownership
 
 130
 00:05:32,700 --> 00:05:35,366
-success when we print y
+when we print y, it's success 
 当我们打印y的时候是成功的
 
 131
 00:05:36,666 --> 00:05:40,066
-When we try to print x, we will find a compilation exception
+When we try to print x, we will find a compilation error
 当我们尝试去打印x 会发现编译异常
 
 132
 00:05:40,066 --> 00:05:42,566
-because our x has no ownership
+because our x has no ownership anymore
 因为我们的x已经不再具有所有权
 
 133
 00:05:45,066 --> 00:05:46,466
-This is a simple comment on the code snippet we just talked about
+This is a short comment on the code snippet we just talked about
 这是对我们刚才
 
 134
 00:05:46,466 --> 00:05:46,800
-This is a simple comment on the code snippet we just talked about
+This is a short comment on the code snippet we just talked about
 
 135
 00:05:46,800 --> 00:05:49,166
-This is a simple comment on the code snippet we just talked about
+This is a short comment on the code snippet we just talked about
 测试的代码片段一个简单注释
 
 136
 00:05:49,966 --> 00:05:52,799
-We allocate its storage when defining s1
+We allocate its space when defining s1
 我们在定义s1的时候分配了它的存储
 
 137
 00:05:52,900 --> 00:05:58,800
-clone the same data from s1 to s2 via clone
+duplicate the same data from s1 to s2 via clone
 通过clone将s1同样的数据克隆至s2
 
 138
 00:06:00,100 --> 00:06:02,000
-Then s1 is still valid at the same time
+s1 is still valid
 那s1同时还是有效的
 
 139
 00:06:02,466 --> 00:06:04,733
-When s1 s2 go out of the scope
+When s1, s2 go out of the scope
 当s1 s2作用域结束的时候
 
 140
 00:06:04,733 --> 00:06:07,466
-release their corresponding storage space respectively
+release their spaces respectively
 分别释放自己对应的存储空间
 
 141
@@ -693,46 +693,46 @@ we can use
 
 142
 00:06:09,600 --> 00:06:11,333
-tag derive to
+the keyword derive to
 derive标签来
 
 143
 00:06:11,466 --> 00:06:13,866
-automatically derive copy or clone interface
+automatically implement copy or clone trait
 自动的派生copy或者clone接口
 
 144
 00:06:14,066 --> 00:06:16,766
-We generally do not need to display the implementation of copy
+generally, we do not need to implement the copy trait explicitly
 我们一般也不需要显示的实现copy
 
 145
 00:06:17,300 --> 00:06:19,566
-an exception is our struct
+an exception is for struct
 一个例外情况是我们的结构体
 
 146
 00:06:19,566 --> 00:06:22,466
-if all its fields are copyable
+if all of its fields are copyable
 如果它所有的字段都是可以copy的
 
 147
 00:06:22,533 --> 00:06:24,099
-then we can use derive(copy)
+then we can use derive(copy) to implement the copy trait
 那我们可以通过derive(copy)
 
 148
 00:06:24,100 --> 00:06:25,500
-let's struct also be copied
+then the struct is also copyable now
 让我们结构体也
 
 149
 00:06:25,500 --> 00:06:25,766
-let's struct also be copied
+then the struct is also copyable now
 
 150
 00:06:25,766 --> 00:06:27,933
-let's struct also be copied
+then the struct is also copyable now
 实现copy这样的一个功能
 
 151
@@ -742,36 +742,36 @@ clone相比copy来说它会更慢
 
 152
 00:06:30,366 --> 00:06:32,199
-as it is copying all data
+as it is duplicating all data
 因为它是发生所有数据
 
 153
 00:06:32,199 --> 00:06:32,200
-as it is copying all data
+as it is duplicating all data
 
 154
 00:06:32,200 --> 00:06:33,066
-as it is copying all data
+as it is duplicating all data
 的拷贝
 
 155
 00:06:33,200 --> 00:06:34,400
-and is on the heap
+on the heap
 并且是在堆上
 
 156
 00:06:34,700 --> 00:06:37,100
-Function clone cannot be defaulted
+clone() cannot be omitted
 clone函数的调用不可缺省
 
 157
 00:06:37,100 --> 00:06:38,566
-what needs to be shown
+we need to call it explicitly
 需要显示的给出来
 
 158
 00:06:38,966 --> 00:06:40,199
-Let's take a look
+Let's take a look at
 接着我们来看一下
 
 159
@@ -781,22 +781,22 @@ the relationship between function and ownership
 
 160
 00:06:42,133 --> 00:06:43,799
-It is similar to assignment
+Similar to assignment
 和赋值很类似
 
 161
 00:06:43,900 --> 00:06:48,166
-Passing a variant to a function also leads to
+passing a variable to a function also leads to
 将某个变量传递给函数也会发生
 
 162
 00:06:48,466 --> 00:06:49,599
-transfer of ownership
+the transfer of ownership
 所有权的转移
 
 163
 00:06:50,000 --> 00:06:50,800
-or copy
+or copy of data
 或者copy
 
 164
