@@ -1,0 +1,1430 @@
+﻿1
+00:00:00,566 --> 00:00:02,333
+Hello everyone, I am Kaichao
+大家好我是凯超
+
+2
+00:00:02,666 --> 00:00:05,399
+Our lesson today will explain rust enums
+我们今天的课程会讲解rust枚举
+
+3
+00:00:05,500 --> 00:00:07,600
+data types and pattern matching
+数据类型和模式匹配
+
+4
+00:00:08,733 --> 00:00:10,366
+Today's course content includes
+今天课程内容包括
+
+5
+00:00:11,100 --> 00:00:12,800
+a brief introduction to enumerated data types
+枚举数据类型的简单介绍
+
+6
+00:00:12,933 --> 00:00:14,766
+includes commonly used enumerated data types
+包括常用的枚举数据类型
+
+7
+00:00:14,766 --> 00:00:16,933
+such as option and result
+如option和result
+
+8
+00:00:17,366 --> 00:00:19,499
+and how to use pattern matching.
+以及如何使用模式匹配
+
+9
+00:00:21,200 --> 00:00:21,700
+Enum is one of the most commonly used data types in rust
+枚举
+
+10
+00:00:21,700 --> 00:00:24,866
+Enum is one of the most commonly used data types in rust
+是rust中最常用的一种数据类型之一
+
+11
+00:00:25,466 --> 00:00:27,966
+it can be used to represent multiple variants
+那它可以用来表示多个变体
+
+12
+00:00:27,966 --> 00:00:28,933
+that is to say
+也就是说
+
+13
+00:00:29,366 --> 00:00:31,966
+multiple possibilities for values ​​of the same type.
+同一类型的值有多种可能性
+
+14
+00:00:31,966 --> 00:00:33,999
+Like our traffic lights,
+比如说我们的交通信号灯
+
+15
+00:00:34,000 --> 00:00:37,566
+it can be red, green or yellow.
+它可以是红色绿色或者黄色
+
+16
+00:00:38,333 --> 00:00:41,666
+But it is impossible to display multiple colors at the same time.
+但是它不可能同时显示多种颜色
+
+17
+00:00:42,900 --> 00:00:45,566
+Another example is the ip address we use
+另外一个例子是我们使用的ip地址
+
+18
+00:00:46,366 --> 00:00:48,399
+In a logic we may deal with the ipv 4 protocol
+那在一段逻辑里面我们可能
+
+19
+00:00:48,399 --> 00:00:48,966
+In a logic we may deal with the ipv 4 protocol
+
+20
+00:00:48,966 --> 00:00:50,533
+In a logic we may deal with the ipv 4 protocol
+处理的是ipv 4协议
+
+21
+00:00:50,766 --> 00:00:52,499
+or the ipv 6 protocol
+那也可能是ipv 6协议
+
+22
+00:00:52,500 --> 00:00:54,766
+But we can't handle multiple protocols
+但是我们不可能在这段逻辑里面
+
+23
+00:00:55,000 --> 00:00:56,700
+in the same logic.
+同时处理多个协议
+
+24
+00:00:58,966 --> 00:01:00,699
+Enumerations are defined via
+枚举的定义是通过
+
+25
+00:01:00,700 --> 00:01:02,533
+a keyword enum
+Enum这样的一个关键词来
+
+26
+00:01:02,533 --> 00:01:03,066
+a keyword enum
+
+27
+00:01:03,066 --> 00:01:03,999
+a keyword enum
+实现的
+
+28
+00:01:04,733 --> 00:01:06,699
+Here we define an enum
+这里我们定义了一个枚举
+
+29
+00:01:06,733 --> 00:01:07,999
+called traffic light
+叫做traffic light
+
+30
+00:01:07,999 --> 00:01:08,866
+called traffic light
+
+31
+00:01:08,866 --> 00:01:09,899
+called traffic light
+交通信号灯
+
+32
+00:01:09,900 --> 00:01:11,133
+it has three variants
+它有三个变体
+
+33
+00:01:11,333 --> 00:01:13,799
+The first one is the red for red light
+第一个是红灯red
+
+34
+00:01:13,900 --> 00:01:16,300
+the second is green and the third is yellow
+第二个是green第三个是yellow
+
+35
+00:01:17,533 --> 00:01:20,899
+We add two colons like this
+我们通过两个冒号这样的方式来
+
+36
+00:01:21,466 --> 00:01:23,199
+to use a variant
+使用这样的一个变体
+
+37
+00:01:24,700 --> 00:01:27,166
+and assign it to our variable yellow
+并将它赋值给我们的变量yellow
+
+38
+00:01:28,200 --> 00:01:32,400
+Similarly, we have another enum example
+类似的我们听了另外一个枚举叫做
+
+39
+00:01:33,466 --> 00:01:35,399
+ipAddr, ip address
+ipAddr ip地址
+
+40
+00:01:35,400 --> 00:01:38,566
+It has two variants one is V4 and one is V6
+它有两个变体一个是V4一个是V6
+
+41
+00:01:39,500 --> 00:01:41,100
+Enum variant
+枚举的变体的话
+
+42
+00:01:41,133 --> 00:01:44,399
+It can include any type of data
+它内部可以包含任意类型的数据
+
+43
+00:01:44,700 --> 00:01:47,200
+For example, string
+比如说是这里我们的字符串
+
+44
+00:01:47,266 --> 00:01:49,599
+numbers, structs,
+或者说是数值结构体
+
+45
+00:01:49,800 --> 00:01:51,400
+other enums etc.
+其他的枚举等等
+
+46
+00:01:52,533 --> 00:01:54,966
+Here we also use two colons
+这里我们同样的用两个冒号
+
+47
+00:01:55,366 --> 00:01:56,933
+to constructed an ip address IP V4
+构造了一个
+
+48
+00:01:56,933 --> 00:01:57,733
+to constructed an ip address IP V4
+
+49
+00:01:57,733 --> 00:02:00,133
+to constructed an ip address IP V4
+IP V4这样的一个ip地址
+
+50
+00:02:00,300 --> 00:02:02,400
+Then its content is
+那它里面的内容是
+
+51
+00:02:02,766 --> 00:02:06,133
+a string (127.0.0.1) 
+一个(127.0.0.1)这样字符串
+
+52
+00:02:06,466 --> 00:02:07,166
+and assign it to our variant home
+把它附值给
+
+53
+00:02:07,166 --> 00:02:08,366
+and assign it to our variant home
+我们的变量home
+
+54
+00:02:09,400 --> 00:02:11,766
+In addition to the fact that the variant can contain data
+那除了变体里面可以包含数据之外
+
+55
+00:02:11,766 --> 00:02:15,733
+we can also define method implementations
+我们可以对枚举定义方法实现
+
+56
+00:02:16,266 --> 00:02:17,499
+which is called trait, similar to interface
+trait也就是接口
+
+57
+00:02:17,499 --> 00:02:17,500
+which is called trait, similar to interface
+
+58
+00:02:17,500 --> 00:02:18,928
+which is called trait, similar to interface
+那我们还没有讲过接口的具体概念
+
+59
+00:02:18,928 --> 00:02:21,166
+We will talk about traits later.
+那我们还没有讲过接口的具体概念
+
+60
+00:02:21,166 --> 00:02:23,199
+We will talk about traits later.
+那这里我们就先跳过
+
+61
+00:02:24,966 --> 00:02:27,166
+Now let's see how to define a enum function.
+现在我们来看一下怎样为
+
+62
+00:02:27,166 --> 00:02:27,400
+Now let's see how to define a enum function.
+
+63
+00:02:27,400 --> 00:02:29,400
+Now let's see how to define a enum function.
+枚举定义方法
+
+64
+00:02:30,700 --> 00:02:33,933
+Here I am using the playground from Rust
+这里我使用的是Rust语言的playground
+
+65
+00:02:33,933 --> 00:02:36,066
+it is a simple, small online environment
+也就是一个简便的
+
+66
+00:02:36,066 --> 00:02:36,533
+it is a simple, small online environment
+
+67
+00:02:36,533 --> 00:02:37,733
+it is a simple, small online environment
+用来测试开发的一个线上小环境
+
+68
+00:02:37,733 --> 00:02:39,733
+for testing and development
+用来测试开发的一个线上小环境
+
+69
+00:02:40,566 --> 00:02:44,166
+Its address is play.rust-lang.org
+它的路径是play.rust-lang.org
+
+70
+00:02:45,166 --> 00:02:48,266
+So here we have a main function
+那这里我们有一个main函数
+
+71
+00:02:48,266 --> 00:02:49,966
+is the execution entry point of our program
+是我们程序的执行入口
+
+72
+00:02:50,666 --> 00:02:53,799
+We define an enum of traffic lights
+我们定义一个交通信号灯这样的枚举
+
+73
+00:02:53,933 --> 00:02:56,166
+it has three variants that we have just seen
+它有三个变体我们刚才已经看到过了
+
+74
+00:02:57,266 --> 00:02:57,933
+Next
+接着呢
+
+75
+00:02:57,933 --> 00:03:01,099
+we will implement an enum
+我们为我们的交通信号灯实现一个
+
+76
+00:03:01,099 --> 00:03:01,366
+we will implement an enum
+
+77
+00:03:01,366 --> 00:03:02,333
+we will implement an enum
+这样的一个枚举
+
+78
+00:03:02,333 --> 00:03:04,533
+implementing a function called "time"
+实现一个方法是time
+
+79
+00:03:05,766 --> 00:03:08,966
+it can return an integer
+它可以返回一个整数
+
+80
+00:03:09,133 --> 00:03:11,966
+we set the return value to 60 here
+那我们这里返回固定的值是60
+
+81
+00:03:13,066 --> 00:03:13,333
+Certainly
+当然
+
+82
+00:03:13,333 --> 00:03:15,333
+We can also return a different value
+我们也可以根据我们交通信号灯
+
+83
+00:03:15,333 --> 00:03:16,066
+base on different variants of TrafficLight
+不同的变体
+
+84
+00:03:16,066 --> 00:03:17,266
+base on different variants of TrafficLight
+返回不同的数值
+
+85
+00:03:18,266 --> 00:03:20,499
+This requires using pattern match
+这就需要用到我们的pattern match
+
+86
+00:03:20,499 --> 00:03:20,500
+we will introduce it later
+
+87
+00:03:20,500 --> 00:03:21,366
+we will introduce it later
+也就是模式匹配
+
+88
+00:03:21,366 --> 00:03:22,999
+we will introduce it later
+我们接下来再去介绍
+
+89
+00:03:24,000 --> 00:03:26,800
+We construct a variant in the main function
+我们在main函数里面构造这样的一个变量
+
+90
+00:03:27,133 --> 00:03:30,399
+red traffic light
+是我们的红色交通信号灯
+
+91
+00:03:31,366 --> 00:03:33,199
+we want to print the duration of a red traffic light
+我们打印我们
+
+92
+00:03:33,199 --> 00:03:33,533
+we want to print the duration of a red traffic light
+
+93
+00:03:33,533 --> 00:03:35,999
+we want to print the duration of a red traffic light
+红色交通信号灯所持续的时间
+
+94
+00:03:36,000 --> 00:03:38,166
+call our time function
+调用我们的time方法
+
+95
+00:03:39,100 --> 00:03:39,966
+implement
+执行
+
+96
+00:03:41,066 --> 00:03:42,999
+You can see here
+可以看到当我们的
+
+97
+00:03:43,333 --> 00:03:44,999
+when a variant is not used
+模式没有用到的时候
+
+98
+00:03:45,000 --> 00:03:47,400
+it will report a warning
+它会报一个warning
+
+99
+00:03:48,800 --> 00:03:50,966
+Here we can see the result
+那这里我们可以看到我们输入结果
+
+100
+00:03:50,966 --> 00:03:52,699
+it has returned 60
+已经返回了60
+
+101
+00:03:54,900 --> 00:03:57,900
+Next, let's look at one of the most commonly used enum
+接着我们来看一个最常用的枚举之一
+
+102
+00:03:57,900 --> 00:03:58,133
+option
+
+103
+00:03:58,133 --> 00:03:59,027
+option
+option它是用来表示两种可能的场景
+
+104
+00:03:59,027 --> 00:04:02,366
+It is used to represent two possible scenarios
+option它是用来表示两种可能的场景
+
+105
+00:04:02,366 --> 00:04:05,299
+One is that some value exist
+一种是存在某种类型的值
+
+106
+00:04:05,300 --> 00:04:08,666
+The other is that no such value, errors.
+另外一种是不存在有效的概率性值
+
+107
+00:04:09,000 --> 00:04:13,000
+It is a common mechanism used for exception handling
+它是用于异常处理的一种常见机制
+
+108
+00:04:13,266 --> 00:04:14,099
+The official function is a generic T
+那官方
+
+109
+00:04:14,099 --> 00:04:14,100
+The official function is a generic T
+
+110
+00:04:14,100 --> 00:04:17,200
+The official function is a generic T
+的定义的话其实是通过一个泛型T
+
+111
+00:04:17,700 --> 00:04:21,000
+to accept different data types
+来接受不同的数据类型
+
+112
+00:04:21,700 --> 00:04:24,166
+Here we did not introduce generics
+那这里我们因为没有介绍泛型
+
+113
+00:04:24,166 --> 00:04:26,199
+So we don't pay attention to the official definition
+所以我们不去关注官方这个定义
+
+114
+00:04:26,566 --> 00:04:28,799
+I will use a integer U8 type
+我们以一个简单的
+
+115
+00:04:29,366 --> 00:04:32,299
+as an example to make a simple introduce
+整数U8类型为例来进行介绍
+
+116
+00:04:32,333 --> 00:04:34,066
+We define an enum
+我们定义了一个枚举
+
+117
+00:04:34,066 --> 00:04:36,533
+its name is my option
+它的名字是my option
+
+118
+00:04:36,900 --> 00:04:38,266
+then it has two variants
+那它有两个变体
+
+119
+00:04:38,266 --> 00:04:39,999
+One is Some(U8)
+一个是Some(U8)
+
+120
+00:04:40,100 --> 00:04:41,966
+That is, when there is value
+也就是当有值的时候
+
+121
+00:04:42,466 --> 00:04:44,466
+Its value is a U8
+它的值是一个U8
+
+122
+00:04:44,666 --> 00:04:45,766
+Another variant is None
+另外一个变体是None
+
+123
+00:04:45,800 --> 00:04:49,500
+That is, there is no valid integer value
+也就是不存在一个有效的整数值
+
+124
+00:04:50,366 --> 00:04:53,199
+The option enum defines a series of
+option枚举里面定义了一系列
+
+125
+00:04:53,466 --> 00:04:55,399
+easy-to-use functions
+好用的方便的方法
+
+126
+00:04:55,400 --> 00:04:56,533
+For example is_some
+比如is_some
+
+127
+00:04:56,533 --> 00:04:59,099
+to check if there are values
+来检查我们当前的这个option
+
+128
+00:04:59,200 --> 00:05:01,533
+for variants in current option
+变量是不是有值
+
+129
+00:05:02,400 --> 00:05:04,400
+Another method is map
+另外一个方法是map
+
+130
+00:05:04,966 --> 00:05:08,133
+it will make operations on the value in our option
+会对我们的option里面的值进行操作
+
+131
+00:05:08,133 --> 00:05:09,599
+If it is None, do nothing
+如果是None的话就什么都不做
+
+132
+00:05:09,600 --> 00:05:10,933
+or returns a None
+还是返回一个None
+
+133
+00:05:11,400 --> 00:05:13,900
+If it is a some
+那如果是一个some
+
+134
+00:05:14,266 --> 00:05:17,266
+then it will operate on the value inside
+的话就会对里面的值进行操作
+
+135
+00:05:17,266 --> 00:05:18,133
+Then
+然后将
+
+136
+00:05:18,800 --> 00:05:20,933
+return the result of the operation
+操作的结果返回
+
+137
+00:05:21,600 --> 00:05:23,333
+map_or is similar to map
+map_or和map类似
+
+138
+00:05:23,333 --> 00:05:25,766
+It will also operate if there is a value in it
+也是会对里面如果有值的话进行操作
+
+139
+00:05:25,766 --> 00:05:27,599
+If there is no value, return a default value
+如果没值的话就返回一个默认值
+
+140
+00:05:27,766 --> 00:05:30,066
+unwrap will open our option
+unwrap会打开我们的option
+
+141
+00:05:30,066 --> 00:05:31,733
+when it is a none
+当我们是一个none的话会
+
+142
+00:05:32,100 --> 00:05:33,966
+make the program exit abnormally
+使程序异常退出
+
+143
+00:05:34,566 --> 00:05:37,666
+There are many fucntions defined in the option
+那option里面定义的方法其实还有很多
+
+144
+00:05:37,933 --> 00:05:40,199
+You can refer to the application documentation of Rust
+大家可以参考Rust的应用文档
+
+145
+00:05:40,200 --> 00:05:41,733
+We have given the link here
+我们这里已经给出了链接
+
+146
+00:05:42,600 --> 00:05:45,533
+Another commonly used enum is result
+另外一个常用的枚举是result
+
+147
+00:05:45,600 --> 00:05:47,766
+It is also an exception handling mechanism
+它也是一种异常处理的机制
+
+148
+00:05:47,900 --> 00:05:49,533
+There are two scenarios
+表示的场景有两种
+
+149
+00:05:49,533 --> 00:05:52,066
+One is correct value of some type
+一种是正确的某种类型的值
+
+150
+00:05:52,466 --> 00:05:53,866
+The other is
+另外一种是
+
+151
+00:05:54,166 --> 00:05:57,166
+another type of value representing the error message
+表示错误信息的另一类型的值
+
+152
+00:05:57,533 --> 00:05:59,666
+The official definition is also through two generics
+那官方定义也是通过两个泛型
+
+153
+00:06:00,500 --> 00:06:04,100
+T and E, E means error message, T means correct value
+T和E, E表示错误信息, T表示正确的值
+
+154
+00:06:04,533 --> 00:06:07,899
+Then let's make our generics concrete here
+那我们这里把我们的泛型具体化
+
+155
+00:06:08,066 --> 00:06:11,699
+Take our integer U8 and error message string as an example
+以我们的整数U8和错误信息string为例
+
+156
+00:06:12,200 --> 00:06:13,866
+Then we can define such an enum
+那我们定义了这样一个枚举
+
+157
+00:06:13,900 --> 00:06:16,200
+its name is my result
+它的名字是my result
+
+158
+00:06:16,333 --> 00:06:18,133
+It has two variants one is OK
+它有两个变体一个是OK
+
+159
+00:06:18,733 --> 00:06:21,133
+the value inside is an integer U8
+然后里面的值是一个整数U8
+
+160
+00:06:21,600 --> 00:06:22,933
+Another variant is error
+另外变体是error
+
+161
+00:06:22,933 --> 00:06:24,266
+it's a error message
+它的表示错误信息
+
+162
+00:06:24,266 --> 00:06:26,566
+it has a value in it that is a string
+它里面有值是一个字母串string
+
+163
+00:06:27,000 --> 00:06:30,200
+The function defined by result, we have is_ok
+result定义的方法有is_ok
+
+164
+00:06:30,200 --> 00:06:31,600
+to check that
+来检查我们的
+
+165
+00:06:32,466 --> 00:06:35,066
+the result is a variant of OK or not
+result是不是一个OK这样的一个变体
+
+166
+00:06:35,133 --> 00:06:36,066
+And function map
+以及map
+
+167
+00:06:36,066 --> 00:06:36,340
+And function map
+
+168
+00:06:36,766 --> 00:06:39,899
+It will operate on the value and returns it
+它会将我们的result里面是OK的话
+
+169
+00:06:39,900 --> 00:06:41,500
+if our result is OK
+会对值进行操作并返回
+
+170
+00:06:41,500 --> 00:06:45,466
+If it is an error, do nothing
+如果是error错误的话不做任何操作
+
+171
+00:06:45,466 --> 00:06:47,399
+Function map_or is similar to map
+map_or和map类似
+
+172
+00:06:47,533 --> 00:06:49,099
+if it is wrong
+那如果是错误的话
+
+173
+00:06:49,466 --> 00:06:51,666
+That returns a default value of unwrap
+那返回一个默认值unwrap
+
+174
+00:06:52,533 --> 00:06:54,266
+It will also open our result type
+也是会打开我们的result类型
+
+175
+00:06:54,266 --> 00:06:56,133
+If it is an error it will
+如果是一个error的话会
+
+176
+00:06:56,733 --> 00:06:59,166
+make our program exception and exit
+使我们的程序异常并退出
+
+177
+00:06:59,733 --> 00:07:02,599
+There are many functions in result
+那result提供的方法还有很多
+
+178
+00:07:02,600 --> 00:07:04,333
+Its documentation is here
+它的语言文档在这里
+
+179
+00:07:05,366 --> 00:07:07,966
+Pattern match
+pattern match也就是模式匹配
+
+180
+00:07:07,966 --> 00:07:11,399
+it is a very useful feature
+它是现代编程语言一个非常
+
+181
+00:07:11,399 --> 00:07:11,400
+it is a very useful feature
+
+182
+00:07:11,400 --> 00:07:13,000
+it is a very useful feature
+强大的功能特性
+
+183
+00:07:13,566 --> 00:07:14,766
+that basically all modern programming languages
+那基本上所有的现代
+
+184
+00:07:14,766 --> 00:07:15,633
+that basically all modern programming languages
+编程语言都具备这样的一个
+
+185
+00:07:15,633 --> 00:07:16,666
+have such a feature
+编程语言都具备这样的一个
+
+186
+00:07:16,666 --> 00:07:16,733
+have such a feature
+
+187
+00:07:16,733 --> 00:07:17,533
+have such a feature
+特性
+
+188
+00:07:17,733 --> 00:07:20,266
+It can easily implement conditional branch management
+他可以方便的实现条件分支管理
+
+189
+00:07:20,266 --> 00:07:23,599
+You can imagine that it is an enhanced version of if else
+你可以想象成他是一个if else的加强版
+
+190
+00:07:23,966 --> 00:07:24,799
+Pattern match
+那模式匹配
+
+191
+00:07:24,800 --> 00:07:27,200
+works with almost all data types
+几乎适用于所有的数据类型
+
+192
+00:07:27,900 --> 00:07:31,133
+including basic types such as integer U8
+包括基本类型比如说整数U8
+
+193
+00:07:31,366 --> 00:07:33,533
+bool, string
+布尔, 字符串
+
+194
+00:07:34,166 --> 00:07:37,333
+complex types such as structs
+复杂类型比如结构体
+
+195
+00:07:37,866 --> 00:07:39,266
+enums and tuples
+枚举和tuple
+
+196
+00:07:40,900 --> 00:07:42,666
+When using pattern match
+在使用模式匹配时
+
+197
+00:07:42,666 --> 00:07:46,066
+the matching must be exhaustive
+他要求我们的匹配必须彻底完备
+
+198
+00:07:46,133 --> 00:07:50,266
+if there are situations that are not included
+也就是说如果有分支没有覆盖到
+
+199
+00:07:50,500 --> 00:07:51,866
+mutation error will occur
+会发生变异错误
+
+200
+00:07:51,866 --> 00:07:52,666
+For example
+比如
+
+201
+00:07:53,366 --> 00:07:55,266
+ if option only matches some
+option如果只匹配了some
+
+202
+00:07:55,466 --> 00:07:57,999
+but no match for none, an error will be reported
+而没有匹配none的话就会报错误
+
+203
+00:07:58,900 --> 00:07:59,900
+Underline
+下划线
+
+204
+00:07:59,900 --> 00:08:03,500
+usually put here represents default
+通常放到最后用来作为默认的
+
+205
+00:08:03,733 --> 00:08:06,133
+or a process that the code doesn't care about
+或者说是代码所不关心的一个
+
+206
+00:08:06,133 --> 00:08:06,933
+or a process that the code doesn't care about
+流程分支
+
+207
+00:08:08,066 --> 00:08:09,299
+Use it with caution
+要谨慎使用
+
+208
+00:08:09,300 --> 00:08:11,866
+otherwise there will be bugs
+不然的话会产生bug
+
+209
+00:08:11,966 --> 00:08:14,733
+When you use the underscore
+也就是说当你使用了下划线
+
+210
+00:08:14,766 --> 00:08:16,099
+but ignore some scene needs to be dealt with
+但是又忽略了某种
+
+211
+00:08:16,099 --> 00:08:16,100
+but ignore some scene needs to be dealt with
+
+212
+00:08:16,100 --> 00:08:17,900
+but ignore some scene needs to be dealt with
+需要处理的场景的时候
+
+213
+00:08:18,000 --> 00:08:19,533
+your code will not work as expected
+你的代码就会
+
+214
+00:08:19,533 --> 00:08:19,566
+your code will not work as expected
+
+215
+00:08:19,566 --> 00:08:21,666
+your code will not work as expected
+不是按期望的那样所运行
+
+216
+00:08:22,566 --> 00:08:24,799
+Here we give two examples of pattern matching
+这里我们举两个模式匹配的例子
+
+217
+00:08:25,000 --> 00:08:27,766
+We defined a variant called value
+我们定义了一个变量叫做value
+
+218
+00:08:27,766 --> 00:08:30,333
+it is an integer U8
+它是一个整数U8
+
+219
+00:08:31,000 --> 00:08:34,933
+The value is 0, then we match this value
+值是0 那我们对这个值进行匹配
+
+220
+00:08:35,533 --> 00:08:37,399
+If it is 1 or 3
+如果是1或者3的时候
+
+221
+00:08:37,400 --> 00:08:40,333
+We will print a corresponding string
+我们就打印对应的一个字符串
+
+222
+00:08:40,766 --> 00:08:42,466
+If other values
+那如果是其他数值
+
+223
+00:08:42,466 --> 00:08:44,066
+we just do nothing
+我们就什么操作都不做
+
+224
+00:08:44,900 --> 00:08:46,866
+Another example is
+另外一个例子是
+
+225
+00:08:46,866 --> 00:08:48,499
+We pattern match the option
+我们对option进行模式匹配
+
+226
+00:08:48,500 --> 00:08:52,133
+Here we define a function called plus_one
+这里我们定义了一个函数叫做plus_one
+
+227
+00:08:52,266 --> 00:08:55,933
+It receives a parameter is an option I32
+它接收一个参数是一个option I32
+
+228
+00:08:56,566 --> 00:08:58,399
+returns an option I32
+返回一个option I32
+
+229
+00:08:58,666 --> 00:09:00,166
+Then here we put our
+那我们这里对我们的数
+
+230
+00:09:00,166 --> 00:09:01,299
+parameters for pattern matching
+参数进行模式匹配
+
+231
+00:09:01,300 --> 00:09:03,333
+If it is None, return it
+如果是None的话返回呢
+
+232
+00:09:03,733 --> 00:09:05,199
+if some
+如果是some
+
+233
+00:09:05,733 --> 00:09:09,199
+Then we add 1 to the value
+那我们对里面的值进行加1
+
+234
+00:09:09,200 --> 00:09:10,300
+then return
+然后返回
+
+235
+00:09:11,066 --> 00:09:12,366
+You see that
+可以看到我们
+
+236
+00:09:13,733 --> 00:09:15,866
+if the variant is some(5)
+变量如果是some(5)
+
+237
+00:09:16,100 --> 00:09:18,733
+Then we call our plus_one function
+那我们调用我们的plus_one函数
+
+238
+00:09:19,533 --> 00:09:21,399
+input some(5)
+传入我们的some(5)
+
+239
+00:09:21,700 --> 00:09:24,133
+then it will return a some(5)
+那我们就会返回一个some(5)
+
+240
+00:09:24,933 --> 00:09:27,099
+When we input a None
+当我们传入的是一个None的时候
+
+241
+00:09:27,100 --> 00:09:29,800
+our plus_one function returns a None
+我们的plus_one函数返回的还是一个None
+
+242
+00:09:31,800 --> 00:09:33,866
+Here we use map
+这里我们来用map
+
+243
+00:09:34,066 --> 00:09:36,533
+to rewrite the plus_one function
+对plus_one函数进行改造
+
+244
+00:09:37,500 --> 00:09:40,600
+We first define a variant
+我们首先定义一个变量
+
+245
+00:09:40,600 --> 00:09:42,200
+it is an option value
+它是一个option的值
+
+246
+00:09:43,566 --> 00:09:45,333
+It is a some(5) with value 
+它是有值的some(5)
+
+247
+00:09:45,500 --> 00:09:47,133
+Then we use map
+那我们再用它的map
+
+248
+00:09:47,133 --> 00:09:49,066
+to do add 1 to the value
+对里面的值进行加1
+
+249
+00:09:51,533 --> 00:09:53,533
+The map receives a closure
+map接收的是一个closure
+
+250
+00:09:53,533 --> 00:09:56,099
+that is, a function call
+也就是一个函数调用
+
+251
+00:09:57,100 --> 00:09:59,133
+Then we print the output
+然后我们打印对应的输出
+
+252
+00:10:00,900 --> 00:10:04,400
+Let's test if the value is None
+接着我们来测一下如果值是None
+
+253
+00:10:04,400 --> 00:10:05,366
+Let's test if the value is None
+的情况下
+
+254
+00:10:05,966 --> 00:10:08,199
+Then we first define a value of None
+那我们首先定义一个None的值
+
+255
+00:10:08,533 --> 00:10:11,199
+Here we need to define the type
+这里我们要显示的给出类型定义
+
+256
+00:10:11,200 --> 00:10:15,366
+because the compiler can't infer it from None
+因为编译器通过None推断不出来
+
+257
+00:10:16,133 --> 00:10:18,733
+If it is some, the type of the value inside
+如果是some的时候里面的值的类型
+
+258
+00:10:20,100 --> 00:10:23,166
+then we also call our map function
+那我们同样的调用我们的map函数
+
+259
+00:10:23,666 --> 00:10:25,933
+to give a closure
+给一个closure
+
+260
+00:10:27,933 --> 00:10:29,366
+then print the result
+然后打印对应的结果
+
+261
+00:10:29,366 --> 00:10:31,399
+Let's try
+我们可以看一下对应的结果
+
+262
+00:10:31,800 --> 00:10:33,466
+You can see that it is None
+可以看到它是None
+
+263
+00:10:35,800 --> 00:10:37,866
+A unique syntax in pattern matche is
+模式匹配的一个
+
+264
+00:10:37,966 --> 00:10:40,899
+if let
+比较独特的语法是if let
+
+265
+00:10:41,766 --> 00:10:44,666
+It is used when we only care about
+它适用的场景是当我们只关心
+
+266
+00:10:44,900 --> 00:10:46,133
+one situation
+一个分支时
+
+267
+00:10:46,800 --> 00:10:48,133
+For example
+比如这里我们
+
+268
+00:10:48,600 --> 00:10:52,333
+A variable is defined as some_U8_value
+定义了一个变量是some_U8_value
+
+269
+00:10:52,400 --> 00:10:54,666
+Then its value is a some
+那它的值是一个some
+
+270
+00:10:55,500 --> 00:10:58,900
+some(3) we can match this value
+some(3) 我们可以对这个值进行匹配
+
+271
+00:10:58,900 --> 00:10:58,966
+Print when some(3)
+
+272
+00:10:58,966 --> 00:11:00,366
+Print when some(3)
+当它是
+
+273
+00:11:00,366 --> 00:11:01,100
+Print when some(3)
+
+274
+00:11:01,100 --> 00:11:02,300
+Print when some(3)
+some(3)的时候打印
+
+275
+00:11:02,300 --> 00:11:03,500
+in other cases
+如果是其他情况的时候
+
+276
+00:11:03,500 --> 00:11:05,566
+we do nothing
+我们就不做操作
+
+277
+00:11:06,200 --> 00:11:08,800
+We can rewrite it with if let
+我们可以把这样的一个语法
+
+278
+00:11:08,800 --> 00:11:10,500
+We can rewrite it with if let
+通过if let进行重写
+
+279
+00:11:11,133 --> 00:11:12,333
+We separate with equal sign
+我们用等号分隔
+
+280
+00:11:12,333 --> 00:11:15,466
+The left is the pattern we need to match, some(3)
+等号左边是我们需要匹配的模式
+
+281
+00:11:15,466 --> 00:11:16,333
+The left is the pattern we need to match, some(3)
+
+282
+00:11:16,333 --> 00:11:17,066
+The left is the pattern we need to match, some(3)
+some(3)
+
+283
+00:11:17,066 --> 00:11:19,466
+The right side, the values ​​we need to match
+那等号右边的话是我们需要匹配的值
+
+284
+00:11:19,466 --> 00:11:21,466
+is some_u8_value
+就是我们的some U8
+
+285
+00:11:22,466 --> 00:11:24,933
+When the match is successful, we do the corresponding operation
+当匹配成功的时候我们做对应的操作
+
+286
+00:11:24,933 --> 00:11:25,933
+that is, print
+也就是打印
+
+287
+00:11:26,133 --> 00:11:28,199
+do nothing when the match is unsuccessful
+当匹配不成功的时候什么都不做
+
+288
+00:11:29,000 --> 00:11:32,400
+Using if let will lose the sanity check
+使用if let会失去完备性检查
+
+289
+00:11:32,400 --> 00:11:34,866
+So be careful when using
+所以使用的时候要格外小心
+
+290
+00:11:36,300 --> 00:11:38,600
+That's all for today's lesson, thank you all
+今天的课程内容就到这里谢谢大家
+
