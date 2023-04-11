@@ -5,12 +5,12 @@ Hello everyone, I am Kaichao
 
 2
 00:00:02,400 --> 00:00:03,933
-The content of this lesson is
+The content of this lesson includes
 本次课程内容是
 
 3
 00:00:04,500 --> 00:00:07,266
-Rust's generic types, traits and lifetimes
+generic types, traits and lifetimes in Rust
 Rust的泛型, trait和生命周期
 
 4
@@ -25,32 +25,32 @@ then how to use trait
 
 6
 00:00:14,133 --> 00:00:17,133
-and the lifetime for variants and references
+and the lifetime of variables and references
 以及变量和引用的生命周期的使用
 
 7
 00:00:18,000 --> 00:00:19,900
-So why use generic types
+So why use generic types?
 那为什么要使用泛型呢
 
 8
 00:00:20,333 --> 00:00:22,366
-We have said in previous lessons that
+In previous lessons we have mentioned that
 我们之前的课程讲到过
 
 9
 00:00:23,000 --> 00:00:25,800
- we can encapsulate using modular code
+we can encapsulate modular code for code reuse
 可以通过模块化的代码封装
 
 10
-00:00:25,966 --> 00:00:27,466
-for code reuse
+00:00:25,800 --> 00:00:27,466
+we can encapsulate modular code for code reuse
 实现代码的复用
 
 11
 00:00:28,533 --> 00:00:29,899
-For some common modules
+For common used modules
 一些公共的模块
 
 12
@@ -60,12 +60,12 @@ we can provide some interfaces
 
 13
 00:00:31,533 --> 00:00:33,533
-for use in other codes
+so that it can be used by other code
 供其他的代码所使用
 
 14
 00:00:34,533 --> 00:00:37,266
-There is another form of code reuse mechanism
+There is a another way to reuse the shared code
 还有另外一种形式的代码复用机制
 
 15
@@ -75,12 +75,12 @@ through generic types
 
 16
 00:00:38,766 --> 00:00:41,266
-When some data structure or function are similar
+When data structures or functions are similar
 当一些数据结构或者函数的功能
 
 17
 00:00:41,266 --> 00:00:42,166
-When some data structure or function are similar
+When data structures or functions are similar
 很类似时
 
 18
@@ -95,17 +95,17 @@ We'll look at some examples later
 
 20
 00:00:46,566 --> 00:00:48,133
-Through generic types
+By abstracting with generic types
 通过泛型这种抽象
 
 21
 00:00:48,133 --> 00:00:50,166
-we can increase the scalability of the code
-我们可以增加代码的扩展性
+we can increase the extensibility of the code
+我们可以增加代码的可扩展性
 
 22
 00:00:50,900 --> 00:00:53,066
-When we add a new data structure
+When adding a new data structure
 当我们新增了一个数据结构的时候
 
 23
@@ -120,57 +120,57 @@ because
 
 25
 00:00:56,800 --> 00:00:59,666
-the current function may accept a generic parameter
+the current function may accept a parameter of generic type
 当前的函数可能是接受一个泛型参数
 
 26
 00:00:59,666 --> 00:01:01,599
-Then our new data structure is ok
+Then our new data structure only need to meet the constraints of this generic type
 那我们新增的这个数据结构
 
 27
 00:01:01,599 --> 00:01:01,600
-Then our new data structure is ok
+Then our new data structure only need to meet the constraints of this generic type
 
 28
 00:01:01,600 --> 00:01:02,124
-Then our new data structure is ok
-只要满足这个泛型参数所对应的约束
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 29
 00:01:02,124 --> 00:01:04,400
-as long as the constraints on this generic parameter are met
-只要满足这个泛型参数所对应的约束
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 30
 00:01:04,400 --> 00:01:05,200
-as long as the constraints on this generic parameter are met
-就可以了
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 31
 00:01:06,533 --> 00:01:08,599
-Generic types are often used in the definition of structures
-泛型常用于结构体的定义
+Generic types are often used in the definition of struct, enum and function signature
+泛型常用于结构体的定义, 枚举定义和函数签名
 
 32
-00:01:08,600 --> 00:01:10,400
-enum definitions and function signatures
-枚举定义和函数签名
+00:01:08,599 --> 00:01:10,400
+Generic types are often used in the definition of struct, enum and function signature
+泛型常用于结构体的定义, 枚举定义和函数签名
 
 33
 00:01:11,800 --> 00:01:14,300
-Now let's look at an example of a structure
+Now let's look at an example of struct
 现在我们来看一个结构体的例子
 
 34
 00:01:14,666 --> 00:01:16,966
-Here we struct a Point
+Here we define a struct called Point
 这里我们定义了一个表示
 
 35
 00:01:17,966 --> 00:01:20,466
 it represents a point on the coordinate system
-坐标系上的一个点的结构体point
+坐标系上的一个点的结构体Point
 
 36
 00:01:20,966 --> 00:01:23,066
@@ -179,47 +179,47 @@ It has two attributes which are x, y
 
 37
 00:01:24,000 --> 00:01:26,733
-that x, y can be an integer or a float
-那x y可以是整数也可以是浮点数
+here x, y can be an integer or float
+那x y可以是整数 也可以是浮点数
 
 38
 00:01:26,733 --> 00:01:28,366
-We can
+Now we can use generic type to reduce the definition of similar structs
 这个时候我们就可以
 
 39
-00:01:28,500 --> 00:01:31,400
-use generic types to reduce
-通过泛型来减少类似的
+00:01:28,366 --> 00:01:31,400
+Now we can use generic type to reduce the definition of similar structs
+通过泛型来减少类似的结构体定义
 
 40
-00:01:31,700 --> 00:01:32,733
-similar struct definition
-结构体定义
+00:01:31,400 --> 00:01:32,733
+Now we can use generic type to reduce the definition of similar structs
+通过泛型来减少类似的结构体定义
 
 41
 00:01:33,133 --> 00:01:35,866
-We use a bracket
+here we use an angle bracket
 那我们是通过一个尖括号
 
 42
 00:01:35,866 --> 00:01:38,599
-it contains a generic parameter T
+it contains a generic type T
 里面包含一个泛型的参数T
 
 43
 00:01:38,933 --> 00:01:43,366
-by convention we capitalize the letter
-约定俗成的 我们以大写的单字母
+by convention we capitalize the letter to represent the generic type
+约定俗成的 我们以大写的单字母来表示我们的泛型
 
 44
-00:01:43,800 --> 00:01:44,933
-to represent our generic
-来表示我们的泛型
+00:01:43,366 --> 00:01:44,933
+by convention we capitalize the letter to represent the generic type
+约定俗成的 我们以大写的单字母来表示我们的泛型
 
 45
 00:01:44,933 --> 00:01:46,599
-If it is a generic parameter
+If it has only one generic type
 如果是一个泛型参数的话
 
 46
@@ -229,62 +229,62 @@ we usually use T
 
 47
 00:01:49,066 --> 00:01:51,333
-that is the initial letter T of type
+it is the first letter (T) of type
 也就是type的首字母T
 
 48
 00:01:52,900 --> 00:01:55,666
-Here we implement for our struct
-这里我们为我们的结构体实现
+Here we implement a function x for our struct
+这里我们为我们的结构体实现了一个方法x
 
 49
 00:01:55,666 --> 00:01:57,966
-a function x
-了一个方法是x
+Here we implement a function x for our struct
+这里我们为我们的结构体实现了一个方法x
 
 50
 00:01:58,366 --> 00:02:01,966
-Its input is a reference to the structure itself
+Its parameter is a reference to the struct itself
 它的参数是结构体自身的一个引用
 
 51
 00:02:02,000 --> 00:02:04,900
-that returns a reference to T
+then returns a reference to T
 那返回一个T的引用
 
 52
 00:02:05,700 --> 00:02:07,366
-Note here that
+Note that
 这里要注意我们在
 
 53
 00:02:07,800 --> 00:02:09,500
-when implementing the corresponding structure
+when implementing the corresponding struct
 实现对应的结构体的时候
 
 54
 00:02:09,500 --> 00:02:11,866
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 我们在implement后面要加一个
 
 55
 00:02:11,866 --> 00:02:12,700
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 
 56
 00:02:12,700 --> 00:02:15,166
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 在implement后面要指定我们的泛型T
 
 57
 00:02:16,366 --> 00:02:17,799
-If there are generic constraints
-如果有泛型约束的话
+we also need to indicate it here if there are constraints to the generic type
+如果有泛型约束的话 我们也要添加在对应的后面
 
 58
-00:02:17,800 --> 00:02:19,733
-we also need to indicate here
-我们也要添加在对应的后面
+00:02:17,799 --> 00:02:19,733
+we also need to indicate it here if there are constraints to the generic type
+如果有泛型约束的话 我们也要添加在对应的后面
 
 59
 00:02:20,566 --> 00:02:23,866
@@ -293,136 +293,137 @@ The logic of the x method here is very simple
 
 60
 00:02:24,400 --> 00:02:26,266
-obitains property of x here
+it gets the field x of the struct
 当前结构体的x
 
 61
 00:02:27,166 --> 00:02:29,099
-and returns a reference to it
+and returns a reference to x
 属性并且返回它的引用
 
 62
 00:02:29,900 --> 00:02:30,266
-When we define in the main function
+Let's look at the main function
 可以看到
 
 63
 00:02:30,266 --> 00:02:32,499
-When we define in the main function
+Let's look at the main function
 当我们在main函数里面可以定义
 
 64
 00:02:33,133 --> 00:02:35,966
-a point where xy is an integer
-x y分别是整数的这样的一个point
+we can define a point where x and y are integer
+x y分别是整数的这样的一个point结构体
 
 65
 00:02:36,166 --> 00:02:39,866
-we can also define x,y as a float number
-结构体也可以定义x y是浮点数的
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 66
 00:02:39,866 --> 00:02:39,933
-we can also define x,y as a float number
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 67
 00:02:39,933 --> 00:02:41,366
-we can also define x,y as a float number
-对应的结构体float
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 68
 00:02:43,400 --> 00:02:45,133
-Let's look at another enum example
+Let's look at another example for enum
 我们再来看一个枚举的例子
 
 69
 00:02:45,133 --> 00:02:47,499
-We talked about it in the previous lesson
+In the previous lesson we mentioned that
 我们之前课程中讲到过
 
 70
 00:02:47,800 --> 00:02:49,200
-Two important enums
+there are two important enums
 两个重要的枚举
 
 71
 00:02:49,200 --> 00:02:53,666
-One is option, shows value or no value
+One is Option, represents containing a value or None
 一个是Option 表示有值或者无值
 
 72
 00:02:53,700 --> 00:02:54,666
-If value
+If containing a value
 那有值的话
 
 73
 00:02:54,666 --> 00:02:57,333
-the type of the value can be an integer
-这个值的类型我们可以是整数
+the type of the value can be integer, float, string etc.
+这个值的类型我们可以是整数, 可以是浮点数, 可以字符串, 等等
 
 74
 00:02:57,333 --> 00:02:59,899
-a float, a string, etc.
-可以是浮点数 可以字符串, 等等
+the type of the value can be integer, float, string etc.
+这个值的类型我们可以是整数, 可以是浮点数, 可以字符串, 等等
 
 75
 00:03:00,100 --> 00:03:01,866
-Then we can use a T here
-那我们这里就可以用一个
+Here we can use generic type T for abstraction
+那我们这里就可以用一个泛型T进行抽象
 
 76
-00:03:02,100 --> 00:03:03,466
-generic T for abstraction
-泛型T进行抽象
+00:03:01,866 --> 00:03:03,466
+Here we can use generic type T for abstraction
+那我们这里就可以用一个泛型T进行抽象
 
 77
 00:03:04,666 --> 00:03:07,866
-to make our code more scalable and flexible
+it makes our code more extensible and flexible
 让我们的代码可扩展性更强也更灵活
 
 78
 00:03:08,133 --> 00:03:10,733
-The same for the result
+Similarly, for the Result enum
 那同样的我们的Result类型
 
 79
 00:03:10,900 --> 00:03:12,266
-it has two generic parameters
+it has two generic types, T and E
 它有两个泛型参数
 
 80
 00:03:12,266 --> 00:03:14,133
-separated by commas
+separated by comma
 通过逗号进行分割
 
 81
 00:03:14,466 --> 00:03:16,066
-The first generic parameter represents
-第一个泛型参数表示
+the first generic type parameter T represents the type of a value in correct cases
+第一个泛型参数表示正确的情况下 值的类型
 
 82
-00:03:16,333 --> 00:03:18,699
-the type of a value in the correct case
-正确的情况下 值的类型
+00:03:16,066 --> 00:03:18,699
+the first generic type parameter T represents the type of a value in correct cases
+第一个泛型参数表示正确的情况下 值的类型
 
 83
 00:03:18,800 --> 00:03:20,166
-The second parameter E
-那第二个参数E
+The second parameter E represents the type of error information in error cases
+那第二个参数E 表示错误场景下的错误类型
 
 84
-00:03:20,333 --> 00:03:23,499
-is the type of error that represents the error scenario
-是表示错误场景下的错误类型
+00:03:20,166 --> 00:03:23,499
+The second parameter E represents the type of error information in error cases
+那第二个参数E 表示错误场景下的错误类型
 
 85
 00:03:25,800 --> 00:03:27,333
-Now let's look at a
+Now let's look at an example
 现在我们来看一个
 
 86
 00:03:27,333 --> 00:03:30,499
-examples that generics used in function signatures
+that generic type is used in function signatures
 泛型参数用在函数签名里的例子
 
 87
@@ -432,22 +433,22 @@ Here we define a function largest
 
 88
 00:03:34,266 --> 00:03:36,533
-It takes a parameter list
+It takes a parameter called list
 它接收一个参数list
 
 89
 00:03:36,866 --> 00:03:40,099
-Its type is a reference to a list type
+its type is a reference to a vector
 它的类型是集合类型的引用
 
 90
 00:03:41,100 --> 00:03:42,466
-Its logic is simple
+the logic is pretty simple
 它的逻辑很简单
 
 91
 00:03:42,466 --> 00:03:45,399
-It will get the maximum value in the list
+It will get the maximum value in the vector
 就是取得当前集合里面的最大值
 
 92
@@ -457,151 +458,151 @@ and returns a reference of the value
 
 93
 00:03:49,000 --> 00:03:52,500
-Such a function can be used to calculate the maximum value
+Such a function can be used to calculate the maximum value of a vector of integers
 这样一个函数可以去计算整数集合的最大值
 
 94
 00:03:52,500 --> 00:03:54,100
-in a list of integers or
-也可以去计算
+or a vector of characters
+也可以去计算字符集合的最大值
 
 95
-00:03:54,566 --> 00:03:56,399
-the maximum value of a integer list
-字符集合的最大值
+00:03:54,100 --> 00:03:56,399
+or a vector of characters
+也可以去计算字符集合的最大值
 
 96
 00:03:56,666 --> 00:04:00,566
-as long as the type inside can be compared in size
+as long as the type inside the vector can be compared with each other
 只要是里面的类型是可以比较大小的
 
 97
 00:04:00,566 --> 00:04:02,899
-then our function should be able to apply
+then our function should be able to apply to such vectors
 那我们这个函数都可以来应用
 
 98
 00:04:03,766 --> 00:04:05,866
-Calculate the maximum value in a list
+and calculate the maximum value in it
 计算对应集合里面的最大值
 
 99
 00:04:08,000 --> 00:04:09,733
-Now let's look at the code demo
+Now let's look at the code
 现在我们来看一下代码演示
 
 100
 00:04:11,533 --> 00:04:13,666
-First we define our
-首先我们定义了我们的
+First let's define the function largest
+首先我们定义了函数largest
 
 101
-00:04:14,333 --> 00:04:15,466
-function largest
+00:04:13,666 --> 00:04:15,466
+First let's define the function largest
 函数largest
 
 102
 00:04:15,866 --> 00:04:17,166
-Its parameters we just mentioned
+the parameter is a reference to a vector
 它的参数我们刚才提到了
 
 103
 00:04:17,166 --> 00:04:19,933
-it is a reference to a list type
+the parameter is a reference to a vector
 它是某个集合类型的引用
 
 104
 00:04:20,400 --> 00:04:23,900
-returns a reference to an element in a list
+returns a reference to an element in the vector
 返回一个集合里面元素的引用
 
 105
 00:04:25,200 --> 00:04:27,933
-First we take the first element of the current list
+First it takes the first element of the input vector
 首先我们取当前集合第一个元素
 
 106
 00:04:28,700 --> 00:04:31,466
-assign to a mutable variant largest
+assign it to a mutable variable called largest
 赋值给一个可变变量largest
 
 107
 00:04:32,733 --> 00:04:35,466
-Then we loop through each element in the list
+Then it loops through each element in the vector
 接着我们循环集合里面的每一个元素
 
 108
 00:04:35,766 --> 00:04:40,766
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 将循环当前的元素与我们保存的临时
 
 109
 00:04:40,766 --> 00:04:41,333
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 
 110
 00:04:41,333 --> 00:04:43,266
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 最大变量largest进行比较
 
 111
 00:04:43,266 --> 00:04:46,266
-If the current element is larger than largest
+If the current element is larger than the largest
 如果是当前元素大于largest的话
 
 112
 00:04:46,266 --> 00:04:47,933
-we will update the largest
+we will update the largest to be the current element
 我们将largest更新
 
 113
 00:04:48,666 --> 00:04:51,699
-After the loop is finish we return largest
+When finishing the loop, the largest is returned
 循环完成之后我们将largest返回
 
 114
 00:04:53,966 --> 00:04:55,899
-Then
+Then in the main function
 我们在main函数里面
 
 115
 00:04:57,100 --> 00:04:58,400
-we define a list of integer in main
+we define a vector of integers called number_list
 紧接着我们在main函数里面
 
 116
 00:04:58,400 --> 00:05:00,866
-we define a list of integer in main
-定义了一个整数集合
+we define a vector of integers called number_list
+定义了一个整数集合 number_list
 
 117
-00:05:01,266 --> 00:05:03,966
-number_list
-number_list
+00:05:00,866 --> 00:05:03,966
+we define a vector of integers called number_list
+定义了一个整数集合 number_list
 
 118
 00:05:04,133 --> 00:05:07,166
-The largest function passes in a reference to our list of integers
+then call the function largest and passes in a reference to the vector
 我们调用largest函数 传入我们整数集合的引用
 
 119
 00:05:08,100 --> 00:05:09,366
-then return the result
+gets the result
 然后返回结果
 
 120
 00:05:09,800 --> 00:05:11,000
-print the result
+print it
 将结果进行打印
 
 121
 00:05:11,000 --> 00:05:13,000
-Let's take a look at the printed results
+Let's take a look at the result
 我们来看一下打印的结果
 
 122
 00:05:14,466 --> 00:05:16,566
-We have a compilation error here
+We can see there is a compilation error here
 可以看到我们这里有一个编译错误
 
 123
@@ -611,57 +612,57 @@ that's because inside our largest function
 
 124
 00:05:20,266 --> 00:05:21,666
-we need to compare size
+we need to compare elements in the vector
 需要进行比较大小
 
 125
 00:05:21,766 --> 00:05:23,466
-then we need a function to compare size
-那我们的泛型参数T
+so the generic type T needs to have the capability to compare with each other
+那我们的泛型参数T应该有一个比较大小的功能
 
 126
-00:05:23,500 --> 00:05:25,666
-in our generic parameter T
-应该有一个比较大小的功能
+00:05:23,466 --> 00:05:25,666
+so the generic type T needs to have the capability to compare with each other
+那我们的泛型参数T应该有一个比较大小的功能
 
 127
 00:05:25,933 --> 00:05:27,599
-We can use trait bound
-我们可以通过trait bound
+Here we can use trait bound for the constraints
+我们可以通过trait bound来进行对应的约束
 
 128
-00:05:27,600 --> 00:05:29,266
-to carry out the constraints
-来进行对应的约束
+00:05:27,599 --> 00:05:29,266
+Here we can use trait bound for the constraints
+我们可以通过trait bound来进行对应的约束
 
 129
 00:05:29,466 --> 00:05:30,866
-Here we have been reminded
+The compiler alreadly reminds us
 这里边已经给了我们提示
 
 130
 00:05:30,866 --> 00:05:32,099
-we need
-我们需要一个
+we need a constraint called PartialOrd
+我们需要PartialOrd这样的一个约束
 
 131
-00:05:32,933 --> 00:05:35,066
-a constraint PartialOrd
-PartialOrd这样的一个约束
+00:05:32,099 --> 00:05:35,066
+we need a constraint called PartialOrd
+我们需要PartialOrd这样的一个约束
 
 132
 00:05:36,600 --> 00:05:37,566
-Specific trait bound
+Details of trait bound will be introduced in the following content.
 具体trait bound内容
 
 133
-00:05:37,600 --> 00:05:39,666
-will be introduce in the following lessons
+00:05:37,566 --> 00:05:39,666
+Details of trait bound will be introduced in the following content.
 我们会在后面的课程进行介绍
 
 134
 00:05:41,933 --> 00:05:43,133
-Then we recompile
+recompile
 然后我们重新编译
 
 135
@@ -676,56 +677,56 @@ At this time, our results have been printed correctly
 
 137
 00:05:46,666 --> 00:05:49,499
-the max is 100, no problem
+the max value is 100
 它最大值是100, 没有问题
 
 138
 00:05:50,600 --> 00:05:53,166
-Similarly, we can also compare
+Similarly, we can also compare a vector of characters
 类似的我们还可以去比较一个
 
 139
 00:05:53,166 --> 00:05:54,766
-a list of characters
+Similarly, we can also compare a vector of characters
 字符集合的大小
 
 140
 00:05:54,766 --> 00:05:55,300
-a list of characters
+Similarly, we can also compare a vector of characters
 
 141
 00:05:55,300 --> 00:05:57,933
-a list of characters
+to get the max character in it
 来取得字符集合的最大值
 
 142
 00:05:58,966 --> 00:06:00,866
-Here we define a list of characters
+Here let's define a vector of characters called char_list
 这里我们定义了一个字符集合char_list
 
 143
 00:06:01,500 --> 00:06:03,666
-char_list and then we call largest
+then call the function largest
 然后我们调用largest这个函数
 
 144
 00:06:03,666 --> 00:06:04,499
-pass in this list
+pass in a reference to the vector
 传入这个集合
 
 145
 00:06:04,500 --> 00:06:06,566
-get the result by reference and print it
+get the result and print it
 获取结果并且打印
 
 146
 00:06:06,566 --> 00:06:08,133
-You can see our largest char words
+You can see our largest character is y
 可以看到我们最大的char的话
 
 147
 00:06:08,133 --> 00:06:09,133
-should be a y
+You can see our largest character is y
 应该是一个y
 
 148
@@ -735,167 +736,167 @@ Let's take a look at the results of the execution
 
 149
 00:06:12,066 --> 00:06:14,099
-It can be seen that our execution result is also correct
+the result is expected
 可以看到我们的执行结果也是正确的
 
 150
 00:06:14,866 --> 00:06:15,766
-Then through this example
+Through this example you can see
 那通过这个例子的话
 
 151
 00:06:15,766 --> 00:06:16,966
-everyone can clearly see
+Through this example you can see
 大家就可以明显的看到
 
 152
 00:06:16,966 --> 00:06:19,799
-we can reduce code work and reuse code 
+how we use generic types to reduce duplicated code and reuse the logic
 我们通过使用泛型可以减少我们的代码
 
 153
-00:06:20,366 --> 00:06:22,066
-by using generic types
+00:06:19,799 --> 00:06:22,066
+how we use generic types to reduce duplicated code and reuse the logic
 实现我们代码复用
 
 154
 00:06:23,700 --> 00:06:26,133
-There are several points to note when using generic types
+There are several tips when using generic types
 在使用泛型时有几个注意的点
 
 155
 00:06:26,300 --> 00:06:28,666
-The first is the benefit of using generic types
+The first is abount benefit
 第一个是使用泛型的好处
 
 156
 00:06:28,866 --> 00:06:29,499
-That Rust
+using generic types in Rust will not affect the efficiency of code execution
 Rust泛型
 
 157
 00:06:29,500 --> 00:06:32,300
-generic types do not affect code execution efficiency
+using generic types in Rust will not affect the efficiency of code execution
 并不会影响代码的执行效率
 
 158
 00:06:32,366 --> 00:06:33,399
-This is because
-这是因为
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 159
-00:06:33,766 --> 00:06:36,499
-generic types are replaced by the concrete type
-泛型会在编译器编译期间
+00:06:33,399 --> 00:06:36,499
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 160
-00:06:36,800 --> 00:06:38,366
-at compile
-替换为具体的类型
+00:06:36,499 --> 00:06:38,366
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 161
 00:06:39,200 --> 00:06:40,366
-Another thing to note is that
+Another tip worth noting is that
 另外一个需要注意的是
 
 162
 00:06:40,366 --> 00:06:41,733
-When your code has
+when your code has a lot of generic types, it will reduce the readability of the code
 当你的代码里有非常多的泛型
 
 163
-00:06:42,266 --> 00:06:45,266
-a lot of generic types, it will reduce the readability of the code
+00:06:41,733 --> 00:06:45,266
+when your code has a lot of generic types, it will reduce the readability of the code
 那代码的可读性会降低
 
 164
 00:06:45,900 --> 00:06:47,066
-When you have a function
+When you have a function with many generic types in the signature
 当你某个函数的签名里面
 
 165
 00:06:47,066 --> 00:06:48,733
-with many generic types in the signature
+When you have a function with many generic types in the signature
 有很多泛型的时候
 
 166
 00:06:48,733 --> 00:06:49,899
-This means that your code
+This usually means that your code needs to be refactored
 这说明你的代码
 
 167
-00:06:49,900 --> 00:06:51,866
-needs to be rewrite
+00:06:49,899 --> 00:06:51,866
+This usually means that your code needs to be refactored
 需要进行一个合理的重构
 
 168
 00:06:53,366 --> 00:06:55,766
-Next, let's take a look at the traits in Rust
+Next, let's take a look at trait in Rust
 接着我们来看一下Rust里面的traits
 
 169
 00:06:56,566 --> 00:06:59,866
-A trait has a certain function or behavior
-一个trait出现了某种功能或者行为
+A trait abstracts a certain capability or behavior
+一个trait抽象了某种功能或者行为
 
 170
 00:07:00,000 --> 00:07:02,266
-it tells the compiler that the type
+it tells the compiler that some type can implement such capabilities
 它告诉编译器这个类型
 
 171
-00:07:02,366 --> 00:07:03,799
-can implement such a function 
+00:07:02,266 --> 00:07:03,799
+it tells the compiler that some type can implement such capabilities
 可以实现这样的功能
 
 172
 00:07:04,900 --> 00:07:08,533
-Different types can have this behavior
+Different types can have same capabilities by implementing the same trait
 那不同的类型都可以去具有这种行为
 
 173
-00:07:08,900 --> 00:07:09,700
-or function
+00:07:08,533 --> 00:07:09,700
+Different types can have same capabilities by implementing the same trait
 或者功能
 
 174
 00:07:09,700 --> 00:07:11,200
-For example, the function to calculate the area
+For example, the capability to calculate the area
 比如说计算面积的功能
 
 175
 00:07:11,200 --> 00:07:13,533
-a square can be calculated and a triangle as well
+a square can calculate its area, so does triangle
 正方形可以有 三角形也可以有
 
 176
 00:07:14,600 --> 00:07:17,700
-Such a concept in Java is through
+Such a concept in Java is defined with interface
 在Java里面这样的一个概念是通过
 
 177
-00:07:18,000 --> 00:07:20,000
-interface to achieve
+00:07:17,700 --> 00:07:20,000
+Such a concept in Java is defined with interface
 接口interface来实现的
 
 178
 00:07:21,400 --> 00:07:23,533
-Here we look at the definition of trait
+Here let's look at the definition of trait
 这里我们来看一下trait定义
 
 179
 00:07:23,966 --> 00:07:26,566
-We defined a trait named summary
-我们定义了一个trait名字叫summary
+We defined a trait named Summary
+我们定义了一个trait 名字叫Summary
 
 180
 00:07:26,800 --> 00:07:29,000
-You can see that we use the Pub keyword to be visible to others
+we use the pub keyword to make it visible to others
 可以看到我们使用pub关键字来对外可见
 
 181
 00:07:29,000 --> 00:07:33,200
-In the case of summary, there is a function called summarize
+In the case of trait Summary, there is a method called summarize
 那summary的话有一个方法是summarize
 
 182
@@ -905,62 +906,62 @@ it does not have a default implementation
 
 183
 00:07:35,500 --> 00:07:37,933
-That is to say, to implement the summary trait
+That is to say, the type that implement the summary trait must implement the method summarize
 也就是说实现Summary trait的类型
 
 184
-00:07:38,400 --> 00:07:41,066
-the type must implement a function summarize
+00:07:37,933 --> 00:07:41,066
+That is to say, the type that implement the summary trait must implement the method summarize
 必须要实现summarize这样的方法
 
 185
 00:07:41,900 --> 00:07:43,333
-Another situation is
+Another scenario is
 另外一种情况是
 
 186
 00:07:43,700 --> 00:07:45,900
-similarly, we defined a trait such as summary
-同样的我们定义了summary这样一个trait
+we defined a trait named Summary
+同样的我们定义了Summary这样一个trait
 
 187
 00:07:46,066 --> 00:07:47,299
-but we give
+but we give a default implementation to the summarize method
 但是我们给
 
 188
-00:07:47,500 --> 00:07:50,266
-the summarize function a default implementation
+00:07:47,299 --> 00:07:50,266
+but we give a default implementation to the summarize method
 summarize这个函数定义了一个默认实现
 
 189
 00:07:50,866 --> 00:07:54,399
-The type that implements the summary trait
+For the type that implements the Summary trait
 那实现Summary trait的类型
 
 190
 00:07:54,666 --> 00:07:56,466
-if such type is desired to use
+if such type want to use the default implementation
 如果这样的类型是希望使用默认实现的话
 
 191
 00:07:56,466 --> 00:07:57,466
-default implementation
+if such type want to use the default implementation
 如果这样的类型是希望使用默认实现的话
 
 192
 00:07:57,466 --> 00:08:00,399
-then it doesn't need to implement the summarize method
+then it doesn't need to implement the summarize method by itself
 那他就不需要去实现summarize这个方法
 
 193
 00:08:02,700 --> 00:08:05,700
-We can combine generic types and traits
+We can combine generic types and traits together
 我们可以把泛型和trait结合起来
 
 194
 00:08:06,100 --> 00:08:08,066
-so that the generic has some constraints
+the the generic can have some constraints
 从而让泛型有了某种约束
 
 195
@@ -980,7 +981,7 @@ only generics that satisfy these constraints can be used
 
 198
 00:08:11,555 --> 00:08:13,166
-instead of any types
+rather than accepting any concrete type
 而不是接受任意的类型
 
 199
@@ -990,27 +991,27 @@ In other words
 
 200
 00:08:14,966 --> 00:08:17,799
-when the compiler tries to replace the generic
+when the compiler tries to replace the generic type with a concrete type
 当编译器尝试去替换泛型时
 
 201
 00:08:18,300 --> 00:08:20,466
-This  type must have
+the concrete type must have the capability defined by this trait
 这个具体的类型必须有
 
 202
-00:08:20,800 --> 00:08:22,733
-the function or behavior defined by this trait
+00:08:20,466 --> 00:08:22,733
+the concrete type must have the capability defined by this trait
 这个trait定义的功能或者行为
 
 203
 00:08:22,733 --> 00:08:23,299
-that is to say
+more specifically, the concrete type implements this trait
 也就是说
 
 204
-00:08:23,300 --> 00:08:25,766
-thist type implements this trait
+00:08:23,299 --> 00:08:25,766
+more specifically, the concrete type implements this trait
 这个具体类型实现了这个trait
 
 205
