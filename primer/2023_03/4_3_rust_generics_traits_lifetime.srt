@@ -1,7 +1,7 @@
 ﻿1
 00:00:00,866 --> 00:00:02,399
 Hello everyone, I am Kaichao
-大家好我是凯超
+大家好 我是凯超
 
 2
 00:00:02,400 --> 00:00:03,933
@@ -135,12 +135,12 @@ Then our new data structure is ok
 28
 00:01:01,600 --> 00:01:02,124
 Then our new data structure is ok
-只要满足这个泛型参数所对的约束
+只要满足这个泛型参数所对应的约束
 
 29
 00:01:02,124 --> 00:01:04,400
 as long as the constraints on this generic parameter are met
-只要满足这个泛型参数所对的约束
+只要满足这个泛型参数所对应的约束
 
 30
 00:01:04,400 --> 00:01:05,200
@@ -200,7 +200,7 @@ similar struct definition
 41
 00:01:33,133 --> 00:01:35,866
 We use a bracket
-那我们是通过一个间括号
+那我们是通过一个尖括号
 
 42
 00:01:35,866 --> 00:01:38,599
@@ -210,7 +210,7 @@ it contains a generic parameter T
 43
 00:01:38,933 --> 00:01:43,366
 by convention we capitalize the letter
-约定俗成的我们以大写的单字母
+约定俗成的 我们以大写的单字母
 
 44
 00:01:43,800 --> 00:01:44,933
@@ -348,7 +348,7 @@ Two important enums
 71
 00:02:49,200 --> 00:02:53,666
 One is option, shows value or no value
-一个是option表示有值或者无值
+一个是Option 表示有值或者无值
 
 72
 00:02:53,700 --> 00:02:54,666
@@ -363,12 +363,12 @@ the type of the value can be an integer
 74
 00:02:57,333 --> 00:02:59,899
 a float, a string, etc.
-可以是浮点数可以字符串等等
+可以是浮点数 可以字符串, 等等
 
 75
 00:03:00,100 --> 00:03:01,866
 Then we can use a T here
-那我们这里就可以用一个T
+那我们这里就可以用一个
 
 76
 00:03:02,100 --> 00:03:03,466
@@ -383,7 +383,7 @@ to make our code more scalable and flexible
 78
 00:03:08,133 --> 00:03:10,733
 The same for the result
-那同样的我们的result类型
+那同样的我们的Result类型
 
 79
 00:03:10,900 --> 00:03:12,266
@@ -393,7 +393,7 @@ it has two generic parameters
 80
 00:03:12,266 --> 00:03:14,133
 separated by commas
-那通过逗号进行分割
+通过逗号进行分割
 
 81
 00:03:14,466 --> 00:03:16,066
@@ -403,7 +403,7 @@ The first generic parameter represents
 82
 00:03:16,333 --> 00:03:18,699
 the type of a value in the correct case
-正确的情况下的一个值的类型
+正确的情况下 值的类型
 
 83
 00:03:18,800 --> 00:03:20,166
@@ -438,17 +438,17 @@ It takes a parameter list
 89
 00:03:36,866 --> 00:03:40,099
 Its type is a reference to a list type
-它类型是集合类型的引用
+它的类型是集合类型的引用
 
 90
 00:03:41,100 --> 00:03:42,466
 Its logic is simple
-那他的逻辑很简单
+它的逻辑很简单
 
 91
 00:03:42,466 --> 00:03:45,399
 It will get the maximum value in the list
-他就是取得当前集合里面的最大值
+就是取得当前集合里面的最大值
 
 92
 00:03:45,400 --> 00:03:47,700
@@ -458,12 +458,12 @@ and returns a reference of the value
 93
 00:03:49,000 --> 00:03:52,500
 Such a function can be used to calculate the maximum value
-这样一个函数可以去计算整数集合
+这样一个函数可以去计算整数集合的最大值
 
 94
 00:03:52,500 --> 00:03:54,100
 in a list of integers or
-最大值也可以去计算
+也可以去计算
 
 95
 00:03:54,566 --> 00:03:56,399
@@ -478,7 +478,7 @@ as long as the type inside can be compared in size
 97
 00:04:00,566 --> 00:04:02,899
 then our function should be able to apply
-那我们这个函数应该是都可以来应用
+那我们这个函数都可以来应用
 
 98
 00:04:03,766 --> 00:04:05,866
@@ -567,22 +567,22 @@ Then
 115
 00:04:57,100 --> 00:04:58,400
 we define a list of integer in main
-紧接着我们在main
+紧接着我们在main函数里面
 
 116
 00:04:58,400 --> 00:05:00,866
 we define a list of integer in main
-函数里面定义了一个整数集合
+定义了一个整数集合
 
 117
 00:05:01,266 --> 00:05:03,966
 number_list
-number_list我们调用
+number_list
 
 118
 00:05:04,133 --> 00:05:07,166
 The largest function passes in a reference to our list of integers
-largest函数传入我们整数集合的引用
+我们调用largest函数 传入我们整数集合的引用
 
 119
 00:05:08,100 --> 00:05:09,366
@@ -626,8 +626,8 @@ in our generic parameter T
 
 127
 00:05:25,933 --> 00:05:27,599
-We can use trait bond
-我们可以通过trait bond
+We can use trait bound
+我们可以通过trait bound
 
 128
 00:05:27,600 --> 00:05:29,266
@@ -637,7 +637,7 @@ to carry out the constraints
 129
 00:05:29,466 --> 00:05:30,866
 Here we have been reminded
-这里边已经给我们提示到
+这里边已经给了我们提示
 
 130
 00:05:30,866 --> 00:05:32,099
@@ -646,18 +646,18 @@ we need
 
 131
 00:05:32,933 --> 00:05:35,066
-a constraint partial order
-partial order这样的一个约束
+a constraint PartialOrd
+PartialOrd这样的一个约束
 
 132
 00:05:36,600 --> 00:05:37,566
-Specific trait bond
-具体trait bond
+Specific trait bound
+具体trait bound内容
 
 133
 00:05:37,600 --> 00:05:39,666
 will be introduce in the following lessons
-内容我们会在后面的课程进行介绍
+我们会在后面的课程进行介绍
 
 134
 00:05:41,933 --> 00:05:43,133
@@ -687,7 +687,7 @@ Similarly, we can also compare
 139
 00:05:53,166 --> 00:05:54,766
 a list of characters
-字符集合的
+字符集合的大小
 
 140
 00:05:54,766 --> 00:05:55,300
@@ -696,17 +696,17 @@ a list of characters
 141
 00:05:55,300 --> 00:05:57,933
 a list of characters
-大小来取得字符集合的最大值
+来取得字符集合的最大值
 
 142
 00:05:58,966 --> 00:06:00,866
 Here we define a list of characters
-这里我们定义了一个字符集合
+这里我们定义了一个字符集合char_list
 
 143
 00:06:01,500 --> 00:06:03,666
 char_list and then we call largest
-char_list然后我们调用largest这个函数
+然后我们调用largest这个函数
 
 144
 00:06:03,666 --> 00:06:04,499
@@ -716,7 +716,7 @@ pass in this list
 145
 00:06:04,500 --> 00:06:06,566
 get the result by reference and print it
-引用获取结果并且打印
+获取结果并且打印
 
 146
 00:06:06,566 --> 00:06:08,133
@@ -751,17 +751,17 @@ everyone can clearly see
 152
 00:06:16,966 --> 00:06:19,799
 we can reduce code work and reuse code 
-我们通过使用泛型可以减少我们的
+我们通过使用泛型可以减少我们的代码
 
 153
 00:06:20,366 --> 00:06:22,066
 by using generic types
-代码实现我们代码复用
+实现我们代码复用
 
 154
 00:06:23,700 --> 00:06:26,133
 There are several points to note when using generic types
-在使用泛型有几个注意的点
+在使用泛型时有几个注意的点
 
 155
 00:06:26,300 --> 00:06:28,666
@@ -771,12 +771,12 @@ The first is the benefit of using generic types
 156
 00:06:28,866 --> 00:06:29,499
 That Rust
-那Rust
+Rust泛型
 
 157
 00:06:29,500 --> 00:06:32,300
 generic types do not affect code execution efficiency
-泛型并不会影响代码的执行效率
+并不会影响代码的执行效率
 
 158
 00:06:32,366 --> 00:06:33,399
@@ -801,22 +801,22 @@ Another thing to note is that
 162
 00:06:40,366 --> 00:06:41,733
 When your code has
-当你的代码里有
+当你的代码里有非常多的泛型
 
 163
 00:06:42,266 --> 00:06:45,266
 a lot of generic types, it will reduce the readability of the code
-非常多的泛型那代码的可读性会降低
+那代码的可读性会降低
 
 164
 00:06:45,900 --> 00:06:47,066
 When you have a function
-当你某个函数
+当你某个函数的签名里面
 
 165
 00:06:47,066 --> 00:06:48,733
 with many generic types in the signature
-的签名里面有很多泛型的时候
+有很多泛型的时候
 
 166
 00:06:48,733 --> 00:06:49,899
@@ -836,7 +836,7 @@ Next, let's take a look at the traits in Rust
 169
 00:06:56,566 --> 00:06:59,866
 A trait has a certain function or behavior
-一个traits出现了某种功能或者行为
+一个trait出现了某种功能或者行为
 
 170
 00:07:00,000 --> 00:07:02,266
@@ -866,7 +866,7 @@ For example, the function to calculate the area
 175
 00:07:11,200 --> 00:07:13,533
 a square can be calculated and a triangle as well
-正方形可以有三角形也可以有
+正方形可以有 三角形也可以有
 
 176
 00:07:14,600 --> 00:07:17,700
@@ -891,7 +891,7 @@ We defined a trait named summary
 180
 00:07:26,800 --> 00:07:29,000
 You can see that we use the Pub keyword to be visible to others
-可以看到我们使用Pub关键字来对外可见
+可以看到我们使用pub关键字来对外可见
 
 181
 00:07:29,000 --> 00:07:33,200
@@ -906,12 +906,12 @@ it does not have a default implementation
 183
 00:07:35,500 --> 00:07:37,933
 That is to say, to implement the summary trait
-也就是说实现summary trait的
+也就是说实现Summary trait的类型
 
 184
 00:07:38,400 --> 00:07:41,066
 the type must implement a function summarize
-类型必须要实现summarize这样的方法
+必须要实现summarize这样的方法
 
 185
 00:07:41,900 --> 00:07:43,333
@@ -936,17 +936,17 @@ summarize这个函数定义了一个默认实现
 189
 00:07:50,866 --> 00:07:54,399
 The type that implements the summary trait
-那实现summary trait的类型
+那实现Summary trait的类型
 
 190
 00:07:54,666 --> 00:07:56,466
 if such type is desired to use
-如果这样的类型是希望使用
+如果这样的类型是希望使用默认实现的话
 
 191
 00:07:56,466 --> 00:07:57,466
 default implementation
-默认实现的话
+如果这样的类型是希望使用默认实现的话
 
 192
 00:07:57,466 --> 00:08:00,399
@@ -1026,7 +1026,7 @@ We define a Tweet
 207
 00:08:31,933 --> 00:08:34,866
 It has two attributes, one is author and the other is test
-它有两个属性一个是author一个是text
+它有两个属性 一个是author 一个是text
 
 208
 00:08:34,866 --> 00:08:36,366
@@ -1036,7 +1036,7 @@ they are string type
 209
 00:08:37,600 --> 00:08:39,733
 We implement the summary we defined earlier
-那我们对我们的Tweet
+那我们对Tweet
 
 210
 00:08:39,733 --> 00:08:41,533
@@ -1091,7 +1091,7 @@ this generic has a constraint that is
 220
 00:09:04,333 --> 00:09:07,399
 it must satisfy a trait like summary
-它必须要满足summary这样的一个trait
+它必须要满足Summary这样的一个trait
 
 221
 00:09:08,266 --> 00:09:09,466
@@ -1111,7 +1111,7 @@ Here we use a colon to
 224
 00:09:15,166 --> 00:09:17,766
 Here we use a colon to
-这里我们是通过冒号summary来去
+这里我们是通过冒号Summary来
 
 225
 00:09:18,133 --> 00:09:19,733
@@ -1120,8 +1120,8 @@ constrain the interface
 
 226
 00:09:19,966 --> 00:09:20,999
-that is trait bond
-也就是trait bond
+that is trait bound
+也就是trait bound
 
 227
 00:09:21,933 --> 00:09:24,799
@@ -1136,31 +1136,32 @@ we can use
 229
 00:09:26,933 --> 00:09:29,199
 some interfaces to do so
-implement某个接口这样的形式
+impl Summary这样的形式
 
 230
 00:09:29,600 --> 00:09:30,766
 If the interface is more complicated
-接口比较复杂
+如果接口比较复杂
 
 231
 00:09:30,766 --> 00:09:32,133
 or it has multiple generic parameters
-或者说有多个
+或者说有多个泛型参数的时候
 
 232
 00:09:32,133 --> 00:09:32,700
 or it has multiple generic parameters
+或者说有多个泛型参数的时候
 
 233
 00:09:32,700 --> 00:09:33,700
 or it has multiple generic parameters
-泛型参数的时候
+或者说有多个泛型参数的时候
 
 234
 00:09:33,700 --> 00:09:36,300
 it becomes less readable
-这种类型就会变得不易读
+这种方式就会变得不易读
 
 235
 00:09:37,766 --> 00:09:39,699
@@ -1175,7 +1176,7 @@ FIrst
 237
 00:09:41,666 --> 00:09:44,066
 we define a trait like summary
-我们定义了一个summary这样的一个trait
+我们定义了Summary这样的一个trait
 
 238
 00:09:44,100 --> 00:09:46,400
@@ -1200,12 +1201,12 @@ as well as
 242
 00:09:53,333 --> 00:09:55,999
 the implementation of the structure to the interface summary
-结构体对summary接口的实现
+结构体对Summary接口的实现
 
 243
 00:09:57,600 --> 00:09:59,000
 The structure name is Tweet
-结构体名字是Tweet
+结构体的名字是Tweet
 
 244
 00:09:59,200 --> 00:10:00,600
@@ -1215,12 +1216,12 @@ is what we just saw
 245
 00:10:01,733 --> 00:10:04,533
 Let's define our function notify
-我们再定义我们的函数notify
+我们再定义函数notify
 
 246
 00:10:04,600 --> 00:10:06,566
 print the results of our summary
-打印我们summary的结果
+打印summarize的结果
 
 247
 00:10:07,933 --> 00:10:09,466
@@ -1235,7 +1236,7 @@ main函数里面进行使用
 249
 00:10:11,466 --> 00:10:12,699
 use it in the main function
-我们notify函数
+我们的notify函数
 
 250
 00:10:14,000 --> 00:10:16,133
@@ -1250,7 +1251,7 @@ Tweet结构体的实例
 252
 00:10:18,733 --> 00:10:22,199
 Its author is kaichao, and its text is hello world
-它的author是kaichao,它的text是hello world
+它的author是kaichao, 它的text是hello world
 
 253
 00:10:22,500 --> 00:10:24,366
@@ -1260,7 +1261,7 @@ then we call the notify function
 254
 00:10:24,366 --> 00:10:26,366
 Pass the reference of Tweet
-传入我们Tweet的引用
+传入我们tweet的引用
 
 255
 00:10:27,733 --> 00:10:29,133
@@ -1288,8 +1289,8 @@ Can be seen here
 
 260
 00:10:37,366 --> 00:10:39,933
-The advantage of using trait bond is that
-我们使用trait bond的好处是
+The advantage of using trait bound is that
+我们使用trait bound的好处是
 
 261
 00:10:40,500 --> 00:10:42,566
@@ -1334,12 +1335,12 @@ as long as it
 269
 00:10:56,100 --> 00:10:58,733
 satisfy an interface like summary
-满足summary这样的一个接口就可以了
+满足Summary这样的一个接口就可以了
 
 270
 00:11:01,000 --> 00:11:02,933
-Another benefit of trait bond is that
-trait bond另外一个好处是
+Another benefit of trait bound is that
+trait bound另外一个好处是
 
 271
 00:11:02,933 --> 00:11:04,699
@@ -1348,8 +1349,8 @@ when we have multiple parameters
 
 272
 00:11:04,900 --> 00:11:06,600
-using a trait bond guarantees
-使用trait bond可以保证
+using a trait bound guarantees
+使用trait bound 可以保证
 
 273
 00:11:07,200 --> 00:11:08,700
@@ -1379,7 +1380,7 @@ Then these two parameter types are references of generic T
 278
 00:11:18,966 --> 00:11:21,066
 Generic T must satisfy such a constraint of summary
-泛型T要满足summary这样一个约束
+泛型T要满足Summary这样一个约束
 
 279
 00:11:22,266 --> 00:11:24,766
@@ -1419,17 +1420,17 @@ For example here
 286
 00:11:42,566 --> 00:11:45,399
 generic T except for one constraint of the summary interface
-泛型T除了有summary接口的一个约束
+泛型T除了有Summary接口的一个约束
 
 287
 00:11:45,400 --> 00:11:47,100
 there is also a constraint of the display interface
-还有display接口的一个约束
+还有Display接口的一个约束
 
 288
 00:11:47,500 --> 00:11:50,300
 Display is a trait built into Rust
-display是Rust内置的一个trait
+Display是Rust内置的一个trait
 
 289
 00:11:50,466 --> 00:11:52,899
@@ -1444,12 +1445,12 @@ Next, let's take a look at the use of the where keyword
 291
 00:11:56,700 --> 00:11:58,966
 Here we define a function called some_function
-这里我们定义了一个函数叫some方式
+这里我们定义了一个函数叫some_function
 
 292
 00:11:59,533 --> 00:12:02,066
 it has two parameters, one is T and the other is U
-它有两个参数一个是T一个是U
+它有两个参数一个是t 一个是u
 
 293
 00:12:02,300 --> 00:12:04,100
@@ -1479,7 +1480,7 @@ Generic U also has two
 298
 00:12:12,566 --> 00:12:15,099
 Longer function signatures are less readable
-函数签名比较长可读性比较低
+函数签名比较长 可读性比较低
 
 299
 00:12:15,533 --> 00:12:18,533
@@ -1494,7 +1495,7 @@ We define a function some_function
 301
 00:12:20,333 --> 00:12:22,933
 This function also has two parameters T and U
-这样为函数也是有两个参数T和U
+这样为函数也是有两个参数t和u
 
 302
 00:12:23,466 --> 00:12:24,266
@@ -1524,21 +1525,22 @@ followed by the corresponding
 307
 00:12:33,333 --> 00:12:35,066
 constraints of T and U
-T和U的分约束
+T和U的泛型约束
 
 308
 00:12:35,200 --> 00:12:37,300
 and separated multiple generic parameters by commas
-并且通过逗号分隔
+并且通过逗号分隔多个泛型参数
 
 309
 00:12:37,300 --> 00:12:38,266
 and separated multiple generic parameters by commas
+并且通过逗号分隔多个泛型参数
 
 310
 00:12:38,266 --> 00:12:39,866
 and separated multiple generic parameters by commas
-多个泛型参数
+并且通过逗号分隔多个泛型参数
 
 311
 00:12:42,266 --> 00:12:43,599
@@ -1707,12 +1709,12 @@ like type
 344
 00:14:03,066 --> 00:14:05,766
 Most of the time we don't need to specify types
-多数时候我们不需要去显示的指定
+多数时候我们不需要去显示的指定类型
 
 345
 00:14:05,800 --> 00:14:08,533
 the compiler can work as well
-类型那编辑器也可以推断出来
+那编辑器也可以推断出来
 
 346
 00:14:08,800 --> 00:14:11,466
@@ -1980,7 +1982,7 @@ Here we define a function named longest
 399
 00:16:10,666 --> 00:16:14,699
 it has two parameters x, y, string slice type
-它有两个参数x y分别是string slice类型
+它有两个参数x y 分别是string slice类型
 
 400
 00:16:15,066 --> 00:16:17,266
@@ -2104,7 +2106,7 @@ two lifetime generics
 424
 00:17:10,600 --> 00:17:13,566
 'a and 'b to different parameters respectively
-'a和'b分别是对应不同的参数
+'a和'b 分别是对应不同的参数
 
 425
 00:17:14,600 --> 00:17:15,533
@@ -2134,7 +2136,7 @@ For example, here we define a function foo
 430
 00:17:25,366 --> 00:17:27,799
 it has only one parameter x which is an application type
-它只有一个参数x是一个应用类型
+它只有一个参数x是一个引用类型
 
 431
 00:17:27,900 --> 00:17:29,600
@@ -2194,12 +2196,12 @@ For example, here we define a function foo
 442
 00:17:51,766 --> 00:17:54,799
 it has two parameters one is self reference
-它有两个参数一个是self引用
+它有两个参数一个是self的引用
 
 443
 00:17:54,966 --> 00:17:57,499
 The other one is the I32 reference
-另外一个是I32引用
+另外一个是i32引用
 
 444
 00:17:57,666 --> 00:17:59,866
@@ -2223,7 +2225,7 @@ lifetime generics 'a and 'b
 448
 00:18:03,100 --> 00:18:04,166
 Then the return value
-那我们返回去的话
+那我们返回值的话
 
 449
 00:18:04,166 --> 00:18:06,199
@@ -2278,7 +2280,7 @@ For example
 459
 00:18:22,600 --> 00:18:24,733
 we define a struct summary 
-我们定义了一个summary的结构体
+我们定义了一个Summary的结构体
 
 460
 00:18:24,733 --> 00:18:26,199
@@ -2345,12 +2347,12 @@ Then construct a summary struct
 473
 00:18:45,266 --> 00:18:48,099
 assign the value of first sentence to part
-把first sentence赋值给part
+把first_sentence赋值给part
 
 474
 00:18:48,266 --> 00:18:51,133
 After our first sentence exits the scope
-当我们的first sentence退出作用域之后
+当我们的first_sentence退出作用域之后
 
 475
 00:18:51,133 --> 00:18:53,533
@@ -2370,7 +2372,7 @@ we will always meet static lifetime
 478
 00:18:58,600 --> 00:19:01,666
 Static means
-static他所表示的意思是
+static 他所表示的意思是
 
 479
 00:19:01,666 --> 00:19:03,499
@@ -2395,12 +2397,12 @@ this reference will remain valid until the program exits
 483
 00:19:11,400 --> 00:19:15,466
 string literal,  the string enclosed in double quotes
-string literal也就是用双引号括起来的
+string literal 也就是用双引号括起来的
 
 484
 00:19:15,466 --> 00:19:17,733
 are static by default
-字符串默认是static
+字符串字面量是static的
 
 485
 00:19:17,933 --> 00:19:21,133
