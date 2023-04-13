@@ -2042,71 +2042,71 @@ such rules are configured in the compiler
 
 411
 00:16:45,266 --> 00:16:47,066
-After use these rules
-如果这一系列规则
+If the lifetime of references can be determined after applying these rules
+如果这一系列规则使用之后可以确定引用的生命周期
 
 412
-00:16:47,533 --> 00:16:50,299
-the lifetime of references can be determined
-使用之后可以确定引用的生命周期
+00:16:47,066 --> 00:16:50,299
+If the lifetime of references can be determined after applying these rules
+如果这一系列规则使用之后可以确定引用的生命周期
 
 413
 00:16:50,300 --> 00:16:51,900
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 那我们对应的
 
 414
 00:16:51,900 --> 00:16:51,966
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 
 415
 00:16:51,966 --> 00:16:52,583
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 生命周期的泛型参数就可以缺省
 
 416
 00:16:52,583 --> 00:16:53,866
-can be defaulted
+then we don't need to use generics for lifetime annotation
 生命周期的泛型参数就可以缺省
 
 417
 00:16:54,266 --> 00:16:56,933
-The first rule is that the compiler
+The first rule is that
 第一个规则是编译器为每一个
 
 418
 00:16:57,600 --> 00:16:59,066
-adds a generic to
+the compiler adds a generic type for each parameter of reference type
 引用类型的参数
 
 419
 00:16:59,066 --> 00:17:00,733
-each reference parameter type
+the compiler adds a generic type for each parameter of reference type
 添加了生命周期的泛型
 
 420
 00:17:02,066 --> 00:17:03,866
-For example, here we define a function foo
+For example, here is a function foo, it has two references
 比如这里我们定义了一个foo函数
 
 421
 00:17:03,866 --> 00:17:05,566
-it has two reference types
+For example, here is a function foo, it has two references
 它有两个引用类型
 
 422
 00:17:06,200 --> 00:17:08,533
-The compiler will automatically add
-那编译器会自动给它加上
+The compiler will automatically add a generic type for each parameter to represent its lifetime
+那编译器会自动给它加上两个生命周期泛型
 
 423
-00:17:09,100 --> 00:17:10,600
-two lifetime generics
-两个生命周期泛型
+00:17:08,533 --> 00:17:10,600
+The compiler will automatically add a generic type for each parameter to represent its lifetime
+那编译器会自动给它加上两个生命周期泛型
 
 424
 00:17:10,600 --> 00:17:13,566
-'a and 'b to different parameters respectively
+which are 'a and 'b respectively
 'a和'b 分别是对应不同的参数
 
 425
@@ -2116,43 +2116,43 @@ The second rule is
 
 426
 00:17:15,533 --> 00:17:17,799
-when there is only one lifetime generic
+when there is only one generic type for lifetime, all the returned references will use this generic type
 当生命周期泛型只有一个时
 
 427
-00:17:18,333 --> 00:17:20,466
-the return values of all reference types
+00:17:17,799 --> 00:17:20,466
+when there is only one generic type for lifetime, all the returned references will use this generic type
 那所有引用类型的返回值
 
 428
 00:17:20,466 --> 00:17:22,933
-will use this generic of this lifetime
+when there is only one generic type for lifetime, all the returned references will use this generic type
 都会使用这个生命周期的泛型
 
 429
 00:17:23,700 --> 00:17:25,266
-For example, here we define a function foo
+For example, here is a function foo
 比如这里我们定了一个函数foo
 
 430
 00:17:25,366 --> 00:17:27,799
-it has only one parameter x which is an application type
+it has only one parameter x which is a reference
 它只有一个参数x是一个引用类型
 
 431
 00:17:27,900 --> 00:17:29,600
-its lifetime is 'a
+the lifetime of x is 'a
 那它的生命周期是'a
 
 432
 00:17:30,200 --> 00:17:32,366
-Then the return value will just use 'a
-那返回值会直接使用'a
+then the return value will just use 'a as its own lifetime
+那返回值会直接使用'a 这样的一个生命周期
 
 433
 00:17:32,366 --> 00:17:34,066
-as its lifetime
-这样的一个生命周期
+then the return value will just use 'a as its own lifetime
+那返回值会直接使用'a 这样的一个生命周期
 
 434
 00:17:35,366 --> 00:17:36,199
@@ -2161,117 +2161,118 @@ The third rule is
 
 435
 00:17:36,200 --> 00:17:38,066
-when there are multiple lieftime generics
+when there are multiple generics for lifetime
 生命周期的泛型有多个时
 
 436
 00:17:38,500 --> 00:17:40,333
-and one of them is
-并且其中一个是
+and one of them is a reference to self or mutable self
+并且其中一个是自身的引用或者可变的引用
 
 437
-00:17:40,566 --> 00:17:43,199
-self reference or mutable reference
-自身的引用或者可变的引用
+00:17:40,333 --> 00:17:43,199
+and one of them is a reference to self or mutable self
+并且其中一个是自身的引用或者可变的引用
 
 438
 00:17:43,400 --> 00:17:46,133
-then the return value of all references
-那么所有引用类型的返回值
+then all the returned references will use the lifetime specified on self
+那么所有引用类型的返回值都会使用
 
 439
-00:17:46,166 --> 00:17:47,333
-will use
-都会使用
+00:17:46,133 --> 00:17:47,333
+then all the returned references will use the lifetime specified on self
+那么所有引用类型的返回值都会使用
 
 440
-00:17:47,400 --> 00:17:49,866
-the lifetime of this self-referenced lifetime
+00:17:47,333 --> 00:17:49,866
+then all the returned references will use the lifetime specified on self
 这样一个自身引用对应的生命周期
 
 441
 00:17:49,866 --> 00:17:51,599
-For example, here we define a function foo
+For example, here is a function foo
 比如这里我们定义了一个函数foo
 
 442
 00:17:51,766 --> 00:17:54,799
-it has two parameters one is self reference
+it has two parameters one is a reference to self, the other one is a reference to i32
 它有两个参数一个是self的引用
 
 443
-00:17:54,966 --> 00:17:57,499
-The other one is the I32 reference
+00:17:54,799 --> 00:17:57,499
+it has two parameters one is a reference to self, the other one is a reference to i32
 另外一个是i32引用
 
 444
 00:17:57,666 --> 00:17:59,866
-Respectively the compiler will add 
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
 分别编译器会增加一个
 
 445
-00:18:00,000 --> 00:18:01,666
-lifetime generics 'a and 'b
-生命周期的泛型参数
+00:17:59,866 --> 00:18:01,666
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 446
 00:18:01,666 --> 00:18:01,933
-lifetime generics 'a and 'b
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 447
 00:18:01,933 --> 00:18:02,799
-lifetime generics 'a and 'b
-'a和'b
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 448
 00:18:03,100 --> 00:18:04,166
-Then the return value
+The returned reference will use the lifetime specified on the self reference
 那我们返回值的话
 
 449
 00:18:04,166 --> 00:18:06,199
-will use the lifetime of the self reference
+The returned reference will use the lifetime specified on the self reference
 会使用self引用的生命周期
 
 450
 00:18:06,200 --> 00:18:07,266
-that is 'a
+which is 'a
 也就是'a
 
 451
 00:18:08,866 --> 00:18:09,933
-Partial fields of the structure
+The fields of struct can also be references
 结构体的部分字段
 
 452
 00:18:09,933 --> 00:18:11,399
-can also be a reference to a value
+The fields of struct can also be references
 也可以是某个值的引用
 
 453
 00:18:11,400 --> 00:18:13,400
-We shall specify
-那这个时候我们就要指定
+We should specify a generic to identify the lifetime of the reference
+那这个时候我们就要指定引用的生命周期
 
 454
-00:18:13,466 --> 00:18:14,966
-reference lifetime
-引用的生命周期
+00:18:13,400 --> 00:18:14,966
+We should specify a generic to identify the lifetime of the reference
+那这个时候我们就要指定引用的生命周期
 
 455
 00:18:15,133 --> 00:18:16,399
-and noted that
+Note that
 并且需要注意的是
 
 456
 00:18:16,400 --> 00:18:17,700
-the instance of the structure
-结构体的实例
+the instance of the struct will no longer be available if the referenced value goes out of scope
+结构体的实例在该值的作用域之外就不再可用了
 
 457
-00:18:17,900 --> 00:18:21,866
-is no longer available outside the scope of the value
-在该值的作用域之外就不再可用了
+00:18:17,700 --> 00:18:21,866
+the instance of the struct will no longer be available if the referenced value goes out of scope
+结构体的实例在该值的作用域之外就不再可用了
 
 458
 00:18:22,266 --> 00:18:22,599
@@ -2280,109 +2281,111 @@ For example
 
 459
 00:18:22,600 --> 00:18:24,733
-we define a struct summary 
+Let's define a struct named Summary 
 我们定义了一个Summary的结构体
 
 460
 00:18:24,733 --> 00:18:26,199
-one of its attributes part is a reference to a string slice
-它的一个属性part
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 461
 00:18:26,199 --> 00:18:26,700
-one of its attributes part is a reference to a string slice
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 462
 00:18:26,700 --> 00:18:29,133
-one of its attributes part is a reference to a string slice
-是一个string slice的引用
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 463
 00:18:30,100 --> 00:18:32,166
-So here we have to specify its lifetime is 'a
-那么这里我们要指定它的生命周期
+Here we must specify the lifetime of "part" field, which is 'a
+那么这里我们要指定它的生命周期是'a
 
 464
 00:18:32,166 --> 00:18:32,866
-So here we have to specify its lifetime is 'a
-是'a
+Here we must specify the lifetime of "part" field, which is 'a
+那么这里我们要指定它的生命周期是'a
 
 465
 00:18:32,866 --> 00:18:35,933
-When we define a string "text" in the main function
-当我们在main函数里面定了一个
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 466
 00:18:35,933 --> 00:18:36,000
-When we define a string "text" in the main function
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 467
 00:18:36,000 --> 00:18:37,200
-When we define a string "text" in the main function
-字符串text
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 468
 00:18:37,300 --> 00:18:38,733
-and get its
-并且获取它的
+and get its first sentence with split function, it returns a string slice
+并且获取它的第一个句子first sentence
 
 469
-00:18:39,300 --> 00:18:41,133
-first sentence, it's a string slice
-第一个句子first sentence
+00:18:38,733 --> 00:18:41,133
+and get its first sentence with split function, it returns a string slice
+并且获取它的第一个句子first sentence
 
 470
 00:18:41,133 --> 00:18:41,300
-first sentence, it's a string slice
+and get its first sentence with split function, it returns a string slice
 
 471
 00:18:41,300 --> 00:18:42,700
-first sentence, it's a string slice
+and get its first sentence with split function, it returns a string slice
 它是一个string slice
 
 472
 00:18:43,300 --> 00:18:45,266
-Then construct a summary struct
+Then create a instance of Summary struct and assign first_sentence to field part
 然后构造一个summary结构体
 
 473
 00:18:45,266 --> 00:18:48,099
-assign the value of first sentence to part
+Then create a instance of Summary struct and assign first_sentence to field part
 把first_sentence赋值给part
 
 474
 00:18:48,266 --> 00:18:51,133
-After our first sentence exits the scope
+After the text referenced by part goes out of the scope, the Summary instance will no longer be available
 当我们的first_sentence退出作用域之后
 
 475
 00:18:51,133 --> 00:18:53,533
-then our struct summary will no longer be available
+After the text referenced by part goes out of the scope, the Summary instance will no longer be available
 那我们的结构体summary也就不再可用
 
 476
 00:18:54,333 --> 00:18:56,133
-In another situation,
+Another commonly used concept is static lifetime
 另外一个生命周期里
 
 477
 00:18:56,133 --> 00:18:58,599
-we will always meet static lifetime
+Another commonly used concept is static lifetime
 经常会遇到的概念是静态生命周期
 
 478
 00:18:58,600 --> 00:19:01,666
-Static means
+Static means the reference is valid throughout the whole execution cycle of the program
 static 他所表示的意思是
 
 479
 00:19:01,666 --> 00:19:03,499
-it is valid
+Static means the reference is valid throughout the whole execution cycle of the program
 当前的引用的有效性
 
 480
-00:19:03,500 --> 00:19:06,366
-throughout the whole execution cycle of the program
+00:19:03,499 --> 00:19:06,366
+Static means the reference is valid throughout the whole execution cycle of the program
 是在整个程序的执行周期
 
 481
@@ -2392,87 +2395,87 @@ That is to say
 
 482
 00:19:07,766 --> 00:19:10,899
-this reference will remain valid until the program exits
+the reference will remain valid until the program exits
 该引用会一直有效直到程序退出
 
 483
 00:19:11,400 --> 00:19:15,466
-string literal,  the string enclosed in double quotes
+String literal is static by default
 string literal 也就是用双引号括起来的
 
 484
 00:19:15,466 --> 00:19:17,733
-are static by default
+String literal is static by default
 字符串字面量是static的
 
 485
 00:19:17,933 --> 00:19:21,133
-it can be identified by 'static
+Static reference can be specified by 'static keyword
 可以通过'static来标识
 
 486
 00:19:21,533 --> 00:19:25,399
-We need to use the static lifetime carefully
+We should be careful with the static lifetime
 我们需要谨慎的使用static生命周期
 
 487
 00:19:25,966 --> 00:19:28,133
-When there is a null pointer in the code or
-当代码里存在空指针或者
+When there is a null pointer in the code or the lifetime of the reference does not match the required
+当代码里存在空指针或者引用的生命周期不匹配的时候
 
 488
-00:19:28,500 --> 00:19:30,333
-when the lifetime of the reference does not match
-引用的生命周期不匹配的时候
+00:19:28,133 --> 00:19:30,333
+When there is a null pointer in the code or the lifetime of the reference does not match the required
+当代码里存在空指针或者引用的生命周期不匹配的时候
 
 489
 00:19:30,333 --> 00:19:32,133
-the compiler often reports compilation errors
+the compiler often raise compilation errors and may recommended us to use static lifetime
 编译器经常会报编译错误
 
 490
 00:19:32,133 --> 00:19:35,566
-and it will recommended us to use static static lifetime
+the compiler often raise compilation errors and may recommended us to use static lifetime
 并且建议我们使用static静态生命周期
 
 491
 00:19:35,566 --> 00:19:37,066
-But at this time we have to consider
+At this moment, we should think about it
 但这个时候我们要考虑一下
 
 492
 00:19:37,066 --> 00:19:39,366
-do we really want our references
+do we really want the reference to be valid all the time in the execution of the program
 我们是否是真的希望我们的引用
 
 493
-00:19:39,466 --> 00:19:41,499
-to be valid all the time in the program
+00:19:39,366 --> 00:19:41,499
+do we really want the reference to be valid all the time in the execution of the program
 在程序的全局是有效的
 
 494
 00:19:41,566 --> 00:19:42,266
-If not
+If not, we should fix the null pointer and other bugs like lifetime mismatch
 如果不是的话
 
 495
 00:19:42,266 --> 00:19:44,766
-we need to fix our null pointer and
-我们就需要去修复我们的空指针和
+If not, we should fix the null pointer and other bugs like lifetime mismatch
+我们就需要去修复我们的空指针和生命周期不匹配这样的一个bug
 
 496
-00:19:45,100 --> 00:19:46,966
-bugs like lifetime mismatch
-生命周期不匹配这样的一个bug
+00:19:44,766 --> 00:19:46,966
+If not, we should fix the null pointer and other bugs like lifetime mismatch
+我们就需要去修复我们的空指针和生命周期不匹配这样的一个bug
 
 497
 00:19:46,966 --> 00:19:49,499
-instead of using the static lifetime
+instead of using static lifetime
 而不是去使用static生命周期
 
 498
 00:19:49,500 --> 00:19:51,333
-Today's course content is over here
+Today's course is over
 今天课程内容到这里就结束了
 
 499
