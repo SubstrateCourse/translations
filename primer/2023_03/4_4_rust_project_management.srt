@@ -1,6 +1,6 @@
 ﻿1
 00:00:01,300 --> 00:00:03,000
-大家好我是凯超
+大家好 我是凯超
 Hello everyone, I am Kaichao
 
 2
@@ -259,7 +259,7 @@ its entry point is in the src/lib.rs file
 
 54
 00:01:54,500 --> 00:01:57,400
-那如果我们自己写的是一个可定程序
+那如果我们自己写的是一个可执行程序
 Then if we write a determinable program
 
 55
@@ -324,12 +324,12 @@ Here we look at a simple module tree
 
 67
 00:02:35,600 --> 00:02:37,800
-根模块也或者说是根目录
+根模块或者说是根目录
 The root module or the root directory
 
 68
 00:02:38,066 --> 00:02:41,699
-是crate它是一个约定俗成的名字
+是crate 它是一个约定俗成的名字
 it is crate, it is a conventional name
 
 69
@@ -399,7 +399,7 @@ That uses the use as keyword
 
 82
 00:03:13,800 --> 00:03:16,266
-在当前模块里面使用Pub use
+在当前模块里面使用pub use
 When we write pub use in the current module to use some functions
 
 83
@@ -423,7 +423,7 @@ That is, the relying party of the current module
 
 87
 00:03:23,666 --> 00:03:25,699
-也可以使用我们Pub use
+也可以使用我们pub use
 can also use the functions in the module by pub use
 
 88
@@ -525,7 +525,7 @@ It specifies the dependencies of our project
 
 108
 00:04:10,066 --> 00:04:11,866
-以及项目的一些源信息
+以及项目的一些元信息
 and some original information about the project
 
 109
@@ -559,7 +559,7 @@ Then open the VScode
 
 115
 00:04:33,766 --> 00:04:35,299
-它可以看到它的一些源信息
+可以看到它的一些元信息
 We can see some of its original information
 
 116
@@ -574,7 +574,7 @@ its version
 
 118
 00:04:37,266 --> 00:04:40,333
-作者以及依赖的Rust的编译的版本
+作者以及依赖的Rust编译器的版本
 author and dependent versions of Rust
 
 119
@@ -710,7 +710,7 @@ You can see that we have some compilation errors
 
 146
 00:05:44,266 --> 00:05:45,866
-那原因是因为我们的
+原因是因为我们的
 The reason is because the submodule is private
 
 147
@@ -724,7 +724,7 @@ The reason is because the submodule is private
 
 149
 00:05:49,466 --> 00:05:51,999
-我们需要通过关键字Pub
+我们需要通过关键字pub
 We need to use the keyword pub to make the module public for others
 
 150
@@ -766,7 +766,7 @@ and also we need to make the functions to be public
 
 158
 00:06:01,766 --> 00:06:04,933
-其中front_of_house不需要增加Pub是因为
+其中front_of_house不需要增加pub是因为
 The front_of_house does not need to use Pub because
 
 159
@@ -948,12 +948,12 @@ such a module
 
 195
 00:07:33,900 --> 00:07:35,333
-以他的子模块hosting
+以及它的子模块hosting
 with its submodule hosting
 
 196
 00:07:35,600 --> 00:07:37,866
-这样对应的add_to_waitlist函数
+调用对应的add_to_waitlist函数
 and add_to_waitlist function
 
 197
@@ -1002,7 +1002,7 @@ Then there are three files inside
 
 206
 00:08:07,366 --> 00:08:10,299
-一个是mod.rs定义了我们所有的
+一个是mod.rs 定义了我们所有的
 One is that mod.rs, it defines all submodules
 
 207
@@ -1055,7 +1055,7 @@ and the code of serving
 
 217
 00:08:44,166 --> 00:08:46,866
-那我们在我们front_of_house目录
+那我们在front_of_house目录
 Then we need to define serving and hosting in mod.rs/front_of_house
 
 218
@@ -1101,7 +1101,7 @@ Then we need to define serving and hosting in mod.rs/front_of_house
 
 227
 00:08:59,933 --> 00:09:01,999
-可以看到我们这里使用Pub关键字
+可以看到我们这里使用pub关键字
 You can see that we use the "pub" keyword here
 
 228
@@ -1116,7 +1116,7 @@ This way our front_of_house is no longer needed
 
 230
 00:09:08,666 --> 00:09:11,333
-接着我们来编译执行我们需要保存
+接着我们来编译执行 我们需要保存
 Let's try to compile and execute the code
 
 231
@@ -1165,7 +1165,7 @@ We can call hosting::add_to_waitlist directly
 
 240
 00:09:34,200 --> 00:09:37,400
-hosting调用add_to_waitlist来直接调用
+hosting::add_to_waitlist来直接调用
 We can call hosting::add_to_waitlist directly
 
 241
@@ -1215,8 +1215,8 @@ it can manage multiple libraries and binaries
 
 250
 00:10:05,333 --> 00:10:08,133
-并且它共享了cargo.lock文件
-and it shares the cargo.lock file
+并且它共享了Cargo.lock文件
+and it shares the Cargo.lock file
 
 251
 00:10:08,333 --> 00:10:10,166
@@ -1235,7 +1235,7 @@ or binary
 
 254
 00:10:14,966 --> 00:10:17,799
-可以减少编译时间增加我们的编译效率
+可以减少编译时间 增加我们的编译效率
 it increase our compilation efficiency
 
 255
@@ -1294,7 +1294,7 @@ we need to import modules again B library's Cargo.toml
 
 266
 00:10:37,266 --> 00:10:39,666
-那这里我们列出了Cargo-workspace
+那这里我们列出了cargo workspace
 Here we havea reference of the Cargo-workspace
 
 267
@@ -1309,7 +1309,7 @@ if you are interested, you can take a look
 
 269
 00:10:42,933 --> 00:10:45,333
-我们现在来看一下一个demo
+我们现在来看一个demo
 Let's take a look at a demo now
 
 270
@@ -1329,7 +1329,7 @@ You can see that it has a lot of file directories
 
 273
 00:10:54,133 --> 00:10:55,933
-它有一个cargo.toml
+它有一个Cargo.toml
 It has a cargo.toml
 
 274
@@ -1359,7 +1359,7 @@ like an organization, there are many members
 
 279
 00:11:05,333 --> 00:11:07,199
-还有非常多的成员
+它有非常多的成员
 like an organization, there are many members
 
 280
@@ -1373,7 +1373,7 @@ The different members are defined in different directories
 
 282
 00:11:11,966 --> 00:11:13,499
-都定义在不同的目录里面
+定义在不同的目录里面
 The different members are defined in different directories
 
 283
@@ -1549,8 +1549,8 @@ The second one is to implement a function
 
 318
 00:12:33,333 --> 00:12:38,199
-它能够为U32类型的整数集合进行求和
-that can sum a collection of integers of type U32
+它能够为u32类型的整数集合进行求和
+that can sum a collection of integers of type u32
 
 319
 00:12:38,400 --> 00:12:40,400
@@ -1559,8 +1559,8 @@ the parameter type is a slice
 
 320
 00:12:40,800 --> 00:12:44,400
-返回类型为一个option U32
-The return type is an Option<U32>
+返回类型为一个Option<u32>
+The return type is an Option<u32>
 
 321
 00:12:44,400 --> 00:12:46,733
@@ -1618,7 +1618,7 @@ and generic constraints to ensure that
 
 332
 00:13:08,933 --> 00:13:11,399
-类型是可以给予计算面积的
+类型是可以计算面积的
 the type's area can be calculated
 
 333
