@@ -1,16 +1,16 @@
 ﻿1
 00:00:00,866 --> 00:00:02,399
 Hello everyone, I am Kaichao
-大家好我是凯超
+大家好 我是凯超
 
 2
 00:00:02,400 --> 00:00:03,933
-The content of this lesson is
+The content of this lesson includes
 本次课程内容是
 
 3
 00:00:04,500 --> 00:00:07,266
-Rust's generic types, traits and lifetimes
+generic types, traits and lifetimes in Rust
 Rust的泛型, trait和生命周期
 
 4
@@ -25,32 +25,32 @@ then how to use trait
 
 6
 00:00:14,133 --> 00:00:17,133
-and the lifetime for variants and references
+and the lifetime of variables and references
 以及变量和引用的生命周期的使用
 
 7
 00:00:18,000 --> 00:00:19,900
-So why use generic types
+So why use generic types?
 那为什么要使用泛型呢
 
 8
 00:00:20,333 --> 00:00:22,366
-We have said in previous lessons that
+In previous lessons we have mentioned that
 我们之前的课程讲到过
 
 9
 00:00:23,000 --> 00:00:25,800
- we can encapsulate using modular code
+we can encapsulate modular code for code reuse
 可以通过模块化的代码封装
 
 10
-00:00:25,966 --> 00:00:27,466
-for code reuse
+00:00:25,800 --> 00:00:27,466
+we can encapsulate modular code for code reuse
 实现代码的复用
 
 11
 00:00:28,533 --> 00:00:29,899
-For some common modules
+For common used modules
 一些公共的模块
 
 12
@@ -60,12 +60,12 @@ we can provide some interfaces
 
 13
 00:00:31,533 --> 00:00:33,533
-for use in other codes
+so that it can be used by other code
 供其他的代码所使用
 
 14
 00:00:34,533 --> 00:00:37,266
-There is another form of code reuse mechanism
+There is a another way to reuse the shared code
 还有另外一种形式的代码复用机制
 
 15
@@ -75,12 +75,12 @@ through generic types
 
 16
 00:00:38,766 --> 00:00:41,266
-When some data structure or function are similar
+When data structures or functions are similar
 当一些数据结构或者函数的功能
 
 17
 00:00:41,266 --> 00:00:42,166
-When some data structure or function are similar
+When data structures or functions are similar
 很类似时
 
 18
@@ -95,17 +95,17 @@ We'll look at some examples later
 
 20
 00:00:46,566 --> 00:00:48,133
-Through generic types
+By abstracting with generic types
 通过泛型这种抽象
 
 21
 00:00:48,133 --> 00:00:50,166
-we can increase the scalability of the code
-我们可以增加代码的扩展性
+we can increase the extensibility of the code
+我们可以增加代码的可扩展性
 
 22
 00:00:50,900 --> 00:00:53,066
-When we add a new data structure
+When adding a new data structure
 当我们新增了一个数据结构的时候
 
 23
@@ -120,57 +120,57 @@ because
 
 25
 00:00:56,800 --> 00:00:59,666
-the current function may accept a generic parameter
+the current function may accept a parameter of generic type
 当前的函数可能是接受一个泛型参数
 
 26
 00:00:59,666 --> 00:01:01,599
-Then our new data structure is ok
+Then our new data structure only need to meet the constraints of this generic type
 那我们新增的这个数据结构
 
 27
 00:01:01,599 --> 00:01:01,600
-Then our new data structure is ok
+Then our new data structure only need to meet the constraints of this generic type
 
 28
 00:01:01,600 --> 00:01:02,124
-Then our new data structure is ok
-只要满足这个泛型参数所对的约束
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 29
 00:01:02,124 --> 00:01:04,400
-as long as the constraints on this generic parameter are met
-只要满足这个泛型参数所对的约束
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 30
 00:01:04,400 --> 00:01:05,200
-as long as the constraints on this generic parameter are met
-就可以了
+Then our new data structure only need to meet the constraints of this generic type
+只要满足这个泛型参数所对应的约束就可以了
 
 31
 00:01:06,533 --> 00:01:08,599
-Generic types are often used in the definition of structures
-泛型常用于结构体的定义
+Generic types are often used in the definition of struct, enum and function signature
+泛型常用于结构体的定义, 枚举定义和函数签名
 
 32
-00:01:08,600 --> 00:01:10,400
-enum definitions and function signatures
-枚举定义和函数签名
+00:01:08,599 --> 00:01:10,400
+Generic types are often used in the definition of struct, enum and function signature
+泛型常用于结构体的定义, 枚举定义和函数签名
 
 33
 00:01:11,800 --> 00:01:14,300
-Now let's look at an example of a structure
+Now let's look at an example of struct
 现在我们来看一个结构体的例子
 
 34
 00:01:14,666 --> 00:01:16,966
-Here we struct a Point
+Here we define a struct called Point
 这里我们定义了一个表示
 
 35
 00:01:17,966 --> 00:01:20,466
 it represents a point on the coordinate system
-坐标系上的一个点的结构体point
+坐标系上的一个点的结构体Point
 
 36
 00:01:20,966 --> 00:01:23,066
@@ -179,47 +179,47 @@ It has two attributes which are x, y
 
 37
 00:01:24,000 --> 00:01:26,733
-that x, y can be an integer or a float
-那x y可以是整数也可以是浮点数
+here x, y can be an integer or float
+那x y可以是整数 也可以是浮点数
 
 38
 00:01:26,733 --> 00:01:28,366
-We can
+Now we can use generic type to reduce the definition of similar structs
 这个时候我们就可以
 
 39
-00:01:28,500 --> 00:01:31,400
-use generic types to reduce
-通过泛型来减少类似的
+00:01:28,366 --> 00:01:31,400
+Now we can use generic type to reduce the definition of similar structs
+通过泛型来减少类似的结构体定义
 
 40
-00:01:31,700 --> 00:01:32,733
-similar struct definition
-结构体定义
+00:01:31,400 --> 00:01:32,733
+Now we can use generic type to reduce the definition of similar structs
+通过泛型来减少类似的结构体定义
 
 41
 00:01:33,133 --> 00:01:35,866
-We use a bracket
-那我们是通过一个间括号
+here we use an angle bracket
+那我们是通过一个尖括号
 
 42
 00:01:35,866 --> 00:01:38,599
-it contains a generic parameter T
+it contains a generic type T
 里面包含一个泛型的参数T
 
 43
 00:01:38,933 --> 00:01:43,366
-by convention we capitalize the letter
-约定俗成的我们以大写的单字母
+by convention we capitalize the letter to represent the generic type
+约定俗成的 我们以大写的单字母来表示我们的泛型
 
 44
-00:01:43,800 --> 00:01:44,933
-to represent our generic
-来表示我们的泛型
+00:01:43,366 --> 00:01:44,933
+by convention we capitalize the letter to represent the generic type
+约定俗成的 我们以大写的单字母来表示我们的泛型
 
 45
 00:01:44,933 --> 00:01:46,599
-If it is a generic parameter
+If it has only one generic type
 如果是一个泛型参数的话
 
 46
@@ -229,62 +229,62 @@ we usually use T
 
 47
 00:01:49,066 --> 00:01:51,333
-that is the initial letter T of type
+it is the first letter (T) of type
 也就是type的首字母T
 
 48
 00:01:52,900 --> 00:01:55,666
-Here we implement for our struct
-这里我们为我们的结构体实现
+Here we implement a function x for our struct
+这里我们为我们的结构体实现了一个方法x
 
 49
 00:01:55,666 --> 00:01:57,966
-a function x
-了一个方法是x
+Here we implement a function x for our struct
+这里我们为我们的结构体实现了一个方法x
 
 50
 00:01:58,366 --> 00:02:01,966
-Its input is a reference to the structure itself
+Its parameter is a reference to the struct itself
 它的参数是结构体自身的一个引用
 
 51
 00:02:02,000 --> 00:02:04,900
-that returns a reference to T
+then returns a reference to T
 那返回一个T的引用
 
 52
 00:02:05,700 --> 00:02:07,366
-Note here that
+Note that
 这里要注意我们在
 
 53
 00:02:07,800 --> 00:02:09,500
-when implementing the corresponding structure
+when implementing the corresponding struct
 实现对应的结构体的时候
 
 54
 00:02:09,500 --> 00:02:11,866
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 我们在implement后面要加一个
 
 55
 00:02:11,866 --> 00:02:12,700
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 
 56
 00:02:12,700 --> 00:02:15,166
-after the implement, we need to specify our generic T
+after the keyword impl, we need to add the generic type T
 在implement后面要指定我们的泛型T
 
 57
 00:02:16,366 --> 00:02:17,799
-If there are generic constraints
-如果有泛型约束的话
+we also need to indicate it here if there are constraints to the generic type
+如果有泛型约束的话 我们也要添加在对应的后面
 
 58
-00:02:17,800 --> 00:02:19,733
-we also need to indicate here
-我们也要添加在对应的后面
+00:02:17,799 --> 00:02:19,733
+we also need to indicate it here if there are constraints to the generic type
+如果有泛型约束的话 我们也要添加在对应的后面
 
 59
 00:02:20,566 --> 00:02:23,866
@@ -293,136 +293,137 @@ The logic of the x method here is very simple
 
 60
 00:02:24,400 --> 00:02:26,266
-obitains property of x here
+it gets the field x of the struct
 当前结构体的x
 
 61
 00:02:27,166 --> 00:02:29,099
-and returns a reference to it
+and returns a reference to x
 属性并且返回它的引用
 
 62
 00:02:29,900 --> 00:02:30,266
-When we define in the main function
+Let's look at the main function
 可以看到
 
 63
 00:02:30,266 --> 00:02:32,499
-When we define in the main function
+Let's look at the main function
 当我们在main函数里面可以定义
 
 64
 00:02:33,133 --> 00:02:35,966
-a point where xy is an integer
-x y分别是整数的这样的一个point
+we can define a point where x and y are integer
+x y分别是整数的这样的一个point结构体
 
 65
 00:02:36,166 --> 00:02:39,866
-we can also define x,y as a float number
-结构体也可以定义x y是浮点数的
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 66
 00:02:39,866 --> 00:02:39,933
-we can also define x,y as a float number
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 67
 00:02:39,933 --> 00:02:41,366
-we can also define x,y as a float number
-对应的结构体float
+we can also define a point where x and y are float number
+也可以定义x y是浮点数对应的结构体float
 
 68
 00:02:43,400 --> 00:02:45,133
-Let's look at another enum example
+Let's look at another example for enum
 我们再来看一个枚举的例子
 
 69
 00:02:45,133 --> 00:02:47,499
-We talked about it in the previous lesson
+In the previous lesson we mentioned that
 我们之前课程中讲到过
 
 70
 00:02:47,800 --> 00:02:49,200
-Two important enums
+there are two important enums
 两个重要的枚举
 
 71
 00:02:49,200 --> 00:02:53,666
-One is option, shows value or no value
-一个是option表示有值或者无值
+One is Option, represents containing a value or None
+一个是Option 表示有值或者无值
 
 72
 00:02:53,700 --> 00:02:54,666
-If value
+If containing a value
 那有值的话
 
 73
 00:02:54,666 --> 00:02:57,333
-the type of the value can be an integer
-这个值的类型我们可以是整数
+the type of the value can be integer, float, string etc.
+这个值的类型我们可以是整数, 可以是浮点数, 可以字符串, 等等
 
 74
 00:02:57,333 --> 00:02:59,899
-a float, a string, etc.
-可以是浮点数可以字符串等等
+the type of the value can be integer, float, string etc.
+这个值的类型我们可以是整数, 可以是浮点数, 可以字符串, 等等
 
 75
 00:03:00,100 --> 00:03:01,866
-Then we can use a T here
-那我们这里就可以用一个T
+Here we can use generic type T for abstraction
+那我们这里就可以用一个泛型T进行抽象
 
 76
-00:03:02,100 --> 00:03:03,466
-generic T for abstraction
-泛型T进行抽象
+00:03:01,866 --> 00:03:03,466
+Here we can use generic type T for abstraction
+那我们这里就可以用一个泛型T进行抽象
 
 77
 00:03:04,666 --> 00:03:07,866
-to make our code more scalable and flexible
+it makes our code more extensible and flexible
 让我们的代码可扩展性更强也更灵活
 
 78
 00:03:08,133 --> 00:03:10,733
-The same for the result
-那同样的我们的result类型
+Similarly, for the Result enum
+那同样的我们的Result类型
 
 79
 00:03:10,900 --> 00:03:12,266
-it has two generic parameters
+it has two generic types, T and E
 它有两个泛型参数
 
 80
 00:03:12,266 --> 00:03:14,133
-separated by commas
-那通过逗号进行分割
+separated by comma
+通过逗号进行分割
 
 81
 00:03:14,466 --> 00:03:16,066
-The first generic parameter represents
-第一个泛型参数表示
+the first generic type parameter T represents the type of a value in correct cases
+第一个泛型参数表示正确的情况下 值的类型
 
 82
-00:03:16,333 --> 00:03:18,699
-the type of a value in the correct case
-正确的情况下的一个值的类型
+00:03:16,066 --> 00:03:18,699
+the first generic type parameter T represents the type of a value in correct cases
+第一个泛型参数表示正确的情况下 值的类型
 
 83
 00:03:18,800 --> 00:03:20,166
-The second parameter E
-那第二个参数E
+The second parameter E represents the type of error information in error cases
+那第二个参数E 表示错误场景下的错误类型
 
 84
-00:03:20,333 --> 00:03:23,499
-is the type of error that represents the error scenario
-是表示错误场景下的错误类型
+00:03:20,166 --> 00:03:23,499
+The second parameter E represents the type of error information in error cases
+那第二个参数E 表示错误场景下的错误类型
 
 85
 00:03:25,800 --> 00:03:27,333
-Now let's look at a
+Now let's look at an example
 现在我们来看一个
 
 86
 00:03:27,333 --> 00:03:30,499
-examples that generics used in function signatures
+that generic type is used in function signatures
 泛型参数用在函数签名里的例子
 
 87
@@ -432,23 +433,23 @@ Here we define a function largest
 
 88
 00:03:34,266 --> 00:03:36,533
-It takes a parameter list
+It takes a parameter called list
 它接收一个参数list
 
 89
 00:03:36,866 --> 00:03:40,099
-Its type is a reference to a list type
-它类型是集合类型的引用
+its type is a reference to a vector
+它的类型是集合类型的引用
 
 90
 00:03:41,100 --> 00:03:42,466
-Its logic is simple
-那他的逻辑很简单
+the logic is pretty simple
+它的逻辑很简单
 
 91
 00:03:42,466 --> 00:03:45,399
-It will get the maximum value in the list
-他就是取得当前集合里面的最大值
+It will get the maximum value in the vector
+就是取得当前集合里面的最大值
 
 92
 00:03:45,400 --> 00:03:47,700
@@ -457,151 +458,151 @@ and returns a reference of the value
 
 93
 00:03:49,000 --> 00:03:52,500
-Such a function can be used to calculate the maximum value
-这样一个函数可以去计算整数集合
+Such a function can be used to calculate the maximum value of a vector of integers
+这样一个函数可以去计算整数集合的最大值
 
 94
 00:03:52,500 --> 00:03:54,100
-in a list of integers or
-最大值也可以去计算
+or a vector of characters
+也可以去计算字符集合的最大值
 
 95
-00:03:54,566 --> 00:03:56,399
-the maximum value of a integer list
-字符集合的最大值
+00:03:54,100 --> 00:03:56,399
+or a vector of characters
+也可以去计算字符集合的最大值
 
 96
 00:03:56,666 --> 00:04:00,566
-as long as the type inside can be compared in size
+as long as the type inside the vector can be compared with each other
 只要是里面的类型是可以比较大小的
 
 97
 00:04:00,566 --> 00:04:02,899
-then our function should be able to apply
-那我们这个函数应该是都可以来应用
+then our function should be able to apply to such vectors
+那我们这个函数都可以来应用
 
 98
 00:04:03,766 --> 00:04:05,866
-Calculate the maximum value in a list
+and calculate the maximum value in it
 计算对应集合里面的最大值
 
 99
 00:04:08,000 --> 00:04:09,733
-Now let's look at the code demo
+Now let's look at the code
 现在我们来看一下代码演示
 
 100
 00:04:11,533 --> 00:04:13,666
-First we define our
-首先我们定义了我们的
+First let's define the function largest
+首先我们定义了函数largest
 
 101
-00:04:14,333 --> 00:04:15,466
-function largest
+00:04:13,666 --> 00:04:15,466
+First let's define the function largest
 函数largest
 
 102
 00:04:15,866 --> 00:04:17,166
-Its parameters we just mentioned
+the parameter is a reference to a vector
 它的参数我们刚才提到了
 
 103
 00:04:17,166 --> 00:04:19,933
-it is a reference to a list type
+the parameter is a reference to a vector
 它是某个集合类型的引用
 
 104
 00:04:20,400 --> 00:04:23,900
-returns a reference to an element in a list
+returns a reference to an element in the vector
 返回一个集合里面元素的引用
 
 105
 00:04:25,200 --> 00:04:27,933
-First we take the first element of the current list
+First it takes the first element of the input vector
 首先我们取当前集合第一个元素
 
 106
 00:04:28,700 --> 00:04:31,466
-assign to a mutable variant largest
+assign it to a mutable variable called largest
 赋值给一个可变变量largest
 
 107
 00:04:32,733 --> 00:04:35,466
-Then we loop through each element in the list
+Then it loops through each element in the vector
 接着我们循环集合里面的每一个元素
 
 108
 00:04:35,766 --> 00:04:40,766
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 将循环当前的元素与我们保存的临时
 
 109
 00:04:40,766 --> 00:04:41,333
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 
 110
 00:04:41,333 --> 00:04:43,266
-compare the current element with our saved largest variant
+compares the current element with the largest variable
 最大变量largest进行比较
 
 111
 00:04:43,266 --> 00:04:46,266
-If the current element is larger than largest
+If the current element is larger than the largest
 如果是当前元素大于largest的话
 
 112
 00:04:46,266 --> 00:04:47,933
-we will update the largest
+we will update the largest to be the current element
 我们将largest更新
 
 113
 00:04:48,666 --> 00:04:51,699
-After the loop is finish we return largest
+When finishing the loop, the largest is returned
 循环完成之后我们将largest返回
 
 114
 00:04:53,966 --> 00:04:55,899
-Then
+Then in the main function
 我们在main函数里面
 
 115
 00:04:57,100 --> 00:04:58,400
-we define a list of integer in main
-紧接着我们在main
+we define a vector of integers called number_list
+紧接着我们在main函数里面
 
 116
 00:04:58,400 --> 00:05:00,866
-we define a list of integer in main
-函数里面定义了一个整数集合
+we define a vector of integers called number_list
+定义了一个整数集合 number_list
 
 117
-00:05:01,266 --> 00:05:03,966
-number_list
-number_list我们调用
+00:05:00,866 --> 00:05:03,966
+we define a vector of integers called number_list
+定义了一个整数集合 number_list
 
 118
 00:05:04,133 --> 00:05:07,166
-The largest function passes in a reference to our list of integers
-largest函数传入我们整数集合的引用
+then call the function largest and passes in a reference to the vector
+我们调用largest函数 传入我们整数集合的引用
 
 119
 00:05:08,100 --> 00:05:09,366
-then return the result
+gets the result
 然后返回结果
 
 120
 00:05:09,800 --> 00:05:11,000
-print the result
+print it
 将结果进行打印
 
 121
 00:05:11,000 --> 00:05:13,000
-Let's take a look at the printed results
+Let's take a look at the result
 我们来看一下打印的结果
 
 122
 00:05:14,466 --> 00:05:16,566
-We have a compilation error here
+We can see there is a compilation error here
 可以看到我们这里有一个编译错误
 
 123
@@ -611,57 +612,57 @@ that's because inside our largest function
 
 124
 00:05:20,266 --> 00:05:21,666
-we need to compare size
+we need to compare elements in the vector
 需要进行比较大小
 
 125
 00:05:21,766 --> 00:05:23,466
-then we need a function to compare size
-那我们的泛型参数T
+so the generic type T needs to have the capability to compare with each other
+那我们的泛型参数T应该有一个比较大小的功能
 
 126
-00:05:23,500 --> 00:05:25,666
-in our generic parameter T
-应该有一个比较大小的功能
+00:05:23,466 --> 00:05:25,666
+so the generic type T needs to have the capability to compare with each other
+那我们的泛型参数T应该有一个比较大小的功能
 
 127
 00:05:25,933 --> 00:05:27,599
-We can use trait bond
-我们可以通过trait bond
+Here we can use trait bound for the constraints
+我们可以通过trait bound来进行对应的约束
 
 128
-00:05:27,600 --> 00:05:29,266
-to carry out the constraints
-来进行对应的约束
+00:05:27,599 --> 00:05:29,266
+Here we can use trait bound for the constraints
+我们可以通过trait bound来进行对应的约束
 
 129
 00:05:29,466 --> 00:05:30,866
-Here we have been reminded
-这里边已经给我们提示到
+The compiler alreadly reminds us
+这里边已经给了我们提示
 
 130
 00:05:30,866 --> 00:05:32,099
-we need
-我们需要一个
+we need a constraint called PartialOrd
+我们需要PartialOrd这样的一个约束
 
 131
-00:05:32,933 --> 00:05:35,066
-a constraint partial order
-partial order这样的一个约束
+00:05:32,099 --> 00:05:35,066
+we need a constraint called PartialOrd
+我们需要PartialOrd这样的一个约束
 
 132
 00:05:36,600 --> 00:05:37,566
-Specific trait bond
-具体trait bond
+Details of trait bound will be introduced in the following content.
+具体trait bound内容
 
 133
-00:05:37,600 --> 00:05:39,666
-will be introduce in the following lessons
-内容我们会在后面的课程进行介绍
+00:05:37,566 --> 00:05:39,666
+Details of trait bound will be introduced in the following content.
+我们会在后面的课程进行介绍
 
 134
 00:05:41,933 --> 00:05:43,133
-Then we recompile
+recompile
 然后我们重新编译
 
 135
@@ -676,56 +677,56 @@ At this time, our results have been printed correctly
 
 137
 00:05:46,666 --> 00:05:49,499
-the max is 100, no problem
+the max value is 100
 它最大值是100, 没有问题
 
 138
 00:05:50,600 --> 00:05:53,166
-Similarly, we can also compare
+Similarly, we can also compare a vector of characters
 类似的我们还可以去比较一个
 
 139
 00:05:53,166 --> 00:05:54,766
-a list of characters
-字符集合的
+Similarly, we can also compare a vector of characters
+字符集合的大小
 
 140
 00:05:54,766 --> 00:05:55,300
-a list of characters
+Similarly, we can also compare a vector of characters
 
 141
 00:05:55,300 --> 00:05:57,933
-a list of characters
-大小来取得字符集合的最大值
+to get the max character in it
+来取得字符集合的最大值
 
 142
 00:05:58,966 --> 00:06:00,866
-Here we define a list of characters
-这里我们定义了一个字符集合
+Here let's define a vector of characters called char_list
+这里我们定义了一个字符集合char_list
 
 143
 00:06:01,500 --> 00:06:03,666
-char_list and then we call largest
-char_list然后我们调用largest这个函数
+then call the function largest
+然后我们调用largest这个函数
 
 144
 00:06:03,666 --> 00:06:04,499
-pass in this list
+pass in a reference to the vector
 传入这个集合
 
 145
 00:06:04,500 --> 00:06:06,566
-get the result by reference and print it
-引用获取结果并且打印
+get the result and print it
+获取结果并且打印
 
 146
 00:06:06,566 --> 00:06:08,133
-You can see our largest char words
+You can see our largest character is y
 可以看到我们最大的char的话
 
 147
 00:06:08,133 --> 00:06:09,133
-should be a y
+You can see our largest character is y
 应该是一个y
 
 148
@@ -735,167 +736,167 @@ Let's take a look at the results of the execution
 
 149
 00:06:12,066 --> 00:06:14,099
-It can be seen that our execution result is also correct
+the result is expected
 可以看到我们的执行结果也是正确的
 
 150
 00:06:14,866 --> 00:06:15,766
-Then through this example
+Through this example you can see
 那通过这个例子的话
 
 151
 00:06:15,766 --> 00:06:16,966
-everyone can clearly see
+Through this example you can see
 大家就可以明显的看到
 
 152
 00:06:16,966 --> 00:06:19,799
-we can reduce code work and reuse code 
-我们通过使用泛型可以减少我们的
+how we use generic types to reduce duplicated code and reuse the logic
+我们通过使用泛型可以减少我们的代码
 
 153
-00:06:20,366 --> 00:06:22,066
-by using generic types
-代码实现我们代码复用
+00:06:19,799 --> 00:06:22,066
+how we use generic types to reduce duplicated code and reuse the logic
+实现我们代码复用
 
 154
 00:06:23,700 --> 00:06:26,133
-There are several points to note when using generic types
-在使用泛型有几个注意的点
+There are several tips when using generic types
+在使用泛型时有几个注意的点
 
 155
 00:06:26,300 --> 00:06:28,666
-The first is the benefit of using generic types
+The first is abount benefit
 第一个是使用泛型的好处
 
 156
 00:06:28,866 --> 00:06:29,499
-That Rust
-那Rust
+using generic types in Rust will not affect the efficiency of code execution
+Rust泛型
 
 157
 00:06:29,500 --> 00:06:32,300
-generic types do not affect code execution efficiency
-泛型并不会影响代码的执行效率
+using generic types in Rust will not affect the efficiency of code execution
+并不会影响代码的执行效率
 
 158
 00:06:32,366 --> 00:06:33,399
-This is because
-这是因为
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 159
-00:06:33,766 --> 00:06:36,499
-generic types are replaced by the concrete type
-泛型会在编译器编译期间
+00:06:33,399 --> 00:06:36,499
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 160
-00:06:36,800 --> 00:06:38,366
-at compile
-替换为具体的类型
+00:06:36,499 --> 00:06:38,366
+This is because generic types are replaced by the concrete type at compile
+这是因为泛型会在编译器编译期间替换为具体的类型
 
 161
 00:06:39,200 --> 00:06:40,366
-Another thing to note is that
+Another tip worth noting is that
 另外一个需要注意的是
 
 162
 00:06:40,366 --> 00:06:41,733
-When your code has
-当你的代码里有
+when your code has a lot of generic types, it will reduce the readability of the code
+当你的代码里有非常多的泛型
 
 163
-00:06:42,266 --> 00:06:45,266
-a lot of generic types, it will reduce the readability of the code
-非常多的泛型那代码的可读性会降低
+00:06:41,733 --> 00:06:45,266
+when your code has a lot of generic types, it will reduce the readability of the code
+那代码的可读性会降低
 
 164
 00:06:45,900 --> 00:06:47,066
-When you have a function
-当你某个函数
+When you have a function with many generic types in the signature
+当你某个函数的签名里面
 
 165
 00:06:47,066 --> 00:06:48,733
-with many generic types in the signature
-的签名里面有很多泛型的时候
+When you have a function with many generic types in the signature
+有很多泛型的时候
 
 166
 00:06:48,733 --> 00:06:49,899
-This means that your code
+This usually means that your code needs to be refactored
 这说明你的代码
 
 167
-00:06:49,900 --> 00:06:51,866
-needs to be rewrite
+00:06:49,899 --> 00:06:51,866
+This usually means that your code needs to be refactored
 需要进行一个合理的重构
 
 168
 00:06:53,366 --> 00:06:55,766
-Next, let's take a look at the traits in Rust
+Next, let's take a look at trait in Rust
 接着我们来看一下Rust里面的traits
 
 169
 00:06:56,566 --> 00:06:59,866
-A trait has a certain function or behavior
-一个traits出现了某种功能或者行为
+A trait abstracts a certain capability or behavior
+一个trait抽象了某种功能或者行为
 
 170
 00:07:00,000 --> 00:07:02,266
-it tells the compiler that the type
+it tells the compiler that some type can implement such capabilities
 它告诉编译器这个类型
 
 171
-00:07:02,366 --> 00:07:03,799
-can implement such a function 
+00:07:02,266 --> 00:07:03,799
+it tells the compiler that some type can implement such capabilities
 可以实现这样的功能
 
 172
 00:07:04,900 --> 00:07:08,533
-Different types can have this behavior
+Different types can have same capabilities by implementing the same trait
 那不同的类型都可以去具有这种行为
 
 173
-00:07:08,900 --> 00:07:09,700
-or function
+00:07:08,533 --> 00:07:09,700
+Different types can have same capabilities by implementing the same trait
 或者功能
 
 174
 00:07:09,700 --> 00:07:11,200
-For example, the function to calculate the area
+For example, the capability to calculate the area
 比如说计算面积的功能
 
 175
 00:07:11,200 --> 00:07:13,533
-a square can be calculated and a triangle as well
-正方形可以有三角形也可以有
+a square can calculate its area, so does triangle
+正方形可以有 三角形也可以有
 
 176
 00:07:14,600 --> 00:07:17,700
-Such a concept in Java is through
+Such a concept in Java is defined with interface
 在Java里面这样的一个概念是通过
 
 177
-00:07:18,000 --> 00:07:20,000
-interface to achieve
+00:07:17,700 --> 00:07:20,000
+Such a concept in Java is defined with interface
 接口interface来实现的
 
 178
 00:07:21,400 --> 00:07:23,533
-Here we look at the definition of trait
+Here let's look at the definition of trait
 这里我们来看一下trait定义
 
 179
 00:07:23,966 --> 00:07:26,566
-We defined a trait named summary
-我们定义了一个trait名字叫summary
+We defined a trait named Summary
+我们定义了一个trait 名字叫Summary
 
 180
 00:07:26,800 --> 00:07:29,000
-You can see that we use the Pub keyword to be visible to others
-可以看到我们使用Pub关键字来对外可见
+we use the pub keyword to make it visible to others
+可以看到我们使用pub关键字来对外可见
 
 181
 00:07:29,000 --> 00:07:33,200
-In the case of summary, there is a function called summarize
+In the case of trait Summary, there is a method called summarize
 那summary的话有一个方法是summarize
 
 182
@@ -905,62 +906,62 @@ it does not have a default implementation
 
 183
 00:07:35,500 --> 00:07:37,933
-That is to say, to implement the summary trait
-也就是说实现summary trait的
+That is to say, the type that implement the summary trait must implement the method summarize
+也就是说实现Summary trait的类型
 
 184
-00:07:38,400 --> 00:07:41,066
-the type must implement a function summarize
-类型必须要实现summarize这样的方法
+00:07:37,933 --> 00:07:41,066
+That is to say, the type that implement the summary trait must implement the method summarize
+必须要实现summarize这样的方法
 
 185
 00:07:41,900 --> 00:07:43,333
-Another situation is
+Another scenario is
 另外一种情况是
 
 186
 00:07:43,700 --> 00:07:45,900
-similarly, we defined a trait such as summary
-同样的我们定义了summary这样一个trait
+we defined a trait named Summary
+同样的我们定义了Summary这样一个trait
 
 187
 00:07:46,066 --> 00:07:47,299
-but we give
+but we give a default implementation to the summarize method
 但是我们给
 
 188
-00:07:47,500 --> 00:07:50,266
-the summarize function a default implementation
+00:07:47,299 --> 00:07:50,266
+but we give a default implementation to the summarize method
 summarize这个函数定义了一个默认实现
 
 189
 00:07:50,866 --> 00:07:54,399
-The type that implements the summary trait
-那实现summary trait的类型
+For the type that implements the Summary trait
+那实现Summary trait的类型
 
 190
 00:07:54,666 --> 00:07:56,466
-if such type is desired to use
-如果这样的类型是希望使用
+if such type want to use the default implementation
+如果这样的类型是希望使用默认实现的话
 
 191
 00:07:56,466 --> 00:07:57,466
-default implementation
-默认实现的话
+if such type want to use the default implementation
+如果这样的类型是希望使用默认实现的话
 
 192
 00:07:57,466 --> 00:08:00,399
-then it doesn't need to implement the summarize method
+then it doesn't need to implement the summarize method by itself
 那他就不需要去实现summarize这个方法
 
 193
 00:08:02,700 --> 00:08:05,700
-We can combine generic types and traits
+We can combine generic types and traits together
 我们可以把泛型和trait结合起来
 
 194
 00:08:06,100 --> 00:08:08,066
-so that the generic has some constraints
+the the generic can have some constraints
 从而让泛型有了某种约束
 
 195
@@ -980,7 +981,7 @@ only generics that satisfy these constraints can be used
 
 198
 00:08:11,555 --> 00:08:13,166
-instead of any types
+rather than accepting any concrete type
 而不是接受任意的类型
 
 199
@@ -990,108 +991,108 @@ In other words
 
 200
 00:08:14,966 --> 00:08:17,799
-when the compiler tries to replace the generic
+when the compiler tries to replace the generic type with a concrete type
 当编译器尝试去替换泛型时
 
 201
 00:08:18,300 --> 00:08:20,466
-This  type must have
+the concrete type must have the capability defined by this trait
 这个具体的类型必须有
 
 202
-00:08:20,800 --> 00:08:22,733
-the function or behavior defined by this trait
+00:08:20,466 --> 00:08:22,733
+the concrete type must have the capability defined by this trait
 这个trait定义的功能或者行为
 
 203
 00:08:22,733 --> 00:08:23,299
-that is to say
+more specifically, the concrete type implements this trait
 也就是说
 
 204
-00:08:23,300 --> 00:08:25,766
-thist type implements this trait
+00:08:23,299 --> 00:08:25,766
+more specifically, the concrete type implements this trait
 这个具体类型实现了这个trait
 
 205
 00:08:27,100 --> 00:08:28,966
-Here we look at an example
+Here let's look at an example
 这里我们来看一个例子
 
 206
 00:08:28,966 --> 00:08:31,466
-We define a Tweet
+It defines a struct called Tweet
 我们定义的一个结构体是Tweet
 
 207
 00:08:31,933 --> 00:08:34,866
-It has two attributes, one is author and the other is test
-它有两个属性一个是author一个是text
+which has two attributes, one is author and the other is text
+它有两个属性 一个是author 一个是text
 
 208
 00:08:34,866 --> 00:08:36,366
-they are string type
+both are string type
 它都是string类型
 
 209
 00:08:37,600 --> 00:08:39,733
-We implement the summary we defined earlier
-那我们对我们的Tweet
+Let's implement the Summary trait we defined earlier for Tweet
+那我们对Tweet
 
 210
 00:08:39,733 --> 00:08:41,533
-in Tweet
+Let's implement the Summary trait we defined earlier for Tweet
 实现了我们之前定义的summary
 
 211
 00:08:41,533 --> 00:08:42,666
-such an interface
+Let's implement the Summary trait we defined earlier for Tweet
 这样的一个接口
 
 212
 00:08:43,700 --> 00:08:46,666
-The implementation of summarize function
+To implement the summarize function, we combine the content of author and text
 那对应的summarize方法的实现
 
 213
-00:08:46,933 --> 00:08:48,466
-is to combine two
+00:08:46,666 --> 00:08:48,466
+To implement the summarize function, we combine the content of author and text
 就是将两个
 
 214
-00:08:48,566 --> 00:08:51,266
-content in Tweet
+00:08:48,466 --> 00:08:51,266
+To implement the summarize function, we combine the content of author and text
 将Tweet里面两个属性的内容进行拼接
 
 215
 00:08:51,266 --> 00:08:52,533
-returns a string
+return a string
 返回一个string
 
 216
 00:08:54,133 --> 00:08:56,399
-We also define a function called notify
+Then we define another function called notify
 我们又定义了一个函数叫notify
 
 217
 00:08:57,000 --> 00:08:58,866
-It receives a parameter item
+it receives a parameter called item
 它接收一个参数是item
 
 218
 00:08:59,000 --> 00:09:01,466
-its type is a generic reference
+item is an reference to a generic type T
 它的类型是一个泛型的引用
 
 219
 00:09:02,066 --> 00:09:04,133
-this generic has a constraint that is
+this generic type has a constraint that it must implement the Summary trait
 这个泛型有一个约束是
 
 220
-00:09:04,333 --> 00:09:07,399
-it must satisfy a trait like summary
-它必须要满足summary这样的一个trait
+00:09:04,133 --> 00:09:07,399
+this generic type has a constraint that it must implement the Summary trait
+它必须要满足Summary这样的一个trait
 
 221
 00:09:08,266 --> 00:09:09,466
@@ -1100,171 +1101,172 @@ The implementation here is very simple
 
 222
 00:09:09,466 --> 00:09:13,299
-We just print the result of the summarize function
+we just print out the result of the summarize function
 我们只是打印summarize方法的结果
 
 223
 00:09:14,500 --> 00:09:15,166
-Here we use a colon to
+You can see that we're using a colon to identify the constraint
 可以看到
 
 224
 00:09:15,166 --> 00:09:17,766
-Here we use a colon to
-这里我们是通过冒号summary来去
+You can see that we're using a colon to identify the constraint
+这里我们是通过冒号Summary来
 
 225
-00:09:18,133 --> 00:09:19,733
-constrain the interface
+00:09:17,766 --> 00:09:19,733
+You can see that we're using a colon to identify the constraint
 进行接口的约束
 
 226
 00:09:19,966 --> 00:09:20,999
-that is trait bond
-也就是trait bond
+which is usually called trait bound
+也就是trait bound
 
 227
 00:09:21,933 --> 00:09:24,799
-When our constraints are relatively simple
+When the constraints are simple
 当我们的约束比较简单的时候
 
 228
 00:09:24,800 --> 00:09:26,766
-we can use
+we can use the form of "impl Summary" to do so
 我们可以去使用
 
 229
 00:09:26,933 --> 00:09:29,199
-some interfaces to do so
-implement某个接口这样的形式
+we can use the form of "impl Summary" to do so
+impl Summary这样的形式
 
 230
 00:09:29,600 --> 00:09:30,766
-If the interface is more complicated
-接口比较复杂
+If the trait bound is complex
+如果接口比较复杂
 
 231
 00:09:30,766 --> 00:09:32,133
 or it has multiple generic parameters
-或者说有多个
+或者说有多个泛型参数的时候
 
 232
 00:09:32,133 --> 00:09:32,700
 or it has multiple generic parameters
+或者说有多个泛型参数的时候
 
 233
 00:09:32,700 --> 00:09:33,700
 or it has multiple generic parameters
-泛型参数的时候
+或者说有多个泛型参数的时候
 
 234
 00:09:33,700 --> 00:09:36,300
-it becomes less readable
-这种类型就会变得不易读
+such form becomes less readable, we'll introduce another way for trait bound later
+这种方式就会变得不易读
 
 235
 00:09:37,766 --> 00:09:39,699
-Now let's write code together
+Now let's write some code together
 现在我们来一起写一下代码
 
 236
 00:09:41,366 --> 00:09:41,666
-FIrst
+First
 首先
 
 237
 00:09:41,666 --> 00:09:44,066
-we define a trait like summary
-我们定义了一个summary这样的一个trait
+let's define a trait called Summary
+我们定义了Summary这样的一个trait
 
 238
 00:09:44,100 --> 00:09:46,400
-it has a function summarize
+it has a function called summarize
 它有一个方法summarize
 
 239
 00:09:46,400 --> 00:09:47,866
-and it has no default implementation
+and it has no default implementation for summarize function
 并且它没有默认的实现
 
 240
 00:09:49,900 --> 00:09:51,700
-Next we define a structure
+Next we define a strucl called Tweet
 接着我们定义结构体
 
 241
-00:09:51,866 --> 00:09:52,666
-as well as
+00:09:51,700 --> 00:09:52,666
+Next let's define a struct called Tweet
 以及
 
 242
 00:09:53,333 --> 00:09:55,999
-the implementation of the structure to the interface summary
-结构体对summary接口的实现
+and implement the Summary trait for the struct
+结构体对Summary接口的实现
 
 243
 00:09:57,600 --> 00:09:59,000
-The structure name is Tweet
-结构体名字是Tweet
+The struct name is Tweet
+结构体的名字是Tweet
 
 244
 00:09:59,200 --> 00:10:00,600
-is what we just saw
+which is what we just saw
 就是我们刚才看到的
 
 245
 00:10:01,733 --> 00:10:04,533
-Let's define our function notify
-我们再定义我们的函数notify
+Let's define the function notify
+我们再定义函数notify
 
 246
 00:10:04,600 --> 00:10:06,566
-print the results of our summary
-打印我们summary的结果
+it prints out the results of our summarize function
+打印summarize的结果
 
 247
 00:10:07,933 --> 00:10:09,466
-Then we can
+Then we can use notify in the main function
 接着我们就可以在
 
 248
-00:10:09,566 --> 00:10:11,466
-use it in the main function
+00:10:09,466 --> 00:10:11,466
+Then we can use notify in the main function
 main函数里面进行使用
 
 249
 00:10:11,466 --> 00:10:12,699
-use it in the main function
-我们notify函数
+Then we can use notify in the main function
+我们的notify函数
 
 250
 00:10:14,000 --> 00:10:16,133
-First we define a
+First let's create an instance of Tweet
 首先我们定义了一个
 
 251
-00:10:16,866 --> 00:10:18,266
-instance of Tweet
+00:10:16,133 --> 00:10:18,266
+First let's create an instance of Tweet
 Tweet结构体的实例
 
 252
 00:10:18,733 --> 00:10:22,199
-Its author is kaichao, and its text is hello world
-它的author是kaichao,它的text是hello world
+Its author is kaichao, and the text is "hello world"
+它的author是kaichao, 它的text是hello world
 
 253
 00:10:22,500 --> 00:10:24,366
-then we call the notify function
+then let's call the notify function
 那我们调用notify函数
 
 254
 00:10:24,366 --> 00:10:26,366
-Pass the reference of Tweet
-传入我们Tweet的引用
+pass in a reference of the tweet that we just created
+传入我们tweet的引用
 
 255
 00:10:27,733 --> 00:10:29,133
-we try to run
+run the program
 我们尝试运行
 
 256
@@ -1283,63 +1285,63 @@ it has printed the output we want
 
 259
 00:10:36,200 --> 00:10:37,300
-Can be seen here
+Here we can see
 这里可以看到
 
 260
 00:10:37,366 --> 00:10:39,933
-The advantage of using trait bond is that
-我们使用trait bond的好处是
+using trait bound has some great advantages
+我们使用trait bound的好处是
 
 261
 00:10:40,500 --> 00:10:42,566
-we can receive a
+One is that function can accept generic parameters that we wouldn't bother to decide it now
 我们可以接收一个
 
 262
 00:10:43,100 --> 00:10:45,166
-generic parameters with some functionality
+One is that function can accept generic parameters that we wouldn't bother to decide it now
 具有某种功能的泛型参数
 
 263
 00:10:45,500 --> 00:10:46,600
-And this parameter
+One is that function can accept generic parameters that we wouldn't bother to decide it now
 而这个参数的话
 
 264
 00:10:46,600 --> 00:10:48,733
-we don't need to define it now
+One is that function can accept generic parameters that we wouldn't bother to decide it now
 我们是不用现在去确定
 
 265
 00:10:48,733 --> 00:10:50,066
-the compiler will replace it for us
+the compiler will decide it for us when needed
 编译器会把我们替换
 
 266
 00:10:50,133 --> 00:10:52,533
-Not only can we accept a Tweet type
+the function can not only accept a Tweet struct type, but also other types
 我们不仅可以接受一个Tweet类型
 
 267
 00:10:52,533 --> 00:10:54,599
-other types are also acceptable
+the function can not only accept a Tweet struct type, but also other types
 也可以接受其他的类型
 
 268
 00:10:54,600 --> 00:10:56,100
-as long as it 
+as long as such types implement the Summary trait
 只要他能够实现
 
 269
 00:10:56,100 --> 00:10:58,733
-satisfy an interface like summary
-满足summary这样的一个接口就可以了
+as long as such types implement the Summary trait
+满足Summary这样的一个接口就可以了
 
 270
 00:11:01,000 --> 00:11:02,933
-Another benefit of trait bond is that
-trait bond另外一个好处是
+Another benefit of using trait bound is that
+trait bound另外一个好处是
 
 271
 00:11:02,933 --> 00:11:04,699
@@ -1348,92 +1350,92 @@ when we have multiple parameters
 
 272
 00:11:04,900 --> 00:11:06,600
-using a trait bond guarantees
-使用trait bond可以保证
+trait bound guarantees that parameters can be the same type
+使用trait bound 可以保证
 
 273
-00:11:07,200 --> 00:11:08,700
-parameter types are the same
+00:11:06,600 --> 00:11:08,700
+trait bound guarantees that parameters can be the same type
 参数类型是一致的
 
 274
 00:11:08,700 --> 00:11:11,100
-For example, here our notify function has two parameters
+For example, here the notify function takes two parameters
 比如这里我们notify函数有两个参数
 
 275
 00:11:11,100 --> 00:11:12,700
-one is item1
+one is item1, the other is item2
 一个是item1
 
 276
 00:11:12,700 --> 00:11:13,933
-one is item2
+one is item1, the other is item2
 一个是item2
 
 277
 00:11:14,300 --> 00:11:18,133
-Then these two parameter types are references of generic T
+Each of the parameters is a reference to generic type T
 那这两个参数类型是泛型T的引用
 
 278
 00:11:18,966 --> 00:11:21,066
-Generic T must satisfy such a constraint of summary
-泛型T要满足summary这样一个约束
+generic type T must satisfy the constraint identified by Summary trait
+泛型T要满足Summary这样一个约束
 
 279
 00:11:22,266 --> 00:11:24,766
-You can see item1 and item2
+You can see that item1 and item2 have the same data type
 可以看到item1和item2
 
 280
 00:11:24,766 --> 00:11:27,099
-the data types are identical
+You can see that item1 and item2 have the same data type
 两个数据类型是一致的
 
 281
 00:11:27,266 --> 00:11:30,099
-After the compiler completes
+During compiling, the generic type will be replaced by the final concrete data type
 在编译器编译完成之后最终
 
 282
-00:11:30,100 --> 00:11:33,100
-it will be replaced by the final data type
+00:11:30,099 --> 00:11:33,100
+During compiling, the generic type will be replaced by the final concrete data type
 会被替换为最终的一个数据类型
 
 283
 00:11:35,533 --> 00:11:38,699
-When a generic parameter has multiple type constraints
+Use "+" between each constraint When a generic type has multiple constraints
 当某个泛型参数有多个类型约束时
 
 284
-00:11:38,700 --> 00:11:40,166
-we can use plus sign
+00:11:38,699 --> 00:11:40,166
+Use "+" between each constraint When a generic type has multiple constraints
 可以使用加号
 
 285
 00:11:40,733 --> 00:11:42,399
-For example here
+For example
 比如这里我们的
 
 286
 00:11:42,566 --> 00:11:45,399
-generic T except for one constraint of the summary interface
-泛型T除了有summary接口的一个约束
+here generic type T has two constraints, one is the trait Summary
+泛型T除了有Summary接口的一个约束
 
 287
 00:11:45,400 --> 00:11:47,100
-there is also a constraint of the display interface
-还有display接口的一个约束
+the other is the trait Display
+还有Display接口的一个约束
 
 288
 00:11:47,500 --> 00:11:50,300
-Display is a trait built into Rust
-display是Rust内置的一个trait
+Display is a build-in trait defined in Rust standard library
+Display是Rust内置的一个trait
 
 289
 00:11:50,466 --> 00:11:52,899
-can be used to implement the printing function
+it's used to format the user-facing output
 可以用来实现打印的功能
 
 290
@@ -1443,215 +1445,216 @@ Next, let's take a look at the use of the where keyword
 
 291
 00:11:56,700 --> 00:11:58,966
-Here we define a function called some_function
-这里我们定义了一个函数叫some方式
+Here we have defined a function called some_function
+这里我们定义了一个函数叫some_function
 
 292
 00:11:59,533 --> 00:12:02,066
-it has two parameters, one is T and the other is U
-它有两个参数一个是T一个是U
+it has two parameters, one is t and the other is u
+它有两个参数一个是t 一个是u
 
 293
 00:12:02,300 --> 00:12:04,100
-its type is a reference to the generic type T
-它类型分别是泛型T的引用
+param t is a reference to the generic type T, param u is a reference to the generic type U
+类型分别是泛型T的引用
 
 294
 00:12:04,100 --> 00:12:05,866
-and a reference to the generic U
+param t is a reference to the generic type T, param u is a reference to the generic type U
 和泛型U的引用
 
 295
 00:12:06,466 --> 00:12:08,733
-Then you can see that the generic T has
+We can tell that the generic type T has two constraints
 那可以看到泛型T有
 
 296
-00:12:08,800 --> 00:12:10,100
-constraints of two traits
+00:12:08,733 --> 00:12:10,100
+We can tell that the generic type T has two constraints
 两个trait的约束
 
 297
 00:12:10,100 --> 00:12:11,600
-Generic U also has two
+generic type U also has two constraints
 泛型U也有两个
 
 298
 00:12:12,566 --> 00:12:15,099
-Longer function signatures are less readable
-函数签名比较长可读性比较低
+The signature of our function is really long and hard to read
+函数签名比较长 可读性比较低
 
 299
 00:12:15,533 --> 00:12:18,533
-Then we use the where keyword to transform
+Now let's use the where keyword to refactor our code
 接着我们用where关键字进行改造
 
 300
 00:12:19,066 --> 00:12:20,333
-We define a function some_function
+some_function still has two parameters t and u
 我们定义的some_function
 
 301
 00:12:20,333 --> 00:12:22,933
-This function also has two parameters T and U
-这样为函数也是有两个参数T和U
+some_function still has two parameters t and u
+这样为函数也是有两个参数t和u
 
 302
 00:12:23,466 --> 00:12:24,266
-that
-那
+
+
 
 303
 00:12:24,933 --> 00:12:27,199
-have constraints of generic T and generic U
+and generic type T and U
 对应的泛型T和泛型U的约束
 
 304
 00:12:27,266 --> 00:12:29,533
-After the function signature
+here we use the keyword "where" at the end of the function signature
 在函数签名之后
 
 305
 00:12:29,533 --> 00:12:31,399
-we input keyword "where"
+here we use the keyword "where" at the end of the function signature
 我们通过在where关键字
 
 306
 00:12:31,533 --> 00:12:33,166
-followed by the corresponding
+followed by the corresponding constraints of T and U
 后面加上对应的
 
 307
-00:12:33,333 --> 00:12:35,066
-constraints of T and U
-T和U的分约束
+00:12:33,166 --> 00:12:35,066
+followed by the corresponding constraints of T and U
+T和U的泛型约束
 
 308
 00:12:35,200 --> 00:12:37,300
-and separated multiple generic parameters by commas
-并且通过逗号分隔
+and separate multiple generic parameters by comma
+并且通过逗号分隔多个泛型参数
 
 309
 00:12:37,300 --> 00:12:38,266
-and separated multiple generic parameters by commas
+and separate multiple generic parameters by comma
+并且通过逗号分隔多个泛型参数
 
 310
 00:12:38,266 --> 00:12:39,866
-and separated multiple generic parameters by commas
-多个泛型参数
+and separate multiple generic parameters by comma
+并且通过逗号分隔多个泛型参数
 
 311
 00:12:42,266 --> 00:12:43,599
-Now let's see
+Next let's see the usage of lifetime
 现在我们来看一下
 
 312
-00:12:43,600 --> 00:12:45,200
-lifetime in Rust
+00:12:43,599 --> 00:12:45,200
+Next let's see the usage of lifetime
 Rust里面的生命周期
 
 313
 00:12:45,800 --> 00:12:48,466
-Every variant in Rust has a lifetime
+In rust, every variable has a lifetime
 在Rust里每个变量都有生命周期
 
 314
 00:12:48,733 --> 00:12:51,933
-the lifetime refers to the valid scope of the variant
+lifetime is used to identify the validity or scope of a variable
 生命周期指的是该变量的有效范围
 
 315
 00:12:51,933 --> 00:12:53,366
-or its scope
+lifetime is used to identify the validity or scope of a variable
 或者说是它的作用域
 
 316
-00:12:53,666 --> 00:12:56,066
-The benefit of the lifetime is that it ensures that
+00:12:53,366 --> 00:12:56,066
+lifetime is used to identify the validity or scope of a variable
 那生命周期的英文是lifetime
 
 317
 00:12:56,066 --> 00:12:56,700
-The benefit of the lifetime is that it ensures that
+The advantage of using lifetime is that it ensures the references are valid and prevents null pointers
 
 318
 00:12:56,700 --> 00:12:59,300
-The benefit of the lifetime is that it ensures that
-生命周期的好处是它确保了
+The advantage of using lifetime is that it ensures the references are valid and prevents null pointers
+生命周期的好处是它确保了引用的有效性
 
 319
-00:12:59,700 --> 00:13:00,700
-validity of references to prevent null pointers
-引用的有效性
+00:12:59,300 --> 00:13:00,700
+The advantage of using lifetime is that it ensures the references are valid and prevents null pointers
+生命周期的好处是它确保了引用的有效性
 
 320
 00:13:00,700 --> 00:13:03,566
-validity of references to prevent null pointers
+The advantage of using lifetime is that it ensures the references are valid and prevents null pointers
 来防止我们代码里面出现空指针
 
 321
 00:13:04,200 --> 00:13:06,100
-Here we look at a code snippet
+Let's look at a code snippet
 这里我们看一个代码片段
 
 322
 00:13:07,066 --> 00:13:09,066
-We define a variant r
+It defines a variable r
 我们定义了一个变量r
 
 323
 00:13:09,800 --> 00:13:11,366
-then we use braces
-接着我们用大括号
+then we use curly braces to create a new scope
+接着我们用大括号生成了一个新的作用域
 
 324
 00:13:11,366 --> 00:13:12,866
-to generate a new scope
-生成了一个新的作用域
+then we use curly braces to create a new scope
+接着我们用大括号生成了一个新的作用域
 
 325
 00:13:13,166 --> 00:13:16,899
-Inside the braces we define a variant x
+Inside the braces we define a variable x
 在大括号里面我们定义了一个变量x
 
 326
 00:13:16,900 --> 00:13:18,000
-its value is 5
+the value is 5
 它的值是5
 
 327
 00:13:18,800 --> 00:13:19,600
-we will
-我们将
+then the reference of x is assigned to our variable r defined in the outer scope
+我们将对应x的引用赋值给外层的变量r
 
 328
-00:13:19,966 --> 00:13:23,066
-reference x to the outer variant r
-对应x的引用赋值给外层的变量r
+00:13:19,600 --> 00:13:23,066
+then the reference of x is assigned to our variable r defined in the outer scope
+我们将对应x的引用赋值给外层的变量r
 
 329
 00:13:23,766 --> 00:13:25,899
-then exit x's scope
+when x goes out of scope
 然后退出我们当前x作用域
 
 330
 00:13:27,066 --> 00:13:28,766
-and print the value referenced by r
+let's try to print the value referenced by r
 尝试打印r引用的值
 
 331
 00:13:29,566 --> 00:13:31,799
-at this time, a compilation exception will be reported
+we will get a compilation error at current stage
 这个时候会报编译异常
 
 332
 00:13:31,933 --> 00:13:33,799
-the reason is that
+The reason is that the scope of r is the outer curly braces
 原因是我们的
 
 333
-00:13:34,400 --> 00:13:37,166
-the scope of r is the outermost brace
+00:13:33,799 --> 00:13:37,166
+The reason is that the scope of r is the outer curly braces
 r的作用域是在最外层的这个大括号
 
 334
@@ -1666,22 +1669,22 @@ The compiler checks the validity of references at compile time
 
 336
 00:13:45,100 --> 00:13:46,266
-it detected
+it detected that r try to reference a value whose scope is smaller than its own scope
 他检测到
 
 337
-00:13:46,700 --> 00:13:47,700
-r try to reference
+00:13:46,266 --> 00:13:47,700
+it detected that r try to reference a value whose scope is smaller than its own scope
 r尝试引用
 
 338
 00:13:47,700 --> 00:13:50,066
-a scope smaller than itself
+it detected that r try to reference a value whose scope is smaller than its own scope
 一个比自己更小的一个作用域
 
 339
 00:13:50,066 --> 00:13:51,666
-then the corresponding exception will be thrown
+and raise the above compiling error
 那就会抛出相应的异常
 
 340
@@ -1691,171 +1694,171 @@ Now let's look at the lifetime of references
 
 341
 00:13:56,166 --> 00:13:59,166
-Lifetime is implicit most of the time
+most of the time lifetime is implicit
 在大多数时候生命周期都是隐含的
 
 342
 00:13:59,466 --> 00:14:01,566
-can be inferred by the compiler
+which means it can be inferred by the compiler
 可以被编译器所推断
 
 343
 00:14:02,100 --> 00:14:03,066
-like type
+just like the type of a variable, we don't need to specify it explicitly
 就像类型一样
 
 344
 00:14:03,066 --> 00:14:05,766
-Most of the time we don't need to specify types
-多数时候我们不需要去显示的指定
+just like the type of a variable, we don't need to specify it explicitly
+多数时候我们不需要去显示的指定类型
 
 345
 00:14:05,800 --> 00:14:08,533
-the compiler can work as well
-类型那编辑器也可以推断出来
+the compiler can infer the type from the context
+编辑器也可以推断出来
 
 346
 00:14:08,800 --> 00:14:11,466
-But when multiple types are possible
+but infer will be failed if multiple candidate types exist, 
 但是当有多种类型都有可能时
 
 347
 00:14:11,700 --> 00:14:14,600
-we need to explicitly specify the type of our variant
+in such cases, we must explicitly specify the type of our variable
 就需要显示的指定我们变量的类型了
 
 348
 00:14:16,000 --> 00:14:16,500
-Same here
+Similarly
 类似的
 
 349
 00:14:16,500 --> 00:14:18,900
-when lifetimes may have different scopes
+when lifetime could have different scopes
 当生命周期可能有不同的范围时
 
 350
 00:14:19,466 --> 00:14:20,666
-we have to specify
+we have to specify the lifetime of a vairable explicitly
 我们就必须显示的
 
 351
 00:14:20,666 --> 00:14:22,099
-the lifetime of a variant
+we have to specify the lifetime of a vairable explicitly
 指定变量的生命周期
 
 352
 00:14:23,000 --> 00:14:23,933
-In Rust
+Rust uses generic types to specify the relationship between lifetimes
 在Rust里
 
 353
 00:14:23,933 --> 00:14:26,533
-relationship between lifetimes can be
+Rust uses generic types to specify the relationship between lifetimes
 可以使用泛型参数来指定这种
 
 354
-00:14:26,800 --> 00:14:28,333
-specified using generic parameters
+00:14:26,533 --> 00:14:28,333
+Rust uses generic types to specify the relationship between lifetimes
 生命周期之间的关系
 
 355
 00:14:28,666 --> 00:14:30,366
-to ensure the validity of the reference
+it ensures the validity of the reference
 来确保引用的有效性
 
 356
 00:14:31,800 --> 00:14:32,866
-Here we look at an example
+Here let's look at an example
 这里我们来看一个例子
 
 357
 00:14:32,866 --> 00:14:35,133
-we define a function longest
+we define a function called longest
 我们定义了一个longest函数
 
 358
 00:14:35,600 --> 00:14:37,400
-It has two parameters which are x, y
+it has two parameters which are x and y
 它有两个参数分别是x y
 
 359
 00:14:37,533 --> 00:14:39,399
-the types are all string slice
+both of the parameters are string slice
 类型都是string slice
 
 360
 00:14:39,666 --> 00:14:42,099
 the return value is also a string slice
-那返回值也是一个string slice
+返回值也是一个string slice
 
 361
 00:14:42,566 --> 00:14:43,599
-Its logic is simple
+the logic is pretty simple
 它的逻辑很简单
 
 362
 00:14:43,600 --> 00:14:47,566
-return the longer string in x, y
+get the longer string in x, y and return it
 返回x y里面更长的那一个字符串
 
 363
 00:14:48,766 --> 00:14:49,299
-At this time
+At this moment
 这个时候
 
 364
 00:14:49,300 --> 00:14:51,466
-there is no way for our compiler to infer
+there is no way for our compiler to infer the lifetime of the returned reference
 我们编译器是没有办法推断出
 
 365
-00:14:51,500 --> 00:14:54,900
-the lifetime of a reference to the return value
+00:14:51,466 --> 00:14:54,900
+there is no way for our compiler to infer the lifetime of the returned reference
 返回值对应的一个引用的生命周期
 
 366
 00:14:55,466 --> 00:14:57,466
-We need to specify it
+we need to specify the lifetime explicitly
 我们只能显示的指定
 
 367
 00:14:58,533 --> 00:14:59,566
-Usually, we use lowercase letters
+By convention
 约定俗成的
 
 368
 00:14:59,566 --> 00:15:01,666
-Usually, we use lowercase letters
+we can use a lowercase letter and a ' in front as special generic type to identify the lifetime
 我们使用小写字母
 
 369
-00:15:01,866 --> 00:15:03,099
-and add a ' in front to represent generic parameters for lifetime
+00:15:01,666 --> 00:15:03,099
+we can use a lowercase letter and a ' in front as special generic type to identify the lifetime
 前面加一个'
 
 370
 00:15:03,099 --> 00:15:03,100
-and add a ' in front to represent generic parameters for lifetime
+we can use a lowercase letter and a ' in front as special generic type to identify the lifetime
 
 371
 00:15:03,100 --> 00:15:03,866
-and add a ' in front to represent generic parameters for lifetime
+we can use a lowercase letter and a ' in front as special generic type to identify the lifetime
 来表示
 
 372
 00:15:03,866 --> 00:15:06,266
-and add a ' in front to represent generic parameters for lifetime
+we can use a lowercase letter and a ' in front as special generic type to identify the lifetime
 我们的生命周期对应的泛型参数
 
 373
 00:15:06,666 --> 00:15:07,933
-Here we define a 'a
+Here we have 'a as the generic type
 这里我们定了一个'a
 
 374
 00:15:07,933 --> 00:15:09,333
-a generic parameter
+Here we have 'a as the generic type
 这样一个泛型参数
 
 375
@@ -1874,113 +1877,113 @@ and put 'a to the parameters x and y
 
 378
 00:15:15,200 --> 00:15:18,000
-indicates that x and y have the same lifetime
+it indicates that x and y have the same lifetime in the context of our function
 表明x和y有相同的生命周期
 
 379
 00:15:18,900 --> 00:15:22,400
-Similarly, we also add a 'a constraint to the return value
+Similarly, we can also add 'a to the return value
 同样的我们返回值也加一个'a的约束
 
 380
 00:15:23,200 --> 00:15:25,766
-indicates that the lifetime of our return value is as same as x and y
-表示我们返回值的生命周期是和x
+it indicates that the lifetime of our return value is as same as x and y
+表示我们返回值的生命周期是和x y是一样的
 
 381
 00:15:25,766 --> 00:15:27,166
 indicates that the lifetime of our return value is as same as x and y
-y是一样的
+表示我们返回值的生命周期是和x y是一样的
 
 382
 00:15:27,933 --> 00:15:29,733
-In this way our compiler can successfully compile
-这样我们的编译器就可以成功的进行
+Now our compiler can successfully compile
+这样我们的编译器就可以成功的进行编译
 
 383
 00:15:29,733 --> 00:15:30,533
-In this way our compiler can successfully compile
-编译
+Now our compiler can successfully compile
+这样我们的编译器就可以成功的进行编译
 
 384
 00:15:31,500 --> 00:15:34,066
 Although here we don't know the exact lifetime of x, y
-虽然在函数这里我们并不清楚x
+虽然在函数这里我们并不清楚x,y真正的生命周期
 
 385
 00:15:34,066 --> 00:15:35,466
 Although here we don't know the exact lifetime of x, y
-y真正的生命周期
+虽然在函数这里我们并不清楚x,y真正的生命周期
 
 386
 00:15:35,500 --> 00:15:36,933
-actually we don't need to know
+actually we don't need to know the exact lifetime
 其实也无需知道
 
 387
 00:15:36,933 --> 00:15:39,533
-We just need to know that
+just be clear that at compile time
 只要明白在实际运行时
 
 388
 00:15:39,766 --> 00:15:42,166
-'a generic will be replaced with
-'a泛型会被替代为
+'a generic will be replaced with the one has the smaller lifetime among x and y
+'a泛型会被替代为x y生命周期较小的那一个就可以了
 
 389
-00:15:42,400 --> 00:15:45,733
-the one with the smaller lifetime among x, y
-x y生命周期较小的那一个就可以了
+00:15:42,166 --> 00:15:45,733
+'a generic will be replaced with the one has the smaller lifetime among x and y
+'a泛型会被替代为x y生命周期较小的那一个就可以了
 
 390
 00:15:47,166 --> 00:15:48,566
-For the return value of the function
+For the return value of function
 对于函数的返回值
 
 391
 00:15:48,733 --> 00:15:51,733
-the lifetime it referenced must from the parameters'
+the lifetime it referenced should comes from the parameters of function
 它的引用的生命周期必须是来自参数
 
 392
 00:15:52,533 --> 00:15:53,899
-if not from parameter
+think about it, if it's not from parameter
 如果不是来自参数
 
 393
 00:15:53,900 --> 00:15:56,600
-that must come from the function itself
+then it must comes from the function itself
 那肯定是来自于函数本身
 
 394
 00:15:57,133 --> 00:15:59,799
-Since the variants inside the function will be cleared if
-由于函数内的变量在函数之外
+since the variables defined inside the function will be cleared when function exits
+由于函数内的变量在函数之外会被清空
 
 395
-00:16:00,000 --> 00:16:00,933
-outside the function
-会被清空
+00:15:59,799 --> 00:16:00,933
+since the variables defined inside the function will be cleared when function exits
+由于函数内的变量在函数之外会被清空
 
 396
 00:16:00,933 --> 00:16:02,366
-it will return a null pointer
+this will lead to null pointer
 所以会造成空指针
 
 397
 00:16:02,366 --> 00:16:05,766
-and it will fail to compile in Rust
+In such cases, Rust compiler will not even let it go through
 而这在Rust从根本上编译就不会通过
 
 398
 00:16:06,933 --> 00:16:10,466
-Here we define a function named longest
+Here we have defined a function named longest
 这里我们定义了一个函数名称是longest
 
 399
 00:16:10,666 --> 00:16:14,699
-it has two parameters x, y, string slice type
-它有两个参数x y分别是string slice类型
+it has two parameters x and y, the type is string slice
+它有两个参数x y 分别是string slice类型
 
 400
 00:16:15,066 --> 00:16:17,266
@@ -1989,122 +1992,122 @@ the return value is also a string slice
 
 401
 00:16:18,866 --> 00:16:21,533
-We use a generic parameter 'a
-我们通过一个泛型参数'a
+it uses generic type 'a to specify the lifetime of our return value
+我们通过一个泛型参数'a 来指定我们返回值的生命周期
 
 402
-00:16:21,700 --> 00:16:24,300
-to specify the lifetime of our return value
-来指定我们返回值的生命周期
+00:16:21,533 --> 00:16:24,300
+it uses generic type 'a to specify the lifetime of our return value
+我们通过一个泛型参数'a 来指定我们返回值的生命周期
 
 403
 00:16:24,800 --> 00:16:25,466
-It can be seen that
+here we can see
 可以看到
 
 404
 00:16:25,466 --> 00:16:27,999
-we define a string in our function
+it defines a string in our function
 我们函数里面定义了一个字符串
 
 405
 00:16:28,500 --> 00:16:32,300
-then return the string slice reference to the string
+then return the string slice referenced to the string
 然后将字符串的string slice引用返回
 
 406
 00:16:32,566 --> 00:16:35,366
-Since we are referencing a value inside a function
+since the slice is referencing a value inside the function
 由于我们引用了一个函数内的值
 
 407
 00:16:35,366 --> 00:16:37,366
-our compilation will fail
+the compilation will fail
 所以我们的编译会失败
 
 408
 00:16:38,400 --> 00:16:39,600
-Let's take a look
+Next let's take a look at the default rules of the reference's lifetime
 接着我们来看一下
 
 409
 00:16:39,600 --> 00:16:41,800
-Lifetime of references
+Next let's take a look at the default rules of the reference's lifetime
 引用类型的生命周期
 
 410
 00:16:41,933 --> 00:16:44,799
-Some default rules configured by the compiler
+such rules are configured in the compiler
 编译器所配置的一些缺省规则
 
 411
 00:16:45,266 --> 00:16:47,066
-After use these rules
-如果这一系列规则
+If the lifetime of references can be determined after applying these rules
+如果这一系列规则使用之后可以确定引用的生命周期
 
 412
-00:16:47,533 --> 00:16:50,299
-the lifetime of references can be determined
-使用之后可以确定引用的生命周期
+00:16:47,066 --> 00:16:50,299
+If the lifetime of references can be determined after applying these rules
+如果这一系列规则使用之后可以确定引用的生命周期
 
 413
 00:16:50,300 --> 00:16:51,900
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 那我们对应的
 
 414
 00:16:51,900 --> 00:16:51,966
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 
 415
 00:16:51,966 --> 00:16:52,583
-then the generics of the lifetime
+then we don't need to use generics for lifetime annotation
 生命周期的泛型参数就可以缺省
 
 416
 00:16:52,583 --> 00:16:53,866
-can be defaulted
+then we don't need to use generics for lifetime annotation
 生命周期的泛型参数就可以缺省
 
 417
 00:16:54,266 --> 00:16:56,933
-The first rule is that the compiler
+The first rule is that
 第一个规则是编译器为每一个
 
 418
 00:16:57,600 --> 00:16:59,066
-adds a generic to
+the compiler adds a generic type for each parameter of reference type
 引用类型的参数
 
 419
 00:16:59,066 --> 00:17:00,733
-each reference parameter type
+the compiler adds a generic type for each parameter of reference type
 添加了生命周期的泛型
 
 420
 00:17:02,066 --> 00:17:03,866
-For example, here we define a function foo
+For example, here is a function foo, it has two references
 比如这里我们定义了一个foo函数
 
 421
 00:17:03,866 --> 00:17:05,566
-it has two reference types
+For example, here is a function foo, it has two references
 它有两个引用类型
 
 422
 00:17:06,200 --> 00:17:08,533
-The compiler will automatically add
-那编译器会自动给它加上
+The compiler will automatically add a generic type for each parameter to represent its lifetime
+那编译器会自动给它加上两个生命周期泛型
 
 423
-00:17:09,100 --> 00:17:10,600
-two lifetime generics
-两个生命周期泛型
+00:17:08,533 --> 00:17:10,600
+The compiler will automatically add a generic type for each parameter to represent its lifetime
+那编译器会自动给它加上两个生命周期泛型
 
 424
 00:17:10,600 --> 00:17:13,566
-'a and 'b to different parameters respectively
-'a和'b分别是对应不同的参数
+which are 'a and 'b respectively
+'a和'b 分别是对应不同的参数
 
 425
 00:17:14,600 --> 00:17:15,533
@@ -2113,43 +2116,43 @@ The second rule is
 
 426
 00:17:15,533 --> 00:17:17,799
-when there is only one lifetime generic
+when there is only one generic type for lifetime, all the returned references will use this generic type
 当生命周期泛型只有一个时
 
 427
-00:17:18,333 --> 00:17:20,466
-the return values of all reference types
+00:17:17,799 --> 00:17:20,466
+when there is only one generic type for lifetime, all the returned references will use this generic type
 那所有引用类型的返回值
 
 428
 00:17:20,466 --> 00:17:22,933
-will use this generic of this lifetime
+when there is only one generic type for lifetime, all the returned references will use this generic type
 都会使用这个生命周期的泛型
 
 429
 00:17:23,700 --> 00:17:25,266
-For example, here we define a function foo
+For example, here is a function foo
 比如这里我们定了一个函数foo
 
 430
 00:17:25,366 --> 00:17:27,799
-it has only one parameter x which is an application type
-它只有一个参数x是一个应用类型
+it has only one parameter x which is a reference
+它只有一个参数x是一个引用类型
 
 431
 00:17:27,900 --> 00:17:29,600
-its lifetime is 'a
+the lifetime of x is 'a
 那它的生命周期是'a
 
 432
 00:17:30,200 --> 00:17:32,366
-Then the return value will just use 'a
-那返回值会直接使用'a
+then the return value will just use 'a as its own lifetime
+那返回值会直接使用'a 这样的一个生命周期
 
 433
 00:17:32,366 --> 00:17:34,066
-as its lifetime
-这样的一个生命周期
+then the return value will just use 'a as its own lifetime
+那返回值会直接使用'a 这样的一个生命周期
 
 434
 00:17:35,366 --> 00:17:36,199
@@ -2158,117 +2161,118 @@ The third rule is
 
 435
 00:17:36,200 --> 00:17:38,066
-when there are multiple lieftime generics
+when there are multiple generics for lifetime
 生命周期的泛型有多个时
 
 436
 00:17:38,500 --> 00:17:40,333
-and one of them is
-并且其中一个是
+and one of them is a reference to self or mutable self
+并且其中一个是自身的引用或者可变的引用
 
 437
-00:17:40,566 --> 00:17:43,199
-self reference or mutable reference
-自身的引用或者可变的引用
+00:17:40,333 --> 00:17:43,199
+and one of them is a reference to self or mutable self
+并且其中一个是自身的引用或者可变的引用
 
 438
 00:17:43,400 --> 00:17:46,133
-then the return value of all references
-那么所有引用类型的返回值
+then all the returned references will use the lifetime specified on self
+那么所有引用类型的返回值都会使用
 
 439
-00:17:46,166 --> 00:17:47,333
-will use
-都会使用
+00:17:46,133 --> 00:17:47,333
+then all the returned references will use the lifetime specified on self
+那么所有引用类型的返回值都会使用
 
 440
-00:17:47,400 --> 00:17:49,866
-the lifetime of this self-referenced lifetime
+00:17:47,333 --> 00:17:49,866
+then all the returned references will use the lifetime specified on self
 这样一个自身引用对应的生命周期
 
 441
 00:17:49,866 --> 00:17:51,599
-For example, here we define a function foo
+For example, here is a function foo
 比如这里我们定义了一个函数foo
 
 442
 00:17:51,766 --> 00:17:54,799
-it has two parameters one is self reference
-它有两个参数一个是self引用
+it has two parameters one is a reference to self, the other one is a reference to i32
+它有两个参数一个是self的引用
 
 443
-00:17:54,966 --> 00:17:57,499
-The other one is the I32 reference
-另外一个是I32引用
+00:17:54,799 --> 00:17:57,499
+it has two parameters one is a reference to self, the other one is a reference to i32
+另外一个是i32引用
 
 444
 00:17:57,666 --> 00:17:59,866
-Respectively the compiler will add 
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
 分别编译器会增加一个
 
 445
-00:18:00,000 --> 00:18:01,666
-lifetime generics 'a and 'b
-生命周期的泛型参数
+00:17:59,866 --> 00:18:01,666
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 446
 00:18:01,666 --> 00:18:01,933
-lifetime generics 'a and 'b
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 447
 00:18:01,933 --> 00:18:02,799
-lifetime generics 'a and 'b
-'a和'b
+the compiler will add 'a and 'b generics for the two parameters to identify their lifetime
+生命周期的泛型参数'a和'b
 
 448
 00:18:03,100 --> 00:18:04,166
-Then the return value
-那我们返回去的话
+The returned reference will use the lifetime specified on the self reference
+那我们返回值的话
 
 449
 00:18:04,166 --> 00:18:06,199
-will use the lifetime of the self reference
+The returned reference will use the lifetime specified on the self reference
 会使用self引用的生命周期
 
 450
 00:18:06,200 --> 00:18:07,266
-that is 'a
+which is 'a
 也就是'a
 
 451
 00:18:08,866 --> 00:18:09,933
-Partial fields of the structure
+The fields of struct can also be references
 结构体的部分字段
 
 452
 00:18:09,933 --> 00:18:11,399
-can also be a reference to a value
+The fields of struct can also be references
 也可以是某个值的引用
 
 453
 00:18:11,400 --> 00:18:13,400
-We shall specify
-那这个时候我们就要指定
+We should specify a generic to identify the lifetime of the reference
+那这个时候我们就要指定引用的生命周期
 
 454
-00:18:13,466 --> 00:18:14,966
-reference lifetime
-引用的生命周期
+00:18:13,400 --> 00:18:14,966
+We should specify a generic to identify the lifetime of the reference
+那这个时候我们就要指定引用的生命周期
 
 455
 00:18:15,133 --> 00:18:16,399
-and noted that
+Note that
 并且需要注意的是
 
 456
 00:18:16,400 --> 00:18:17,700
-the instance of the structure
-结构体的实例
+the instance of the struct will no longer be available if the referenced value goes out of scope
+结构体的实例在该值的作用域之外就不再可用了
 
 457
-00:18:17,900 --> 00:18:21,866
-is no longer available outside the scope of the value
-在该值的作用域之外就不再可用了
+00:18:17,700 --> 00:18:21,866
+the instance of the struct will no longer be available if the referenced value goes out of scope
+结构体的实例在该值的作用域之外就不再可用了
 
 458
 00:18:22,266 --> 00:18:22,599
@@ -2277,109 +2281,111 @@ For example
 
 459
 00:18:22,600 --> 00:18:24,733
-we define a struct summary 
-我们定义了一个summary的结构体
+Let's define a struct named Summary 
+我们定义了一个Summary的结构体
 
 460
 00:18:24,733 --> 00:18:26,199
-one of its attributes part is a reference to a string slice
-它的一个属性part
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 461
 00:18:26,199 --> 00:18:26,700
-one of its attributes part is a reference to a string slice
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 462
 00:18:26,700 --> 00:18:29,133
-one of its attributes part is a reference to a string slice
-是一个string slice的引用
+the field "part" is a reference to a string
+它的一个属性part是一个string slice
 
 463
 00:18:30,100 --> 00:18:32,166
-So here we have to specify its lifetime is 'a
-那么这里我们要指定它的生命周期
+Here we must specify the lifetime of "part" field, which is 'a
+那么这里我们要指定它的生命周期是'a
 
 464
 00:18:32,166 --> 00:18:32,866
-So here we have to specify its lifetime is 'a
-是'a
+Here we must specify the lifetime of "part" field, which is 'a
+那么这里我们要指定它的生命周期是'a
 
 465
 00:18:32,866 --> 00:18:35,933
-When we define a string "text" in the main function
-当我们在main函数里面定了一个
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 466
 00:18:35,933 --> 00:18:36,000
-When we define a string "text" in the main function
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 467
 00:18:36,000 --> 00:18:37,200
-When we define a string "text" in the main function
-字符串text
+Let's define a string named text in the main function
+当我们在main函数里面定了一个字符串text
 
 468
 00:18:37,300 --> 00:18:38,733
-and get its
-并且获取它的
+and get its first sentence with split function, it returns a string slice
+并且获取它的第一个句子first sentence
 
 469
-00:18:39,300 --> 00:18:41,133
-first sentence, it's a string slice
-第一个句子first sentence
+00:18:38,733 --> 00:18:41,133
+and get its first sentence with split function, it returns a string slice
+并且获取它的第一个句子first sentence
 
 470
 00:18:41,133 --> 00:18:41,300
-first sentence, it's a string slice
+and get its first sentence with split function, it returns a string slice
 
 471
 00:18:41,300 --> 00:18:42,700
-first sentence, it's a string slice
+and get its first sentence with split function, it returns a string slice
 它是一个string slice
 
 472
 00:18:43,300 --> 00:18:45,266
-Then construct a summary struct
+Then create a instance of Summary struct and assign first_sentence to field part
 然后构造一个summary结构体
 
 473
 00:18:45,266 --> 00:18:48,099
-assign the value of first sentence to part
-把first sentence赋值给part
+Then create a instance of Summary struct and assign first_sentence to field part
+把first_sentence赋值给part
 
 474
 00:18:48,266 --> 00:18:51,133
-After our first sentence exits the scope
-当我们的first sentence退出作用域之后
+After the text referenced by part goes out of the scope, the Summary instance will no longer be available
+当我们的first_sentence退出作用域之后
 
 475
 00:18:51,133 --> 00:18:53,533
-then our struct summary will no longer be available
+After the text referenced by part goes out of the scope, the Summary instance will no longer be available
 那我们的结构体summary也就不再可用
 
 476
 00:18:54,333 --> 00:18:56,133
-In another situation,
+Another commonly used concept is static lifetime
 另外一个生命周期里
 
 477
 00:18:56,133 --> 00:18:58,599
-we will always meet static lifetime
+Another commonly used concept is static lifetime
 经常会遇到的概念是静态生命周期
 
 478
 00:18:58,600 --> 00:19:01,666
-Static means
-static他所表示的意思是
+Static means the reference is valid throughout the whole execution cycle of the program
+static 他所表示的意思是
 
 479
 00:19:01,666 --> 00:19:03,499
-it is valid
+Static means the reference is valid throughout the whole execution cycle of the program
 当前的引用的有效性
 
 480
-00:19:03,500 --> 00:19:06,366
-throughout the whole execution cycle of the program
+00:19:03,499 --> 00:19:06,366
+Static means the reference is valid throughout the whole execution cycle of the program
 是在整个程序的执行周期
 
 481
@@ -2389,87 +2395,87 @@ That is to say
 
 482
 00:19:07,766 --> 00:19:10,899
-this reference will remain valid until the program exits
+the reference will remain valid until the program exits
 该引用会一直有效直到程序退出
 
 483
 00:19:11,400 --> 00:19:15,466
-string literal,  the string enclosed in double quotes
-string literal也就是用双引号括起来的
+String literal is static by default
+string literal 也就是用双引号括起来的
 
 484
 00:19:15,466 --> 00:19:17,733
-are static by default
-字符串默认是static
+String literal is static by default
+字符串字面量是static的
 
 485
 00:19:17,933 --> 00:19:21,133
-it can be identified by 'static
+Static reference can be specified by 'static keyword
 可以通过'static来标识
 
 486
 00:19:21,533 --> 00:19:25,399
-We need to use the static lifetime carefully
+We should be careful with the static lifetime
 我们需要谨慎的使用static生命周期
 
 487
 00:19:25,966 --> 00:19:28,133
-When there is a null pointer in the code or
-当代码里存在空指针或者
+When there is a null pointer in the code or the lifetime of the reference does not match the required
+当代码里存在空指针或者引用的生命周期不匹配的时候
 
 488
-00:19:28,500 --> 00:19:30,333
-when the lifetime of the reference does not match
-引用的生命周期不匹配的时候
+00:19:28,133 --> 00:19:30,333
+When there is a null pointer in the code or the lifetime of the reference does not match the required
+当代码里存在空指针或者引用的生命周期不匹配的时候
 
 489
 00:19:30,333 --> 00:19:32,133
-the compiler often reports compilation errors
+the compiler often raise compilation errors and may recommended us to use static lifetime
 编译器经常会报编译错误
 
 490
 00:19:32,133 --> 00:19:35,566
-and it will recommended us to use static static lifetime
+the compiler often raise compilation errors and may recommended us to use static lifetime
 并且建议我们使用static静态生命周期
 
 491
 00:19:35,566 --> 00:19:37,066
-But at this time we have to consider
+At this moment, we should think about it
 但这个时候我们要考虑一下
 
 492
 00:19:37,066 --> 00:19:39,366
-do we really want our references
+do we really want the reference to be valid all the time in the execution of the program
 我们是否是真的希望我们的引用
 
 493
-00:19:39,466 --> 00:19:41,499
-to be valid all the time in the program
+00:19:39,366 --> 00:19:41,499
+do we really want the reference to be valid all the time in the execution of the program
 在程序的全局是有效的
 
 494
 00:19:41,566 --> 00:19:42,266
-If not
+If not, we should fix the null pointer and other bugs like lifetime mismatch
 如果不是的话
 
 495
 00:19:42,266 --> 00:19:44,766
-we need to fix our null pointer and
-我们就需要去修复我们的空指针和
+If not, we should fix the null pointer and other bugs like lifetime mismatch
+我们就需要去修复我们的空指针和生命周期不匹配这样的一个bug
 
 496
-00:19:45,100 --> 00:19:46,966
-bugs like lifetime mismatch
-生命周期不匹配这样的一个bug
+00:19:44,766 --> 00:19:46,966
+If not, we should fix the null pointer and other bugs like lifetime mismatch
+我们就需要去修复我们的空指针和生命周期不匹配这样的一个bug
 
 497
 00:19:46,966 --> 00:19:49,499
-instead of using the static lifetime
+instead of using static lifetime
 而不是去使用static生命周期
 
 498
 00:19:49,500 --> 00:19:51,333
-Today's course content is over here
+Today's course is over
 今天课程内容到这里就结束了
 
 499
