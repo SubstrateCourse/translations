@@ -6,184 +6,184 @@ Hello everyone, I am Kaichao
 2
 00:00:03,133 --> 00:00:06,666
 本次课程内容是Rust项目的代码管理
-The content of this course is code management of Rust projects
+Today's course is about project management in Rust
 
 3
 00:00:08,466 --> 00:00:09,899
 课程内容包含
-Course content includes
+the content includes
 
 4
 00:00:10,700 --> 00:00:13,600
 Rust里常用的模块组件
-commonly used module components in Rust
+commonly used modular components in Rust such as package, crate, module
 
 5
 00:00:13,600 --> 00:00:16,800
 如package, crate, module的介绍
-such as package, crate, module introduction
+commonly used modular components in Rust such as package, crate, module
 
 6
 00:00:17,733 --> 00:00:19,333
 如何引入功能模块
-and how to import modules
+how to import such modlar components
 
 7
 00:00:19,700 --> 00:00:21,466
-最后我们会看一下
-Finally we'll look at
+最后我们会看一下workspace的简单使用方法
+Finally we'll look at the usage of workspace
 
 8
-00:00:21,566 --> 00:00:23,533
-workspace的简单使用方法
-simple usage of workspace
+00:00:21,466 --> 00:00:23,533
+最后我们会看一下workspace的简单使用方法
+Finally we'll look at the usage of workspace
 
 9
 00:00:25,166 --> 00:00:26,266
 首先我们来看一下
-First
+First let's see
 
 10
 00:00:26,266 --> 00:00:27,866
 为什么要对我们的
-why do we need project management?
+why do we need do project management for our code?
 
 11
 00:00:27,866 --> 00:00:29,599
 代码项目进行管理呢
-why do we need project management?
+why do we need do project management for our code?
 
 12
 00:00:30,066 --> 00:00:32,666
 当我们的Rust项目变得很大时
-When our Rust projects get big
+When the project gets really big, there will be a lot of code
 
 13
-00:00:32,766 --> 00:00:34,599
+00:00:32,666 --> 00:00:34,599
 会有大量的程序代码
-there will be a lot of  code
+When the project gets really big, there will be a lot of code
 
 14
 00:00:35,933 --> 00:00:37,299
 那我们就需要将程序代码
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 15
 00:00:37,299 --> 00:00:37,300
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 16
 00:00:37,300 --> 00:00:38,866
 放在不同的模块下
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 17
 00:00:38,866 --> 00:00:39,799
 不同的文件里
-in a different file
+we need to splite code in different modules, different files
 
 18
 00:00:40,000 --> 00:00:42,200
 从而让代码更容易维护
-making the code easier to maintain
+so that the code become much easier to maintain
 
 19
 00:00:42,500 --> 00:00:45,333
 这跟我们的电脑桌面的管理是一样的
-This is the same as the management of our computer desktop
+This is simlar to manage the desktop of our computer
 
 20
 00:00:45,333 --> 00:00:47,766
 当你有一两个文件的时候
-when you have a file or two
+when you only have one or two files on your desktop, that's fine
 
 21
 00:00:47,766 --> 00:00:49,699
-放在桌面是OK的
-it's OK to put it on the desktop
+放在桌面是Ok的
+when you only have one or two files on your desktop, that's fine
 
 22
 00:00:50,266 --> 00:00:52,133
 但是当你有了几十
-but when you have dozens
+but when you have dozens even hundreds of files on your desktop
 
 23
 00:00:52,133 --> 00:00:54,133
 上百个的文件的时候
-maybe hundreds of files
+but when you have dozens even hundreds of files on your desktop
 
 24
 00:00:54,400 --> 00:00:56,933
 如果你不再分组管理那就不行了
-it won't work if you don't do file management
+it won't work if you don't move files into different folders
 
 25
 00:00:57,533 --> 00:01:01,166
-代码的模块化还可以用来封装
-Code modularity can also be used to encapsulate
+代码的模块化还可以用来封装无需外部关心的实现细节
+Modular code can also be used to encapsulate the implementation details for its users
 
 26
-00:01:01,366 --> 00:01:03,533
-无需外部关心的实现细节
-implementation details that require no external concern
+00:01:01,166 --> 00:01:03,533
+代码的模块化还可以用来封装无需外部关心的实现细节
+Modular code can also be used to encapsulate the implementation details for its users
 
 27
 00:01:03,933 --> 00:01:05,766
 让代码实现复用
-make the code be reusable
+make the code reusable
 
 28
 00:01:06,266 --> 00:01:07,966
 当我们有了一段功能代码
-When we have a piece of function code
+When we have a piece of code which implements a function
 
 29
 00:01:08,200 --> 00:01:10,900
 别的代码需要使用这个功能
-and other code needs to use this function
+and other code wants to use this function
 
 30
 00:01:11,100 --> 00:01:12,700
 那只需要通过
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 31
 00:01:12,700 --> 00:01:12,966
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 32
 00:01:12,966 --> 00:01:13,650
 该模块的公共接口
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 33
 00:01:13,650 --> 00:01:14,299
 该模块的公共接口
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 34
 00:01:14,299 --> 00:01:14,300
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 35
 00:01:14,300 --> 00:01:16,000
 调用相应的功能就可以了
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 36
 00:01:16,000 --> 00:01:18,766
 不需要在自己的代码里再次实现
-No need to implement it again in your own code
+there's no need to implement the logic again in its own code
 
 37
 00:01:18,933 --> 00:01:21,666
 也不用关心内部的实现细节
-and don't need to care about internal details
+and the user don't need to care much about implementation details
 
 38
 00:01:22,766 --> 00:01:26,199
 Rust提供的代码管理组件包括
-Code management components provided by Rust include
+The components for code management provided by Rust include
 
 39
 00:01:26,366 --> 00:01:27,399
@@ -202,21 +202,21 @@ The first one is package
 42
 00:01:28,733 --> 00:01:30,799
 它是cargo工具用来
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 43
 00:01:30,799 --> 00:01:30,966
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 44
 00:01:30,966 --> 00:01:33,799
 构建编译测试的一个空间
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 45
 00:01:34,266 --> 00:01:37,099
 也是我们工作的一个主要目录
-also a main directory where we work
+it's the main directory for our work
 
 46
 00:01:37,333 --> 00:01:38,599
@@ -226,161 +226,161 @@ What about inside the package?
 47
 00:01:38,800 --> 00:01:41,066
 又分为很多crate
-It is divided into many crates
+a package is divided into many crates
 
 48
 00:01:41,333 --> 00:01:44,299
-有我们本地自己写的crate
-There are crates written by us locally
+有我们本地自己写的crate 还有我们依赖的一些公共库
+There are local crates written by us and some public libraries we depend on
 
 49
-00:01:44,300 --> 00:01:46,900
-还有我们依赖的一些公共库
-and some public libraries we depend on
+00:01:44,299 --> 00:01:46,900
+有我们本地自己写的crate 还有我们依赖的一些公共库
+There are local crates written by us and some public libraries we depend on
 
 50
 00:01:46,933 --> 00:01:50,266
 我们自己写的如果是工具库的话
-If we write it ourselves and it is a tool library
+If it is a library, entry point is in the src/lib.rs
 
 51
 00:01:50,266 --> 00:01:50,999
 它的
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 52
 00:01:50,999 --> 00:01:51,000
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 53
 00:01:51,000 --> 00:01:54,500
 入口文件在src/lib.rs文件里
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 54
 00:01:54,500 --> 00:01:57,400
 那如果我们自己写的是一个可执行程序
-Then if we write a determinable program
+If it's a executable binary, the entry point is in src/main.rs
 
 55
-00:01:57,733 --> 00:01:59,666
+00:01:57,400 --> 00:01:59,666
 那它的入口文件在src/main.rs里面
-its entry point is in src/main.rs
+If it's a executable binary, the entry point is in src/main.rs
 
 56
 00:01:59,733 --> 00:02:03,066
 常用的一些公共的依赖库
-These are commonly used public dependent libraries
+Here are some commonly used libraries
 
 57
 00:02:03,066 --> 00:02:06,333
 包括rand来获取随机数
-Rand, get random numbers
+rand library is used to get a random number
 
 58
 00:02:06,500 --> 00:02:10,133
 serde对我们的json文件进行解析
-Serde, parses json files
+serde to parse the json content
 
 59
 00:02:10,333 --> 00:02:13,166
 以及diesel对我们的数据库进行操作
-And diesel, operates on our database
+And diesel to query and modify our database
 
 60
 00:02:13,533 --> 00:02:14,566
 那每个crate呢
-What about each crate?
+How to manage a crate?
 
 61
 00:02:14,566 --> 00:02:18,466
-又可以进一步通过module进行划分
-It can be further divided by modules
+又可以进一步通过module进行划分, 组织代码
+it can be further divided into modules for better code organization
 
 62
 00:02:18,566 --> 00:02:22,733
-组织代码控制不同module之间是否可见
-The organization code controls whether it is visible between different modules
+控制不同module之间是否可见
+By controling the visibility between different modules, we get clear interface
 
 63
 00:02:22,966 --> 00:02:25,699
 当某个模块需要依赖其他模块的时候
-When a module needs to depend on other modules
+When one module needs to depend on another module
 
 64
 00:02:25,700 --> 00:02:28,566
 就需要引入对应的模块功能
-you need to import the modules
+you just need to import it by specifing the path of the module
 
 65
-00:02:28,666 --> 00:02:31,399
+00:02:28,566 --> 00:02:31,399
 那引入的时候我们需要指定路径
-When importing, we need to specify the path
+you just need to import it by specifing the path of the module
 
 66
 00:02:32,200 --> 00:02:35,400
 这里我们来看一个简单的模块树
-Here we look at a simple module tree
+Let's look at the folder structure of a simple package
 
 67
 00:02:35,600 --> 00:02:37,800
 根模块或者说是根目录
-The root module or the root directory
+By convention, the root module or the root directory is usually called crate
 
 68
-00:02:38,066 --> 00:02:41,699
+00:02:37,800 --> 00:02:41,699
 是crate 它是一个约定俗成的名字
-it is crate, it is a conventional name
+By convention, the root module or the root directory is usually called crate
 
 69
 00:02:42,466 --> 00:02:44,466
 当我们内部定义了其他模块的时候
-When we define other modules internally
+here we aslo defined a submodule inside it
 
 70
 00:02:44,466 --> 00:02:46,866
 比如这里我们定义了一个子模块
-for example, here we define a submodule
+here we also defined a submodule inside it
 
 71
 00:02:46,866 --> 00:02:48,933
-在crate下面定义了一个子模块是
-a submodule defined under the crate is
+在crate下面定义了一个子模块是front_of_house
+it's named front_of_house
 
 72
-00:02:49,466 --> 00:02:50,733
-front_of_house
-front_of_house
+00:02:48,933 --> 00:02:50,733
+在crate下面定义了一个子模块是front_of_house
+it's named front_of_house
 
 73
 00:02:50,966 --> 00:02:52,299
 那front_of_house里面呢
-What about the front_of_house?
+What's in the front_of_house module?
 
 74
 00:02:52,300 --> 00:02:54,300
-我们又定义了两个子模块
-We define two more submodules
+我们又定义了两个子模块 分别是hosting和serving
+it defines two submodules, hosting and serving
 
 75
-00:02:54,500 --> 00:02:56,333
-分别是hosting和serving
-hosting and serving
+00:02:54,300 --> 00:02:56,333
+我们又定义了两个子模块 分别是hosting和serving
+it defines two submodules, hosting and serving
 
 76
 00:02:56,666 --> 00:02:59,533
-在hosting里面我们定义了两个函数
-In hosting we define two functions
+在hosting里面我们定义了两个函数, 是add_to_wait_list以及seat_at_table
+In hosting module, we list two functions, add_to_wait_list and seat_at_table
 
 77
-00:03:00,000 --> 00:03:04,133
-是add_to_wait_list以及seat_at_table
-It is add_to_wait_list and seat_at_table
+00:02:59,533 --> 00:03:04,133
+在hosting里面我们定义了两个函数, 是add_to_wait_list以及seat_at_table
+In hosting module, we list two functions, add_to_wait_list and seat_at_table
 
 78
 00:03:04,133 --> 00:03:06,333
 以及serving里面的几个函数
-and also we have several functions in serving
+and several other functions in serving module
 
 79
 00:03:06,900 --> 00:03:09,133
