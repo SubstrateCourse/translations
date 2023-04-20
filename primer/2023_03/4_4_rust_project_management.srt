@@ -385,99 +385,101 @@ and several other functions in serving module
 79
 00:03:06,900 --> 00:03:09,133
 当某个模块需要依赖其他模块的时候
-When a module needs to depend on other modules
+If a module needs to depend on other modules
 
 80
 00:03:09,133 --> 00:03:11,099
-就需要进行功能引入
-we need function imports
+就需要进行功能引入, 使用的是use关键字
+we can import the dependent features with the keyword "use"
 
 81
-00:03:11,100 --> 00:03:13,533
-那使用的是use关键字
-That uses the use as keyword
+00:03:11,099 --> 00:03:13,533
+就需要进行功能引入, 使用的是use关键字
+we can import the dependent features with the keyword "use"
 
 82
 00:03:13,800 --> 00:03:16,266
-在当前模块里面使用pub use
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 83
 00:03:16,266 --> 00:03:16,533
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 84
 00:03:16,533 --> 00:03:17,333
-某个功能的时候
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 85
 00:03:17,333 --> 00:03:20,333
 那这个功能会重新导出当前模块
-Then this function will be re-exported
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 86
 00:03:20,333 --> 00:03:23,066
 也就是当前模块的依赖方
-That is, the relying party of the current module
+That is
 
 87
 00:03:23,666 --> 00:03:25,699
-也可以使用我们pub use
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 88
 00:03:25,699 --> 00:03:25,700
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 89
 00:03:25,700 --> 00:03:26,933
-出来的这样的一个功能
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 90
 00:03:27,500 --> 00:03:29,866
 crate我们刚才看到了它是一个
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 91
 00:03:29,866 --> 00:03:30,133
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 92
 00:03:30,133 --> 00:03:31,766
 根目录，根模块
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 93
 00:03:32,133 --> 00:03:35,066
 self是当前模块的一个表示
-self is a representation of the current module
+"self" is represented as the current module
 
 94
 00:03:35,266 --> 00:03:37,466
 super是当前模块的父模块
-super is the parent module of the current module
+"super" is the parent module of the current module
 
 95
 00:03:37,466 --> 00:03:40,533
-那我们还可以使用as关键字对我们的
-Then we can also use the "as" as a keyword to
+那我们还可以使用as关键字对我们引入的功能模块进行别名
+We can also use the keyword "as" to alias the imported features
 
 96
-00:03:40,700 --> 00:03:43,133
-引入的功能模块进行别名
-alias the imported modules or functions
+00:03:40,533 --> 00:03:43,133
+那我们还可以使用as关键字对我们引入的功能模块进行别名
+We can also use the keyword "as" to alias the imported features
 
 97
 00:03:43,133 --> 00:03:44,766
 或者函数进行别名
-alias the imported modules or functions
+We can also use the keyword "as" to alias the imported features
 
 98
 00:03:45,566 --> 00:03:47,866
 现在我们来看一个简单的例子
-Now let's look at a simple example
+Now let's look at a demo
 
 99
 00:03:48,300 --> 00:03:50,900
@@ -496,138 +498,140 @@ The project name is project-demo
 
 102
 00:03:58,500 --> 00:04:00,666
-那我们来现在看一看我们
-then let's see us what's inside the project-demo
+那我们来现在看一看
+then let's see what's inside the project-demo directory
 
 103
 00:04:00,666 --> 00:04:01,100
-then let's see us what's inside the project-demo
+then let's see what's inside the project-demo directory
 
 104
 00:04:01,100 --> 00:04:03,866
 project-demo的包含的文件
-then let's see us what's inside the project-demo
+then let's see what's inside the project-demo directory
 
 105
 00:04:04,166 --> 00:04:05,966
 它有一个Cargo.toml
-There is a Cargo.toml, it' the project configuration file
+There is a Cargo.toml, it's the project configuration file
 
 106
 00:04:05,966 --> 00:04:08,299
 是我们的项目配置文件
-There is a Cargo.toml, it' the project configuration file
+There is a Cargo.toml, it's the project configuration file
 
 107
 00:04:08,566 --> 00:04:10,066
-指定了我们项目的依赖
-It specifies the dependencies of our project
+指定了我们项目的依赖以及项目的一些元信息
+it specifies the dependencies and some meta information about the project
 
 108
 00:04:10,066 --> 00:04:11,866
-以及项目的一些元信息
-and some original information about the project
+指定了我们项目的依赖以及项目的一些元信息
+it specifies the dependencies and some meta information about the project
 
 109
 00:04:12,533 --> 00:04:15,399
 src文件是我们的源代码文件
-The src file is our source code file
+the source code lives in src directory
 
 110
 00:04:16,166 --> 00:04:18,899
 那刚开始的时候它只有一个main.rs
-At begining, it has only one main.rs file
+it has only one file named main.rs when creating a fresh new project
 
 111
 00:04:20,933 --> 00:04:22,899
-我们进入到我们对应的
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 112
 00:04:22,899 --> 00:04:23,800
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 113
 00:04:23,800 --> 00:04:25,133
-项目文件目录
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 114
 00:04:25,133 --> 00:04:27,899
 然后打开我们的VScode
-Then open the VScode
+then open the VScode
 
 115
 00:04:33,766 --> 00:04:35,299
 可以看到它的一些元信息
-We can see some of its original information
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 116
-00:04:35,300 --> 00:04:36,266
-比如我们项目名称
-for example, project name
+00:04:35,299 --> 00:04:36,266
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 117
 00:04:36,266 --> 00:04:37,133
-它的版本
-its version
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 118
-00:04:37,266 --> 00:04:40,333
-作者以及依赖的Rust编译器的版本
-author and dependent versions of Rust
+00:04:37,133 --> 00:04:40,333
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 119
 00:04:41,500 --> 00:04:44,166
 那我们源文件里面的main.rs
-Then the main.rs in our original file
+The source code in main.rs only print "Hello, world!" to the console
 
 120
 00:04:44,166 --> 00:04:47,099
 它只有简单的逻辑就是打印"Hello, world!"
-It only has simple logic to print "Hello, world!"
+The source code in main.rs only print "Hello, world!" to the console
 
 121
 00:04:47,100 --> 00:04:48,700
 我们执行看一下结果
-Let's execute and see the result
+Let's run the program and see the result
 
 122
 00:04:52,600 --> 00:04:55,400
 可以看到我们这里已经打印出来了
-You can see that we have a result printed here
+You can see that the result is printed
 
 123
 00:04:55,400 --> 00:04:55,500
-Then let's copy and paste our modules
+Next
 
 124
 00:04:55,500 --> 00:04:59,466
-接着我们把我们的模块定义
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 125
 00:04:59,466 --> 00:05:00,133
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 126
 00:05:00,133 --> 00:05:01,099
-拷贝进来
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 127
 00:05:03,333 --> 00:05:04,266
 这里我们
-It's the module tree we just saw
+which are the modules we just saw
 
 128
 00:05:04,266 --> 00:05:04,300
-It's the module tree we just saw
+which are the modules we just saw
 
 129
 00:05:04,300 --> 00:05:06,300
 就是我们刚才看到的那个模块树
-It's the module tree we just saw
+which are the modules we just saw
 
 130
 00:05:06,300 --> 00:05:09,166
@@ -636,28 +640,28 @@ We have a submodule which is front_of_house
 
 131
 00:05:09,400 --> 00:05:11,466
-它里面有两个子模块一个是hosting
-There are two submodules in it, one is hosting
+它里面有两个子模块一个是hosting, 一个是serving
+there are two submodules in it, one is hosting, one is serving
 
 132
-00:05:11,700 --> 00:05:12,566
-一个是serving
-one is serving
+00:05:11,466 --> 00:05:12,566
+它里面有两个子模块一个是hosting, 一个是serving
+there are two submodules in it, one is hosting, one is serving
 
 133
 00:05:12,566 --> 00:05:14,199
-里面各自定了几个函数
-There are several functions in it
+里面各自定义了几个函数, 函数的功能都比较简单
+There are several simple functions in it
 
 134
-00:05:14,200 --> 00:05:15,533
-函数的功能都比较简单
-the functions are relatively simple
+00:05:14,199 --> 00:05:15,533
+里面各自定义了几个函数, 函数的功能都比较简单
+There are several simple functions in it
 
 135
 00:05:15,533 --> 00:05:17,666
 就是简单的打印输出
-just to print something
+just print some content to the console
 
 136
 00:05:18,200 --> 00:05:20,600
@@ -667,36 +671,36 @@ Now let's compile and run
 137
 00:05:23,766 --> 00:05:26,666
 可以看到并没有额外的一些输出
-You can see that there is no printed result
+You can see that there is no additional output
 
 138
 00:05:26,866 --> 00:05:29,733
 那我们在我们的main函数里面使用
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 139
 00:05:29,733 --> 00:05:29,866
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 140
 00:05:29,866 --> 00:05:31,333
 我们对应的模块功能
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 141
 00:05:32,000 --> 00:05:36,200
-这里我们调用的是front_of_house hosting模块
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+这里我们调用的是front_of_house hosting模块下面的add_to_waitlist的例子
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 142
 00:05:36,200 --> 00:05:37,333
-下面的add_to_waitlist的例子
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+这里我们调用的是front_of_house hosting模块下面的add_to_waitlist的例子
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 143
 00:05:37,333 --> 00:05:38,266
 这样一个函数
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 144
 00:05:38,533 --> 00:05:39,766
@@ -706,7 +710,7 @@ Let's compile and run
 145
 00:05:42,000 --> 00:05:44,266
 可以看到我们有一些编译错误
-You can see that we have some compilation errors
+You can see that there are some compilation errors
 
 146
 00:05:44,266 --> 00:05:45,866
@@ -747,71 +751,71 @@ We need to use the keyword pub to make the module public for others
 
 154
 00:05:55,100 --> 00:05:57,366
-以及我们的可调用函数也需要
-and also we need to make the functions to be public
+以及我们调用的函数也需要增加
+we also need to make the called function to be public
 
 155
 00:05:57,366 --> 00:05:59,999
 以及我们调用的函数也需要增加
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 156
 00:05:59,999 --> 00:06:00,066
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 157
 00:06:00,066 --> 00:06:00,866
 可见性
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 158
 00:06:01,766 --> 00:06:04,933
 其中front_of_house不需要增加pub是因为
-The front_of_house does not need to use Pub because
+the front_of_house does not need be "pub"
 
 159
 00:06:05,366 --> 00:06:08,566
 main函数和front_of_house这样的模块位于
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 160
 00:06:08,566 --> 00:06:09,066
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 161
 00:06:09,066 --> 00:06:10,866
 同一个模块里
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 162
 00:06:11,133 --> 00:06:13,366
 两者是彼此可见的
-Both are visible to each other
+both are visible to each other, there is no need to add pub here
 
 163
 00:06:13,366 --> 00:06:15,066
 所以在这里不需要加Pub
-so there is no need to add Pub here
+both are visible to each other, there is no need to add pub here
 
 164
 00:06:15,166 --> 00:06:16,466
 接着我们来执行
-Next we run the code
+Next let's run the code
 
 165
 00:06:18,733 --> 00:06:21,533
-可以看到我们现在已经成功的打印了
-You can see that we have now successfully printed
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 166
-00:06:21,600 --> 00:06:23,900
-我们的add_to_waitlist
-the output of the function add_to_waitlist
+00:06:21,533 --> 00:06:23,900
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 167
 00:06:23,900 --> 00:06:25,500
-这样函数的输出结果
-the output of the function add_to_waitlist
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 168
 00:06:26,300 --> 00:06:28,666
