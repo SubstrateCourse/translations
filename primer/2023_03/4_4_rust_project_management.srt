@@ -820,42 +820,42 @@ You can see that the output from the function add_to_waitlist is successfully pr
 168
 00:06:26,300 --> 00:06:28,666
 那接着我们来重构一下我们代码
-Then let's refactor our code
+Now let's refactor our code
 
 169
 00:06:28,700 --> 00:06:30,566
-因为我们的模块
-because our module
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 170
 00:06:30,566 --> 00:06:32,599
-通常是要放在一个单独文件里
-usually  needs to be in a separate file
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 171
-00:06:32,600 --> 00:06:36,200
-而不是放在某一个main文件
-instead of putting it in a main file
+00:06:32,599 --> 00:06:36,200
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 172
 00:06:36,200 --> 00:06:37,566
 或者说其他文件里
-or in any other files
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 173
 00:06:37,600 --> 00:06:39,666
 我们把这个内容拷贝出来
-Let's copy this content
+Let's copy the content of the module
 
 174
 00:06:40,666 --> 00:06:42,566
-增加一个新的文件
-add a new file
+增加一个新的文件叫front_of_house.rs
+add a new file called front_of_house.rs
 
 175
-00:06:43,200 --> 00:06:45,933
-叫front_of_house.rs
-called front_of_house.rs
+00:06:42,566 --> 00:06:45,933
+增加一个新的文件叫front_of_house.rs
+add a new file called front_of_house.rs
 
 176
 00:06:47,300 --> 00:06:48,966
@@ -865,41 +865,42 @@ paste the corresponding code
 177
 00:06:49,333 --> 00:06:50,566
 当我们把对应的模块
-When we put the corresponding module
+When moving the code in a module to a separate file
 
 178
 00:06:50,566 --> 00:06:52,999
 代码移到一个分开的文件的时候
-when code is moved to a separate file
+When moving the code in a module to a separate file
 
 179
 00:06:53,166 --> 00:06:53,899
-我们就不再
-we will no longer
+我们就不再需要最外层的这样的一个模块名
+we will no longer need the module name of the outermost level
 
 180
-00:06:53,900 --> 00:06:56,400
-需要最外层的这样的一个模块名
-need a module name of the outermost level
+00:06:53,899 --> 00:06:56,400
+我们就不再需要最外层的这样的一个模块名
+we will no longer need the module name of the outermost level
 
 181
 00:07:03,333 --> 00:07:04,699
-相应的我们要在
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 182
 00:07:04,699 --> 00:07:04,933
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 183
 00:07:04,933 --> 00:07:07,366
-main里面引入我们对应的模块
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 184
 00:07:10,666 --> 00:07:12,066
 接着我们来执行一下
-Then let's execute
+Let's execute the program
 
 185
 00:07:14,300 --> 00:07:15,333
@@ -914,124 +915,125 @@ We just mentioned that
 187
 00:07:17,533 --> 00:07:21,299
 除了使用这种相对路径来指定我们的
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 188
 00:07:21,299 --> 00:07:22,000
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 189
 00:07:22,000 --> 00:07:23,133
 所依赖的功能之外
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 190
 00:07:23,133 --> 00:07:24,966
 我们还可以通过一个绝对路径
-we can also use an absolute path
+we can also use the absolute path
 
 191
 00:07:25,000 --> 00:07:28,566
 那他的根模块或者说根目录是叫crate
-Its root module or root directory is called crate
+the root module or root directory is called "crate"
 
 192
 00:07:28,566 --> 00:07:29,766
 我们刚才已经看到了
-we have just seen
+we have just seen the module "front_of_house" under our root module
 
 193
-00:07:30,066 --> 00:07:32,699
+00:07:29,766 --> 00:07:32,699
 我们根模块下面的front_of_house
-front_of_house under our root module
+we have just seen the module "front_of_house" under our root module
 
 194
-00:07:32,700 --> 00:07:33,900
+00:07:32,699 --> 00:07:33,900
 这样的一个模块
-such a module
+we have just seen the module "front_of_house" under our root module
 
 195
 00:07:33,900 --> 00:07:35,333
 以及它的子模块hosting
-with its submodule hosting
+and its submodule "hosting"
 
 196
 00:07:35,600 --> 00:07:37,866
 调用对应的add_to_waitlist函数
-and add_to_waitlist function
+call the add_to_waitlist function
 
 197
 00:07:43,966 --> 00:07:46,699
 那我们接着再次重构一下
-Then let's refactor again
+Let's do another refactor
 
 198
 00:07:46,700 --> 00:07:49,866
-除了把我们的模块代码移到一个文件
+除了把我们的模块代码移到一个文件里面之外
 In addition to moving our module code to a file
 
 199
 00:07:49,866 --> 00:07:50,699
-里面之外
+除了把我们的模块代码移到一个文件里面之外
 In addition to moving our module code to a file
 
 200
 00:07:50,700 --> 00:07:53,866
 我们还可以把它移到一个目录下面
-we can also move it under a directory
+we can also move it to another directory for better code management
 
 201
 00:07:53,866 --> 00:07:57,066
 从而达到更细的一个管理
- as to achieve a better management
+we can also move it to another directory for better code management
 
 202
 00:07:58,266 --> 00:08:01,299
 我们定一个目录叫front_of_house
-We set a directory called front_of_house
+Let's create a directory called front_of_house
 
 203
 00:08:03,533 --> 00:08:05,566
-那这里面的话有
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 204
 00:08:05,566 --> 00:08:06,700
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 205
 00:08:06,700 --> 00:08:07,366
-三个文件
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 206
 00:08:07,366 --> 00:08:10,299
 一个是mod.rs 定义了我们所有的
-One is that mod.rs, it defines all submodules
+One is mod.rs, it includes all submodules
 
 207
 00:08:10,299 --> 00:08:10,766
-One is that mod.rs, it defines all submodules
+One is mod.rs, it includes all submodules
 
 208
 00:08:10,766 --> 00:08:14,099
 front_of_house模块里面所有的子模块
-One is that mod.rs, it defines all submodules
+One is mod.rs, it includes all submodules
 
 209
 00:08:16,300 --> 00:08:17,100
 那
-Then
+and
 
 210
 00:08:17,866 --> 00:08:20,999
 相应的我们有一个hosting的子模块
-we have a hosting submodule
+another one is hosting submodule
 
 211
 00:08:21,366 --> 00:08:23,866
 以及一个serving的子模块
-and a serving submodule
+and serving submodule
 
 212
 00:08:26,066 --> 00:08:27,899
@@ -1041,82 +1043,82 @@ Let's copy and paste the corresponding code
 213
 00:08:28,400 --> 00:08:30,966
 hosting的模块代码是在这里
-The hosting module code is here
+here is the code of hosting module
 
 214
 00:08:35,266 --> 00:08:36,366
 以及我们
-and the code of serving
+and the code of serving module
 
 215
 00:08:36,366 --> 00:08:37,666
-and the code of serving
+and the code of serving module
 
 216
 00:08:37,666 --> 00:08:39,866
 serving对应代码也粘出来
-and the code of serving
+and the code of serving module
 
 217
 00:08:44,166 --> 00:08:46,866
 那我们在front_of_house目录
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 218
 00:08:46,866 --> 00:08:46,966
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 219
 00:08:46,966 --> 00:08:48,166
 的mod.rs
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 220
 00:08:48,166 --> 00:08:49,133
 里面我们就需要
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 221
 00:08:49,133 --> 00:08:49,466
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 222
 00:08:49,466 --> 00:08:51,733
 定义我们对应的模块
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 223
 00:08:51,733 --> 00:08:54,466
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 224
 00:08:54,466 --> 00:08:55,366
 hosting
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 225
 00:08:55,366 --> 00:08:57,400
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 226
 00:08:57,400 --> 00:08:59,166
 以及我们的serving
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 227
 00:08:59,933 --> 00:09:01,999
 可以看到我们这里使用pub关键字
-You can see that we use the "pub" keyword here
+You can see that we use the "pub" keyword here to make the module public visible
 
 228
-00:09:02,000 --> 00:09:03,866
+00:09:01,999 --> 00:09:03,866
 让我们的模块变得可见
-to make our module public visible
+You can see that we use the "pub" keyword here to make the module public visible
 
 229
 00:09:04,800 --> 00:09:07,966
 这样我们的front_of_house就不再需要了
-This way our front_of_house is no longer needed
+After refactor, the file front_of_house is no longer needed
 
 230
 00:09:08,666 --> 00:09:11,333
@@ -1131,71 +1133,71 @@ We can see that the execution is still successful
 232
 00:09:17,900 --> 00:09:19,666
 这样我们就有了一个
-Now we have a clearer code structure
+Now we have a much cleaner code structure
 
 233
 00:09:19,666 --> 00:09:22,133
 比较清晰的代码结构
-Now we have a clearer code structure
+Now we have a much cleaner code structure
 
 234
 00:09:22,900 --> 00:09:24,533
-那我们现在可以看我们
-We also notice that
+那我们现在可以看我们引入的路径很长
+You may notice that the import path is long
 
 235
-00:09:24,866 --> 00:09:26,333
-引入的路径很长
-the path to import is long
+00:09:24,533 --> 00:09:26,333
+那我们现在可以看我们引入的路径很长
+You may notice that the import path is long
 
 236
 00:09:26,333 --> 00:09:27,866
 我们可以使用use
-Actually, we can use a keyword to import modules
+let's import the modules by "use" it
 
 237
 00:09:27,866 --> 00:09:30,766
 关键字把我们对应的模块引入进来
-Actually, we can use a keyword to import modules
+let's import the modules by "use" it
 
 238
 00:09:32,200 --> 00:09:34,066
 我们就直接可以通过
-We can call hosting::add_to_waitlist directly
+the we can call hosting::add_to_waitlist directly
 
 239
 00:09:34,066 --> 00:09:34,200
-We can call hosting::add_to_waitlist directly
+the we can call hosting::add_to_waitlist directly
 
 240
 00:09:34,200 --> 00:09:37,400
 hosting::add_to_waitlist来直接调用
-We can call hosting::add_to_waitlist directly
+the we can call hosting::add_to_waitlist directly
 
 241
 00:09:39,666 --> 00:09:42,066
 可以看到我们两次调用都是成功的
-You can see that our two calls are successful
+both are successful
 
 242
 00:09:42,500 --> 00:09:46,200
 同样的我们可以使用as来进行别名
-Similarly, we can use as to alias
+We can also use "as" keyword to alias a module or function
 
 243
 00:09:46,200 --> 00:09:48,266
 比如我们直接用host
-For example, we directly alias the module to host
+For example, we give the hosting module a alias called "host"
 
 244
 00:09:48,933 --> 00:09:50,666
 这样我们hosting改成host
-In this way, we change hosting to host
+then change hosting to host
 
 245
 00:09:52,866 --> 00:09:54,766
 重新调用也是成功的
-The call is also successful
+the execution is also successful
 
 246
 00:09:55,466 --> 00:09:57,399
@@ -1205,7 +1207,7 @@ That's all for our code demo
 247
 00:09:57,966 --> 00:10:00,333
 接着我们来看一下workspace
-then let's take a look at the workspace
+Now let's take a look at the workspace
 
 248
 00:10:01,066 --> 00:10:02,566
