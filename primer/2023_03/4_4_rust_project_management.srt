@@ -1,189 +1,189 @@
 ﻿1
 00:00:01,300 --> 00:00:03,000
-大家好我是凯超
+大家好 我是凯超
 Hello everyone, I am Kaichao
 
 2
 00:00:03,133 --> 00:00:06,666
 本次课程内容是Rust项目的代码管理
-The content of this course is code management of Rust projects
+Today's course is about project management in Rust
 
 3
 00:00:08,466 --> 00:00:09,899
 课程内容包含
-Course content includes
+the content includes
 
 4
 00:00:10,700 --> 00:00:13,600
 Rust里常用的模块组件
-commonly used module components in Rust
+commonly used modular components in Rust such as package, crate, module
 
 5
 00:00:13,600 --> 00:00:16,800
 如package, crate, module的介绍
-such as package, crate, module introduction
+commonly used modular components in Rust such as package, crate, module
 
 6
 00:00:17,733 --> 00:00:19,333
 如何引入功能模块
-and how to import modules
+how to import such modlar components
 
 7
 00:00:19,700 --> 00:00:21,466
-最后我们会看一下
-Finally we'll look at
+最后我们会看一下workspace的简单使用方法
+Finally we'll look at the usage of workspace
 
 8
-00:00:21,566 --> 00:00:23,533
-workspace的简单使用方法
-simple usage of workspace
+00:00:21,466 --> 00:00:23,533
+最后我们会看一下workspace的简单使用方法
+Finally we'll look at the usage of workspace
 
 9
 00:00:25,166 --> 00:00:26,266
 首先我们来看一下
-First
+First let's see
 
 10
 00:00:26,266 --> 00:00:27,866
 为什么要对我们的
-why do we need project management?
+why do we need do project management for our code?
 
 11
 00:00:27,866 --> 00:00:29,599
 代码项目进行管理呢
-why do we need project management?
+why do we need do project management for our code?
 
 12
 00:00:30,066 --> 00:00:32,666
 当我们的Rust项目变得很大时
-When our Rust projects get big
+When the project gets really big, there will be a lot of code
 
 13
-00:00:32,766 --> 00:00:34,599
+00:00:32,666 --> 00:00:34,599
 会有大量的程序代码
-there will be a lot of  code
+When the project gets really big, there will be a lot of code
 
 14
 00:00:35,933 --> 00:00:37,299
 那我们就需要将程序代码
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 15
 00:00:37,299 --> 00:00:37,300
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 16
 00:00:37,300 --> 00:00:38,866
 放在不同的模块下
-Then we need to put the code in different modules
+we need to splite code in different modules, different files
 
 17
 00:00:38,866 --> 00:00:39,799
 不同的文件里
-in a different file
+we need to splite code in different modules, different files
 
 18
 00:00:40,000 --> 00:00:42,200
 从而让代码更容易维护
-making the code easier to maintain
+so that the code become much easier to maintain
 
 19
 00:00:42,500 --> 00:00:45,333
 这跟我们的电脑桌面的管理是一样的
-This is the same as the management of our computer desktop
+This is simlar to manage the desktop of our computer
 
 20
 00:00:45,333 --> 00:00:47,766
 当你有一两个文件的时候
-when you have a file or two
+when you only have one or two files on your desktop, that's fine
 
 21
 00:00:47,766 --> 00:00:49,699
-放在桌面是OK的
-it's OK to put it on the desktop
+放在桌面是Ok的
+when you only have one or two files on your desktop, that's fine
 
 22
 00:00:50,266 --> 00:00:52,133
 但是当你有了几十
-but when you have dozens
+but when you have dozens even hundreds of files on your desktop
 
 23
 00:00:52,133 --> 00:00:54,133
 上百个的文件的时候
-maybe hundreds of files
+but when you have dozens even hundreds of files on your desktop
 
 24
 00:00:54,400 --> 00:00:56,933
 如果你不再分组管理那就不行了
-it won't work if you don't do file management
+it won't work if you don't move files into different folders
 
 25
 00:00:57,533 --> 00:01:01,166
-代码的模块化还可以用来封装
-Code modularity can also be used to encapsulate
+代码的模块化还可以用来封装无需外部关心的实现细节
+Modular code can also be used to encapsulate the implementation details for its users
 
 26
-00:01:01,366 --> 00:01:03,533
-无需外部关心的实现细节
-implementation details that require no external concern
+00:01:01,166 --> 00:01:03,533
+代码的模块化还可以用来封装无需外部关心的实现细节
+Modular code can also be used to encapsulate the implementation details for its users
 
 27
 00:01:03,933 --> 00:01:05,766
 让代码实现复用
-make the code be reusable
+make the code reusable
 
 28
 00:01:06,266 --> 00:01:07,966
 当我们有了一段功能代码
-When we have a piece of function code
+When we have a piece of code which implements a function
 
 29
 00:01:08,200 --> 00:01:10,900
 别的代码需要使用这个功能
-and other code needs to use this function
+and other code wants to use this function
 
 30
 00:01:11,100 --> 00:01:12,700
 那只需要通过
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 31
 00:01:12,700 --> 00:01:12,966
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 32
 00:01:12,966 --> 00:01:13,650
 该模块的公共接口
-we just need to call the function
+it just need to call the public interface exposed from the implementation
 
 33
 00:01:13,650 --> 00:01:14,299
 该模块的公共接口
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 34
 00:01:14,299 --> 00:01:14,300
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 35
 00:01:14,300 --> 00:01:16,000
 调用相应的功能就可以了
-using the public interface of this module
+it just need to call the public interface exposed from the implementation
 
 36
 00:01:16,000 --> 00:01:18,766
 不需要在自己的代码里再次实现
-No need to implement it again in your own code
+there's no need to implement the logic again in its own code
 
 37
 00:01:18,933 --> 00:01:21,666
 也不用关心内部的实现细节
-and don't need to care about internal details
+and the user don't need to care much about implementation details
 
 38
 00:01:22,766 --> 00:01:26,199
 Rust提供的代码管理组件包括
-Code management components provided by Rust include
+The components for code management provided by Rust include
 
 39
 00:01:26,366 --> 00:01:27,399
@@ -202,21 +202,21 @@ The first one is package
 42
 00:01:28,733 --> 00:01:30,799
 它是cargo工具用来
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 43
 00:01:30,799 --> 00:01:30,966
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 44
 00:01:30,966 --> 00:01:33,799
 构建编译测试的一个空间
-it is used by the cargo tool to build spcaes for compilation and testing
+cargo command use this space to build, compile and test the code
 
 45
 00:01:34,266 --> 00:01:37,099
 也是我们工作的一个主要目录
-also a main directory where we work
+it's the main directory for our work
 
 46
 00:01:37,333 --> 00:01:38,599
@@ -226,258 +226,260 @@ What about inside the package?
 47
 00:01:38,800 --> 00:01:41,066
 又分为很多crate
-It is divided into many crates
+a package is divided into many crates
 
 48
 00:01:41,333 --> 00:01:44,299
-有我们本地自己写的crate
-There are crates written by us locally
+有我们本地自己写的crate 还有我们依赖的一些公共库
+There are local crates written by us and some public libraries we depend on
 
 49
-00:01:44,300 --> 00:01:46,900
-还有我们依赖的一些公共库
-and some public libraries we depend on
+00:01:44,299 --> 00:01:46,900
+有我们本地自己写的crate 还有我们依赖的一些公共库
+There are local crates written by us and some public libraries we depend on
 
 50
 00:01:46,933 --> 00:01:50,266
 我们自己写的如果是工具库的话
-If we write it ourselves and it is a tool library
+If it is a library, entry point is in the src/lib.rs
 
 51
 00:01:50,266 --> 00:01:50,999
 它的
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 52
 00:01:50,999 --> 00:01:51,000
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 53
 00:01:51,000 --> 00:01:54,500
 入口文件在src/lib.rs文件里
-its entry point is in the src/lib.rs file
+If it is a library, entry point is in the src/lib.rs
 
 54
 00:01:54,500 --> 00:01:57,400
-那如果我们自己写的是一个可定程序
-Then if we write a determinable program
+那如果我们自己写的是一个可执行程序
+If it's a executable binary, the entry point is in src/main.rs
 
 55
-00:01:57,733 --> 00:01:59,666
+00:01:57,400 --> 00:01:59,666
 那它的入口文件在src/main.rs里面
-its entry point is in src/main.rs
+If it's a executable binary, the entry point is in src/main.rs
 
 56
 00:01:59,733 --> 00:02:03,066
 常用的一些公共的依赖库
-These are commonly used public dependent libraries
+Here are some commonly used libraries
 
 57
 00:02:03,066 --> 00:02:06,333
 包括rand来获取随机数
-Rand, get random numbers
+rand library is used to get a random number
 
 58
 00:02:06,500 --> 00:02:10,133
 serde对我们的json文件进行解析
-Serde, parses json files
+serde to parse the json content
 
 59
 00:02:10,333 --> 00:02:13,166
 以及diesel对我们的数据库进行操作
-And diesel, operates on our database
+And diesel to query and modify our database
 
 60
 00:02:13,533 --> 00:02:14,566
 那每个crate呢
-What about each crate?
+How to manage a crate?
 
 61
 00:02:14,566 --> 00:02:18,466
-又可以进一步通过module进行划分
-It can be further divided by modules
+又可以进一步通过module进行划分, 组织代码
+it can be further divided into modules for better code organization
 
 62
 00:02:18,566 --> 00:02:22,733
-组织代码控制不同module之间是否可见
-The organization code controls whether it is visible between different modules
+控制不同module之间是否可见
+By controling the visibility between different modules, we get clear interface
 
 63
 00:02:22,966 --> 00:02:25,699
 当某个模块需要依赖其他模块的时候
-When a module needs to depend on other modules
+When one module needs to depend on another module
 
 64
 00:02:25,700 --> 00:02:28,566
 就需要引入对应的模块功能
-you need to import the modules
+you just need to import it by specifing the path of the module
 
 65
-00:02:28,666 --> 00:02:31,399
+00:02:28,566 --> 00:02:31,399
 那引入的时候我们需要指定路径
-When importing, we need to specify the path
+you just need to import it by specifing the path of the module
 
 66
 00:02:32,200 --> 00:02:35,400
 这里我们来看一个简单的模块树
-Here we look at a simple module tree
+Let's look at the folder structure of a simple package
 
 67
 00:02:35,600 --> 00:02:37,800
-根模块也或者说是根目录
-The root module or the root directory
+根模块或者说是根目录
+By convention, the root module or the root directory is usually called crate
 
 68
-00:02:38,066 --> 00:02:41,699
-是crate它是一个约定俗成的名字
-it is crate, it is a conventional name
+00:02:37,800 --> 00:02:41,699
+是crate 它是一个约定俗成的名字
+By convention, the root module or the root directory is usually called crate
 
 69
 00:02:42,466 --> 00:02:44,466
 当我们内部定义了其他模块的时候
-When we define other modules internally
+here we aslo defined a submodule inside it
 
 70
 00:02:44,466 --> 00:02:46,866
 比如这里我们定义了一个子模块
-for example, here we define a submodule
+here we also defined a submodule inside it
 
 71
 00:02:46,866 --> 00:02:48,933
-在crate下面定义了一个子模块是
-a submodule defined under the crate is
+在crate下面定义了一个子模块是front_of_house
+it's named front_of_house
 
 72
-00:02:49,466 --> 00:02:50,733
-front_of_house
-front_of_house
+00:02:48,933 --> 00:02:50,733
+在crate下面定义了一个子模块是front_of_house
+it's named front_of_house
 
 73
 00:02:50,966 --> 00:02:52,299
 那front_of_house里面呢
-What about the front_of_house?
+What's in the front_of_house module?
 
 74
 00:02:52,300 --> 00:02:54,300
-我们又定义了两个子模块
-We define two more submodules
+我们又定义了两个子模块 分别是hosting和serving
+it defines two submodules, hosting and serving
 
 75
-00:02:54,500 --> 00:02:56,333
-分别是hosting和serving
-hosting and serving
+00:02:54,300 --> 00:02:56,333
+我们又定义了两个子模块 分别是hosting和serving
+it defines two submodules, hosting and serving
 
 76
 00:02:56,666 --> 00:02:59,533
-在hosting里面我们定义了两个函数
-In hosting we define two functions
+在hosting里面我们定义了两个函数, 是add_to_wait_list以及seat_at_table
+In hosting module, we list two functions, add_to_wait_list and seat_at_table
 
 77
-00:03:00,000 --> 00:03:04,133
-是add_to_wait_list以及seat_at_table
-It is add_to_wait_list and seat_at_table
+00:02:59,533 --> 00:03:04,133
+在hosting里面我们定义了两个函数, 是add_to_wait_list以及seat_at_table
+In hosting module, we list two functions, add_to_wait_list and seat_at_table
 
 78
 00:03:04,133 --> 00:03:06,333
 以及serving里面的几个函数
-and also we have several functions in serving
+and several other functions in serving module
 
 79
 00:03:06,900 --> 00:03:09,133
 当某个模块需要依赖其他模块的时候
-When a module needs to depend on other modules
+If a module needs to depend on other modules
 
 80
 00:03:09,133 --> 00:03:11,099
-就需要进行功能引入
-we need function imports
+就需要进行功能引入, 使用的是use关键字
+we can import the dependent features with the keyword "use"
 
 81
-00:03:11,100 --> 00:03:13,533
-那使用的是use关键字
-That uses the use as keyword
+00:03:11,099 --> 00:03:13,533
+就需要进行功能引入, 使用的是use关键字
+we can import the dependent features with the keyword "use"
 
 82
 00:03:13,800 --> 00:03:16,266
-在当前模块里面使用Pub use
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 83
 00:03:16,266 --> 00:03:16,533
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 84
 00:03:16,533 --> 00:03:17,333
-某个功能的时候
-When we write pub use in the current module to use some functions
+在当前模块里面使用 pub use 某个功能的时候
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 85
 00:03:17,333 --> 00:03:20,333
 那这个功能会重新导出当前模块
-Then this function will be re-exported
+With "pub use" keyword, we can not only import the feature, but also re-export it from current module
 
 86
 00:03:20,333 --> 00:03:23,066
 也就是当前模块的依赖方
-That is, the relying party of the current module
+That is
 
 87
 00:03:23,666 --> 00:03:25,699
-也可以使用我们Pub use
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 88
 00:03:25,699 --> 00:03:25,700
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 89
 00:03:25,700 --> 00:03:26,933
-出来的这样的一个功能
-can also use the functions in the module by pub use
+也可以使用我们 pub use 出来的这样的一个功能
+the modules that depend on the current module can also use the features from a 3rd-party module by re-exporting with "pub use"
 
 90
 00:03:27,500 --> 00:03:29,866
 crate我们刚才看到了它是一个
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 91
 00:03:29,866 --> 00:03:30,133
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 92
 00:03:30,133 --> 00:03:31,766
 根目录，根模块
-Crate, as we just saw, it is a root directory, root module
+"crate" is represented as the root module of a package
 
 93
 00:03:32,133 --> 00:03:35,066
 self是当前模块的一个表示
-self is a representation of the current module
+"self" is represented as the current module
 
 94
 00:03:35,266 --> 00:03:37,466
 super是当前模块的父模块
-super is the parent module of the current module
+"super" is the parent module of the current module
 
 95
 00:03:37,466 --> 00:03:40,533
-那我们还可以使用as关键字对我们的
-Then we can also use the "as" as a keyword to
+那我们还可以使用as关键字对我们引入的功能模块进行别名
+We can also use the keyword "as" to alias the imported features
 
 96
-00:03:40,700 --> 00:03:43,133
-引入的功能模块进行别名
-alias the imported modules or functions
+00:03:40,533 --> 00:03:43,133
+那我们还可以使用as关键字对我们引入的功能模块进行别名
+We can also use the keyword "as" to alias the imported features
 
 97
 00:03:43,133 --> 00:03:44,766
 或者函数进行别名
-alias the imported modules or functions
+We can also use the keyword "as" to alias the imported features
 
 98
 00:03:45,566 --> 00:03:47,866
 现在我们来看一个简单的例子
-Now let's look at a simple example
+Now let's look at a demo
 
 99
 00:03:48,300 --> 00:03:50,900
@@ -496,138 +498,140 @@ The project name is project-demo
 
 102
 00:03:58,500 --> 00:04:00,666
-那我们来现在看一看我们
-then let's see us what's inside the project-demo
+那我们来现在看一看
+then let's see what's inside the project-demo directory
 
 103
 00:04:00,666 --> 00:04:01,100
-then let's see us what's inside the project-demo
+then let's see what's inside the project-demo directory
 
 104
 00:04:01,100 --> 00:04:03,866
 project-demo的包含的文件
-then let's see us what's inside the project-demo
+then let's see what's inside the project-demo directory
 
 105
 00:04:04,166 --> 00:04:05,966
 它有一个Cargo.toml
-There is a Cargo.toml, it' the project configuration file
+There is a Cargo.toml, it's the project configuration file
 
 106
 00:04:05,966 --> 00:04:08,299
 是我们的项目配置文件
-There is a Cargo.toml, it' the project configuration file
+There is a Cargo.toml, it's the project configuration file
 
 107
 00:04:08,566 --> 00:04:10,066
-指定了我们项目的依赖
-It specifies the dependencies of our project
+指定了我们项目的依赖以及项目的一些元信息
+it specifies the dependencies and some meta information about the project
 
 108
 00:04:10,066 --> 00:04:11,866
-以及项目的一些源信息
-and some original information about the project
+指定了我们项目的依赖以及项目的一些元信息
+it specifies the dependencies and some meta information about the project
 
 109
 00:04:12,533 --> 00:04:15,399
 src文件是我们的源代码文件
-The src file is our source code file
+the source code lives in src directory
 
 110
 00:04:16,166 --> 00:04:18,899
 那刚开始的时候它只有一个main.rs
-At begining, it has only one main.rs file
+it has only one file named main.rs when creating a fresh new project
 
 111
 00:04:20,933 --> 00:04:22,899
-我们进入到我们对应的
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 112
 00:04:22,899 --> 00:04:23,800
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 113
 00:04:23,800 --> 00:04:25,133
-项目文件目录
-We enter into our corresponding project file directory
+我们进入到我们对应的项目文件目录
+Let's enter into the project directory
 
 114
 00:04:25,133 --> 00:04:27,899
 然后打开我们的VScode
-Then open the VScode
+then open the VScode
 
 115
 00:04:33,766 --> 00:04:35,299
-它可以看到它的一些源信息
-We can see some of its original information
+可以看到它的一些元信息
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 116
-00:04:35,300 --> 00:04:36,266
-比如我们项目名称
-for example, project name
+00:04:35,299 --> 00:04:36,266
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 117
 00:04:36,266 --> 00:04:37,133
-它的版本
-its version
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 118
-00:04:37,266 --> 00:04:40,333
-作者以及依赖的Rust的编译的版本
-author and dependent versions of Rust
+00:04:37,133 --> 00:04:40,333
+比如我们项目名称, 它的版本, 作者以及依赖的Rust编译器的版本
+we can see there are some meta information like project name, version, author, and the dependent version of Rust in Cargo.toml
 
 119
 00:04:41,500 --> 00:04:44,166
 那我们源文件里面的main.rs
-Then the main.rs in our original file
+The source code in main.rs only print "Hello, world!" to the console
 
 120
 00:04:44,166 --> 00:04:47,099
 它只有简单的逻辑就是打印"Hello, world!"
-It only has simple logic to print "Hello, world!"
+The source code in main.rs only print "Hello, world!" to the console
 
 121
 00:04:47,100 --> 00:04:48,700
 我们执行看一下结果
-Let's execute and see the result
+Let's run the program and see the result
 
 122
 00:04:52,600 --> 00:04:55,400
 可以看到我们这里已经打印出来了
-You can see that we have a result printed here
+You can see that the result is printed
 
 123
 00:04:55,400 --> 00:04:55,500
-Then let's copy and paste our modules
+Next
 
 124
 00:04:55,500 --> 00:04:59,466
-接着我们把我们的模块定义
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 125
 00:04:59,466 --> 00:05:00,133
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 126
 00:05:00,133 --> 00:05:01,099
-拷贝进来
-Then let's copy and paste our modules
+接着我们把我们的模块定义拷贝进来
+let's copy our defined modules here
 
 127
 00:05:03,333 --> 00:05:04,266
 这里我们
-It's the module tree we just saw
+which are the modules we just saw
 
 128
 00:05:04,266 --> 00:05:04,300
-It's the module tree we just saw
+which are the modules we just saw
 
 129
 00:05:04,300 --> 00:05:06,300
 就是我们刚才看到的那个模块树
-It's the module tree we just saw
+which are the modules we just saw
 
 130
 00:05:06,300 --> 00:05:09,166
@@ -636,28 +640,28 @@ We have a submodule which is front_of_house
 
 131
 00:05:09,400 --> 00:05:11,466
-它里面有两个子模块一个是hosting
-There are two submodules in it, one is hosting
+它里面有两个子模块一个是hosting, 一个是serving
+there are two submodules in it, one is hosting, one is serving
 
 132
-00:05:11,700 --> 00:05:12,566
-一个是serving
-one is serving
+00:05:11,466 --> 00:05:12,566
+它里面有两个子模块一个是hosting, 一个是serving
+there are two submodules in it, one is hosting, one is serving
 
 133
 00:05:12,566 --> 00:05:14,199
-里面各自定了几个函数
-There are several functions in it
+里面各自定义了几个函数, 函数的功能都比较简单
+There are several simple functions in it
 
 134
-00:05:14,200 --> 00:05:15,533
-函数的功能都比较简单
-the functions are relatively simple
+00:05:14,199 --> 00:05:15,533
+里面各自定义了几个函数, 函数的功能都比较简单
+There are several simple functions in it
 
 135
 00:05:15,533 --> 00:05:17,666
 就是简单的打印输出
-just to print something
+just print some content to the console
 
 136
 00:05:18,200 --> 00:05:20,600
@@ -667,36 +671,36 @@ Now let's compile and run
 137
 00:05:23,766 --> 00:05:26,666
 可以看到并没有额外的一些输出
-You can see that there is no printed result
+You can see that there is no additional output
 
 138
 00:05:26,866 --> 00:05:29,733
 那我们在我们的main函数里面使用
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 139
 00:05:29,733 --> 00:05:29,866
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 140
 00:05:29,866 --> 00:05:31,333
 我们对应的模块功能
-We used functions from modules in our main function
+In the main function, we can use the functions from hosting module
 
 141
 00:05:32,000 --> 00:05:36,200
-这里我们调用的是front_of_house hosting模块
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+这里我们调用的是front_of_house hosting模块下面的add_to_waitlist的例子
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 142
 00:05:36,200 --> 00:05:37,333
-下面的add_to_waitlist的例子
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+这里我们调用的是front_of_house hosting模块下面的add_to_waitlist的例子
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 143
 00:05:37,333 --> 00:05:38,266
 这样一个函数
-Here we are calling the add_to_waitlist from hosting of front_of_house module
+here we are calling the function add_to_waitlist from front_of_house::hosting module
 
 144
 00:05:38,533 --> 00:05:39,766
@@ -706,11 +710,11 @@ Let's compile and run
 145
 00:05:42,000 --> 00:05:44,266
 可以看到我们有一些编译错误
-You can see that we have some compilation errors
+You can see that there are some compilation errors
 
 146
 00:05:44,266 --> 00:05:45,866
-那原因是因为我们的
+原因是因为我们的
 The reason is because the submodule is private
 
 147
@@ -724,7 +728,7 @@ The reason is because the submodule is private
 
 149
 00:05:49,466 --> 00:05:51,999
-我们需要通过关键字Pub
+我们需要通过关键字pub
 We need to use the keyword pub to make the module public for others
 
 150
@@ -747,111 +751,111 @@ We need to use the keyword pub to make the module public for others
 
 154
 00:05:55,100 --> 00:05:57,366
-以及我们的可调用函数也需要
-and also we need to make the functions to be public
+以及我们调用的函数也需要增加
+we also need to make the called function to be public
 
 155
 00:05:57,366 --> 00:05:59,999
 以及我们调用的函数也需要增加
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 156
 00:05:59,999 --> 00:06:00,066
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 157
 00:06:00,066 --> 00:06:00,866
 可见性
-and also we need to make the functions to be public
+we also need to make the called function to be public
 
 158
 00:06:01,766 --> 00:06:04,933
-其中front_of_house不需要增加Pub是因为
-The front_of_house does not need to use Pub because
+其中front_of_house不需要增加pub是因为
+the front_of_house does not need be "pub"
 
 159
 00:06:05,366 --> 00:06:08,566
 main函数和front_of_house这样的模块位于
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 160
 00:06:08,566 --> 00:06:09,066
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 161
 00:06:09,066 --> 00:06:10,866
 同一个模块里
-the main function and the front_of_house are in the same module
+because the main function and front_of_house are in the same module
 
 162
 00:06:11,133 --> 00:06:13,366
 两者是彼此可见的
-Both are visible to each other
+both are visible to each other, there is no need to add pub here
 
 163
 00:06:13,366 --> 00:06:15,066
 所以在这里不需要加Pub
-so there is no need to add Pub here
+both are visible to each other, there is no need to add pub here
 
 164
 00:06:15,166 --> 00:06:16,466
 接着我们来执行
-Next we run the code
+Next let's run the code
 
 165
 00:06:18,733 --> 00:06:21,533
-可以看到我们现在已经成功的打印了
-You can see that we have now successfully printed
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 166
-00:06:21,600 --> 00:06:23,900
-我们的add_to_waitlist
-the output of the function add_to_waitlist
+00:06:21,533 --> 00:06:23,900
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 167
 00:06:23,900 --> 00:06:25,500
-这样函数的输出结果
-the output of the function add_to_waitlist
+可以看到我们现在已经成功的打印了add_to_waitlist函数的输出结果
+You can see that the output from the function add_to_waitlist is successfully printed
 
 168
 00:06:26,300 --> 00:06:28,666
 那接着我们来重构一下我们代码
-Then let's refactor our code
+Now let's refactor our code
 
 169
 00:06:28,700 --> 00:06:30,566
-因为我们的模块
-because our module
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 170
 00:06:30,566 --> 00:06:32,599
-通常是要放在一个单独文件里
-usually  needs to be in a separate file
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 171
-00:06:32,600 --> 00:06:36,200
-而不是放在某一个main文件
-instead of putting it in a main file
+00:06:32,599 --> 00:06:36,200
+因为我们的模块通常是要放在一个单独文件里, 而不是放在某一个main文件
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 172
 00:06:36,200 --> 00:06:37,566
 或者说其他文件里
-or in any other files
+usually a module is splitted into a different file instead of putting it in the main.rs
 
 173
 00:06:37,600 --> 00:06:39,666
 我们把这个内容拷贝出来
-Let's copy this content
+Let's copy the content of the module
 
 174
 00:06:40,666 --> 00:06:42,566
-增加一个新的文件
-add a new file
+增加一个新的文件叫front_of_house.rs
+add a new file called front_of_house.rs
 
 175
-00:06:43,200 --> 00:06:45,933
-叫front_of_house.rs
-called front_of_house.rs
+00:06:42,566 --> 00:06:45,933
+增加一个新的文件叫front_of_house.rs
+add a new file called front_of_house.rs
 
 176
 00:06:47,300 --> 00:06:48,966
@@ -861,41 +865,42 @@ paste the corresponding code
 177
 00:06:49,333 --> 00:06:50,566
 当我们把对应的模块
-When we put the corresponding module
+When moving the code in a module to a separate file
 
 178
 00:06:50,566 --> 00:06:52,999
 代码移到一个分开的文件的时候
-when code is moved to a separate file
+When moving the code in a module to a separate file
 
 179
 00:06:53,166 --> 00:06:53,899
-我们就不再
-we will no longer
+我们就不再需要最外层的这样的一个模块名
+we will no longer need the module name of the outermost level
 
 180
-00:06:53,900 --> 00:06:56,400
-需要最外层的这样的一个模块名
-need a module name of the outermost level
+00:06:53,899 --> 00:06:56,400
+我们就不再需要最外层的这样的一个模块名
+we will no longer need the module name of the outermost level
 
 181
 00:07:03,333 --> 00:07:04,699
-相应的我们要在
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 182
 00:07:04,699 --> 00:07:04,933
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 183
 00:07:04,933 --> 00:07:07,366
-main里面引入我们对应的模块
-Correspondingly we need to import modules in our main.rs
+相应的我们要在main里面引入我们对应的模块
+Then we need to import the module in main.rs
 
 184
 00:07:10,666 --> 00:07:12,066
 接着我们来执行一下
-Then let's execute
+Let's execute the program
 
 185
 00:07:14,300 --> 00:07:15,333
@@ -910,124 +915,125 @@ We just mentioned that
 187
 00:07:17,533 --> 00:07:21,299
 除了使用这种相对路径来指定我们的
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 188
 00:07:21,299 --> 00:07:22,000
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 189
 00:07:22,000 --> 00:07:23,133
 所依赖的功能之外
-instead of using this relative path to specify our dependency
+instead of using the relative path to specify our dependency
 
 190
 00:07:23,133 --> 00:07:24,966
 我们还可以通过一个绝对路径
-we can also use an absolute path
+we can also use the absolute path
 
 191
 00:07:25,000 --> 00:07:28,566
 那他的根模块或者说根目录是叫crate
-Its root module or root directory is called crate
+the root module or root directory is called "crate"
 
 192
 00:07:28,566 --> 00:07:29,766
 我们刚才已经看到了
-we have just seen
+we have just seen the module "front_of_house" under our root module
 
 193
-00:07:30,066 --> 00:07:32,699
+00:07:29,766 --> 00:07:32,699
 我们根模块下面的front_of_house
-front_of_house under our root module
+we have just seen the module "front_of_house" under our root module
 
 194
-00:07:32,700 --> 00:07:33,900
+00:07:32,699 --> 00:07:33,900
 这样的一个模块
-such a module
+we have just seen the module "front_of_house" under our root module
 
 195
 00:07:33,900 --> 00:07:35,333
-以他的子模块hosting
-with its submodule hosting
+以及它的子模块hosting
+and its submodule "hosting"
 
 196
 00:07:35,600 --> 00:07:37,866
-这样对应的add_to_waitlist函数
-and add_to_waitlist function
+调用对应的add_to_waitlist函数
+call the add_to_waitlist function
 
 197
 00:07:43,966 --> 00:07:46,699
 那我们接着再次重构一下
-Then let's refactor again
+Let's do another refactor
 
 198
 00:07:46,700 --> 00:07:49,866
-除了把我们的模块代码移到一个文件
+除了把我们的模块代码移到一个文件里面之外
 In addition to moving our module code to a file
 
 199
 00:07:49,866 --> 00:07:50,699
-里面之外
+除了把我们的模块代码移到一个文件里面之外
 In addition to moving our module code to a file
 
 200
 00:07:50,700 --> 00:07:53,866
 我们还可以把它移到一个目录下面
-we can also move it under a directory
+we can also move it to another directory for better code management
 
 201
 00:07:53,866 --> 00:07:57,066
 从而达到更细的一个管理
- as to achieve a better management
+we can also move it to another directory for better code management
 
 202
 00:07:58,266 --> 00:08:01,299
 我们定一个目录叫front_of_house
-We set a directory called front_of_house
+Let's create a directory called front_of_house
 
 203
 00:08:03,533 --> 00:08:05,566
-那这里面的话有
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 204
 00:08:05,566 --> 00:08:06,700
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 205
 00:08:06,700 --> 00:08:07,366
-三个文件
-Then there are three files inside
+那这里面的话有三个文件
+there are three files inside it
 
 206
 00:08:07,366 --> 00:08:10,299
-一个是mod.rs定义了我们所有的
-One is that mod.rs, it defines all submodules
+一个是mod.rs 定义了我们所有的
+One is mod.rs, it includes all submodules
 
 207
 00:08:10,299 --> 00:08:10,766
-One is that mod.rs, it defines all submodules
+One is mod.rs, it includes all submodules
 
 208
 00:08:10,766 --> 00:08:14,099
 front_of_house模块里面所有的子模块
-One is that mod.rs, it defines all submodules
+One is mod.rs, it includes all submodules
 
 209
 00:08:16,300 --> 00:08:17,100
 那
-Then
+and
 
 210
 00:08:17,866 --> 00:08:20,999
 相应的我们有一个hosting的子模块
-we have a hosting submodule
+another one is hosting submodule
 
 211
 00:08:21,366 --> 00:08:23,866
 以及一个serving的子模块
-and a serving submodule
+and serving submodule
 
 212
 00:08:26,066 --> 00:08:27,899
@@ -1037,86 +1043,86 @@ Let's copy and paste the corresponding code
 213
 00:08:28,400 --> 00:08:30,966
 hosting的模块代码是在这里
-The hosting module code is here
+here is the code of hosting module
 
 214
 00:08:35,266 --> 00:08:36,366
 以及我们
-and the code of serving
+and the code of serving module
 
 215
 00:08:36,366 --> 00:08:37,666
-and the code of serving
+and the code of serving module
 
 216
 00:08:37,666 --> 00:08:39,866
 serving对应代码也粘出来
-and the code of serving
+and the code of serving module
 
 217
 00:08:44,166 --> 00:08:46,866
-那我们在我们front_of_house目录
-Then we need to define serving and hosting in mod.rs/front_of_house
+那我们在front_of_house目录
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 218
 00:08:46,866 --> 00:08:46,966
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 219
 00:08:46,966 --> 00:08:48,166
 的mod.rs
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 220
 00:08:48,166 --> 00:08:49,133
 里面我们就需要
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 221
 00:08:49,133 --> 00:08:49,466
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 222
 00:08:49,466 --> 00:08:51,733
 定义我们对应的模块
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 223
 00:08:51,733 --> 00:08:54,466
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 224
 00:08:54,466 --> 00:08:55,366
 hosting
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 225
 00:08:55,366 --> 00:08:57,400
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 226
 00:08:57,400 --> 00:08:59,166
 以及我们的serving
-Then we need to define serving and hosting in mod.rs/front_of_house
+Then we need to define serving and hosting submodules in mod.rs of front_of_house directory
 
 227
 00:08:59,933 --> 00:09:01,999
-可以看到我们这里使用Pub关键字
-You can see that we use the "pub" keyword here
+可以看到我们这里使用pub关键字
+You can see that we use the "pub" keyword here to make the module public visible
 
 228
-00:09:02,000 --> 00:09:03,866
+00:09:01,999 --> 00:09:03,866
 让我们的模块变得可见
-to make our module public visible
+You can see that we use the "pub" keyword here to make the module public visible
 
 229
 00:09:04,800 --> 00:09:07,966
 这样我们的front_of_house就不再需要了
-This way our front_of_house is no longer needed
+After refactor, the file front_of_house is no longer needed
 
 230
 00:09:08,666 --> 00:09:11,333
-接着我们来编译执行我们需要保存
+接着我们来编译执行 我们需要保存
 Let's try to compile and execute the code
 
 231
@@ -1127,71 +1133,71 @@ We can see that the execution is still successful
 232
 00:09:17,900 --> 00:09:19,666
 这样我们就有了一个
-Now we have a clearer code structure
+Now we have a much cleaner code structure
 
 233
 00:09:19,666 --> 00:09:22,133
 比较清晰的代码结构
-Now we have a clearer code structure
+Now we have a much cleaner code structure
 
 234
 00:09:22,900 --> 00:09:24,533
-那我们现在可以看我们
-We also notice that
+那我们现在可以看我们引入的路径很长
+You may notice that the import path is long
 
 235
-00:09:24,866 --> 00:09:26,333
-引入的路径很长
-the path to import is long
+00:09:24,533 --> 00:09:26,333
+那我们现在可以看我们引入的路径很长
+You may notice that the import path is long
 
 236
 00:09:26,333 --> 00:09:27,866
 我们可以使用use
-Actually, we can use a keyword to import modules
+let's import the modules by "use" it
 
 237
 00:09:27,866 --> 00:09:30,766
 关键字把我们对应的模块引入进来
-Actually, we can use a keyword to import modules
+let's import the modules by "use" it
 
 238
 00:09:32,200 --> 00:09:34,066
 我们就直接可以通过
-We can call hosting::add_to_waitlist directly
+the we can call hosting::add_to_waitlist directly
 
 239
 00:09:34,066 --> 00:09:34,200
-We can call hosting::add_to_waitlist directly
+the we can call hosting::add_to_waitlist directly
 
 240
 00:09:34,200 --> 00:09:37,400
-hosting调用add_to_waitlist来直接调用
-We can call hosting::add_to_waitlist directly
+hosting::add_to_waitlist来直接调用
+the we can call hosting::add_to_waitlist directly
 
 241
 00:09:39,666 --> 00:09:42,066
 可以看到我们两次调用都是成功的
-You can see that our two calls are successful
+both are successful
 
 242
 00:09:42,500 --> 00:09:46,200
 同样的我们可以使用as来进行别名
-Similarly, we can use as to alias
+We can also use "as" keyword to alias a module or function
 
 243
 00:09:46,200 --> 00:09:48,266
 比如我们直接用host
-For example, we directly alias the module to host
+For example, we give the hosting module a alias called "host"
 
 244
 00:09:48,933 --> 00:09:50,666
 这样我们hosting改成host
-In this way, we change hosting to host
+then change hosting to host
 
 245
 00:09:52,866 --> 00:09:54,766
 重新调用也是成功的
-The call is also successful
+the execution is also successful
 
 246
 00:09:55,466 --> 00:09:57,399
@@ -1201,7 +1207,7 @@ That's all for our code demo
 247
 00:09:57,966 --> 00:10:00,333
 接着我们来看一下workspace
-then let's take a look at the workspace
+Now let's take a look at the workspace
 
 248
 00:10:01,066 --> 00:10:02,566
@@ -1215,8 +1221,8 @@ it can manage multiple libraries and binaries
 
 250
 00:10:05,333 --> 00:10:08,133
-并且它共享了cargo.lock文件
-and it shares the cargo.lock file
+并且它共享了Cargo.lock文件
+it shares the Cargo.lock file
 
 251
 00:10:08,333 --> 00:10:10,166
@@ -1226,32 +1232,32 @@ and the compiled output directory
 252
 00:10:10,266 --> 00:10:13,366
 这样当我们在编译多个库的时候
-So when we are compiling multiple libraries
+So when we are compiling multiple libraries or binaries
 
 253
 00:10:13,366 --> 00:10:14,599
 或者binary的时候
-or binary
+So when we are compiling multiple libraries or binaries
 
 254
 00:10:14,966 --> 00:10:17,799
-可以减少编译时间增加我们的编译效率
-it increase our compilation efficiency
+可以减少编译时间 增加我们的编译效率
+it's more efficient when compiling
 
 255
 00:10:18,333 --> 00:10:19,366
 另外一个好处是
-Another benefit is
+Another benefit is that the dependencies are isolated from each other among different libraries and binaries
 
 256
 00:10:19,366 --> 00:10:21,899
 不同的library和binary之间
-Among different libraries and binary
+Another benefit is that the dependencies are isolated from each other among different libraries and binaries
 
 257
-00:10:22,066 --> 00:10:23,899
+00:10:21,899 --> 00:10:23,899
 他们的依赖是彼此隔离的
-their dependencies are isolated from each other
+Another benefit is that the dependencies are isolated from each other among different libraries and binaries
 
 258
 00:10:23,900 --> 00:10:24,533
@@ -1266,71 +1272,72 @@ in a workspace
 260
 00:10:26,600 --> 00:10:29,566
 A library里面引入的一个库
-modules imported in the A library
+modules imported in the library A cannot be used directly in the library B
 
 261
 00:10:29,800 --> 00:10:32,200
 在B library并不能直接使用
-they cannot be used directly in the B library
+modules imported in the library A cannot be used directly in the library B
 
 262
 00:10:32,733 --> 00:10:34,199
-还需要在B library的
-we need to import modules again B library's Cargo.toml
+还需要在B library的Cargo.toml里面进行引入
+we need to specify the required dependencies again in Cargo.toml of library B
 
 263
 00:10:34,199 --> 00:10:34,200
-we need to import modules again B library's Cargo.toml
+还需要在B library的Cargo.toml里面进行引入
+we need to specify the required dependencies again in Cargo.toml of library B
 
 264
 00:10:34,200 --> 00:10:35,966
-Cargo.toml里面进行引入
-we need to import modules again B library's Cargo.toml
+还需要在B library的Cargo.toml里面进行引入
+we need to specify the required dependencies again in Cargo.toml of library B
 
 265
 00:10:35,966 --> 00:10:36,766
 才可以用
-we need to import modules again B library's Cargo.toml
+we need to specify the required dependencies again in Cargo.toml of library B
 
 266
 00:10:37,266 --> 00:10:39,666
-那这里我们列出了Cargo-workspace
-Here we havea reference of the Cargo-workspace
+那这里我们列出了cargo workspace
+Here we list some resources for cargo workspace
 
 267
 00:10:39,666 --> 00:10:40,566
 一个参考资料
-Here we havea reference of the Cargo-workspace
+Here we list some resources for cargo workspace
 
 268
 00:10:40,566 --> 00:10:42,366
 大家感兴趣的话可以看一下
-if you are interested, you can take a look
+take a look if you want to know more about it
 
 269
 00:10:42,933 --> 00:10:45,333
-我们现在来看一下一个demo
+我们现在来看一个demo
 Let's take a look at a demo now
 
 270
 00:10:45,933 --> 00:10:48,733
 那这个demo的话其实就是Substrate
-Then this demo is actually Substrate source code
+it is the source code of Substrate
 
 271
 00:10:48,733 --> 00:10:49,533
 源代码
-Then this demo is actually Substrate source code
+it is the source code of Substrate
 
 272
 00:10:50,366 --> 00:10:53,299
 可以看到它有非常多的文件目录
-You can see that it has a lot of file directories
+You can see that it has a lot of directories
 
 273
 00:10:54,133 --> 00:10:55,933
-它有一个cargo.toml
-It has a cargo.toml
+它有一个Cargo.toml
+It has a Cargo.toml
 
 274
 00:10:56,533 --> 00:10:57,866
@@ -1340,41 +1347,41 @@ let's open it
 275
 00:10:58,533 --> 00:11:00,099
 它定义了一个workspace
-It defines a workspace
+it defines a workspace
 
 276
 00:11:00,100 --> 00:11:01,700
 所以我们的Substrate源代码
-the Substrate source code, in fact, it is a typical workspace
+in fact, Substrate source code is typically organized as a workspace
 
 277
 00:11:01,700 --> 00:11:03,466
 其实是一个典型的workspace
-the Substrate source code, in fact, it is a typical workspace
+in fact, Substrate source code is typically organized as a workspace
 
 278
 00:11:03,766 --> 00:11:05,333
 组织的一个应用
-like an organization, there are many members
+there are many members in it
 
 279
 00:11:05,333 --> 00:11:07,199
-还有非常多的成员
-like an organization, there are many members
+它有非常多的成员
+there are many members in it
 
 280
 00:11:10,466 --> 00:11:11,933
 那不同的成员
-The different members are defined in different directories
+different members are defined in different directories
 
 281
 00:11:11,933 --> 00:11:11,966
-The different members are defined in different directories
+different members are defined in different directories
 
 282
 00:11:11,966 --> 00:11:13,499
-都定义在不同的目录里面
-The different members are defined in different directories
+定义在不同的目录里面
+different members are defined in different directories
 
 283
 00:11:13,500 --> 00:11:14,300
@@ -1384,32 +1391,32 @@ For example
 284
 00:11:14,466 --> 00:11:17,366
 bin里面定义了可执行的一些binary
-sSome executable binaries are defined in the bin
+the executable binaries are defined in the bin directory
 
 285
 00:11:17,500 --> 00:11:18,300
 比如node
-such as node
+here the node binary is a full-featured program of blockchain node
 
 286
 00:11:18,300 --> 00:11:21,300
 它是一个功能非常完善的节点程序
-it is a very full-featured node program
+here the node binary is a full-featured program of blockchain node
 
 287
 00:11:21,800 --> 00:11:23,966
 node template大家应该比较熟悉了
-You should be familiar with node template
+you should already be familiar with the node-template which is a minimal node program
 
 288
 00:11:23,966 --> 00:11:27,966
 它是一个最小化的节点代码程序
-it is a minimal node code program
+you should already be familiar with the node-template which is a minimal node program
 
 289
 00:11:28,333 --> 00:11:30,799
 utils里面包含了一些工具组件
-The utils contains some tool components
+The utils directory contains some utility components
 
 290
 00:11:30,800 --> 00:11:31,600
@@ -1428,139 +1435,141 @@ such as subkey for key management
 293
 00:11:34,766 --> 00:11:37,166
 那client目录里面包含了
-The client directory contains
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 294
 00:11:37,333 --> 00:11:40,299
 节点客户端所需要必备的一些功能
-some functions required by the node client
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 295
 00:11:40,300 --> 00:11:43,100
-比如网络传输层, 交易池
-such as network transport layer, transaction pool, consensus
+比如网络传输层, 交易池, 共识相关的, 以及数据库的读写操作等等
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 296
 00:11:43,100 --> 00:11:46,133
-such as network transport layer, transaction pool, consensus
+比如网络传输层, 交易池, 共识相关的, 以及数据库的读写操作等等
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 297
 00:11:46,133 --> 00:11:47,499
-共识相关的等等
-such as network transport layer, transaction pool, consensus
+比如网络传输层, 交易池, 共识相关的, 以及数据库的读写操作等等
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 298
 00:11:47,499 --> 00:11:47,500
-and database operations
+比如网络传输层, 交易池, 共识相关的, 以及数据库的读写操作等等
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 299
 00:11:47,500 --> 00:11:49,100
-以及数据库的读写操作
-and database operations
+比如网络传输层, 交易池, 共识相关的, 以及数据库的读写操作等等
+The client directory contains some functions required by the node such as networking, transaction pool, consensus, database, etc
 
 300
 00:11:50,266 --> 00:11:52,899
-那frame里面包含的是我们
-The frame contains
+那frame里面包含的是我们编写runtime所需要的一些基础功能组件
+The frame directory contains the fundamental components to code the runtime
 
 301
 00:11:53,333 --> 00:11:54,466
-编写runtime
-some basic functional components required when we write runtimes
+那frame里面包含的是我们编写runtime所需要的一些基础功能组件
+The frame directory contains the fundamental components to code the runtime
 
 302
 00:11:54,466 --> 00:11:56,899
-所需要的一些基础功能组件
-some basic functional components required when we write runtimes
+那frame里面包含的是我们编写runtime所需要的一些基础功能组件
+The frame directory contains the fundamental components to code the runtime
 
 303
 00:11:56,900 --> 00:11:59,666
 以及我们常用的一些runtime的模块
-and some of our commonly used runtime modules
+and some commonly used runtime modules such as assets
 
 304
 00:11:59,666 --> 00:12:00,666
 比如资产
-such as assets
+and some commonly used runtime modules such as assets
 
 305
 00:12:01,700 --> 00:12:03,666
 primitive里面定义了
-The primitive contains
+The primitive directory contains the core data structures and functions in the Substrate
 
 306
-00:12:03,766 --> 00:12:06,666
+00:12:03,666 --> 00:12:06,666
 Substrate里面核心的一些
-core data structures and functions in the Substrate
+The primitive directory contains the core data structures and functions in the Substrate
 
 307
 00:12:06,666 --> 00:12:07,100
-core data structures and functions in the Substrate
+The primitive directory contains the core data structures and functions in the Substrate
 
 308
 00:12:07,100 --> 00:12:08,966
 数据结构和功能
-core data structures and functions in the Substrate
+The primitive directory contains the core data structures and functions in the Substrate
 
 309
 00:12:09,533 --> 00:12:10,299
 感兴趣大家
-If you are interested
+If you are interested, take a look at the source code
 
 310
-00:12:10,300 --> 00:12:12,500
+00:12:10,299 --> 00:12:12,500
 可以仔细去读一下源码
-you can read the source code
+If you are interested, take a look at the source code
 
 311
 00:12:15,166 --> 00:12:18,166
 我们今天的作业内容是第一题
-This is the assignment for this lesson
+This is the homework for today's lesson
 
 312
 00:12:18,500 --> 00:12:19,366
 为我们的枚举
-The first is to mplement a trait for the enum of traffic light
+The first is to implement a trait for the enum of traffic light
 
 313
 00:12:19,366 --> 00:12:22,599
 数据类型交通信号灯实现一个trait
-The first is to mplement a trait for the enum of traffic light
+The first is to implement a trait for the enum of traffic light
 
 314
 00:12:23,066 --> 00:12:24,499
 那这个trait里面包含
-This trait should contain
+This trait should contain a method that returns the duration of each light
 
 315
 00:12:24,500 --> 00:12:26,733
 了一个返回时间的方法
-a function that returns a time
+This trait should contain a method that returns the duration of each light
 
 316
 00:12:27,300 --> 00:12:30,700
 不同的信号灯应该返回的时间不同
-The duration of each light shoule be different
+The duration of each light can be different.
 
 317
 00:12:30,966 --> 00:12:33,166
 第二道题是实现一个函数
-The second one is to implement a function
+The second one is to implement a function that sums a collection of u32 integers
 
 318
 00:12:33,333 --> 00:12:38,199
-它能够为U32类型的整数集合进行求和
-that can sum a collection of integers of type U32
+它能够为u32类型的整数集合进行求和
+The second one is to implement a function that sums a collection of u32 integers 
 
 319
 00:12:38,400 --> 00:12:40,400
 参数类型是一个slice
-the parameter type is a slice
+with parameter type &[u32] and return type Option
 
 320
 00:12:40,800 --> 00:12:44,400
-返回类型为一个option U32
-The return type is an Option<U32>
+返回类型为一个Option<u32>
+with parameter type &[u32] and return type Option
 
 321
 00:12:44,400 --> 00:12:46,733
@@ -1570,56 +1579,56 @@ returns None when the sum overflows
 322
 00:12:47,700 --> 00:12:48,966
 第三道题是
-The third question is
+The third question is implementing a function that prints the area of a geometric shape.
 
 323
 00:12:48,966 --> 00:12:51,266
 实现一个打印图形面积的函数
-Implement a function to print the area of ​​graphics
+The third question is implementing a function that prints the area of a geometric shape.
 
 324
 00:12:51,600 --> 00:12:54,100
 他接收一个可以计算面积的
-It takes a type that its area can be calculated as a parameter
+It takes a type that can calculate the area, such as a circle, triangle, or square, as a parameter.
 
 325
 00:12:54,100 --> 00:12:55,600
 类型作为参数
-It takes a type that its area can be calculated as a parameter
+It takes a type that can calculate the area, such as a circle, triangle, or square, as a parameter.
 
 326
-00:12:55,933 --> 00:12:59,466
+00:12:55,600 --> 00:12:59,466
 这个类型可以是圆形, 三角形, 正方形
-This type can be circle, triangle, square
+It takes a type that can calculate the area, such as a circle, triangle, or square, as a parameter.
 
 327
 00:13:00,066 --> 00:13:02,766
 那我们这里就需要用到泛型来表示
-Then we need to use generic types to represent such a variety type
+Here we need to use generic types to represent such a variable type
 
 328
 00:13:02,766 --> 00:13:04,066
 这样的一个多种
-Then we need to use generic types to represent such a variety type
+Here we need to use generic types to represent such a variable type
 
 329
 00:13:04,066 --> 00:13:04,300
-Then we need to use generic types to represent such a variety type
+Here we need to use generic types to represent such a variable type
 
 330
 00:13:04,300 --> 00:13:05,533
 类型的可能性
-Then we need to use generic types to represent such a variety type
+Here we need to use generic types to represent such a variable type
 
 331
 00:13:05,733 --> 00:13:08,733
-以及泛型约束来保证我们这个
-and generic constraints to ensure that
+以及泛型约束来保证我们这个类型是可以计算面积的
+and trait bound to constrain the generic type whose area is caculated
 
 332
-00:13:08,933 --> 00:13:11,399
-类型是可以给予计算面积的
-the type's area can be calculated
+00:13:08,733 --> 00:13:11,399
+以及泛型约束来保证我们这个类型是可以计算面积的
+and trait bound to constrain the generic type whose area is caculated
 
 333
 00:13:12,133 --> 00:13:14,166
