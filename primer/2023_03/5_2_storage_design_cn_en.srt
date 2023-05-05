@@ -1,0 +1,3046 @@
+﻿1
+00:00:00,966 --> 00:00:02,933
+hello大家好我是凯超
+Hello everyone, I am Kaichao
+
+2
+00:00:03,166 --> 00:00:06,266
+我们今天课程内容是substrate runtime
+The content of our course today is Substrate Runtime
+
+3
+00:00:06,300 --> 00:00:07,566
+数据存储的设计
+Data Storage Design
+
+4
+00:00:08,966 --> 00:00:10,866
+本次课程内容主要包括了
+This course mainly includes
+
+5
+00:00:11,166 --> 00:00:14,166
+区块链存储和传统互联网应用的存储
+Blockchain storage and storage of traditional Internet applications
+
+6
+00:00:14,166 --> 00:00:15,199
+不同点和约束
+Differences and constraints between them
+
+7
+00:00:15,766 --> 00:00:17,099
+以及substrate
+and substrate
+
+8
+00:00:17,100 --> 00:00:19,566
+所提供的存储单元的数据类型
+of the provided storage unit by Substrate
+
+9
+00:00:19,933 --> 00:00:21,066
+知识的有哪些
+Which types are supported
+
+10
+00:00:21,500 --> 00:00:23,766
+接着我们会介绍如何使用
+Then we'll show you how to use
+
+11
+00:00:23,900 --> 00:00:25,300
+substrate的存储单元
+Substrate storage unit
+
+12
+00:00:25,300 --> 00:00:27,333
+进行一个创始区块的初始化
+to initialize a genesis block
+
+13
+00:00:27,733 --> 00:00:30,999
+最后我们会介绍一下使用substrate进行
+Finally, we will introduce the use of substrate for
+
+14
+00:00:31,333 --> 00:00:33,566
+存储设计的时候一些最佳实践
+some best practices in storage design
+
+15
+00:00:34,866 --> 00:00:35,399
+大家知道
+Everybody knows
+
+16
+00:00:35,400 --> 00:00:37,766
+区块链通常有这样几个特点
+Blockchain usually has the following characteristics
+
+17
+00:00:37,766 --> 00:00:40,299
+第一个是它的代码是完全开源的
+The first is that its code is completely open source
+
+18
+00:00:40,300 --> 00:00:42,466
+可以供所有人去审查
+It is available for everyone to review
+
+19
+00:00:42,700 --> 00:00:44,500
+并且它是由对等网络组成的
+and it is made up of a peer-to-peer network
+
+20
+00:00:44,500 --> 00:00:46,666
+这样一个区中心的网络
+such a decentralized network.
+
+21
+00:00:47,333 --> 00:00:50,366
+那通过引入了延迟和随机来在
+That introduces delay and randomness to
+
+22
+00:00:50,600 --> 00:00:52,533
+不同的节点之间达成共识
+achieve consensus  between different nodes
+
+23
+00:00:52,800 --> 00:00:54,733
+那在这样的一个网络环境里面
+Then in such a network environment
+
+24
+00:00:54,933 --> 00:00:56,366
+区块链使用了
+Blockchain
+
+25
+00:00:56,366 --> 00:00:59,133
+链式的增量的形式来存储数据
+stores data in the form of chained incremental manner.
+
+26
+00:00:59,133 --> 00:01:03,299
+区块之间彼此是通过链式直接连接
+Blocks are directly connected to each other through chains
+
+27
+00:01:03,900 --> 00:01:06,333
+并且所有的节点都会备份
+and all nodes will be backed up
+
+28
+00:01:06,333 --> 00:01:07,933
+链上的状态数据
+state data on the chain.
+
+29
+00:01:08,133 --> 00:01:09,899
+有一些Archive的节点
+There are some Archive nodes
+
+30
+00:01:10,166 --> 00:01:12,333
+甚至会保存所有的历史数据
+even save all historical data
+
+31
+00:01:12,366 --> 00:01:13,199
+这就对
+That needs that
+
+32
+00:01:13,200 --> 00:01:16,466
+节点的存储和性能都有比较高的要求
+the node storage and performance have relatively high requirements
+
+33
+00:01:17,400 --> 00:01:19,933
+区块链应用的程序
+Programs for blockchain applications
+
+34
+00:01:20,133 --> 00:01:22,666
+它通常都会有高效的键值对数据库
+It usually has an efficient key-value pair database
+
+35
+00:01:22,966 --> 00:01:25,566
+比如bitcoin里面使用的LevelDB
+For example, LevelDB used in bitcoin
+
+36
+00:01:25,866 --> 00:01:28,333
+以太坊及Substrate里面使用的RocksDB
+RocksDB used in Ethereum and Substrate
+
+37
+00:01:29,766 --> 00:01:32,333
+当我们在使用区块链作为我们
+When we are using blockchain as our
+
+38
+00:01:32,466 --> 00:01:34,866
+Web 3.0业务的载体的时候
+carrier of Web 3.0 business
+
+39
+00:01:35,100 --> 00:01:37,300
+它的存储有这些限制
+Its storage has these limitations
+
+40
+00:01:37,666 --> 00:01:38,566
+第一个是
+the first is
+
+41
+00:01:38,766 --> 00:01:40,866
+大文件如果直接存储在链
+If large files are stored directly in the chain
+
+42
+00:01:40,866 --> 00:01:42,733
+上的成本是非常高的
+The cost is very high.
+
+43
+00:01:42,900 --> 00:01:45,133
+通常情况下我们需要选择一种
+Usually we need to choose a
+
+44
+00:01:45,400 --> 00:01:47,400
+中心化的或者去中心的
+centralized or decentralized
+
+45
+00:01:47,400 --> 00:01:49,133
+存储形式来存储
+storage form to store
+
+46
+00:01:49,133 --> 00:01:49,966
+大的文件
+large files
+
+47
+00:01:50,133 --> 00:01:52,999
+而只是在链上存储一个很小的
+Instead, just store a small
+
+48
+00:01:53,500 --> 00:01:54,700
+文件的哈希值
+file hash on the chain.
+
+49
+00:01:55,766 --> 00:01:56,899
+我们刚才已经提到了
+we just mentioned
+
+50
+00:01:56,900 --> 00:01:58,600
+链式的区块存储结构
+chained block storage structure
+
+51
+00:01:59,066 --> 00:01:59,799
+那这种结构
+that structure
+
+52
+00:01:59,800 --> 00:02:01,966
+其实并不利于对历史数据的索引
+In fact, it is not conducive to the indexing of historical data
+
+53
+00:02:01,966 --> 00:02:03,166
+因为你如果想索引的话
+because if you want to index
+
+54
+00:02:03,166 --> 00:02:03,966
+你就需要
+you have to
+
+55
+00:02:04,200 --> 00:02:07,200
+遍历当前区块往前所有的区块
+traverse all blocks before the current block
+
+56
+00:02:07,666 --> 00:02:10,199
+那这就要求我们通常会有一个
+Then this requires that we usually have a
+
+57
+00:02:10,700 --> 00:02:13,333
+链下的这样的一个索引的服务
+such an off-chain index service
+
+58
+00:02:13,733 --> 00:02:15,166
+通常也就是我们的
+Usually
+
+59
+00:02:15,166 --> 00:02:17,066
+区块浏览器这样的一个基础设施
+It's an infrastructure such as a block explorer
+
+60
+00:02:18,333 --> 00:02:19,266
+另外一个约束是
+Another constraint is
+
+61
+00:02:19,266 --> 00:02:20,533
+由于区块链的逻辑
+that due to the logic of the blockchain
+
+62
+00:02:20,533 --> 00:02:22,566
+是在不同的节点之间
+between different nodes
+
+63
+00:02:23,133 --> 00:02:24,866
+都要去运行这样的一个逻辑
+has to be ran
+
+64
+00:02:25,300 --> 00:02:28,200
+要求逻辑执行的结果必须是完全
+It is required that the result of logic execution must be completely
+
+65
+00:02:28,366 --> 00:02:29,766
+一致的
+consistent.
+
+66
+00:02:29,766 --> 00:02:30,966
+那浮点数的话
+For the floating point number
+
+67
+00:02:30,966 --> 00:02:33,566
+它的运算结果跟编译器以及
+Its result has direct relationship with
+
+68
+00:02:33,933 --> 00:02:36,266
+CPU的架构都有直接的关系
+ the compiler and the architecture of the CPU.
+
+69
+00:02:36,400 --> 00:02:38,466
+所以我们在区块链里面是不能使用
+So we cannot use float numbers
+
+70
+00:02:38,466 --> 00:02:39,066
+浮点数的
+in the blockchain
+
+71
+00:02:39,066 --> 00:02:41,299
+而是需要使用其他
+Instead, you need to use other
+
+72
+00:02:41,600 --> 00:02:43,566
+固定点的小数来模拟浮点数
+fixed-point decimals to simulate
+
+73
+00:02:43,566 --> 00:02:44,966
+这样的一个操作
+floating-point numbers.
+
+74
+00:02:46,800 --> 00:02:49,900
+我们之前在课程中已经简单提到过
+We've briefly mentioned this earlier in the course
+
+75
+00:02:50,100 --> 00:02:51,966
+嗯substrate链上的存储单元
+Well, the storage unit on the substrate chain
+
+76
+00:02:51,966 --> 00:02:53,766
+有单值类型StorageValue
+There is a single value type StorageValue
+
+77
+00:02:54,133 --> 00:02:55,933
+简单映射类型StorageMap
+Simple mapping type StorageMap
+
+78
+00:02:55,933 --> 00:02:57,399
+以及双键映射类型
+and the double keys mapping type
+
+79
+00:02:57,700 --> 00:02:59,133
+StorageDoubleMap
+StorageDoubleMap
+
+80
+00:02:59,400 --> 00:03:02,533
+以及多键映射类型StorageNMAP
+and the multi-key mapping type StorageNMAP
+
+81
+00:03:02,766 --> 00:03:05,366
+那在开发链上的存储单元的时候
+When developing storage units on the chain
+
+82
+00:03:05,466 --> 00:03:07,133
+有这些点需要去注意
+There are these points to pay attention to
+
+83
+00:03:07,933 --> 00:03:10,733
+substrate支持了一些Rust的原生数据类型
+substrate supports some of Rust's native data types
+
+84
+00:03:10,900 --> 00:03:11,666
+它是
+it is
+
+85
+00:03:11,666 --> 00:03:14,933
+Rust的所有原生数据类型的一个子集
+a subset of all of Rust's native data types.
+
+86
+00:03:15,933 --> 00:03:18,866
+那这些子集是定义在Rust的核心库和
+Those subsets are defined in the Rust core library and
+
+87
+00:03:19,333 --> 00:03:20,499
+Alloc库之中
+In the Alloc library
+
+88
+00:03:21,466 --> 00:03:24,599
+进一步substrate支持的这样的原生类型
+Such native types supported by Substrate
+
+89
+00:03:24,600 --> 00:03:26,966
+可以构成我们刚刚提到的
+can constitute what we just mentioned
+
+90
+00:03:27,100 --> 00:03:28,100
+映射类型
+mapping type
+
+91
+00:03:28,733 --> 00:03:31,333
+其实substrate支持的这些原生类型
+In fact, these native types supported by Substrate
+
+92
+00:03:31,333 --> 00:03:32,966
+就是对
+is for that
+
+93
+00:03:33,400 --> 00:03:36,533
+这些原生类型实现了一定的编解码的
+these native types implement a certain codec
+
+94
+00:03:36,766 --> 00:03:37,566
+规则
+rule
+
+95
+00:03:38,200 --> 00:03:39,766
+我们现在来回顾一下
+let's review now
+
+96
+00:03:39,766 --> 00:03:43,166
+上节课所了解到的storage宏
+the storage macro learned in the last lesson.
+
+97
+00:03:43,533 --> 00:03:45,966
+我们定义了一个something这样一个storage
+We define a storage like something
+
+98
+00:03:46,266 --> 00:03:48,099
+那它的类型是StorageValue
+Then its type is StorageValue
+
+99
+00:03:48,800 --> 00:03:51,800
+存储的值是一个32位无符号的整数
+The stored value is a 32-bit unsigned integer
+
+100
+00:03:52,166 --> 00:03:54,066
+我们是使用的pallet::storage这个宏
+We are using the pallet::storage macro
+
+101
+00:03:54,066 --> 00:03:56,399
+并且我们有一个可选的getter函数
+and we have an optional getter function
+
+102
+00:03:56,766 --> 00:03:57,899
+名字叫做something
+the name is something
+
+103
+00:03:59,366 --> 00:04:00,933
+除了我们刚才看到的32位
+In addition to the 32-bit we just saw
+
+104
+00:04:00,933 --> 00:04:02,866
+无符号整数这样的一个单质类型
+A primitive type such as unsigned integers
+
+105
+00:04:03,266 --> 00:04:05,366
+其实还有其他各种各样的单值类型
+In fact, there are various other single value types
+
+106
+00:04:05,366 --> 00:04:07,866
+那单值类型其实顾名思义就是
+The single-value type, as the name implies, is
+
+107
+00:04:07,966 --> 00:04:10,499
+只能用来存储某一种单一类型的值
+can only be used to store a single type of value
+
+108
+00:04:10,900 --> 00:04:12,800
+比如它是布尔值数值类型
+For example it is a boolean numeric type
+
+109
+00:04:12,933 --> 00:04:14,766
+或者枚举或者结构体
+or enumeration or structure
+
+110
+00:04:15,100 --> 00:04:17,266
+数值类型有8位
+Numeric types have 8 bits
+
+111
+00:04:17,733 --> 00:04:20,966
+无符号有符号整数以及32位64位
+unsigned signed integer and 32-bit 64-bit
+
+112
+00:04:20,966 --> 00:04:22,299
+128位等等
+128 bits etc.
+
+113
+00:04:22,700 --> 00:04:26,500
+还有一些Substrate内置的大整数类型有256
+There are also some built-in large integer types in Substrate with 256
+
+114
+00:04:26,733 --> 00:04:28,199
+有512等等
+There are 512 and so on
+
+115
+00:04:28,700 --> 00:04:31,600
+布尔类型以及集合类型有vector
+Boolean types and collection types have vector
+
+116
+00:04:31,933 --> 00:04:33,566
+BTreeMap和BTreeSet
+BTreeMap and BTreeSet
+
+117
+00:04:34,766 --> 00:04:35,666
+我们刚才提到了
+we just mentioned
+
+118
+00:04:35,666 --> 00:04:37,399
+区块链不能直接使用浮点数
+Blockchain cannot directly use floating point numbers
+
+119
+00:04:37,533 --> 00:04:40,333
+那么取而代之的是定点小数
+Then instead of fixed-point decimals
+
+120
+00:04:40,333 --> 00:04:41,666
+Substrate内置的有
+Substrate has built-in
+
+121
+00:04:42,100 --> 00:04:45,466
+Percent, Permil, Perbill以及FixedU128
+Percent, Permil, Perbill and FixedU128
+
+122
+00:04:46,466 --> 00:04:47,799
+还有一些自定义的类型
+There are also some custom types
+
+123
+00:04:47,800 --> 00:04:50,800
+比如定常的哈西H128H256
+For example, the regular Hash H128H256
+
+124
+00:04:50,800 --> 00:04:54,266
+可以快速方便的去表示哈西的结果
+It can quickly and conveniently express the result of Hash
+
+125
+00:04:55,533 --> 00:04:57,899
+Substrate支持的其他的一些复杂类型
+Some other complex types supported by Substrate
+
+126
+00:04:57,900 --> 00:04:59,900
+包括了Option
+include Option
+
+127
+00:04:59,900 --> 00:05:02,400
+这样的一个有值或者无值
+such a value or no value
+
+128
+00:05:02,400 --> 00:05:04,166
+这样的一个类型
+such a type
+
+129
+00:05:04,166 --> 00:05:05,399
+Tuple元组
+Tuple
+
+130
+00:05:05,700 --> 00:05:07,566
+它可以包含多个元素
+it can contain multiple elements
+
+131
+00:05:08,366 --> 00:05:09,499
+这些不同的元素
+these different elements
+
+132
+00:05:09,500 --> 00:05:11,166
+的类型可以是不一样的
+Their types can be different
+
+133
+00:05:11,600 --> 00:05:12,700
+以及枚举
+and enumeration
+
+134
+00:05:13,333 --> 00:05:16,599
+以及结构体可以包含更多的属性信息
+And the structure can contain more attribute information
+
+135
+00:05:17,166 --> 00:05:20,866
+还有一些特定的内置自定义类型
+There are also some specific built-in custom types
+
+136
+00:05:20,866 --> 00:05:22,466
+比如Timestamp
+Such as Timestamp
+
+137
+00:05:22,466 --> 00:05:23,866
+模块会定义的Moment
+Moment defined by the module
+
+138
+00:05:23,866 --> 00:05:26,399
+来表示我们当前区块的时间戳
+to represent the timestamp of our current block
+
+139
+00:05:27,000 --> 00:05:29,966
+以及系统模块提供的AccountId表示
+and the AccountId provided by the system module represents
+
+140
+00:05:30,300 --> 00:05:32,333
+用户的account标识
+user's account ID
+
+141
+00:05:32,866 --> 00:05:35,899
+通常情况下它是用户私钥所对应的
+Usually it is the user's private key corresponding to
+
+142
+00:05:36,066 --> 00:05:36,933
+公钥信息
+the public key information
+
+143
+00:05:38,466 --> 00:05:40,366
+我们先来看一下数值类型
+Let's take a look at the numeric types first
+
+144
+00:05:40,500 --> 00:05:43,566
+这里我们以8位无符号整数来举例
+Here we take 8-bit unsigned integer as an example
+
+145
+00:05:43,900 --> 00:05:46,266
+我们定义了一个数据类型
+We define a data type
+
+146
+00:05:46,266 --> 00:05:48,866
+它的名字叫做MyUnsignedNumber
+Its name is MyUnsignedNumber
+
+147
+00:05:48,866 --> 00:05:51,166
+它的类型是一个StorageValue
+Its type is a StorageValue
+
+148
+00:05:51,366 --> 00:05:53,333
+那这个单值类型存储的
+Then this single value type stores
+
+149
+00:05:53,866 --> 00:05:56,466
+类型是一个8位无符号的整数
+the type which is an 8-bit unsigned integer
+
+150
+00:05:57,000 --> 00:05:58,900
+同样呢我们有一个可见的Get函数
+Also we have a visible Get function
+
+151
+00:05:58,900 --> 00:06:00,100
+是my_unsigned_number
+It is my_unsigned_number
+
+152
+00:06:01,200 --> 00:06:02,666
+这里我们又举了另外一个例子
+Here we give another example
+
+153
+00:06:02,666 --> 00:06:04,999
+是一个有符号的8位整数
+It is a signed 8-bit integer
+
+154
+00:06:05,100 --> 00:06:07,133
+同样的是一个storageValue类型
+It is also a storageValue type
+
+155
+00:06:07,333 --> 00:06:09,499
+里面存储元素是i8
+The storage element inside is i8
+
+156
+00:06:09,800 --> 00:06:10,266
+可以看到
+We can see
+
+157
+00:06:10,266 --> 00:06:12,266
+这里我们给了第三个泛型参数
+Here we give the third generic parameter
+
+158
+00:06:12,266 --> 00:06:13,533
+叫做ValueQuery
+called ValueQuery
+
+159
+00:06:14,166 --> 00:06:16,199
+它表示的是我们是使用
+It means that we are using
+
+160
+00:06:16,300 --> 00:06:17,666
+ValueQuery这种形式来
+ValueQuery of this form
+
+161
+00:06:17,666 --> 00:06:19,466
+去读取链上存储单元
+to read the storage unit on the chain.
+
+162
+00:06:19,533 --> 00:06:21,966
+如果不指定的话是默认的是OptionQuery
+If it is not specified, the default is OptionQuery
+
+163
+00:06:21,966 --> 00:06:23,133
+也就是默认的话
+That is, the default
+
+164
+00:06:23,266 --> 00:06:25,666
+如果没有值会返回一个Option
+Returning an Option if there is no value
+
+165
+00:06:25,666 --> 00:06:27,133
+也就是None这样的一个值
+That is, a value like None
+
+166
+00:06:28,066 --> 00:06:30,333
+那如果使用ValueQuarry的话
+Then if you use ValueQuery
+
+167
+00:06:30,766 --> 00:06:33,399
+如果是没有值的话我们就会返回一个
+If there is no value, we will return a
+
+168
+00:06:33,533 --> 00:06:34,733
+那么就会返回一个
+then it will return a
+
+169
+00:06:34,733 --> 00:06:36,199
+所存储类型的一个默认值
+a default value for the stored type
+
+170
+00:06:36,200 --> 00:06:38,733
+比如i8的话它的默认值就是0
+For example, for i8, its default value is 0
+
+171
+00:06:39,766 --> 00:06:42,766
+对于单值类型一些常用的API有
+Some commonly used APIs for single value types are
+
+172
+00:06:43,100 --> 00:06:44,466
+比如我们可以使用Put
+For example, we can use Put
+
+173
+00:06:44,466 --> 00:06:46,533
+方法来更新链上的存储单元
+method to update storage units on the chain
+
+174
+00:06:46,900 --> 00:06:48,900
+我们使用Get方法获取
+We use the Get method to obtain
+
+175
+00:06:48,933 --> 00:06:51,699
+当前链上存储单元里面所存储的值
+the value stored in the storage unit on the current chain
+
+176
+00:06:52,166 --> 00:06:54,299
+要用mutate来更新一个
+To use mutate to update a
+
+177
+00:06:54,700 --> 00:06:56,600
+存储的值变成一个新的值
+stored value to a new value
+
+178
+00:06:56,866 --> 00:06:58,899
+我们还可以使用q来删除
+We can also use q to delete
+
+179
+00:06:59,700 --> 00:07:02,200
+当前存储单元里面已经存储的值
+the value already stored in the current storage unit
+
+180
+00:07:02,733 --> 00:07:04,099
+这里我给到了一个链接
+here i gave a link
+
+181
+00:07:04,100 --> 00:07:05,900
+是StorageValue的接口文档
+It is the interface document of StorageValue
+
+182
+00:07:06,100 --> 00:07:08,366
+大家有兴趣的话可以看一下
+If you are interested, you can take a look
+
+183
+00:07:09,500 --> 00:07:11,533
+那对于所存储的数
+That for the stored number
+
+184
+00:07:11,533 --> 00:07:12,333
+值类型
+value type
+
+185
+00:07:12,700 --> 00:07:14,533
+我们通常在区块链应用开发的时候
+We usually use some security operations
+
+186
+00:07:14,533 --> 00:07:16,333
+要使用一些安全性的操作
+in developing blockchain applications
+
+187
+00:07:16,733 --> 00:07:18,733
+来避免一些溢出性的错误
+to avoid some overflow errors
+
+188
+00:07:19,400 --> 00:07:22,133
+比如会返回None类型的一些安全操作
+For example, some security operations that return None type
+
+189
+00:07:22,133 --> 00:07:24,466
+包括checked_add checked_sub
+include checked_add checked_sub
+
+190
+00:07:24,800 --> 00:07:26,900
+checked_multiply以及checked_divide
+checked_multiply and checked_divide
+
+191
+00:07:27,866 --> 00:07:29,133
+我们以checked_add的为例
+Let's take checked_add as an example
+
+192
+00:07:29,133 --> 00:07:32,499
+当我们相加之后的结果是溢出了
+When the result of adding is overflow
+
+193
+00:07:32,500 --> 00:07:35,200
+那么我们会去返回一个错误信息
+Then we will return an error message
+
+194
+00:07:35,666 --> 00:07:38,066
+从而我们可以很及时的去判断
+Thus we can judge the wrong scene
+
+195
+00:07:38,166 --> 00:07:38,999
+错误的场景
+in a timely manner
+
+196
+00:07:39,000 --> 00:07:41,600
+进而让我们的这这笔交易去失败
+and let our deal fail
+
+197
+00:07:42,300 --> 00:07:43,566
+除了checked_*
+except checked_*
+
+198
+00:07:43,733 --> 00:07:44,999
+这一类的返回results
+This kind of safe operation
+
+199
+00:07:44,999 --> 00:07:45,000
+returning result
+
+200
+00:07:45,000 --> 00:07:46,565
+类型的安全操作之外
+returning result
+
+201
+00:07:46,966 --> 00:07:49,666
+还有一类安全操作是会返回饱和值
+Another type of safe operation is to return a saturation value
+
+202
+00:07:49,900 --> 00:07:52,100
+也就是溢出的时候返回最大值
+That is, when overflow, returning the maximum value
+
+203
+00:07:52,666 --> 00:07:54,766
+这些操作包括saturating_add
+These operations include saturating_add
+
+204
+00:07:54,766 --> 00:07:56,466
+saturating_sub等等
+saturating_sub etc.
+
+205
+00:07:57,300 --> 00:08:00,166
+这里以saturating_add的为例我们对一个
+Here we take saturating_add as an example for an
+
+206
+00:08:01,000 --> 00:08:02,666
+无符号的8位整数
+unsigned 8-bit integer
+
+207
+00:08:02,866 --> 00:08:05,499
+加了一个很大的整数1万
+Added a large integer 10,000
+
+208
+00:08:05,566 --> 00:08:08,166
+那很明显它超过了它的最大值
+That's clearly over it's maximum
+
+209
+00:08:08,300 --> 00:08:11,200
+那么我们就会去饱和值就是最大值255
+then we'll saturate the value to a maximum of 255
+
+210
+00:08:12,766 --> 00:08:14,199
+对于大整数类型
+For large integer types
+
+211
+00:08:14,733 --> 00:08:16,499
+嗯和整数类型是很类似的
+Well, it is very similar to the integer type
+
+212
+00:08:16,500 --> 00:08:18,666
+不过我们需要去在我们的代码里
+But we need to go in our code
+
+213
+00:08:18,900 --> 00:08:21,400
+首先引入大整数类型的定义
+First introduce the definition of large integer type
+
+214
+00:08:21,400 --> 00:08:23,200
+它是在sp_core里面
+It is inside sp_core
+
+215
+00:08:23,866 --> 00:08:24,133
+这里
+here
+
+216
+00:08:24,133 --> 00:08:26,166
+我们定义了一个大整数类型的名字
+We define a large integer type with the name
+
+217
+00:08:26,166 --> 00:08:27,599
+叫my_big_integer
+called my_big_integer
+
+218
+00:08:28,500 --> 00:08:29,800
+那它是一个StorageValue
+then it is a StorageValue
+
+219
+00:08:29,800 --> 00:08:31,000
+的这样一个存储类型
+Such a storage type of
+
+220
+00:08:31,000 --> 00:08:33,600
+里面存储的数据类型是U256
+The data type stored in it is U256
+
+221
+00:08:34,900 --> 00:08:37,466
+同样的对于大整数也提供了一些
+Similarly for large integers some
+
+222
+00:08:37,533 --> 00:08:39,533
+内置的安全性的操作的方法
+methods of operation with built-in security are provided
+
+223
+00:08:39,600 --> 00:08:42,666
+比如checked_add overflow multiply
+For example checked_add overflow multiply
+
+224
+00:08:43,166 --> 00:08:45,566
+这里也给到了接口文档的链接
+Here is also a link to the interface documentation
+
+225
+00:08:46,966 --> 00:08:48,933
+对于布尔类型是很类似的
+For boolean type is very similar
+
+226
+00:08:48,933 --> 00:08:51,866
+我们这里定义了一个存储单元
+Here we define a storage unit
+
+227
+00:08:51,866 --> 00:08:52,766
+它的名字叫MyBool
+Its name is MyBool
+
+228
+00:08:52,766 --> 00:08:55,566
+它是一个单值类型
+it is a single value type
+
+229
+00:08:55,900 --> 00:08:59,266
+单值类型里面存储的类型是布尔类型
+The type stored in the single value type is Boolean type
+
+230
+00:08:59,900 --> 00:09:02,166
+通常链上通过存储布尔类型
+Usually on-chain by storing boolean type
+
+231
+00:09:02,166 --> 00:09:04,066
+来存储一些标志性的信息
+To store some symbolic information
+
+232
+00:09:04,666 --> 00:09:07,766
+并且可以根据链上存储的标志性信息
+And it can be based on the iconic information stored on the chain
+
+233
+00:09:08,100 --> 00:09:10,066
+在代码里进行逻辑判断
+to make logical judgments in the code
+
+234
+00:09:10,600 --> 00:09:13,200
+同样的默认的是一个OptionQuery
+The same default is an OptionQuery
+
+235
+00:09:13,600 --> 00:09:16,500
+对于ValueQuery的话它的默认值是false
+For ValueQuery, its default value is false
+
+236
+00:09:17,566 --> 00:09:18,399
+在Substrate里面
+Inside Substrate
+
+237
+00:09:18,400 --> 00:09:20,866
+不能直接使用Rust内置的vector
+You cannot directly use Rust's built-in vector
+
+238
+00:09:21,100 --> 00:09:21,900
+集合类型
+collection type
+
+239
+00:09:21,900 --> 00:09:22,900
+而是使用
+Instead use
+
+240
+00:09:22,900 --> 00:09:25,766
+自定义的BoundedVec这样一个集合类型
+custom BoundedVec such a collection type
+
+241
+00:09:26,200 --> 00:09:27,100
+可以看到
+We can see
+
+242
+00:09:27,300 --> 00:09:30,066
+这行代码我们定义了一个type MyString
+In this line of code we define a type MyString
+
+243
+00:09:30,066 --> 00:09:31,866
+然后它是一个StorageValue
+Then it is a StorageValue
+
+244
+00:09:31,866 --> 00:09:33,133
+也就是单值类型
+That is, single value type
+
+245
+00:09:33,666 --> 00:09:34,666
+它的值是
+Its value is
+
+246
+00:09:34,666 --> 00:09:36,599
+BoundedVector是一个集合
+BoundedVector which is a collection
+
+247
+00:09:36,933 --> 00:09:38,933
+那BoundedVector有两个范型参数
+Then BoundedVector has two generic parameters
+
+248
+00:09:38,933 --> 00:09:41,133
+第一个是集合里面的数据类型
+The first is the data type in the collection
+
+249
+00:09:41,300 --> 00:09:43,466
+这里是8位无符号整数
+Here is the 8 bit unsigned integer
+
+250
+00:09:43,933 --> 00:09:46,499
+然后集合内的最大长度是100
+Then the maximum length within the set is 100
+
+251
+00:09:47,166 --> 00:09:49,066
+然后它是一个ValueQuery
+Then it is a ValueQuery
+
+252
+00:09:49,533 --> 00:09:51,066
+就是会返回一个默认值
+it will return a default value
+
+253
+00:09:51,066 --> 00:09:51,866
+如果
+if
+
+254
+00:09:51,966 --> 00:09:53,399
+存储项不存在的话
+If the storage item does not exist
+
+255
+00:09:54,266 --> 00:09:56,499
+对于BoundedVector有这些常用的操作
+There are these common operations for BoundedVector
+
+256
+00:09:56,500 --> 00:09:59,266
+比如try_push可以去添加一个元素
+For example, try_push can add an element
+
+257
+00:09:59,533 --> 00:10:01,599
+remove可以去删除一个元素
+remove can delete an element
+
+258
+00:10:01,733 --> 00:10:03,166
+iter可以去
+iter can
+
+259
+00:10:03,600 --> 00:10:04,466
+遍历
+traverse
+
+260
+00:10:04,500 --> 00:10:06,733
+这样的一个BoundedVector集合数据类型
+such a BoundedVector collection data type
+
+261
+00:10:07,300 --> 00:10:10,400
+这里我们给出了Substrate的文档链接
+Here we give the documentation link for Substrate
+
+262
+00:10:11,200 --> 00:10:15,500
+那对于BoundedVector它的默认值是0x00
+The default value for BoundedVector is 0x00
+
+263
+00:10:15,533 --> 00:10:17,466
+是用ValueQuery这种形式
+It is in the form of ValueQuery
+
+264
+00:10:18,133 --> 00:10:19,733
+接着我们来看一下
+Let's take a look
+
+265
+00:10:20,333 --> 00:10:22,299
+定点小数Percent Permill
+Fixed-point decimal Percent Permill
+
+266
+00:10:22,300 --> 00:10:24,166
+Perbill这样的一个类型定义
+Perbill these types definitions
+
+267
+00:10:24,500 --> 00:10:26,966
+我们需要首先引入对应的类型
+We need to first introduce the corresponding type
+
+268
+00:10:26,966 --> 00:10:28,499
+在sp_runtime里面
+inside sp_runtime
+
+269
+00:10:29,300 --> 00:10:31,266
+这里我们定义了一个存储项
+Here we define a storage item
+
+270
+00:10:31,266 --> 00:10:33,299
+它的名字叫MyPermill
+Its name is MyPermill
+
+271
+00:10:34,300 --> 00:10:35,466
+它是一个单值类型
+it is a single value type
+
+272
+00:10:35,466 --> 00:10:38,099
+存储的类型是Permill
+The storage type is Permill
+
+273
+00:10:39,166 --> 00:10:41,766
+对于这种定点小数类型
+For this fixed-point decimal type
+
+274
+00:10:42,133 --> 00:10:44,666
+Substrate内置了一些构造方法
+Substrate has some built-in construction methods
+
+275
+00:10:45,500 --> 00:10:48,700
+比如我们可以使用Percent来构建一个
+For example, we can use Percent to build a
+
+276
+00:10:49,100 --> 00:10:51,366
+包含百分之几这样的一个
+Permill data containing
+
+277
+00:10:51,466 --> 00:10:52,533
+Permill的数据
+a few percent
+
+278
+00:10:53,000 --> 00:10:54,933
+也可以使用from_parts
+You can also use from_parts
+
+279
+00:10:54,933 --> 00:10:55,066
+to give a value to indicate
+
+280
+00:10:55,066 --> 00:10:57,600
+来给定一个值来表示是
+to give a value to indicate
+
+281
+00:10:57,600 --> 00:10:57,733
+来给定一个值来表示是
+
+282
+00:10:57,900 --> 00:10:59,133
+100万分之几
+Parts per million
+
+283
+00:10:59,133 --> 00:11:01,766
+比如我们这里可以给定1,000
+For example, we can give 1,000 here
+
+284
+00:11:01,800 --> 00:11:03,733
+那我们如果value是1,000的话
+Then if the value is 1,000,
+
+285
+00:11:03,733 --> 00:11:04,533
+那我们
+then we
+
+286
+00:11:04,566 --> 00:11:08,666
+Permill::from_parts的话就是1,000/1,000,000
+Permill::from_parts is 1,000/1,000,000
+
+287
+00:11:09,766 --> 00:11:12,733
+类似的我们还可以使用form_rational这种
+Similarly, we can also use form_rational
+
+288
+00:11:12,900 --> 00:11:13,966
+给定分子p
+given molecule p
+
+289
+00:11:13,966 --> 00:11:16,366
+和分母q这种机制来构造一个
+and denominator q this mechanism to construct a
+
+290
+00:11:16,733 --> 00:11:17,999
+定点小数类型
+Fixed-point decimal type
+
+291
+00:11:19,366 --> 00:11:20,166
+使用
+When
+
+292
+00:11:20,900 --> 00:11:22,933
+Permill这种类型进行计算的时候
+using Permill type to calculate
+
+293
+00:11:23,100 --> 00:11:24,200
+也有一些二进制操作
+There are also some binary operations
+
+294
+00:11:24,200 --> 00:11:27,300
+比如是saturating_mul可以将两个
+For example, saturating_mul can multiply two
+
+295
+00:11:27,566 --> 00:11:29,799
+Permill的数据类型进行相乘
+Permill data types
+
+296
+00:11:30,533 --> 00:11:32,066
+我们也可以和一些
+we can also multiply with some
+
+297
+00:11:32,266 --> 00:11:34,333
+整数类型直接进行相乘
+Integer types directly
+
+298
+00:11:34,333 --> 00:11:35,799
+并且进行一些转换
+and do some conversions
+
+299
+00:11:36,900 --> 00:11:37,733
+但是我们要格外
+but we have to be extra
+
+300
+00:11:37,733 --> 00:11:39,566
+注意一些可能溢出的场景
+aware of some possible overflow scenarios
+
+301
+00:11:39,866 --> 00:11:42,266
+这里我们也给到了Permill的定义
+Here we also give the definition of Permill
+
+302
+00:11:42,733 --> 00:11:45,466
+里面有一些帮助性的方法
+There are some helpful methods in it
+
+303
+00:11:45,766 --> 00:11:47,299
+大家可以去参考一下
+You can refer to it
+
+304
+00:11:48,100 --> 00:11:49,600
+在Substrate开发过程中
+During Substrate development
+
+305
+00:11:50,000 --> 00:11:53,400
+合理的使用API文档是特别关键的
+Reasonable use of API documentation is particularly critical
+
+306
+00:11:53,400 --> 00:11:54,366
+因为现在
+Because now
+
+307
+00:11:55,000 --> 00:11:55,966
+通常这些API
+Usually these APIs
+
+308
+00:11:55,966 --> 00:11:57,799
+文档里面有非常多的描述性信息
+There is a lot of descriptive information in the document
+
+309
+00:11:57,800 --> 00:11:59,366
+以及使用的例子
+and examples of using
+
+310
+00:11:59,500 --> 00:12:01,266
+结合API文档以及
+Combining API documentation and
+
+311
+00:12:01,666 --> 00:12:04,699
+现有的substrate内置的一些代码示例
+Some code examples built into existing Substrate
+
+312
+00:12:04,699 --> 00:12:04,700
+we'll be fine to
+
+313
+00:12:04,700 --> 00:12:06,199
+我们就可以很好的去
+we'll be fine to
+
+314
+00:12:06,366 --> 00:12:08,166
+理解和使用对应的
+understand and use the corresponding
+
+315
+00:12:08,533 --> 00:12:09,699
+存储数据类型
+storage data type
+
+316
+00:12:11,133 --> 00:12:12,766
+这里我们再看一个
+Here we look at another
+
+317
+00:12:13,166 --> 00:12:15,266
+自定义的类型叫做moment
+custom type which is called moment
+
+318
+00:12:15,266 --> 00:12:16,599
+表示我们的时间
+showing our time
+
+319
+00:12:17,300 --> 00:12:18,066
+我们刚才讲到
+we just talked about
+
+320
+00:12:18,066 --> 00:12:20,866
+它是在timestamp模块里面去定义的
+It is defined in the timestamp module
+
+321
+00:12:21,100 --> 00:12:22,366
+当我们想使用
+when we want to use
+
+322
+00:12:22,366 --> 00:12:24,166
+timestamp模块所定义的moment类型的时候
+the moment type defined by the timestamp module
+
+323
+00:12:24,166 --> 00:12:26,733
+我们可以让我们的配置接口去
+We can let our config interface to
+
+324
+00:12:27,000 --> 00:12:28,266
+继承自timestamp
+inherit from the configuration interface 
+
+325
+00:12:28,266 --> 00:12:29,666
+里面的配置接口
+inside the timestamp.
+
+326
+00:12:30,733 --> 00:12:31,799
+这样我们的
+so our
+
+327
+00:12:32,000 --> 00:12:33,966
+当前模块就可以拥有
+current module can have
+
+328
+00:12:33,966 --> 00:12:35,466
+moment的这样一个类型定义
+such a type definition of moment
+
+329
+00:12:36,466 --> 00:12:39,699
+这里我们定了一个存储单元叫做MyTime
+Here we set a storage unit called MyTime
+
+330
+00:12:40,166 --> 00:12:42,499
+它的类型是一个单值类型
+Its type is a single value type
+
+331
+00:12:42,500 --> 00:12:45,333
+它存储的数据是T::Moment
+The data it stores is T::Moment
+
+332
+00:12:45,333 --> 00:12:46,666
+也就是来源于我们的
+That is from our
+
+333
+00:12:46,666 --> 00:12:49,099
+Timestamp模块里面定义的这样moment类型
+the moment type defined in the Timestamp module.
+
+334
+00:12:50,066 --> 00:12:51,166
+通常情况下
+Usually
+
+335
+00:12:51,300 --> 00:12:55,200
+moment类型在实现的时候就是一个U64
+the moment type is a U64 when it is implemented
+
+336
+00:12:55,200 --> 00:12:56,500
+这样的一个类型别名
+A type alias like this
+
+337
+00:12:56,700 --> 00:12:59,000
+我们可以通过这种方式来获取
+We can get time on chain
+
+338
+00:12:59,000 --> 00:12:59,966
+链上的时间
+by this way.
+
+339
+00:13:00,000 --> 00:13:02,666
+通过调用pallet_timestamp模块下的
+By calling the public exposed method get
+
+340
+00:13:03,100 --> 00:13:04,800
+公共暴露的方法get
+under the pallet_timestamp module
+
+341
+00:13:05,200 --> 00:13:06,700
+来获取当前
+to get the current
+
+342
+00:13:06,900 --> 00:13:09,466
+timestamp模块里面所存储的链上时间
+on-chain time stored in the timestamp module
+
+343
+00:13:10,133 --> 00:13:12,499
+还有一类自定义的类型是
+There is also a class of custom types that is
+
+344
+00:13:12,666 --> 00:13:14,566
+系统模块所提供的AccountId
+AccountId provided by the system module
+
+345
+00:13:14,800 --> 00:13:16,566
+这里我们定义了一个存储单元类型
+Here we define a storage unit type
+
+346
+00:13:16,566 --> 00:13:17,799
+叫做MyAccountId
+called MyAccountId
+
+347
+00:13:18,733 --> 00:13:20,133
+然后它是一个单值类型
+Then it is a single value type
+
+348
+00:13:20,133 --> 00:13:22,766
+它的存储数据是T::AccountId
+Its storage data is T::AccountId
+
+349
+00:13:22,766 --> 00:13:24,066
+也就是由我们系统模块
+That is, Provided by our system module
+
+350
+00:13:24,066 --> 00:13:25,466
+提供的这样一个关联类型
+such an association type
+
+351
+00:13:25,466 --> 00:13:26,399
+AccountId
+AccountId
+
+352
+00:13:27,200 --> 00:13:28,400
+我们刚才也已经说过了
+we just said
+
+353
+00:13:28,400 --> 00:13:30,200
+它是在系统模块里面定义
+It is defined in the system module
+
+354
+00:13:30,300 --> 00:13:31,766
+并且通常是
+and usually
+
+355
+00:13:32,300 --> 00:13:34,800
+用户私钥所对应的公匙信息
+The public key information corresponding to the user's private key
+
+356
+00:13:35,400 --> 00:13:37,266
+系统模块还提供了一个帮助方法
+The system module also provides a helper method
+
+357
+00:13:37,266 --> 00:13:38,566
+可以很好的从
+which can get our AccountId
+
+358
+00:13:39,000 --> 00:13:41,500
+我们的交易发送方获取我们的AccountId
+from our transaction sender
+
+359
+00:13:41,500 --> 00:13:44,333
+就是ensure_signed这样的一个帮助方法
+It is a helper method like ensure_signed
+
+360
+00:13:45,000 --> 00:13:45,933
+对于有
+For
+
+361
+00:13:46,100 --> 00:13:48,733
+存储复杂信息要求的这样的一些场景
+some scenarios such as storage complex information requirements
+
+362
+00:13:48,733 --> 00:13:50,499
+我们可以使用结构体
+We can use the structure
+
+363
+00:13:50,800 --> 00:13:53,366
+比如这里我们定了一个结构体是people
+For example, here we set a structure that is people
+
+364
+00:13:53,566 --> 00:13:55,366
+它有两个属性一个是name
+It has two attributes one is name
+
+365
+00:13:55,766 --> 00:13:57,866
+表示人的名字
+that Indicates the person's name
+
+366
+00:13:57,966 --> 00:13:59,366
+age表示人的年龄
+age means the age of the person
+
+367
+00:14:00,266 --> 00:14:02,166
+为了能够在链上存储这样一个结构体
+To be able to store such a structure on-chain
+
+368
+00:14:02,166 --> 00:14:05,599
+我们需要让我们讲一个结构体实现
+We need to know how does a struct implement
+
+369
+00:14:05,900 --> 00:14:06,933
+这些接口
+these interfaces
+
+370
+00:14:07,266 --> 00:14:09,266
+我们是使用derive这种形式
+We use the form of derive
+
+371
+00:14:09,266 --> 00:14:10,933
+去自动的帮我们生成
+to automatically generate
+
+372
+00:14:11,333 --> 00:14:12,333
+对应的实现
+corresponding realization for us
+
+373
+00:14:12,333 --> 00:14:13,733
+比如
+for example
+
+374
+00:14:13,733 --> 00:14:16,599
+编解码所需要的encode的decode的实现
+The implementation of decode required for encoding and decoding
+
+375
+00:14:16,933 --> 00:14:18,966
+以及默认值Default的实现
+and the implementation of the default value Default
+
+376
+00:14:19,900 --> 00:14:21,133
+这里我们就可以定义
+Here we can define
+
+377
+00:14:21,133 --> 00:14:22,099
+一个新的存储单元
+a new storage unit
+
+378
+00:14:22,100 --> 00:14:23,400
+叫做MyStruct
+called MyStruct
+
+379
+00:14:23,666 --> 00:14:24,666
+它是个单值类型
+it is a single value type
+
+380
+00:14:24,666 --> 00:14:26,299
+里面存储的数据是People
+The data stored in it is People
+
+381
+00:14:26,300 --> 00:14:27,300
+这样一个结构体
+such a structure
+
+382
+00:14:28,400 --> 00:14:29,733
+那对于Enum类型
+That for the Enum type
+
+383
+00:14:29,733 --> 00:14:31,866
+它和Struct是很类似的
+It is very similar to Struct
+
+384
+00:14:32,000 --> 00:14:34,200
+只不过它需要手动的去实行
+But the default interface
+
+385
+00:14:34,200 --> 00:14:35,766
+default接口
+needs to be done manually.
+
+386
+00:14:36,200 --> 00:14:39,100
+没有办法通过derive这种形式去
+There is no way to use this form of
+
+387
+00:14:39,166 --> 00:14:40,066
+派生出来
+derive
+
+388
+00:14:40,333 --> 00:14:41,933
+这里我给出来一个Enum的例子
+Here I give an example of Enum
+
+389
+00:14:41,933 --> 00:14:43,533
+有兴趣的话大家也可以看一下
+If you are interested, you can also take a look
+
+390
+00:14:44,500 --> 00:14:47,100
+我们刚才已经看过了一些单值类型
+We have just looked at some single value types
+
+391
+00:14:47,300 --> 00:14:49,166
+Substrate所支持的一些单值类型
+Some single-value types supported by Substrate
+
+392
+00:14:49,166 --> 00:14:50,966
+现在我们来看一下
+now let's see
+
+393
+00:14:50,966 --> 00:14:53,599
+如何构造简单的映射类型
+How to construct a simple mapped type
+
+394
+00:14:53,600 --> 00:14:55,666
+也就是我们这里的StorageMap
+That is our StorageMap here
+
+395
+00:14:55,866 --> 00:14:57,866
+它通常是用来保存键值对
+It is usually used to store key-value pairs
+
+396
+00:14:58,466 --> 00:14:59,699
+那我们刚才提到的
+what we just mentioned
+
+397
+00:14:59,933 --> 00:15:01,966
+单值类型都可以用作key
+Single-value types can be used as keys
+
+398
+00:15:02,000 --> 00:15:04,100
+或者用作value来使用
+or use it as value
+
+399
+00:15:04,966 --> 00:15:08,766
+这里我们定义了一个存储项叫做MyMap
+Here we define a storage item called MyMap
+
+400
+00:15:09,700 --> 00:15:10,866
+它是一个StorageMap
+It is a StorageMap
+
+401
+00:15:10,866 --> 00:15:12,133
+这样的一个映射类型
+such a mapping type
+
+402
+00:15:12,300 --> 00:15:14,466
+那map里面的key是一个U8
+The key in the map is a U8
+
+403
+00:15:14,766 --> 00:15:17,399
+值是我们系统模块定义的哈西类型
+The value is the hash type defined by our system module
+
+404
+00:15:17,400 --> 00:15:20,566
+这里Blake2_128Concat是一个哈西算法
+Here Blake2_128Concat is a hash algorithm
+
+405
+00:15:21,300 --> 00:15:24,166
+它是用来对我们的key进行哈西
+It is used to hash our key
+
+406
+00:15:24,333 --> 00:15:27,133
+进而使用哈西后的结果作为一个
+and then use the hashed result as a
+
+407
+00:15:27,533 --> 00:15:29,699
+Key-value数据库真正
+key used for storage
+
+408
+00:15:29,900 --> 00:15:32,000
+存储的时候所用到的那个key
+in the key-value database
+
+409
+00:15:33,333 --> 00:15:35,266
+那对应的key算法
+The corresponding key algorithm
+
+410
+00:15:35,266 --> 00:15:37,266
+除了Blake2_128Concat之外
+In addition to Blake2_128Concat
+
+411
+00:15:37,266 --> 00:15:40,133
+还有Twox64Concat Identity
+There is also Twox64Concat Identity
+
+412
+00:15:40,800 --> 00:15:42,366
+以及对应的非Concat
+and the corresponding non-Concat
+
+413
+00:15:42,400 --> 00:15:43,666
+这样的一个哈西算法
+Such a hash algorithm
+
+414
+00:15:43,800 --> 00:15:45,733
+它们的区别是Blake2_128
+Their difference is Blake2_128
+
+415
+00:15:45,766 --> 00:15:48,866
+是一个密码学安全的哈西算法
+is a cryptographically secure hash algorithm
+
+416
+00:15:48,866 --> 00:15:51,733
+那Twox64的话它的速度会更快
+Then Twox64 will be faster
+
+417
+00:15:51,733 --> 00:15:53,966
+但是它不是一个密码学安全的
+But it is not a cryptographically secure
+
+418
+00:15:53,966 --> 00:15:54,766
+哈西算法
+Hash algorithm
+
+419
+00:15:55,700 --> 00:15:57,300
+Identity通常是用在
+Identity is usually used in
+
+420
+00:15:57,800 --> 00:16:01,266
+当我们的key本身已经是一个哈西的
+When our key itself is already a Hash
+
+421
+00:16:01,266 --> 00:16:02,166
+结果的时候
+result,
+
+422
+00:16:02,166 --> 00:16:04,699
+我们可以使用Identity来避免一些
+We can use Identity to avoid some
+
+423
+00:16:04,966 --> 00:16:06,399
+额外的不必要的计算
+additional unnecessary calculations
+
+424
+00:16:07,700 --> 00:16:10,800
+对于storage map这样的一个类型
+For a type like storage map
+
+425
+00:16:10,966 --> 00:16:12,666
+我们有这样一些常用的API
+We have some commonly used APIs like this
+
+426
+00:16:12,666 --> 00:16:14,699
+比如我们可以通过insert方法去
+For example, we can use the insert method to
+
+427
+00:16:14,700 --> 00:16:16,066
+插入一个键值
+insert a key
+
+428
+00:16:16,900 --> 00:16:18,466
+我们可以通过get
+We can get
+
+429
+00:16:18,766 --> 00:16:21,199
+来给定一个key来获取对应的
+to give a key to get the corresponding
+
+430
+00:16:21,300 --> 00:16:22,800
+映射里面的值
+value in the map
+
+431
+00:16:23,133 --> 00:16:25,199
+我们还可以通过remove方法给定key
+We can also give the key through the remove method
+
+432
+00:16:25,200 --> 00:16:26,666
+来删除某一个元素
+to delete an element
+
+433
+00:16:27,066 --> 00:16:28,733
+对于修改和覆盖
+For modification and overwriting
+
+434
+00:16:29,066 --> 00:16:31,066
+元素我们可以使用insert进行覆盖
+elements, we can use insert to cover
+
+435
+00:16:31,066 --> 00:16:34,266
+或者使用mutate来更改一个原有的值
+or use mutate to change an existing value
+
+436
+00:16:34,966 --> 00:16:36,199
+更新成一个新的值
+update to a new value
+
+437
+00:16:36,400 --> 00:16:37,366
+这里我们
+here
+
+438
+00:16:37,366 --> 00:16:39,733
+给到了一个StorageMap的接口文档
+a StorageMap interface document is given
+
+439
+00:16:40,166 --> 00:16:41,733
+还有一点需要说的是
+one more thing to say
+
+440
+00:16:41,733 --> 00:16:42,999
+StorageMap实现了
+StorageMap implements
+
+441
+00:16:43,000 --> 00:16:44,866
+Iterable StorageMap这样一个接口
+Iterable StorageMap such an interface
+
+442
+00:16:45,066 --> 00:16:46,733
+可以用来迭代我们
+can be used to iterate
+
+443
+00:16:47,333 --> 00:16:49,399
+StorageMap里面所有的key value
+all key values ​​in StorageMap
+
+444
+00:16:49,400 --> 00:16:51,266
+但是在迭代的时候我们要尤其
+But when iterating we have to especially
+
+445
+00:16:51,333 --> 00:16:52,299
+格外注意
+pay extra attention
+
+446
+00:16:52,933 --> 00:16:55,466
+不能让链上迭代的时间
+The time to iterate on the chain cannot be allowed
+
+447
+00:16:55,600 --> 00:16:57,666
+超过我们区块的生成时间
+exceeding the generation time of our block
+
+448
+00:16:57,933 --> 00:16:58,599
+这样的话
+In this case
+
+449
+00:16:58,600 --> 00:17:01,333
+就有可能导致我们不能正常的出块
+It may cause us to fail to produce blocks normally
+
+450
+00:17:01,466 --> 00:17:03,733
+所以在迭代的时候要格外的小心
+So be extra careful when iterating
+
+451
+00:17:04,733 --> 00:17:06,299
+接着我们就可以看一下
+Then we can see
+
+452
+00:17:06,733 --> 00:17:09,699
+双键形式类型StorageDoubleMap
+Double key form type StorageDoubleMap
+
+453
+00:17:10,566 --> 00:17:13,499
+那顾名思义它就是用了两个key来索引
+As the name implies, it uses two keys to index
+
+454
+00:17:13,733 --> 00:17:14,533
+一个value
+a value
+
+455
+00:17:15,066 --> 00:17:17,933
+它的好处是你可以快速的去删除
+Its advantage is that you can quickly delete
+
+456
+00:17:18,666 --> 00:17:21,499
+第一个key也就是key1所对应的任意记录
+The first key is any record corresponding to key1
+
+457
+00:17:21,700 --> 00:17:24,800
+也可以快速遍历key1所对应的所有记录
+You can also quickly traverse all records corresponding to key1
+
+458
+00:17:25,533 --> 00:17:28,333
+这里我们定义了一个存储项叫做
+Here we define a storage item called
+
+459
+00:17:28,533 --> 00:17:29,666
+MyDoubleMap
+MyDoubleMap
+
+460
+00:17:30,400 --> 00:17:32,700
+它是StorageDoubleMap这样一个类型
+It is a type of StorageDoubleMap
+
+461
+00:17:32,700 --> 00:17:35,866
+它的key1是AccountId
+Its key1 is AccountId
+
+462
+00:17:36,200 --> 00:17:40,466
+key2是U32 所存储的值是一个哈西
+key2 is U32 and the stored value is a Hash
+
+463
+00:17:40,666 --> 00:17:41,733
+这里为大家简单起见
+Here for the sake of simplicity
+
+464
+00:17:41,733 --> 00:17:44,299
+我们都是使用Blake2_128
+We are all using Blake2_128
+
+465
+00:17:44,366 --> 00:17:45,733
+这样的一个哈西算法
+such a hash algorithm
+
+466
+00:17:46,266 --> 00:17:47,766
+在正式的代码中的话
+In formal code
+
+467
+00:17:47,766 --> 00:17:49,699
+我们通常是要根据上下文
+We usually want to use the context
+
+468
+00:17:50,000 --> 00:17:52,133
+根据key的类型以及
+according to the type of key and
+
+469
+00:17:52,700 --> 00:17:54,100
+它的输入来源
+its input source
+
+470
+00:17:54,100 --> 00:17:56,300
+来去选择一个合适的哈西算法
+to choose a suitable hash algorithm
+
+471
+00:17:56,533 --> 00:17:58,099
+通常情况下是当
+Usually
+
+472
+00:17:58,333 --> 00:18:00,599
+输入是由用户控制的时候
+When the input is controlled by the user
+
+473
+00:18:01,166 --> 00:18:03,099
+我们需要用一个密码学安全的
+We need to use a cryptographically secure
+
+474
+00:18:03,300 --> 00:18:03,733
+哈西算法
+Hash algorithm
+
+475
+00:18:03,733 --> 00:18:05,933
+比如是Blake2_128
+For example, Blake2_128
+
+476
+00:18:06,266 --> 00:18:08,599
+但是如果这个数据本身是由
+But if this data itself is composed of
+
+477
+00:18:08,933 --> 00:18:09,799
+系统所控制
+controlled by the system
+
+478
+00:18:09,800 --> 00:18:12,333
+能够保证它不会被任意的输入
+which can guarantee that it will not be arbitrarily entered
+
+479
+00:18:12,333 --> 00:18:13,966
+那我们就可以使用更快的
+Then we can use the faster
+
+480
+00:18:13,966 --> 00:18:16,099
+Twox64这样一个哈西算法
+Hash algorithm such as Twox64
+
+481
+00:18:16,933 --> 00:18:18,299
+刚才我们已提到过了
+We just mentioned
+
+482
+00:18:18,366 --> 00:18:20,599
+如果这个key本身已经是一个
+If we can already guarantee that
+
+483
+00:18:20,600 --> 00:18:22,700
+我们已经可以保证它是一个
+the key itself is
+
+484
+00:18:23,100 --> 00:18:25,766
+密码学安全的输出或者一个
+a cryptographically secure output or a
+
+485
+00:18:26,266 --> 00:18:27,333
+哈西结果的输出
+output of the hash result
+
+486
+00:18:27,333 --> 00:18:28,966
+我们就可以直接使用
+we can directly use
+
+487
+00:18:29,266 --> 00:18:30,666
+identity这种机制
+identity mechanism
+
+488
+00:18:30,666 --> 00:18:32,799
+来避免额外的哈西计算的开销
+to avoid the overhead of additional hash calculations
+
+489
+00:18:34,266 --> 00:18:35,066
+对于
+for
+
+490
+00:18:35,500 --> 00:18:38,300
+StorageDoubleMap这种类型我们有这些API
+StorageDoubleMap this type we have these APIs
+
+491
+00:18:38,600 --> 00:18:41,866
+我们可以使用insert的方法来插入key1
+We can use the insert method to insert key1
+
+492
+00:18:41,866 --> 00:18:43,699
+key2以及对应的value值
+key2 and the corresponding value
+
+493
+00:18:44,266 --> 00:18:46,566
+然后我们还可以通过Get的方法给定key1
+Then we can also give key1 through the method of Get
+
+494
+00:18:46,566 --> 00:18:48,533
+key2来获取对应的元素值
+key2 to get the corresponding element value
+
+495
+00:18:49,300 --> 00:18:50,966
+使用remove方法来删除key1
+Use the remove method to delete
+
+496
+00:18:50,966 --> 00:18:52,166
+key2对应的元素值
+The elements values corresponding to key 1 and key2
+
+497
+00:18:53,000 --> 00:18:54,133
+那我们刚才提到了
+then we just mentioned
+
+498
+00:18:54,400 --> 00:18:55,966
+StorageDoubleMap的一个好处是
+One benefit of StorageDoubleMap is that
+
+499
+00:18:55,966 --> 00:18:58,366
+可以快速的删除key1所有的元素
+it can quickly delete all elements of key1
+
+500
+00:18:58,500 --> 00:19:01,133
+那这样的API就是remove prefix
+Then such an API is remove prefix
+
+501
+00:19:01,866 --> 00:19:04,899
+这里我也给出了StorageDoubleMap的API文档
+Here I also give the API documentation for StorageDoubleMap
+
+502
+00:19:05,100 --> 00:19:06,666
+大家有时间的话一定要读
+If you have time, you can
+
+503
+00:19:06,666 --> 00:19:07,466
+一读
+read it
+
+504
+00:19:08,400 --> 00:19:10,466
+和StorageMap很类似
+Similar to StorageMap
+
+505
+00:19:10,800 --> 00:19:13,733
+StorageDoubleMap也实现了一个叫做
+StorageDoubleMap also implements a method called
+
+506
+00:19:14,133 --> 00:19:16,333
+iterable storage double map这样的一个接口
+an interface like iterable storage double map
+
+507
+00:19:16,333 --> 00:19:18,699
+能够对我们的双键映射类型里面
+which is able to traverse all elements in
+
+508
+00:19:18,700 --> 00:19:20,800
+所有的元素进行一个迭代
+the double bond type
+
+509
+00:19:21,100 --> 00:19:21,500
+同样的
+same
+
+510
+00:19:21,500 --> 00:19:23,666
+我们在迭代的时候要格外的小心
+We have to be extra careful when iterating
+
+511
+00:19:23,666 --> 00:19:25,133
+不能让迭代的时间
+we can't let iteration time
+
+512
+00:19:25,133 --> 00:19:27,133
+超过我们的区块实证时间
+exceed our block verification time
+
+513
+00:19:28,900 --> 00:19:31,900
+接着我们来看一下存储的初始化
+Next, let's look at the initialization of the storage
+
+514
+00:19:32,166 --> 00:19:33,866
+那通常在创始区块的时候
+usually at the time of the genesis block
+
+515
+00:19:33,866 --> 00:19:37,199
+我们对于某些模块要初始化一些
+For some modules we want to initialize some
+
+516
+00:19:37,400 --> 00:19:38,500
+需要的数据
+required data
+
+517
+00:19:38,900 --> 00:19:41,300
+那我们是定义这样的一个GenesisConfig
+Then we define such a GenesisConfig
+
+518
+00:19:41,300 --> 00:19:43,300
+这样的一个结构体
+such a structure
+
+519
+00:19:43,933 --> 00:19:46,299
+那这样的一个需要的数据
+Then such a required data
+
+520
+00:19:46,300 --> 00:19:47,533
+它的名字就是value
+its name is value
+
+521
+00:19:47,533 --> 00:19:50,166
+它数据类型是一个U8类型
+Its data type is a U8 type
+
+522
+00:19:50,333 --> 00:19:53,299
+这是我们以这样一个简单的类型举例
+Here is our example with such a simple type
+
+523
+00:19:54,300 --> 00:19:56,466
+那我们还需要使用genesis_config
+Then we also need to use genesis_config
+
+524
+00:19:56,466 --> 00:19:57,966
+这样一个宏来表示
+Such a macro to represent
+
+525
+00:19:58,266 --> 00:20:00,666
+这个结构体是需要在创始
+that this structure is needed in the initial
+
+526
+00:20:00,766 --> 00:20:02,099
+区块里面进行配置的
+configured in the block
+
+527
+00:20:02,533 --> 00:20:05,699
+配置是通常发生在Chainspec文件里面
+Configuration usually happens in the Chainspec file
+
+528
+00:20:06,166 --> 00:20:09,466
+我们还需要去实现一个Default接口
+We also need to implement a Default interface
+
+529
+00:20:09,666 --> 00:20:11,699
+这里它Default值很简单
+Here its Default value is very simple
+
+530
+00:20:11,700 --> 00:20:12,566
+就是我们
+it's
+
+531
+00:20:12,700 --> 00:20:14,500
+U8这样一个数值类型的Default值
+Default value of a numeric type such as U8
+
+532
+00:20:14,500 --> 00:20:15,400
+也就是0
+That is 0
+
+533
+00:20:15,800 --> 00:20:17,300
+我们还需要去
+we still need to
+
+534
+00:20:17,666 --> 00:20:20,599
+实现genesis_build这样的一个接口
+implement an interface like genesis_build
+
+535
+00:20:21,300 --> 00:20:23,766
+当我们在初始化的时候对我们的
+When we initialize our
+
+536
+00:20:24,266 --> 00:20:27,566
+chainspec里面的初始化的值进行
+value in the chainspec, we need to do
+
+537
+00:20:27,900 --> 00:20:28,700
+一系列操作
+series of operations
+
+538
+00:20:28,700 --> 00:20:30,733
+来更新我们链上的存储单元
+to update storage units on our chain
+
+539
+00:20:30,733 --> 00:20:32,599
+比如这里我们在build的时候
+For example, here when we are building
+
+540
+00:20:32,800 --> 00:20:33,733
+我们将
+we will
+
+541
+00:20:34,700 --> 00:20:36,533
+Chainspec里面所配置的
+take out the initial value
+
+542
+00:20:37,000 --> 00:20:38,566
+初始值value拿出来
+configured in Chainspec
+
+543
+00:20:38,566 --> 00:20:39,766
+然后放在我们
+then put in
+
+544
+00:20:39,900 --> 00:20:41,700
+MyValue这样的一个存储项里面
+a storage item like MyValue
+
+545
+00:20:42,666 --> 00:20:45,133
+大家可以去参考Substrate内置的
+You can refer to Substrate's built-in
+
+546
+00:20:45,466 --> 00:20:47,766
+Sudo模块里面的一些实现
+implementations in the Sudo module
+
+547
+00:20:48,266 --> 00:20:50,133
+它里面定义了一个
+It defines a
+
+548
+00:20:50,333 --> 00:20:52,533
+很简单的初始化的配置
+Very simple initial configuration
+
+549
+00:20:53,933 --> 00:20:54,933
+这里我还想给大家
+Here I also want to share with you
+
+550
+00:20:54,933 --> 00:20:56,066
+分享一些在
+some
+
+551
+00:20:56,333 --> 00:20:58,133
+Substrate进行链上存储设计的时候
+best practices
+
+552
+00:20:58,133 --> 00:20:59,466
+一些最佳实践
+when Substrate is designing on-chain storage
+
+553
+00:21:00,000 --> 00:21:01,366
+我们刚才已经提到过了
+we just mentioned
+
+554
+00:21:01,366 --> 00:21:04,199
+链上的存储资源是相对比较昂贵的
+On-chain storage resources are relatively expensive
+
+555
+00:21:04,600 --> 00:21:06,066
+因为它会在
+because it will
+
+556
+00:21:06,066 --> 00:21:08,299
+成千上万个节点里面进行一个备份
+make a backup in thousands of nodes
+
+557
+00:21:08,933 --> 00:21:10,933
+所以通常情况下我们要把一些
+So usually we'll take some
+
+558
+00:21:11,400 --> 00:21:12,366
+源信息
+source information
+
+559
+00:21:12,366 --> 00:21:15,133
+或者说大文件的信息要存储在一个
+In other words, the information of large files should be stored by a
+
+560
+00:21:15,400 --> 00:21:18,000
+更有利的去中心的存储机制
+more favorable decentralized storage mechanism
+
+561
+00:21:18,000 --> 00:21:19,700
+或者中心化存储机制里面
+or in the centralized storage mechanism
+
+562
+00:21:19,700 --> 00:21:22,333
+链上只存储一个小的哈西值
+Only a small hash value is stored on the chain
+
+563
+00:21:23,300 --> 00:21:24,400
+还有一个就是
+Another one is
+
+564
+00:21:24,400 --> 00:21:26,366
+当我们有集合类的数据类型的时候
+When we have a data type of collection class
+
+565
+00:21:26,366 --> 00:21:27,333
+我们要去
+we are going to
+
+566
+00:21:27,800 --> 00:21:29,700
+设置这样一个集合所
+set up the maximum capacity that can be carried
+
+567
+00:21:29,933 --> 00:21:31,333
+能承载的最大容量
+in such a collection
+
+568
+00:21:31,333 --> 00:21:33,666
+来保证他不会占用过多的空间
+to make sure it doesn't take up too much space
+
+569
+00:21:34,933 --> 00:21:36,399
+另外一个比较好的实践是
+Another good practice is that
+
+570
+00:21:36,400 --> 00:21:38,000
+我们尽可能的在
+we try our best to
+
+571
+00:21:38,100 --> 00:21:39,100
+开始的时候
+check all possible error scenarios
+
+572
+00:21:39,100 --> 00:21:41,566
+校验所有的可能错误的场景
+at the beginning
+
+573
+00:21:42,000 --> 00:21:43,000
+那校验完成之后
+After the verification is completed
+
+574
+00:21:43,000 --> 00:21:45,733
+我们再进行我们存储项的更新操作
+Let's update our storage items again
+
+575
+00:21:45,733 --> 00:21:49,066
+也就是verify first write last
+That is verify first write last
+
+576
+00:21:49,900 --> 00:21:52,500
+那在substrate的最新的版本也就是
+The latest version in substrate is
+
+577
+00:21:52,966 --> 00:21:54,899
+frame V2新的语法里面
+inside the new syntax of frame V2
+
+578
+00:21:55,066 --> 00:21:57,799
+提供了一个transactional这样一个宏
+It provides a transactional such a macro
+
+579
+00:21:58,166 --> 00:21:59,733
+它可以保证我们
+it guarantees us
+
+580
+00:21:59,800 --> 00:22:01,733
+可调函数的这样的一个
+atomic operations
+
+581
+00:22:02,100 --> 00:22:03,266
+原子化的操作
+of callable functions
+
+582
+00:22:03,333 --> 00:22:05,166
+也就是说当有错误发生的时候
+That is, when an error occurs
+
+583
+00:22:05,166 --> 00:22:06,266
+我们可以保证
+we can guarantee that
+
+584
+00:22:06,466 --> 00:22:09,599
+之前对存储项的操作会去回滚
+previous operations on storage items will be rolled back
+
+585
+00:22:10,166 --> 00:22:12,366
+尽管我们有这样的一个原子性操作的
+Although we have such an atomic operation
+
+586
+00:22:12,366 --> 00:22:15,333
+宏那我们还是希望大家能够在
+Macro, we still hope that when operating
+
+587
+00:22:15,566 --> 00:22:16,366
+操作的时候
+everyone can
+
+588
+00:22:16,366 --> 00:22:18,499
+先去对错误的场景进行的校验
+check the wrong scene first
+
+589
+00:22:18,500 --> 00:22:20,666
+然后最终再去更新
+and finally update
+
+590
+00:22:22,400 --> 00:22:25,166
+另外一些其他的点
+some other points
+
+591
+00:22:25,166 --> 00:22:26,499
+我想分享的是
+what i want to share is
+
+592
+00:22:26,500 --> 00:22:27,766
+我们可以在
+we can
+
+593
+00:22:27,866 --> 00:22:30,166
+对存储单元使用pub关键字
+use the pub keyword for storage units
+
+594
+00:22:30,866 --> 00:22:31,666
+来设置这样的
+to set the
+
+595
+00:22:31,666 --> 00:22:34,333
+存储单元对不同模块的可见范围
+visibility range of storage unit to different modules
+
+596
+00:22:34,800 --> 00:22:36,500
+然后我们的ValueQuery
+Then our ValueQuery
+
+597
+00:22:36,700 --> 00:22:39,466
+也可以设置一些自定义的默认值
+It is also possible to set some custom default values
+
+598
+00:22:39,566 --> 00:22:42,099
+这里我给到了一个例子
+Here I give an example
+
+599
+00:22:43,100 --> 00:22:46,066
+那当大家对某些存储的API
+Then when everyone doesn't know certain storage APIs
+
+600
+00:22:46,166 --> 00:22:47,466
+不是很了解的时候
+that well
+
+601
+00:22:47,466 --> 00:22:48,733
+我们可以去参考
+we can refer to
+
+602
+00:22:48,966 --> 00:22:52,533
+substrate frame目录下的不同的pallets
+different pallets under the substrate frame directory
+
+603
+00:22:52,766 --> 00:22:55,266
+来查找一些最新的使用方法
+to find some of the newest ways to use
+
+604
+00:22:55,966 --> 00:22:58,266
+还可以结合API文档
+We can also read API documentations
+
+605
+00:22:58,266 --> 00:23:01,299
+比如这里的palettes::storage是宏的
+For example, palettes::storage here is a macro
+
+606
+00:23:01,300 --> 00:23:03,066
+接口文档以及我们刚才
+documentation and what we just
+
+607
+00:23:03,466 --> 00:23:05,866
+列出的不同的存储数据类型
+list the different storage data types
+
+608
+00:23:05,866 --> 00:23:07,333
+它的API文档
+its API documentation
+
+609
+00:23:08,466 --> 00:23:10,799
+今天课程内容到这里就结束了
+Today's course content is over here
+
+610
+00:23:10,800 --> 00:23:11,666
+谢谢大家
+thank you all
+
