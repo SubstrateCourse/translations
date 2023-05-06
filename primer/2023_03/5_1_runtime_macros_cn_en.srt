@@ -250,98 +250,98 @@ State transition from onchain state A to onchain state B is triggered by transac
 
 51
 00:02:07,366 --> 00:02:08,899
-将对应的交易信息
-The corresponding transaction information
+将对应的交易信息应用到我们的Runtime逻辑层
+apply the transactions to the Runtime logic
 
 52
-00:02:08,900 --> 00:02:11,166
-应用到我们的Runtime逻辑层
-Applied to our Runtime logic layer
+00:02:08,899 --> 00:02:11,166
+将对应的交易信息应用到我们的Runtime逻辑层
+apply the transactions to the Runtime logic
 
 53
 00:02:11,766 --> 00:02:13,366
 进行状态的修改
-to make status changes
+thus changes the onchain state
 
 54
 00:02:15,600 --> 00:02:17,566
-那在Substrates内置了很多
-There are a lot of Runtime function modules
+那在Substrates内置了很多Runtime的功能模块
+Substrate provides a lot of build-in modules which can be used in runtime
 
 55
 00:02:17,666 --> 00:02:19,166
-Runtime的功能模块
-built in Substrate
+那在Substrates内置了很多Runtime的功能模块
+Substrate provides a lot of build-in modules which can be used in runtime
 
 56
 00:02:19,766 --> 00:02:22,799
 这些功能模块也被称之为pallet
-These functional modules are also called pallets
+such modules are also called pallets
 
 57
 00:02:24,166 --> 00:02:26,799
 常用的有资产管理相关的assets, balance
-Commonly used modules are assets and balances related to asset management
+Commonly used modules includes assets management features like assets, balances pallets
 
 58
 00:02:27,600 --> 00:02:31,800
 共识相关的babe, grandpa
-Consensus-related babe, grandpa
+consensus related pallets like babe, grandpa
 
 59
 00:02:32,700 --> 00:02:36,966
 以及治理相关的collective, democracy, elections, sudo
-And governance-related collective, democracy, elections, sudo
+governance related pallets like collective, democracy, elections, sudo, etc.
 
 60
 00:02:36,966 --> 00:02:40,133
 还有权益证明相关的staking
-There are also staking related to proof of rights and interests
+and Proof of Staking related pallets like staking.
 
 61
 00:02:40,600 --> 00:02:42,466
 以及智能合约contract
-and the smart contract contract
+also the smart contract pallet called contracts
 
 62
 00:02:42,900 --> 00:02:46,200
 这些模块都是可组合的可自由添加
-These modules are all combinable and can be added freely
+All of these pallets are composable and can be used freely
 
 63
 00:02:46,266 --> 00:02:48,766
-根据你链上逻辑的要求
-According to the requirements of your on-chain logic
+根据你链上逻辑的要求可以自由的进行选择
+you only need to choose the ones that fit for your business
 
 64
-00:02:49,000 --> 00:02:50,600
-可以自由的进行选择
-you are free to choose
+00:02:48,766 --> 00:02:50,600
+根据你链上逻辑的要求可以自由的进行选择
+you only need to choose the ones that fit for your business
 
 65
 00:02:51,200 --> 00:02:51,966
-但是这些模块
-But these modules
+但是这些模块都要依赖于一个公共的系统模块
+Most of the pallets depend on the frame-system pallet
 
 66
 00:02:51,966 --> 00:02:53,866
-都要依赖于一个公共的系统模块
-depend on a common system module
+但是这些模块都要依赖于一个公共的系统模块
+Most of the pallets depend on the frame-system pallet
 
 67
 00:02:53,866 --> 00:02:54,666
 叫做system
-called system
+Most of the pallets depend on the frame-system pallet
 
 68
 00:02:57,100 --> 00:02:59,166
-在使用Substrate进行Runtime
-When developing functional modules
+在使用Substrate进行Runtime功能模块开发的时候
+When developing a module for Substrate Runtime
 
 69
-00:02:59,533 --> 00:03:00,933
-功能模块开发的时候
-in Runtime by using Substrate
+00:02:59,166 --> 00:03:00,933
+在使用Substrate进行Runtime功能模块开发的时候
+When developing a module for Substrate Runtime
 
 70
 00:03:01,066 --> 00:03:03,266
@@ -356,145 +356,146 @@ The first is frame_support::pallet
 72
 00:03:07,366 --> 00:03:10,099
 可以用来我们定义一个新的功能模块
-Can be used to define a new function module
+it can be used to define a new module 
 
 73
 00:03:11,266 --> 00:03:13,399
-接着是使用pallet::config
-Then use pallet::config
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 74
-00:03:13,400 --> 00:03:14,700
-来定义我们功能模块
-To define the configuration trait
+00:03:13,399 --> 00:03:14,700
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 75
 00:03:14,700 --> 00:03:16,000
-所需要的配置接口
-of the module
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 76
 00:03:16,000 --> 00:03:16,066
-The configuration trait usually contains some
+The configuration trait usually contains some dependent data and associate types.
 
 77
 00:03:16,066 --> 00:03:18,033
 配置接口里面通常会包含一些
-The configuration trait usually contains some
+The configuration trait usually contains some dependent data and associate types.
 
 78
 00:03:18,033 --> 00:03:18,099
 配置接口里面通常会包含一些
+The configuration trait usually contains some dependent data and associate types.
 
 79
-00:03:18,400 --> 00:03:20,700
+00:03:18,099 --> 00:03:20,700
 依赖的数据信息和类型信息
-Dependent data information and type information
+The configuration trait usually contains some dependent data and associate types.
 
 80
 00:03:21,866 --> 00:03:23,499
 pallet::storage可以定义
-pallet::storage can be defined
+pallet::storage macro can be used to define the onchain storage items
 
 81
-00:03:23,700 --> 00:03:25,766
+00:03:23,499 --> 00:03:25,766
 我们所需要的链上存储单元
-The on-chain storage unit we need
+pallet::storage macro can be used to define the onchain storage items
 
 82
 00:03:25,866 --> 00:03:27,999
-pallet::event定义我们
-pallet::event defines our
+pallet::event定义链上可以触发的事件
+pallet::event defines the events that can be triggered on chain
 
 83
-00:03:28,400 --> 00:03:30,600
-链上可以触发的事件
-Events that can be triggered on the chain
+00:03:27,999 --> 00:03:30,600
+pallet::event定义链上可以触发的事件
+pallet::event defines the events that can be triggered on chain
 
 84
 00:03:31,466 --> 00:03:33,133
-pallet::error定义了
-pallet::error defines
+pallet::error定义了链上交易可以接受的错误信息
+pallet::error defines the error types that caused by sending transactions
 
 85
-00:03:33,700 --> 00:03:36,766
-链上交易可以接受的错误信息
-Acceptable error messages for on-chain transactions
+00:03:33,133 --> 00:03:36,766
+pallet::error定义了链上交易可以接受的错误信息
+pallet::error defines the error types that caused by sending transactions
 
 86
 00:03:38,266 --> 00:03:41,533
 pallet::call定义了我们链上的可调用函数
-pallet::call defines the callable function on our chain
+pallet::call defines the dipatchable functions
 
 87
 00:03:41,733 --> 00:03:43,966
 也就是对应的我们不同的交易类型
-That is, corresponding to our different transaction types
+corresponding to our different transaction types
 
 88
 00:03:45,133 --> 00:03:49,733
 pallet::hooks定义了一些独特的函数
-pallet::hooks defines some unique functions
+pallet::hooks defines some unique functions that can be executed at different periods of a block
 
 89
-00:03:49,866 --> 00:03:52,933
+00:03:49,733 --> 00:03:52,933
 可以在区块的不同时期进行执行
-Can be executed at different times in the block
+pallet::hooks defines some unique functions that can be executed at different periods of a block
 
 90
 00:03:54,966 --> 00:03:55,866
-consruct_runtime
-consruct_runtime
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 91
-00:03:55,900 --> 00:03:56,900
-用来把我们
-used to put our
+00:03:55,866 --> 00:03:56,900
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 92
-00:03:57,166 --> 00:03:59,499
-新添加的功能模块
-newly added function modules
+00:03:56,900 --> 00:03:59,499
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 93
-00:03:59,500 --> 00:04:00,900
-加入到我们的Runtime里
-into our Runtime
+00:03:59,499 --> 00:04:00,900
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 94
 00:04:03,700 --> 00:04:06,166
-那不管是传统的互联网应用还是
-Whether it's traditional Internet applications or
+不管是传统的互联网应用还是以区块链技术为代表的Web3.0应用
+Whether it's traditional Web2.0 applications or blockchain based Web3.0 applications
 
 95
-00:04:06,533 --> 00:04:09,366
-以区块链技术为代表的Web3.0应用
-Web3.0 applications represented by blockchain technology
+00:04:06,166 --> 00:04:09,366
+不管是传统的互联网应用还是以区块链技术为代表的Web3.0应用
+Whether it's traditional Web2.0 applications or blockchain based Web3.0 applications
 
 96
 00:04:09,366 --> 00:04:11,966
 那关键性的数据都需要进行存储
-All critical data needs to be stored
+the critical data needs to be stored, so that it can be processed and used later
 
 97
-00:04:12,100 --> 00:04:16,733
+00:04:11,966 --> 00:04:16,733
 从而可以被后续进行处理和使用
-so that it can be processed and used later
+the critical data needs to be stored, so that it can be processed and used later
 
 98
 00:04:17,333 --> 00:04:21,099
-Substrate的storage宏就是用来定义
-Substrate's storage macro is used to define
+Substrate的storage宏就是用来定义链上的存储单元
+Substrate's storage macro is used to define onchain storage items.
 
 99
-00:04:21,533 --> 00:04:22,866
-链上的存储单元
-storage unit on the chain
+00:04:21,099 --> 00:04:22,866
+Substrate的storage宏就是用来定义链上的存储单元
+Substrate's storage macro is used to define onchain storage items.
 
 100
 00:04:25,166 --> 00:04:27,799
 这里我们看一个storage宏的例子
-Here we look at an example of a storage macro
+Here let's look at an example of storage macro
 
 101
 00:04:28,133 --> 00:04:31,499
