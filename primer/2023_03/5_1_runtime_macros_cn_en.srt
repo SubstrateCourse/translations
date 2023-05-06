@@ -75,7 +75,7 @@ in Rust
 
 16
 00:00:38,866 --> 00:00:42,599
-变成语言里提供了两种宏的语法
+编程语言里提供了两种宏的语法
 Two macro syntaxes are provided in the language
 
 17
@@ -758,7 +758,7 @@ When defining a storage unit
 
 153
 00:06:23,900 --> 00:06:25,966
-这个泛型T是不可缺少的
+这个泛型T是不可缺省的
 This generic T is indispensable
 
 154
@@ -813,7 +813,7 @@ It is of type StorageMap
 
 164
 00:06:56,866 --> 00:06:58,966
-还有一个是双键值类型
+还有一个是双键映射类型
 There is also a double key value type
 
 165
@@ -918,7 +918,7 @@ It can also support some custom transaction types
 
 185
 00:07:47,333 --> 00:07:49,499
-比如你可以注册链上的身份
+比如注册链上的身份
 For example, you can register an identity on the chain
 
 186
@@ -953,12 +953,12 @@ every external transaction
 
 192
 00:08:04,133 --> 00:08:06,066
-都会对应一个可调的函数
+都会对应一个可调用函数
 will correspond to an adjustable function
 
 193
 00:08:06,266 --> 00:08:08,466
-那可调的函数就是通过call
+那可调用函数就是通过call
 The adjustable function is through call
 
 194
@@ -973,12 +973,12 @@ defined in the module
 
 196
 00:08:12,500 --> 00:08:15,566
-可调的函数会根据我们的函数参数
+可调用函数会根据我们的函数参数
 The adjustable function will be based on our function parameters
 
 197
 00:08:16,100 --> 00:08:18,500
-进行我们自定的逻辑的处理
+进行我们自定义逻辑的处理
 to perform our own logic processing
 
 198
@@ -1103,7 +1103,7 @@ The return result is DispatchResult
 
 222
 00:09:08,866 --> 00:09:13,133
-是一个Rust result类型的类型别名
+是一个Rust Result类型的类型别名
 It is a type alias for the Rust result type
 
 223
@@ -1128,12 +1128,12 @@ call_index macro
 
 227
 00:09:23,933 --> 00:09:25,599
-可以把可调用函数在code
+可以把可调用函数在codec
 can fix the sequence
 
 228
 00:09:25,599 --> 00:09:26,399
-可以把可调用函数在code
+可以把可调用函数在codec
  callable functions in code
 
 229
@@ -1545,7 +1545,7 @@ if it has a value
 
 311
 00:12:18,000 --> 00:12:20,966
-我们就对应里面的值进行加1
+我们就对里面的值进行加1
 We add 1 to the corresponding value inside
 
 312
@@ -1665,13 +1665,13 @@ event type which is SomethingStored
 
 335
 00:13:14,400 --> 00:13:19,366
-第一个参数是U32表示我们操作的数据
+第一个参数是U32 表示我们操作的数据
 The first parameter is U32 representing the data we operate
 
 336
 00:13:19,500 --> 00:13:21,400
-第二个参数是T::AccountID
-The second parameter is T::AccountID
+第二个参数是T::AccountId
+The second parameter is T::AccountId
 
 337
 00:13:21,400 --> 00:13:24,166
@@ -1735,7 +1735,7 @@ Event enumeration type, subtype SomethingStored
 
 349
 00:13:54,366 --> 00:13:56,799
-它有两个数据一个是这个数据something
+它有两个数据, 一个是这个数据something
 It has two data one is this data something
 
 350
@@ -1768,12 +1768,12 @@ We can notify the client through error information
 
 356
 00:14:08,733 --> 00:14:10,399
-那需要使用的就是pallet
+那需要使用的就是pallet::error这样的一个宏
 Then you need to use the pallet
 
 357
-00:14:10,400 --> 00:14:11,566
-error这样的一个宏
+00:14:10,399 --> 00:14:11,566
+那需要使用的就是pallet::error这样的一个宏
 error macro
 
 358
@@ -1833,7 +1833,7 @@ to be exposed to the client
 
 369
 00:14:36,600 --> 00:14:39,500
-对于可调用函数里面触发的错类型
+对于可调用函数里面触发的错误类型
 For the error type triggered in the callable function
 
 370
@@ -2298,7 +2298,7 @@ That is our host here
 
 462
 00:18:24,066 --> 00:18:26,366
-那当我们需要一些自定义一些
+那当我们需要自定义一些
 Then when we need some customized
 
 463
