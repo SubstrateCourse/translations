@@ -5,113 +5,113 @@ Hello everyone, I am Kaichao
 
 2
 00:00:03,700 --> 00:00:06,933
-我们今天课程的内容是Substrate Runtime
-The content of our course today is Substrate Runtime
+我们今天课程的内容是Substrate Runtime宏的介绍
+The content of our course today is about Substrate Runtime macros.
 
 3
-00:00:06,966 --> 00:00:08,066
-宏的介绍
-Macros Introduction.
+00:00:06,933 --> 00:00:08,066
+我们今天课程的内容是Substrate Runtime宏的介绍
+The content of our course today is about Substrate Runtime macros.
 
 4
 00:00:09,500 --> 00:00:11,100
 今天课程内容主要包含
-Today's course content mainly includes
+Today's course mainly includes
 
 5
 00:00:11,266 --> 00:00:12,799
 Rust宏的基本介绍
-A basic introduction to Rust macros
+A quick introduction to Rust macros
 
 6
 00:00:12,966 --> 00:00:14,666
-以及使用Substrate进行Runtime
-And use Substrate for Runtime
+以及使用Substrate进行Runtime进行开发的时候经常使用的宏
+And the macros defined in Substrate for runtime development
 
 7
 00:00:14,666 --> 00:00:17,533
-进行开发的时候所经常使用的宏
-Macros that are often used during development
+以及使用Substrate进行Runtime进行开发的时候经常使用的宏
+And the macros defined in Substrate for runtime development
 
 8
 00:00:18,200 --> 00:00:19,466
-接着我们会介绍
-Next we will introduce
+接着我们会介绍使用cargo-expand工具来将这样的宏展开
+Next we will introduce the cargo-expand tool to expand such macros
 
 9
-00:00:19,733 --> 00:00:22,966
-使用Cargo expend工具来将这样的宏展开
-Use the Cargo expand tool to expand such macros
+00:00:19,466 --> 00:00:22,966
+接着我们会介绍使用cargo-expand工具来将这样的宏展开
+Next we will introduce the cargo-expand tool to expand such macros
 
 10
 00:00:23,466 --> 00:00:24,699
-最后我们会
-Finally we will
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 11
-00:00:24,866 --> 00:00:26,999
-看一下Substrate提供的一些其他
-Take a look at some of the other
+00:00:24,699 --> 00:00:26,999
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 12
-00:00:27,266 --> 00:00:28,399
-帮助性的宏
-helpful macros.
+00:00:26,999 --> 00:00:28,399
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 13
 00:00:30,866 --> 00:00:32,966
-宏是一种源编程的方式
+宏是一种元编程的方式
 Macros are a form of metaprogramming
 
 14
 00:00:33,133 --> 00:00:36,499
 那类似的概念在Java里面称作反射
-That similar concept is called reflection in Java
+the similar concept is called reflection in Java
 
 15
 00:00:37,766 --> 00:00:38,566
-在Rust
-in Rust
+在Rust编程语言里提供了两种宏的语法
+There are two kinds of macro syntax in Rust
 
 16
-00:00:38,866 --> 00:00:42,599
-编程语言里提供了两种宏的语法
-Two macro syntaxes are provided in the language
+00:00:38,566 --> 00:00:42,599
+在Rust编程语言里提供了两种宏的语法
+There are two kinds of macro syntax in Rust
 
 17
 00:00:42,600 --> 00:00:45,266
 一种是声明宏一种是过程宏
-One is a declarative macro and the other is a procedural macro
+One is declarative macro and the other is procedural macro
 
 18
 00:00:45,900 --> 00:00:47,733
 这里我给出了一个链接
-here i give a link
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 19
-00:00:48,066 --> 00:00:49,533
-里面描述了Rust
-which describes
+00:00:47,733 --> 00:00:49,533
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 20
 00:00:49,533 --> 00:00:51,966
-宏的一些基本的知识和
-Some basic knowledge of macros and
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 21
-00:00:52,500 --> 00:00:53,366
-常用的介绍
-Commonly used introduction in Rust
+00:00:51,966 --> 00:00:53,366
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 22
 00:00:55,466 --> 00:00:58,566
-Substrate使用宏的原因的话是为了简化
-The reason Substrate uses macros is to simplify
+Substrate使用宏的原因是为了简化区块链Runtime的开发
+The reason Substrate uses macros is to simplify the development of blockchain runtime
 
 23
 00:00:58,933 --> 00:01:00,499
-区块链Runtime的开发
-the development of Blockchain Runtime
+Substrate使用宏的原因是为了简化区块链Runtime的开发
+The reason Substrate uses macros is to simplify the development of blockchain runtime
 
 24
 00:01:01,466 --> 00:01:03,766
@@ -121,132 +121,132 @@ Later we will introduce what is Runtime
 25
 00:01:05,400 --> 00:01:09,266
 通过使用宏可以建立一套自定义的DSL
-A custom DSL can be built by using macros
+A custom DSL (aka, Domain Specific Language) can be built by using macros
 
 26
-00:01:09,300 --> 00:01:11,400
+00:01:09,266 --> 00:01:11,400
 也就是领域特定语言
-which is Domain Specific Language
+A custom DSL (aka, Domain Specific Language) can be built by using macros
 
 27
 00:01:12,066 --> 00:01:15,466
-那一个合理的领域特定语言可以
-That a reasonable Domain Specific Language can
+那一个合理的领域特定语言可以很好的被用户所理解
+A well designed  DSL can be understood by users easily.
 
 28
-00:01:15,733 --> 00:01:17,933
-很好的被用户所理解
-well understood by users
+00:01:15,466 --> 00:01:17,933
+那一个合理的领域特定语言可以很好的被用户所理解
+A well designed  DSL can be understood by users easily.
 
 29
 00:01:17,933 --> 00:01:20,466
 在这里的话就是区块链的开发者
-In this case, the developer of the blockchain
+In our case, the users of Substrate are blockchain developers
 
 30
 00:01:21,266 --> 00:01:23,366
 那同样的使用这样的DSL
-Then using a DSL like this
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 31
 00:01:23,366 --> 00:01:25,666
 可以让我们的代码开发变得更加简洁
-Can make our code development more concise
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 32
 00:01:25,666 --> 00:01:27,333
 效率也更加高
-more efficient
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 33
 00:01:28,966 --> 00:01:30,066
-从而能够让
-thereby enabling
+从而能够让区块链应用开发者
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 34
 00:01:30,200 --> 00:01:31,566
-区块链应用开发者
-Blockchain application developers
+从而能够让区块链应用开发者
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 35
 00:01:31,566 --> 00:01:34,366
-不需要去关心底层的这些数据库
-don't need to care about the underlying databases
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 36
-00:01:34,566 --> 00:01:35,333
-点对点网络
-peer-to-peer network
+00:01:34,366 --> 00:01:35,333
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 37
 00:01:35,333 --> 00:01:37,699
-密码学和WASM执行环境这些
-Cryptography and WASM execution environment These
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 38
-00:01:38,066 --> 00:01:39,133
-公共的底层组件
-common underlying components
+00:01:37,699 --> 00:01:39,133
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 39
 00:01:39,133 --> 00:01:41,933
-只需要使用DSL编写上层的
-Only need to use DSL to write the upper layer
+只需要使用DSL编写上层的应用业务组件就可以了
+they only need to code the business compoments on the application layer.
 
 40
-00:01:42,066 --> 00:01:43,766
-应用业务组件就可以了
-Just apply business components
+00:01:41,933 --> 00:01:43,766
+只需要使用DSL编写上层的应用业务组件就可以了
+they only need to code the business compoments on the application layer.
 
 41
 00:01:45,266 --> 00:01:46,999
-接着我们来看一下Substrate Runtime
-Then let's take a look at Substrate Runtime
+接着我们来看一下Substrate Runtime的定义
+Then let's take a look at the definition of Substrate Runtime
 
 42
-00:01:47,000 --> 00:01:47,800
-的定义
-Definition
+00:01:46,999 --> 00:01:47,800
+接着我们来看一下Substrate Runtime的定义
+Then let's take a look at the definition of Substrate Runtime
 
 43
 00:01:48,500 --> 00:01:49,900
 大家应该已经知道
-everyone should already know
+you should already know that
 
 44
 00:01:50,066 --> 00:01:52,933
-区块链里区块的验证是通过
-The verification of blocks in the blockchain is through
+区块链里区块的验证是通过链上的逻辑进行校验的
+the verification of the blocks in blockchain is through some onchain logic
 
 45
-00:01:53,100 --> 00:01:54,966
-链上的逻辑进行校验的
-the logic on the chain
+00:01:52,933 --> 00:01:54,966
+区块链里区块的验证是通过链上的逻辑进行校验的
+the verification of the blocks in blockchain is through some onchain logic
 
 46
 00:01:55,500 --> 00:01:56,900
 那在Substrate里面
-That's in Substrate
+In Substrate, such onchain logic is called Runtime
 
 47
 00:01:56,900 --> 00:01:58,966
 对应的链上逻辑我们称之为Runtime
-The corresponding on-chain logic is called Runtime
+In Substrate, such onchain logic is called Runtime
 
 48
 00:02:00,566 --> 00:02:02,699
-区块链的状态a state a
-The state of the blockchain A state A
+区块链的链上状态A转换到新的链上状态B
+State transition from onchain state A to onchain state B is triggered by transactions
 
 49
-00:02:02,700 --> 00:02:04,933
-转换到新的状态state b
-Transit to a new state state B
+00:02:02,699 --> 00:02:04,933
+区块链的链上状态A转换到新的链上状态B
+State transition from onchain state A to onchain state B is triggered by transactions
 
 50
-00:02:05,400 --> 00:02:07,200
+00:02:04,933 --> 00:02:07,200
 需要通过交易进行触发
-need to be triggered by a transaction
+State transition from onchain state A to onchain state B is triggered by transactions
 
 51
 00:02:07,366 --> 00:02:08,899
