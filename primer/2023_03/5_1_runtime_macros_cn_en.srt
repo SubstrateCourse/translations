@@ -750,47 +750,47 @@ we can easily use this get function to retrieve the value stored in the storage 
 151
 00:06:20,766 --> 00:06:22,599
 另外一个点是我们
-Another point is that we
+Another point worth notion is
 
 152
 00:06:22,933 --> 00:06:23,899
-定义存储单元的时候
-When defining a storage unit
+定义存储单元的时候这个泛型T是不可缺省的
+the generic T can't be omitted when defining storage items
 
 153
-00:06:23,900 --> 00:06:25,966
-这个泛型T是不可缺省的
-This generic T is indispensable
+00:06:23,899 --> 00:06:25,966
+定义存储单元的时候这个泛型T是不可缺省的
+the generic T can't be omitted when defining storage items
 
 154
 00:06:27,200 --> 00:06:28,000
-它和
-it and
+它和标准的Rust语法可能稍微有些不一样
+it's slightly different with Rust standard syntax
 
 155
 00:06:28,000 --> 00:06:30,366
-标准的Rust语法可能稍微有些不一样
-Standard Rust syntax may be slightly different
+它和标准的Rust语法可能稍微有些不一样
+it's slightly different with Rust standard syntax
 
 156
 00:06:32,200 --> 00:06:34,333
-那除了我们刚才看到的StorageValue
-So in addition to the StorageValue we just saw
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 157
 00:06:34,333 --> 00:06:35,733
-这样的一个
-such a
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 158
-00:06:36,100 --> 00:06:38,733
-存储的数据类型之外
-Stored data types other than
+00:06:35,733 --> 00:06:38,733
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 159
 00:06:39,366 --> 00:06:42,366
 还可以有其他的存储类型
-There can also be other storage types
+there are also other types for storage items
 
 160
 00:06:42,400 --> 00:06:44,533
@@ -800,257 +800,257 @@ StorageValue is used to store a single value
 161
 00:06:46,533 --> 00:06:50,566
 另外的两个是一个是存出映射类型
-The other two are one is to store out the mapping type
+Another one is used to to store a mapping type for key value pairs
 
 162
 00:06:51,100 --> 00:06:52,733
 也就是一个key-value的键值对
-That is, a key-value key-value pair
+Another one is used to to store a mapping type for key value pairs
 
 163
 00:06:53,933 --> 00:06:55,499
 它的类型StorageMap
-It is of type StorageMap
+called StorageMap
 
 164
 00:06:56,866 --> 00:06:58,966
 还有一个是双键映射类型
-There is also a double key value type
+If there are two keys corresponding to a value
 
 165
 00:06:58,966 --> 00:07:01,199
 就是有两个键对应一个值
-There are two keys corresponding to a value
+If there are two keys corresponding to a value
 
 166
 00:07:02,066 --> 00:07:04,199
 它的类型是StorageDoubleMap
-Its type is StorageDoubleMap
+we can use StorageDoubleMap
 
 167
 00:07:05,500 --> 00:07:06,866
-在后面的课程
-in later courses
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 168
 00:07:06,866 --> 00:07:08,566
-我们会详细的介绍不同
-We will introduce the different
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 169
 00:07:08,566 --> 00:07:09,966
-的数据存储类型
-type of data storage
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 170
 00:07:11,133 --> 00:07:14,399
 还有一个键值的类型叫做StorageNMap
-There is also a key-value type called StorageNMap
+There is another one called StorageNMap
 
 171
 00:07:14,533 --> 00:07:17,066
-用来把多个键对应一个值的
-Used to map multiple keys to a single value
+用来把多个键对应一个值的map数据类型
+it's used to map multiple keys to a single value
 
 172
 00:07:17,066 --> 00:07:18,099
-map数据类型
-map data type
+用来把多个键对应一个值的map数据类型
+it's used to map multiple keys to a single value
 
 173
 00:07:18,100 --> 00:07:20,400
 比如可以有3个键或者4个键
-For example, there can be 3 keys or 4 keys
+For example, there can be 3 keys or 4 keys mapping to a value
 
 174
 00:07:20,400 --> 00:07:22,266
 他们来共同对应一个值
-They come together to correspond to a value
+For example, there can be 3 keys or 4 keys mapping to a value
 
 175
 00:07:22,733 --> 00:07:24,333
 这里我们也给出了文档链接
-Here we also give the documentation link
+Here is the documentation link, check it out
 
 176
 00:07:24,333 --> 00:07:25,599
 希望大家可以看一看
-I hope you can take a look
+Here is the documentation link, check it out
 
 177
 00:07:26,966 --> 00:07:28,333
-接着我们来看一下
-Let's take a look
+接着我们来看一下Substrate的call这样的一个宏
+Let's take a look at the pallet::call macro in Substrate
 
 178
-00:07:29,000 --> 00:07:32,133
-Substrate的call这样的一个宏
-A macro like Substrate's call
+00:07:28,333 --> 00:07:32,133
+接着我们来看一下Substrate的call这样的一个宏
+Let's take a look at the pallet::call macro in Substrate
 
 179
 00:07:32,700 --> 00:07:33,466
-大家知道
-Everybody knows
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 180
 00:07:33,466 --> 00:07:34,799
-区块链的链上状态
-On-chain state of the blockchain
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 181
-00:07:34,800 --> 00:07:37,166
-通常都是由交易进行触发的
-Usually triggered by a transaction
+00:07:34,799 --> 00:07:37,166
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 182
 00:07:37,466 --> 00:07:41,133
 那在Substrate里面不仅支持一些简单的
-Then in Substrate it not only supports some simple
+Substrate not only supports simple transactions like transfers
 
 183
-00:07:41,500 --> 00:07:44,300
+00:07:41,133 --> 00:07:44,300
 交易比如转账这样的简单交易
-Transactions Simple transactions such as transfers
+Substrate not only supports simple transactions like transfers
 
 184
 00:07:44,300 --> 00:07:47,333
 还可以支持自定义的一些交易类型
-It can also support some custom transaction types
+but also support custom transaction types like register onchain identity
 
 185
 00:07:47,333 --> 00:07:49,499
 比如注册链上的身份
-For example, you can register an identity on the chain
+but also support custom transaction types like register onchain identity
 
 186
 00:07:49,733 --> 00:07:51,933
 你可以进行治理相关的投票
-You can vote on governance
+you can also vote on governance
 
 187
 00:07:53,600 --> 00:07:54,466
 在Substrate的里面
-Inside the Substrate
+In Substrate, such transactions are usually called extrinsic
 
 188
 00:07:54,466 --> 00:07:57,266
 这样的交易通常叫做extrinsic
-Such transactions are usually called extrinsic
+In Substrate, such transactions are usually called extrinsic
 
 189
 00:07:57,266 --> 00:07:58,733
 表示外部交易
-Indicates external transactions
+Extrinsic means external transactions triggered by users
 
 190
-00:07:59,066 --> 00:08:00,866
+00:07:58,733 --> 00:08:00,866
 是由外部用户来触发的
-is triggered by an external user
+Extrinsic means external transactions triggered by users
 
 191
 00:08:02,666 --> 00:08:04,133
 每一个外部交易
-every external transaction
+Each extrinsic corresponds to a dispatchable function in runtime
 
 192
 00:08:04,133 --> 00:08:06,066
 都会对应一个可调用函数
-will correspond to an adjustable function
+Each extrinsic corresponds to a dispatchable function in runtime
 
 193
 00:08:06,266 --> 00:08:08,466
-那可调用函数就是通过call
-The adjustable function is through call
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 194
-00:08:08,500 --> 00:08:09,300
-这样的一个宏
-such a macro
+00:08:08,466 --> 00:08:09,300
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 195
 00:08:09,300 --> 00:08:10,966
-在模块里面进行定义的
-defined in the module
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 196
 00:08:12,500 --> 00:08:15,566
 可调用函数会根据我们的函数参数
-The adjustable function will be based on our function parameters
+The dispatchable will perform its own logic based on the parameters
 
 197
-00:08:16,100 --> 00:08:18,500
+00:08:15,566 --> 00:08:18,500
 进行我们自定义逻辑的处理
-to perform our own logic processing
+The dispatchable will perform its own logic based on the parameters
 
 198
 00:08:18,500 --> 00:08:20,466
-来对列上状态进行更新
-To update the state on the column
+来对链上状态进行更新
+then update the onchain state when finish executing the dispatchable
 
 199
 00:08:22,466 --> 00:08:25,466
 这里我们看一个call的例子
-Here we look at an example of a call
+Here let's look at an example of pallet::call macro
 
 200
 00:08:26,366 --> 00:08:27,266
-在之前
-before
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 201
 00:08:27,266 --> 00:08:29,299
-我们已经定义了一个pallet
-We have defined a pallet
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 202
-00:08:29,300 --> 00:08:30,333
-这样的一个结构体
-such a structure
+00:08:29,299 --> 00:08:30,333
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 203
 00:08:30,333 --> 00:08:31,333
-表示我们
-showing us
+表示我们的功能模块
+it represents our module
 
 204
-00:08:31,566 --> 00:08:32,866
-功能模块
-the functional module
+00:08:31,333 --> 00:08:32,866
+表示我们的功能模块
+it represents our module
 
 205
 00:08:33,100 --> 00:08:34,000
 接着我们对pallet
-Then in the pallet struct
+Then we can add some implementations for the Pallet struct
 
 206
 00:08:34,000 --> 00:08:36,100
 结构体添加了一些功能实现
-we add some functional implementation
+Then we can add some implementations for the Pallet struct
 
 207
 00:08:36,533 --> 00:08:37,733
-在这个功能实现
-Outside the implementation
+在这个功能实现外面
+here it uses pallet::call macro to annotate the implementation
 
 208
-00:08:38,100 --> 00:08:38,966
-外面我们
-we use
+00:08:37,733 --> 00:08:38,966
+在这个功能实现外面
+here it uses pallet::call macro to annotate the implementation
 
 209
-00:08:39,100 --> 00:08:42,200
+00:08:38,966 --> 00:08:42,200
 应用了pallet::call这样的一个宏来表示
-a macro such as pallet::call to represent that
+here it uses pallet::call macro to annotate the implementation
 
 210
 00:08:42,366 --> 00:08:45,266
 这个实现里面是我们的可调用函数
-Inside this implementation is our callable function
+it means the implementation is used for defining dispatchable functions
 
 211
 00:08:45,866 --> 00:08:47,533
 对应的是不同的交易
-Corresponding to different transactions
+such dispatchables corresponds to different transactions
 
 212
 00:08:48,200 --> 00:08:48,666
