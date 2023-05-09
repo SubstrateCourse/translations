@@ -1055,12 +1055,12 @@ such dispatchables corresponds to different transactions
 212
 00:08:48,200 --> 00:08:48,666
 这里面
-here
+One of the dispatchables is named do_something
 
 213
 00:08:48,666 --> 00:08:50,733
 其中一个可调用函数的名字是do_something
-The name of one of the callable functions is do_something
+One of the dispatchables is named do_something
 
 214
 00:08:50,733 --> 00:08:51,966
@@ -1070,52 +1070,52 @@ It accepts two parameters
 215
 00:08:52,166 --> 00:08:53,799
 第一个参数是origin
-The first parameter is origin
+The first parameter is origin which indicates the sender of the transaction
 
 216
-00:08:54,066 --> 00:08:56,133
+00:08:53,799 --> 00:08:56,133
 表示交易的发送方
-which Indicates the sender of the transaction
+The first parameter is origin which indicates the sender of the transaction
 
 217
 00:08:56,766 --> 00:08:58,066
 它的类型是OriginFor
-Its type is OriginFor
+its type is OriginFor from the system module
 
 218
 00:08:58,066 --> 00:09:00,133
 来自我们的系统模块
-from our system modules
+its type is OriginFor from the system module
 
 219
 00:09:00,500 --> 00:09:02,400
 另外一个数据是something
-Another data is something
+Another parameter is something, an u32 integer
 
 220
-00:09:02,600 --> 00:09:04,600
+00:09:02,400 --> 00:09:04,600
 它是32位整数类型
-It is a 32-bit integer type
+Another parameter is something, an u32 integer
 
 221
 00:09:04,800 --> 00:09:07,266
 返回结果是DispatchResult
-The return result is DispatchResult
+The value returned from the dispatchable is DispatchResult
 
 222
 00:09:08,866 --> 00:09:13,133
 是一个Rust Result类型的类型别名
-It is a type alias for the Rust result type
+DispatchResult is a type alias for the Result type in Rust
 
 223
 00:09:13,733 --> 00:09:16,299
 包含了Substrates所返回的一些
-which contains some of the
+it contains some custom errors from runtime
 
 224
-00:09:16,333 --> 00:09:17,733
+00:09:16,299 --> 00:09:17,733
 自定义的错误信息
-custom error messages
+it contains some custom errors from runtime
 
 225
 00:09:18,900 --> 00:09:21,366
@@ -1125,389 +1125,389 @@ The macro pallet::weight will be introduced later
 226
 00:09:22,800 --> 00:09:23,933
 call_index宏
-call_index macro
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 227
 00:09:23,933 --> 00:09:25,599
 可以把可调用函数在codec
-can fix the sequence
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 228
 00:09:25,599 --> 00:09:26,399
 可以把可调用函数在codec
- callable functions in code
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 229
 00:09:26,399 --> 00:09:26,400
- callable functions in code
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 230
 00:09:26,400 --> 00:09:27,100
 编解码过程中的顺序
- callable functions in code
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 231
 00:09:27,100 --> 00:09:27,900
 编解码过程中的顺序
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 232
 00:09:27,900 --> 00:09:27,933
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 233
 00:09:27,933 --> 00:09:28,899
 固定下来
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 234
 00:09:29,100 --> 00:09:30,566
 比如do something
-such as do something
+such as do_something, its index is 0
 
 235
-00:09:30,700 --> 00:09:32,000
+00:09:30,566 --> 00:09:32,000
 它的序号是0
-its serial number is 0
+such as do_something, its index is 0
 
 236
 00:09:33,266 --> 00:09:35,699
 在这个可调用函数里面它的逻辑很简单
-Inside this callable function its logic is simple
+The logic of the dispatchable is very simple
 
 237
 00:09:35,800 --> 00:09:38,533
 首先是使用系统文化提供的ensure_signed
-The first is to use the ensure_signed provided by the system culture
+it first use ensure_signed provided by the system module to verify the origin
 
 238
-00:09:38,900 --> 00:09:41,300
+00:09:38,533 --> 00:09:41,300
 将origin进行较验
-to verify the origin
+it first use ensure_signed provided by the system module to verify the origin
 
 239
 00:09:41,366 --> 00:09:43,466
 看对应的交易发送方是不是
-See if the corresponding transaction sender is
+check if the transaction sender is signed or not
 
 240
-00:09:43,600 --> 00:09:44,733
+00:09:43,466 --> 00:09:44,733
 经过签名的
-signed
+check if the transaction sender is signed or not
 
 241
 00:09:45,866 --> 00:09:48,133
 如果是签名的话我们返回我
-If it's signed it returns
+if signed, ensure_signed returns the account id of the transaction sender
 
 242
 00:09:48,133 --> 00:09:50,566
 们交易的发送方对应的account
-the account corresponding to the sender of our transaction
+if signed, ensure_signed returns the account id of the transaction sender
 
 243
 00:09:51,300 --> 00:09:52,766
-接着我们交易完成之后
-Then after our transaction is completed
+接着我们校验完成之后
+After some verification, we can then modify the storage item
 
 244
 00:09:52,766 --> 00:09:54,766
 我们就可以对我们存储单元进行
-We can then modify
+After some verification, we can then modify the storage item
 
 245
-00:09:55,266 --> 00:09:56,333
+00:09:54,766 --> 00:09:56,333
 修改我们将something
- our storage unit
+After some verification, we can then modify the storage item
 
 246
 00:09:56,800 --> 00:09:59,133
 刚才提到的something这样一个存储单元
-The something just mentioned such a storage unit
+We just mentioned such a storage item named Something
 
 247
 00:09:59,300 --> 00:10:01,066
 里面存储值进行更新
-The value stored inside is updated
+to update its value in the storage, we can use put function
 
 248
 00:10:01,066 --> 00:10:02,933
 是使用put函数
-It is to use the put function
+to update its value in the storage, we can use put function
 
 249
 00:10:04,333 --> 00:10:04,699
 紧接着
-Immediately after
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 250
-00:10:04,700 --> 00:10:06,933
+00:10:04,699 --> 00:10:06,933
 我们就可以触发一个事件来表示
-we can trigger an event to indicate
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 251
 00:10:06,933 --> 00:10:08,766
 来告诉客户端我们的
-to tell the client our
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 252
-00:10:09,300 --> 00:10:10,666
+00:10:08,766 --> 00:10:10,666
 逻辑执行成功了
-logic execution succeeded
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 253
 00:10:10,966 --> 00:10:13,366
 我们触发的事件是SomethingStored
-The event we trigger is SomethingStored
+the event is called SomethingStored
 
 254
 00:10:13,966 --> 00:10:14,699
 这样的一个事件
-such an event
+SomethingStored event provides two information, one is something indicating the updated data
 
 255
-00:10:14,700 --> 00:10:15,666
+00:10:14,699 --> 00:10:15,666
 它有两个数据
-it has two data
+SomethingStored event provides two information, one is something indicating the updated data
 
 256
 00:10:15,666 --> 00:10:16,466
 一个是something
-one is something
+SomethingStored event provides two information, one is something indicating the updated data
 
 257
 00:10:16,466 --> 00:10:18,133
 表示我们更新的数据信息
-Indicating our updated data information
+SomethingStored event provides two information, one is something indicating the updated data
 
 258
 00:10:18,133 --> 00:10:19,466
 以及who
-and who
+and who shows the account that updates the data
 
 259
-00:10:19,500 --> 00:10:22,533
+00:10:19,466 --> 00:10:22,533
 表示我们是谁来更新的这样的信息
-Indicating who we are to update such information
+and who shows the account that updates the data
 
 260
 00:10:23,000 --> 00:10:24,566
-最后我们就可以返回OK
-Finally we can return OK
+最后我们就可以返回Ok
+At the end, it returns Ok
 
 261
 00:10:25,600 --> 00:10:28,333
 那pallet::weight宏的话是表示我们
-The pallet::weight macro means that
+The pallet::weight macro is used to represent the excution time used by the dispatchable when building the block
 
 262
-00:10:28,500 --> 00:10:31,066
+00:10:28,333 --> 00:10:31,066
 当前交易或者说是可调用函数do_something
-The current transaction or callable do_something
+The pallet::weight macro is used to represent the excution time used by the dispatchable when building the block
 
 263
 00:10:31,600 --> 00:10:33,500
 所需要的执行的时间
-required execution time
+here it's fixed for demo purpose
 
 264
 00:10:33,966 --> 00:10:36,399
 大家知道对于区块链应用
-Everyone knows that for blockchain applications
+For blockchain, the time can be used to generate a block is usually limited
 
 265
-00:10:36,766 --> 00:10:39,166
+00:10:36,399 --> 00:10:39,166
 区块的生成时间通常都是有限的
-Block generation time is usually limited
+For blockchain, the time can be used to generate a block is usually limited
 
 266
 00:10:39,800 --> 00:10:40,966
 通常是几秒钟
-usually a few seconds
+the period is usually a few seconds
 
 267
 00:10:41,600 --> 00:10:44,200
 那在有限的区块生成时间里
-that in the limited block generation time
+Then we have to allocate the block time reasonably across different transactions
 
 268
 00:10:44,200 --> 00:10:44,366
-we need to make a reasonable allocation
+Then we have to allocate the block time reasonably across different transactions
 
 269
 00:10:44,366 --> 00:10:45,733
 我们就需要对这个时间
-we need to make a reasonable allocation
+Then we have to allocate the block time reasonably across different transactions
 
 270
 00:10:45,733 --> 00:10:46,766
 进行合理的分配
-to the time.
+Then we have to allocate the block time reasonably across different transactions
 
 271
 00:10:47,900 --> 00:10:51,066
 对应的分配的机制就是通过
-The corresponding allocation mechanism is through
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 272
-00:10:51,600 --> 00:10:52,466
+00:10:51,066 --> 00:10:52,466
 量化
-Quantify
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 273
-00:10:52,500 --> 00:10:55,266
+00:10:52,466 --> 00:10:55,266
 某一个可调用函数的执行时间来完成的
-the execution time of a callable function to complete
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 274
 00:10:55,266 --> 00:10:58,533
 而量化的方式就是pallet::weight交易权重
-The quantification method is pallet::weight transaction weight
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 275
-00:10:58,600 --> 00:11:00,333
+00:10:58,533 --> 00:11:00,333
 来进行一个设置
-to make a setting
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 276
 00:11:00,333 --> 00:11:01,866
 设置一个合理的权重值
-Set a reasonable weight value
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 277
 00:11:01,866 --> 00:11:03,499
 也就是表示这个
-That is to say this
+that is to say, the value of the weight is the execution time of the dispatchable function
 
 278
 00:11:03,566 --> 00:11:06,099
 可调用函数的一个合理的执行时间
-A reasonable execution time for callable functions
+that is to say, the value of the weight is the execution time of the dispatchable function
 
 279
 00:11:07,300 --> 00:11:10,866
 进而将对应的权重值转换为交易费用
-Then convert the corresponding weight value into a transaction fee
+Further we can convert the weight value to the transaction fee
 
 280
 00:11:11,200 --> 00:11:12,866
 通过交易费用这种机制
-Through the transaction fee mechanism
+Through the transaction fee mechanism, the blockchain gets better protected from attacks like denial of service
 
 281
 00:11:12,866 --> 00:11:16,533
 来更好的避免拒绝服务类似的攻击
-To better avoid attacks like denial of service
+Through the transaction fee mechanism, the blockchain gets better protected from attacks like denial of service
 
 282
 00:11:18,700 --> 00:11:21,400
 我们接着来再看一个
-let's see one more
+Let's see another dispatchable named cause_error
 
 283
 00:11:21,400 --> 00:11:23,400
 另外一个可调用函数是cause_error
-Another callable function is cause_error
+Let's see another dispatchable named cause_error
 
 284
 00:11:23,400 --> 00:11:25,566
 同样它有一个weight值
-Also it has a weight value
+It has weight too, here give it a fixed value for simplicity
 
 285
-00:11:25,766 --> 00:11:28,599
+00:11:25,566 --> 00:11:28,599
 那这里都是为了方便起见
-it's all here for convenience
+It has weight too, here give it a fixed value for simplicity
 
 286
-00:11:28,600 --> 00:11:29,500
+00:11:28,599 --> 00:11:29,500
 给它一个固定的值
-to give it a fixed value
+It has weight too, here give it a fixed value for simplicity
 
 287
 00:11:29,500 --> 00:11:30,200
 通常情况下
-usually
+Usually different dispatchables have different logic
 
 288
 00:11:30,200 --> 00:11:31,733
 不同的可调用函数它有不同逻辑
-Different callable functions have different logic
+Usually different dispatchables have different logic
 
 289
 00:11:31,733 --> 00:11:34,799
 它的权重的计算也是会和
-Its weight calculation will also be relevant with
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 290
-00:11:35,066 --> 00:11:36,933
+00:11:34,799 --> 00:11:36,933
 逻辑里面所读取
-the specific information
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 291
-00:11:37,300 --> 00:11:39,300
+00:11:36,933 --> 00:11:39,300
 去操作存储单元的
-reading in logic
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 292
-00:11:39,700 --> 00:11:41,133
+00:11:39,300 --> 00:11:41,133
 具体信息会有关系
-to operate the storage unit.
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 293
 00:11:41,666 --> 00:11:44,099
 我们本次课程并不会详细的介绍
-We will not introduce in detail in this course
+we will not cover the detail about how to set the transaction weight in this course
 
 294
-00:11:44,100 --> 00:11:44,875
+00:11:44,099 --> 00:11:44,875
 如何设置交易权重
-about how to set trade weight
+we will not cover the detail about how to set the transaction weight in this course
 
 295
 00:11:44,875 --> 00:11:46,800
 在后续的进阶课程
-In subsequent advanced courses
+there will be more such information in Substrate advanced course
 
 296
 00:11:46,800 --> 00:11:48,666
 我们会有更多的一些介绍
-We will have some more introductions
+there will be more such information in Substrate advanced course
 
 297
 00:11:49,266 --> 00:11:51,299
 这里我们定义一个另外可调用函数叫做
-Here we define an additional callable function called
+Here we define another dispatchable called cause_error
 
 298
 00:11:51,500 --> 00:11:53,800
 casue_error它只有一个参数就是origin
-Casue_error has only one parameter which is origin
+it has only one parameter which is origin
 
 299
 00:11:53,800 --> 00:11:55,200
 表示我们交易的发送方
-Indicating the sender of our transaction
+indicating the sender of our transaction
 
 300
 00:11:55,566 --> 00:11:58,966
 同样它也返回一个类型叫做DispatchResult
-It also returns a type called DispatchResult
+it also returns a value with type DispatchResult
 
 301
 00:11:59,333 --> 00:12:01,199
 我们也是使用ensure_signed
-We also use ensure_signed
+We use ensure_signed to verify that the sender is signed
 
 302
-00:12:01,200 --> 00:12:02,466
+00:12:01,199 --> 00:12:02,466
 来表示我们的交易
-to represent that our transaction
+We use ensure_signed to verify that the sender is signed
 
 303
 00:12:02,466 --> 00:12:03,999
 发送方是一个签名的
-sender is signed
+We use ensure_signed to verify that the sender is signed
 
 304
 00:12:04,900 --> 00:12:06,900
