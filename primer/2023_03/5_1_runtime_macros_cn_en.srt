@@ -1747,185 +1747,186 @@ the other is the sender of the transaction
 351
 00:14:01,533 --> 00:14:02,799
 当可调用函数
-when any error
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 352
 00:14:02,799 --> 00:14:02,966
-of the callable function occurs during execution
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 353
 00:14:02,966 --> 00:14:04,832
 在执行过程中发生任何错误时
-of the callable function occurs during execution
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 354
 00:14:04,832 --> 00:14:04,999
 在执行过程中发生任何错误时
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 355
-00:14:05,000 --> 00:14:08,666
+00:14:04,999 --> 00:14:08,666
 我们可以通过error信息来通知客户端
-We can notify the client through error information
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 356
-00:14:08,733 --> 00:14:10,399
+00:14:08,666 --> 00:14:10,399
 那需要使用的就是pallet::error这样的一个宏
-Then you need to use the pallet
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 357
 00:14:10,399 --> 00:14:11,566
 那需要使用的就是pallet::error这样的一个宏
-error macro
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 358
 00:14:11,600 --> 00:14:13,500
 同样呢我们定义了一个enum Error
-Similarly, we defined an enum Error
+Similarly, let's define an enum named Error
 
 359
 00:14:13,566 --> 00:14:15,333
 这样的一个枚举类型
-Such an enumerated type
+it has two variants
 
 360
-00:14:15,866 --> 00:14:17,699
+00:14:15,333 --> 00:14:17,699
 那这里我们有两个变体
-So here we have two variants
+it has two variants
 
 361
 00:14:17,700 --> 00:14:20,266
 一个是NoneValue表示没有值
-One is NoneValue means no value
+one is NoneValue, it means no value exists
 
 362
 00:14:20,266 --> 00:14:22,933
 另外一个变体是StorageOverflow
-Another variant is StorageOverflow
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 363
 00:14:22,933 --> 00:14:25,099
 表示了存储在计算的过程中
-indicating storage overflow happend
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 364
-00:14:25,166 --> 00:14:26,299
+00:14:25,099 --> 00:14:26,299
 发生了溢出
-in the process of calculation
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 365
 00:14:26,566 --> 00:14:29,566
 通常情况下错误信息要有比较好的可读性
-In general, error messages should be more readable
+In general, the error variants should be readable
 
 366
 00:14:29,700 --> 00:14:32,266
 并且我们这里的Rust的注释文档
-And our Rust annotation documentation here
+the Rust doc coments here will also be exposed to the client through metadata
 
 367
 00:14:32,266 --> 00:14:33,733
 也会通过metadata
-Also through metadata
+the Rust doc coments here will also be exposed to the client through metadata
 
 368
-00:14:33,766 --> 00:14:35,133
+00:14:33,733 --> 00:14:35,133
 来暴露给客户端
-to be exposed to the client
+the Rust doc coments here will also be exposed to the client through metadata
 
 369
 00:14:36,600 --> 00:14:39,500
 对于可调用函数里面触发的错误类型
-For the error type triggered in the callable function
+For the error variants triggered in the dispatchable, they are slightly different than event variants
 
 370
 00:14:39,500 --> 00:14:41,666
 他们和event有一些不一样
-They are a little different from event
+For the error variants triggered in the dispatchable, they are slightly different than event variants
 
 371
 00:14:41,900 --> 00:14:42,966
 event可以添加数据
-event can add data
+event variants can contain some data, but no extra data can be added in error variants
 
 372
 00:14:42,966 --> 00:14:44,766
 但是错误信息不能添加数据
-But the error message cannot add data
+event variants can contain some data, but no extra data can be added in error variants
 
 373
 00:14:45,333 --> 00:14:46,466
 我们刚才已经提到了
-we just mentioned
+We just mentioned that the error information will be exposed to the client through metadata
 
 374
 00:14:46,466 --> 00:14:48,266
 错误信息也会通过metadata
-Error information will also use metadata
+We just mentioned that the error information will be exposed to the client through metadata
 
 375
 00:14:48,266 --> 00:14:49,466
 暴露给客户端
-to be exposed to clients
+We just mentioned that the error information will be exposed to the client through metadata
 
 376
 00:14:49,933 --> 00:14:52,199
 那当错误真正发生时
-when the error actually occurs
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 377
-00:14:52,366 --> 00:14:54,399
+00:14:52,199 --> 00:14:54,399
 其实是触发了一个system
-In fact, it triggered a system
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 378
-00:14:54,533 --> 00:14:56,299
+00:14:54,399 --> 00:14:56,299
 ExtrinsicFailed的这样一个事件
-Such an event of ExtrinsicFailed
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 379
 00:14:56,700 --> 00:14:59,333
 那这个事件里面就包含了对应错误的
-Then this event contains the corresponding error
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 380
-00:14:59,400 --> 00:15:00,133
+00:14:59,333 --> 00:15:00,133
 索引信息
-index information
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 381
 00:15:00,133 --> 00:15:01,866
 比如它是由哪个模块触发的
-For example, which module triggers it
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 382
 00:15:01,866 --> 00:15:03,733
 以及它触发的错误的index
-And the index of the error it triggered
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 383
 00:15:04,733 --> 00:15:07,166
 也就是错误的名字并不会真正的返回
-That is, the wrong name does not really return
+in fact, the error name is not included in the event
 
 384
 00:15:07,166 --> 00:15:07,966
 而是
-but
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 385
-00:15:08,166 --> 00:15:12,266
+00:15:07,966 --> 00:15:12,266
 具体在枚举定义的一个排序的顺序
-A sorted order specifically defined in the enumeration
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 386
 00:15:12,266 --> 00:15:14,333
 会返回给客户端
-will be returned to the client
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 387
 00:15:16,066 --> 00:15:18,133
 接着我们来看一下hooks宏
-Then let's take a look at the hooks macro
+Now let's take a look at the pallet::hooks macro
 
 388
 00:15:18,566 --> 00:15:21,866
@@ -1935,92 +1936,92 @@ There are some reserved functions in Substarte Runtime
 389
 00:15:22,366 --> 00:15:24,733
 可以用在特定的时间点
-can be used at a specific point in time
+such reserved functions can be used to execute custom logic at a specific time
 
 390
 00:15:24,733 --> 00:15:26,666
 执行一些自定义的逻辑
-to execute some custom logic
+such reserved functions can be used to execute custom logic at a specific time
 
 391
 00:15:27,133 --> 00:15:30,266
 比如on_initialize这样一个保留函数
-For example, a reserved function such as on_initialize
+For example, one reserved function is on_initialize, which is executed at the beginning of each block
 
 392
-00:15:30,300 --> 00:15:33,466
+00:15:30,266 --> 00:15:33,466
 它可以在每个区块的开头进行执行
-It can be executed at the beginning of each block
+For example, one reserved function is on_initialize, which is executed at the beginning of each block
 
 393
 00:15:33,966 --> 00:15:35,599
 另外一个是on_finalize
-The other one is on_finalize
+Another one is on_finalize, it will be executed at the end of each block
 
 394
-00:15:35,733 --> 00:15:38,266
+00:15:35,599 --> 00:15:38,266
 他会在每个区块结束时执行
-It will be execute at the end of each block
+Another one is on_finalize, it will be executed at the end of each block
 
 395
 00:15:38,700 --> 00:15:40,766
 还有一个是offchain_worker
-Another one is offchain_worker
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 396
 00:15:40,766 --> 00:15:43,533
 它也是在区块开头的时候就会执行
-It is also executed at the beginning of the block
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 397
 00:15:43,533 --> 00:15:47,366
 但是不同的是它会起一个新的线程
-But the difference is that it will start a new thread
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 398
-00:15:47,533 --> 00:15:50,566
+00:15:47,366 --> 00:15:50,566
 并不会占用链上的执行资源
-it does not occupy execution resources on the chain
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 399
 00:15:51,200 --> 00:15:53,000
 通常offchain_worker可以用来
-Usually offchain_worker can be used
+Usually the offchain worker can be used to perform tasks that require high computational power
 
 400
-00:15:53,333 --> 00:15:55,399
+00:15:53,000 --> 00:15:55,399
 执行一些计算量要求比较高
-Performing some calculations that are relatively demanding
+Usually the offchain worker can be used to perform tasks that require high computational power
 
 401
 00:15:55,400 --> 00:15:58,600
 或者与链外系统进行交互的一些操作
-Or some operations that interact with off-chain systems
+or interact with offchain systems like querying price and identity information, etc.
 
 402
-00:15:58,733 --> 00:16:01,399
+00:15:58,600 --> 00:16:01,399
 比如去获取一些链外的价格信息
-For example, to obtain some off-chain price information
+or interact with offchain systems like querying price and identity information, etc.
 
 403
-00:16:01,533 --> 00:16:02,866
+00:16:01,399 --> 00:16:02,866
 或者身份信息等等
-or identity information, etc.
+or interact with offchain systems like querying price and identity information, etc.
 
 404
 00:16:03,566 --> 00:16:05,099
 那on_runtime_upgrade的话
-Then on_runtime_upgrade
+The on_runtime_upgrade function only executes when there are runtime upgrades
 
 405
-00:16:05,100 --> 00:16:08,300
+00:16:05,099 --> 00:16:08,300
 是当有runtime升级的时候才会执行
-It will be executed when there is a runtime upgrade
+The on_runtime_upgrade function only executes when there are runtime upgrades
 
 406
 00:16:08,300 --> 00:16:12,200
 通常是用做遗留数据的数据迁移功能
-Usually used as a data migration function for legacy data
+use it to migrate legacy onchain data
 
 407
 00:16:13,100 --> 00:16:16,533
