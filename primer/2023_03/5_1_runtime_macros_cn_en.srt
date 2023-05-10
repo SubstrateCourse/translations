@@ -5,113 +5,113 @@ Hello everyone, I am Kaichao
 
 2
 00:00:03,700 --> 00:00:06,933
-我们今天课程的内容是Substrate Runtime
-The content of our course today is Substrate Runtime
+我们今天课程的内容是Substrate Runtime宏的介绍
+The content of our course today is about Substrate Runtime macros.
 
 3
-00:00:06,966 --> 00:00:08,066
-宏的介绍
-Macros Introduction.
+00:00:06,933 --> 00:00:08,066
+我们今天课程的内容是Substrate Runtime宏的介绍
+The content of our course today is about Substrate Runtime macros.
 
 4
 00:00:09,500 --> 00:00:11,100
 今天课程内容主要包含
-Today's course content mainly includes
+Today's course mainly includes
 
 5
 00:00:11,266 --> 00:00:12,799
 Rust宏的基本介绍
-A basic introduction to Rust macros
+A quick introduction to Rust macros
 
 6
 00:00:12,966 --> 00:00:14,666
-以及使用Substrate进行Runtime
-And use Substrate for Runtime
+以及使用Substrate进行Runtime进行开发的时候经常使用的宏
+And the macros defined in Substrate for runtime development
 
 7
 00:00:14,666 --> 00:00:17,533
-进行开发的时候所经常使用的宏
-Macros that are often used during development
+以及使用Substrate进行Runtime进行开发的时候经常使用的宏
+And the macros defined in Substrate for runtime development
 
 8
 00:00:18,200 --> 00:00:19,466
-接着我们会介绍
-Next we will introduce
+接着我们会介绍使用cargo-expand工具来将这样的宏展开
+Next we will introduce the cargo-expand tool to expand such macros
 
 9
-00:00:19,733 --> 00:00:22,966
-使用Cargo expend工具来将这样的宏展开
-Use the Cargo expand tool to expand such macros
+00:00:19,466 --> 00:00:22,966
+接着我们会介绍使用cargo-expand工具来将这样的宏展开
+Next we will introduce the cargo-expand tool to expand such macros
 
 10
 00:00:23,466 --> 00:00:24,699
-最后我们会
-Finally we will
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 11
-00:00:24,866 --> 00:00:26,999
-看一下Substrate提供的一些其他
-Take a look at some of the other
+00:00:24,699 --> 00:00:26,999
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 12
-00:00:27,266 --> 00:00:28,399
-帮助性的宏
-helpful macros.
+00:00:26,999 --> 00:00:28,399
+最后我们会看一下Substrate提供的一些其他帮助性的宏
+Finally we will take a look at some of other useful macros in Substrate.
 
 13
 00:00:30,866 --> 00:00:32,966
-宏是一种源编程的方式
+宏是一种元编程的方式
 Macros are a form of metaprogramming
 
 14
 00:00:33,133 --> 00:00:36,499
 那类似的概念在Java里面称作反射
-That similar concept is called reflection in Java
+the similar concept is called reflection in Java
 
 15
 00:00:37,766 --> 00:00:38,566
-在Rust
-in Rust
+在Rust编程语言里提供了两种宏的语法
+There are two kinds of macro syntax in Rust
 
 16
-00:00:38,866 --> 00:00:42,599
-变成语言里提供了两种宏的语法
-Two macro syntaxes are provided in the language
+00:00:38,566 --> 00:00:42,599
+在Rust编程语言里提供了两种宏的语法
+There are two kinds of macro syntax in Rust
 
 17
 00:00:42,600 --> 00:00:45,266
 一种是声明宏一种是过程宏
-One is a declarative macro and the other is a procedural macro
+One is declarative macro and the other is procedural macro
 
 18
 00:00:45,900 --> 00:00:47,733
 这里我给出了一个链接
-here i give a link
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 19
-00:00:48,066 --> 00:00:49,533
-里面描述了Rust
-which describes
+00:00:47,733 --> 00:00:49,533
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 20
 00:00:49,533 --> 00:00:51,966
-宏的一些基本的知识和
-Some basic knowledge of macros and
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 21
-00:00:52,500 --> 00:00:53,366
-常用的介绍
-Commonly used introduction in Rust
+00:00:51,966 --> 00:00:53,366
+里面描述了Rust宏的一些基本的知识和常用的介绍
+here's a link of Rust doc which describes some basic knowledge of macros in Rust
 
 22
 00:00:55,466 --> 00:00:58,566
-Substrate使用宏的原因的话是为了简化
-The reason Substrate uses macros is to simplify
+Substrate使用宏的原因是为了简化区块链Runtime的开发
+The reason Substrate uses macros is to simplify the development of blockchain runtime
 
 23
 00:00:58,933 --> 00:01:00,499
-区块链Runtime的开发
-the development of Blockchain Runtime
+Substrate使用宏的原因是为了简化区块链Runtime的开发
+The reason Substrate uses macros is to simplify the development of blockchain runtime
 
 24
 00:01:01,466 --> 00:01:03,766
@@ -121,227 +121,227 @@ Later we will introduce what is Runtime
 25
 00:01:05,400 --> 00:01:09,266
 通过使用宏可以建立一套自定义的DSL
-A custom DSL can be built by using macros
+A custom DSL (aka, Domain Specific Language) can be built by using macros
 
 26
-00:01:09,300 --> 00:01:11,400
+00:01:09,266 --> 00:01:11,400
 也就是领域特定语言
-which is Domain Specific Language
+A custom DSL (aka, Domain Specific Language) can be built by using macros
 
 27
 00:01:12,066 --> 00:01:15,466
-那一个合理的领域特定语言可以
-That a reasonable Domain Specific Language can
+那一个合理的领域特定语言可以很好的被用户所理解
+A well designed  DSL can be understood by users easily.
 
 28
-00:01:15,733 --> 00:01:17,933
-很好的被用户所理解
-well understood by users
+00:01:15,466 --> 00:01:17,933
+那一个合理的领域特定语言可以很好的被用户所理解
+A well designed  DSL can be understood by users easily.
 
 29
 00:01:17,933 --> 00:01:20,466
 在这里的话就是区块链的开发者
-In this case, the developer of the blockchain
+In our case, the users of Substrate are blockchain developers
 
 30
 00:01:21,266 --> 00:01:23,366
 那同样的使用这样的DSL
-Then using a DSL like this
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 31
 00:01:23,366 --> 00:01:25,666
 可以让我们的代码开发变得更加简洁
-Can make our code development more concise
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 32
 00:01:25,666 --> 00:01:27,333
 效率也更加高
-more efficient
+By using the DSL provided by Substrate, it can make code development more concise and efficient
 
 33
 00:01:28,966 --> 00:01:30,066
-从而能够让
-thereby enabling
+从而能够让区块链应用开发者
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 34
 00:01:30,200 --> 00:01:31,566
-区块链应用开发者
-Blockchain application developers
+从而能够让区块链应用开发者
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 35
 00:01:31,566 --> 00:01:34,366
-不需要去关心底层的这些数据库
-don't need to care about the underlying databases
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 36
-00:01:34,566 --> 00:01:35,333
-点对点网络
-peer-to-peer network
+00:01:34,366 --> 00:01:35,333
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 37
 00:01:35,333 --> 00:01:37,699
-密码学和WASM执行环境这些
-Cryptography and WASM execution environment These
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 38
-00:01:38,066 --> 00:01:39,133
-公共的底层组件
-common underlying components
+00:01:37,699 --> 00:01:39,133
+不需要去关心底层的这些数据库, 点对点网络, 密码学和WASM执行环境这些公共的底层组件
+therefore blockchain developers don't need to care about the underlying databases, p2p network, cryptography and WASM execution environment, etc.
 
 39
 00:01:39,133 --> 00:01:41,933
-只需要使用DSL编写上层的
-Only need to use DSL to write the upper layer
+只需要使用DSL编写上层的应用业务组件就可以了
+they only need to code the business compoments on the application layer.
 
 40
-00:01:42,066 --> 00:01:43,766
-应用业务组件就可以了
-Just apply business components
+00:01:41,933 --> 00:01:43,766
+只需要使用DSL编写上层的应用业务组件就可以了
+they only need to code the business compoments on the application layer.
 
 41
 00:01:45,266 --> 00:01:46,999
-接着我们来看一下Substrate Runtime
-Then let's take a look at Substrate Runtime
+接着我们来看一下Substrate Runtime的定义
+Then let's take a look at the definition of Substrate Runtime
 
 42
-00:01:47,000 --> 00:01:47,800
-的定义
-Definition
+00:01:46,999 --> 00:01:47,800
+接着我们来看一下Substrate Runtime的定义
+Then let's take a look at the definition of Substrate Runtime
 
 43
 00:01:48,500 --> 00:01:49,900
 大家应该已经知道
-everyone should already know
+you should already know that
 
 44
 00:01:50,066 --> 00:01:52,933
-区块链里区块的验证是通过
-The verification of blocks in the blockchain is through
+区块链里区块的验证是通过链上的逻辑进行校验的
+the verification of the blocks in blockchain is through some onchain logic
 
 45
-00:01:53,100 --> 00:01:54,966
-链上的逻辑进行校验的
-the logic on the chain
+00:01:52,933 --> 00:01:54,966
+区块链里区块的验证是通过链上的逻辑进行校验的
+the verification of the blocks in blockchain is through some onchain logic
 
 46
 00:01:55,500 --> 00:01:56,900
 那在Substrate里面
-That's in Substrate
+In Substrate, such onchain logic is called Runtime
 
 47
 00:01:56,900 --> 00:01:58,966
 对应的链上逻辑我们称之为Runtime
-The corresponding on-chain logic is called Runtime
+In Substrate, such onchain logic is called Runtime
 
 48
 00:02:00,566 --> 00:02:02,699
-区块链的状态a state a
-The state of the blockchain A state A
+区块链的链上状态A转换到新的链上状态B
+State transition from onchain state A to onchain state B is triggered by transactions
 
 49
-00:02:02,700 --> 00:02:04,933
-转换到新的状态state b
-Transit to a new state state B
+00:02:02,699 --> 00:02:04,933
+区块链的链上状态A转换到新的链上状态B
+State transition from onchain state A to onchain state B is triggered by transactions
 
 50
-00:02:05,400 --> 00:02:07,200
+00:02:04,933 --> 00:02:07,200
 需要通过交易进行触发
-need to be triggered by a transaction
+State transition from onchain state A to onchain state B is triggered by transactions
 
 51
 00:02:07,366 --> 00:02:08,899
-将对应的交易信息
-The corresponding transaction information
+将对应的交易信息应用到我们的Runtime逻辑层
+apply the transactions to the Runtime logic
 
 52
-00:02:08,900 --> 00:02:11,166
-应用到我们的Runtime逻辑层
-Applied to our Runtime logic layer
+00:02:08,899 --> 00:02:11,166
+将对应的交易信息应用到我们的Runtime逻辑层
+apply the transactions to the Runtime logic
 
 53
 00:02:11,766 --> 00:02:13,366
 进行状态的修改
-to make status changes
+thus changes the onchain state
 
 54
 00:02:15,600 --> 00:02:17,566
-那在Substrates内置了很多
-There are a lot of Runtime function modules
+那在Substrates内置了很多Runtime的功能模块
+Substrate provides a lot of build-in modules which can be used in runtime
 
 55
 00:02:17,666 --> 00:02:19,166
-Runtime的功能模块
-built in Substrate
+那在Substrates内置了很多Runtime的功能模块
+Substrate provides a lot of build-in modules which can be used in runtime
 
 56
 00:02:19,766 --> 00:02:22,799
 这些功能模块也被称之为pallet
-These functional modules are also called pallets
+such modules are also called pallets
 
 57
 00:02:24,166 --> 00:02:26,799
 常用的有资产管理相关的assets, balance
-Commonly used modules are assets and balances related to asset management
+Commonly used modules includes assets management features like assets, balances pallets
 
 58
 00:02:27,600 --> 00:02:31,800
 共识相关的babe, grandpa
-Consensus-related babe, grandpa
+consensus related pallets like babe, grandpa
 
 59
 00:02:32,700 --> 00:02:36,966
 以及治理相关的collective, democracy, elections, sudo
-And governance-related collective, democracy, elections, sudo
+governance related pallets like collective, democracy, elections, sudo, etc.
 
 60
 00:02:36,966 --> 00:02:40,133
 还有权益证明相关的staking
-There are also staking related to proof of rights and interests
+and Proof of Staking related pallets like staking.
 
 61
 00:02:40,600 --> 00:02:42,466
 以及智能合约contract
-and the smart contract contract
+also the smart contract pallet called contracts
 
 62
 00:02:42,900 --> 00:02:46,200
 这些模块都是可组合的可自由添加
-These modules are all combinable and can be added freely
+All of these pallets are composable and can be used freely
 
 63
 00:02:46,266 --> 00:02:48,766
-根据你链上逻辑的要求
-According to the requirements of your on-chain logic
+根据你链上逻辑的要求可以自由的进行选择
+you only need to choose the ones that fit for your business
 
 64
-00:02:49,000 --> 00:02:50,600
-可以自由的进行选择
-you are free to choose
+00:02:48,766 --> 00:02:50,600
+根据你链上逻辑的要求可以自由的进行选择
+you only need to choose the ones that fit for your business
 
 65
 00:02:51,200 --> 00:02:51,966
-但是这些模块
-But these modules
+但是这些模块都要依赖于一个公共的系统模块
+Most of the pallets depend on the frame-system pallet
 
 66
 00:02:51,966 --> 00:02:53,866
-都要依赖于一个公共的系统模块
-depend on a common system module
+但是这些模块都要依赖于一个公共的系统模块
+Most of the pallets depend on the frame-system pallet
 
 67
 00:02:53,866 --> 00:02:54,666
 叫做system
-called system
+Most of the pallets depend on the frame-system pallet
 
 68
 00:02:57,100 --> 00:02:59,166
-在使用Substrate进行Runtime
-When developing functional modules
+在使用Substrate进行Runtime功能模块开发的时候
+When developing a module for Substrate Runtime
 
 69
-00:02:59,533 --> 00:03:00,933
-功能模块开发的时候
-in Runtime by using Substrate
+00:02:59,166 --> 00:03:00,933
+在使用Substrate进行Runtime功能模块开发的时候
+When developing a module for Substrate Runtime
 
 70
 00:03:01,066 --> 00:03:03,266
@@ -356,440 +356,441 @@ The first is frame_support::pallet
 72
 00:03:07,366 --> 00:03:10,099
 可以用来我们定义一个新的功能模块
-Can be used to define a new function module
+it can be used to define a new module
 
 73
 00:03:11,266 --> 00:03:13,399
-接着是使用pallet::config
-Then use pallet::config
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 74
-00:03:13,400 --> 00:03:14,700
-来定义我们功能模块
-To define the configuration trait
+00:03:13,399 --> 00:03:14,700
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 75
 00:03:14,700 --> 00:03:16,000
-所需要的配置接口
-of the module
+接着是使用pallet::config来定义我们功能模块所需要的配置接口
+Then use pallet::config to define the configuration trait of our module
 
 76
 00:03:16,000 --> 00:03:16,066
-The configuration trait usually contains some
+The configuration trait usually contains some dependent data and associate types.
 
 77
 00:03:16,066 --> 00:03:18,033
 配置接口里面通常会包含一些
-The configuration trait usually contains some
+The configuration trait usually contains some dependent data and associate types.
 
 78
 00:03:18,033 --> 00:03:18,099
 配置接口里面通常会包含一些
+The configuration trait usually contains some dependent data and associate types.
 
 79
-00:03:18,400 --> 00:03:20,700
+00:03:18,099 --> 00:03:20,700
 依赖的数据信息和类型信息
-Dependent data information and type information
+The configuration trait usually contains some dependent data and associate types.
 
 80
 00:03:21,866 --> 00:03:23,499
 pallet::storage可以定义
-pallet::storage can be defined
+pallet::storage macro can be used to define the onchain storage items
 
 81
-00:03:23,700 --> 00:03:25,766
+00:03:23,499 --> 00:03:25,766
 我们所需要的链上存储单元
-The on-chain storage unit we need
+pallet::storage macro can be used to define the onchain storage items
 
 82
 00:03:25,866 --> 00:03:27,999
-pallet::event定义我们
-pallet::event defines our
+pallet::event定义链上可以触发的事件
+pallet::event defines the events that can be triggered on chain
 
 83
-00:03:28,400 --> 00:03:30,600
-链上可以触发的事件
-Events that can be triggered on the chain
+00:03:27,999 --> 00:03:30,600
+pallet::event定义链上可以触发的事件
+pallet::event defines the events that can be triggered on chain
 
 84
 00:03:31,466 --> 00:03:33,133
-pallet::error定义了
-pallet::error defines
+pallet::error定义了链上交易可以接受的错误信息
+pallet::error defines the error types that caused by sending transactions
 
 85
-00:03:33,700 --> 00:03:36,766
-链上交易可以接受的错误信息
-Acceptable error messages for on-chain transactions
+00:03:33,133 --> 00:03:36,766
+pallet::error定义了链上交易可以接受的错误信息
+pallet::error defines the error types that caused by sending transactions
 
 86
 00:03:38,266 --> 00:03:41,533
 pallet::call定义了我们链上的可调用函数
-pallet::call defines the callable function on our chain
+pallet::call defines the dipatchable functions
 
 87
 00:03:41,733 --> 00:03:43,966
 也就是对应的我们不同的交易类型
-That is, corresponding to our different transaction types
+corresponding to our different transaction types
 
 88
 00:03:45,133 --> 00:03:49,733
 pallet::hooks定义了一些独特的函数
-pallet::hooks defines some unique functions
+pallet::hooks defines some unique functions that can be executed at different periods of a block
 
 89
-00:03:49,866 --> 00:03:52,933
+00:03:49,733 --> 00:03:52,933
 可以在区块的不同时期进行执行
-Can be executed at different times in the block
+pallet::hooks defines some unique functions that can be executed at different periods of a block
 
 90
 00:03:54,966 --> 00:03:55,866
-consruct_runtime
-consruct_runtime
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 91
-00:03:55,900 --> 00:03:56,900
-用来把我们
-used to put our
+00:03:55,866 --> 00:03:56,900
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 92
-00:03:57,166 --> 00:03:59,499
-新添加的功能模块
-newly added function modules
+00:03:56,900 --> 00:03:59,499
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 93
-00:03:59,500 --> 00:04:00,900
-加入到我们的Runtime里
-into our Runtime
+00:03:59,499 --> 00:04:00,900
+consruct_runtime用来把我们新添加的功能模块加入到Runtime里
+Macro consruct_runtime is used to add our new module into the Runtime
 
 94
 00:04:03,700 --> 00:04:06,166
-那不管是传统的互联网应用还是
-Whether it's traditional Internet applications or
+不管是传统的互联网应用还是以区块链技术为代表的Web3.0应用
+Whether it's traditional Web2.0 applications or blockchain based Web3.0 applications
 
 95
-00:04:06,533 --> 00:04:09,366
-以区块链技术为代表的Web3.0应用
-Web3.0 applications represented by blockchain technology
+00:04:06,166 --> 00:04:09,366
+不管是传统的互联网应用还是以区块链技术为代表的Web3.0应用
+Whether it's traditional Web2.0 applications or blockchain based Web3.0 applications
 
 96
 00:04:09,366 --> 00:04:11,966
 那关键性的数据都需要进行存储
-All critical data needs to be stored
+the critical data needs to be stored, so that it can be processed and used later
 
 97
-00:04:12,100 --> 00:04:16,733
+00:04:11,966 --> 00:04:16,733
 从而可以被后续进行处理和使用
-so that it can be processed and used later
+the critical data needs to be stored, so that it can be processed and used later
 
 98
 00:04:17,333 --> 00:04:21,099
-Substrate的storage宏就是用来定义
-Substrate's storage macro is used to define
+Substrate的storage宏就是用来定义链上的存储单元
+Substrate's storage macro is used to define onchain storage items.
 
 99
-00:04:21,533 --> 00:04:22,866
-链上的存储单元
-storage unit on the chain
+00:04:21,099 --> 00:04:22,866
+Substrate的storage宏就是用来定义链上的存储单元
+Substrate's storage macro is used to define onchain storage items.
 
 100
 00:04:25,166 --> 00:04:27,799
 这里我们看一个storage宏的例子
-Here we look at an example of a storage macro
+Here let's look at an example of storage macro
 
 101
 00:04:28,133 --> 00:04:31,499
-在解释storage宏之前我们首先来看我们
-Before explaining the storage macro, let's first look at our
+在解释storage宏之前我们首先来看我们之前提到几个宏
+before explaining the storage macro, let's first look at several others macros we mentioned before
 
 102
-00:04:32,166 --> 00:04:34,066
-之前提到几个宏
-Several macros mentioned before
+00:04:31,499 --> 00:04:34,066
+在解释storage宏之前我们首先来看我们之前提到几个宏
+before explaining the storage macro, let's first look at several others macros we mentioned before
 
 103
 00:04:34,166 --> 00:04:35,899
 一个是frame_support::pallet
-One is frame_support::pallet
+One is frame_support::pallet, which is used to define our new module
 
 104
-00:04:36,100 --> 00:04:38,166
+00:04:35,899 --> 00:04:38,166
 用来定义我们一个新的功能模块
-Used to define our new function module
+One is frame_support::pallet, which is used to define our new module
 
 105
 00:04:38,166 --> 00:04:40,299
 我们这里名字叫做pallet
-Our name here is pallet
+here the module is called pallet
 
 106
-00:04:41,066 --> 00:04:42,933
+00:04:40,299 --> 00:04:42,933
 功能模块的名字叫做pallet
-The name of the function module is pallet
+here the module is called pallet
 
 107
 00:04:44,333 --> 00:04:46,099
-接着我们是使用pallet::config
-Then we use pallet::config
+接着我们是使用pallet::config来定义我们功能模块的配置接口
+Then we use pallet::config to define the configuration trait of our module
 
 108
-00:04:46,100 --> 00:04:47,300
-来定义我们功能模块
-To define our function module
+00:04:46,099 --> 00:04:47,300
+接着我们是使用pallet::config来定义我们功能模块的配置接口
+Then we use pallet::config to define the configuration trait of our module
 
 109
 00:04:47,300 --> 00:04:48,133
-配置接口
-configuration interface
+接着我们是使用pallet::config来定义我们功能模块的配置接口
+Then we use pallet::config to define the configuration trait of our module
 
 110
 00:04:48,800 --> 00:04:50,200
 这里我们定义了一个配置接口
-Here we define a configuration interface
+here we define a configuration trait called config
 
 111
 00:04:50,200 --> 00:04:51,266
 名字是config
-name is config
+here we define a configuration trait called config
 
 112
 00:04:51,266 --> 00:04:52,899
-它继承自system模块
-It inherits from the system module
+它继承自system模块config接口
+it inherits from the config trait of system module
 
 113
 00:04:52,900 --> 00:04:55,000
-config我们刚才已经提到了啊
-config we just mentioned
+我们刚才已经提到了
+we just mentioned that
 
 114
 00:04:55,000 --> 00:04:57,466
-每个功能模块都要继承自我们的
-Every feature module should inherit from our
+每个功能模块都要继承自我们的系统模块
+each runtime module should inherits from our system module
 
 115
-00:04:57,500 --> 00:04:58,333
-系统模块
-system module
+00:04:57,466 --> 00:04:58,333
+每个功能模块都要继承自我们的系统模块
+each runtime module should inherits from our system module
 
 116
 00:04:59,666 --> 00:05:00,466
-那我们
-then we
+我们当前的功能模块儿配置接口里面
+The config trait of our module has a associate type called RuntimeEvent
 
 117
-00:05:00,566 --> 00:05:02,899
-当前的功能模块儿配置接口里面
-In the configuration interface of the current function module
+00:05:00,466 --> 00:05:02,899
+我们当前的功能模块儿配置接口里面
+The config trait of our module has a associate type called RuntimeEvent
 
 118
-00:05:02,900 --> 00:05:05,166
-有个关键类型是RuntimeEvent
-One key type is RuntimeEvent
+00:05:02,899 --> 00:05:05,166
+有个关联类型是RuntimeEvent
+The config trait of our module has a associate type called RuntimeEvent
 
 119
 00:05:05,800 --> 00:05:08,366
 这个event有两个类型约束
-This event has two type constraints
+There are two type constraints applied to RuntimeEvent
 
 120
 00:05:08,366 --> 00:05:10,366
 一个是它可以从
-One is that it can be accessed from
+one is that it can be converted from the module's event
 
 121
 00:05:11,266 --> 00:05:13,399
 自己模块的event进行转换
-The event of its own module is converted
+one is that it can be converted from the module's event
 
 122
 00:05:14,100 --> 00:05:15,733
 并且它是系统模块
-and it is a system module
+the other is that it conforms to the event type in system module
 
 123
-00:05:15,766 --> 00:05:17,066
+00:05:15,733 --> 00:05:17,066
 event这样的一个类型
-A type such as event
+the other is that it conforms to the event type in system module
 
 124
 00:05:18,366 --> 00:05:20,166
-接着我们就可以看我们的
-Then we can watch our
+接着我们就可以看storage存储宏
+Now let's look at the stroage macro
 
 125
-00:05:20,266 --> 00:05:21,699
-storage存储宏
-storage storage macro
+00:05:20,166 --> 00:05:21,699
+接着我们就可以看storage存储宏
+Now let's look at the stroage macro
 
 126
 00:05:22,200 --> 00:05:24,766
 我们是使用pallet::storage这样的一个宏
-We are using a macro like pallet::storage
+we are using the macro syntax #[pallet::storage]
 
 127
 00:05:25,566 --> 00:05:27,866
 待会我们再来看getter这个宏
-Let's look at the getter macro later
+later we'll introduce pallet::getter macro
 
 128
 00:05:28,066 --> 00:05:31,766
 这里我们定义了一个类型别名something
-Here we define a type alias something
+for storage macro, here it defines a type alias called Something
 
 129
 00:05:32,800 --> 00:05:34,800
 它真实类型是StorageValue
-Its real type is StorageValue
+which alias to the real type StorageValue
 
 130
 00:05:35,400 --> 00:05:38,666
 它有两个泛型参数第一个是下划线
-It has two generic parameters the first is underscore
+it has two generic parameters, the first is underscore, the second is u32
 
 131
-00:05:39,866 --> 00:05:41,933
+00:05:38,666 --> 00:05:41,933
 第二个是U32表示
-The second is the U32 representation
+it has two generic parameters, the first is underscore, the second is u32
 
 132
 00:05:42,066 --> 00:05:45,266
-U32表示我们真实的something
-U32 means our real something
+u32表示我们真实的Something
+here u32 means the storage item Something can store a 32 bits integer
 
 133
-00:05:45,366 --> 00:05:46,533
+00:05:45,266 --> 00:05:46,533
 这样一个存储单元
-such a storage unit
+here u32 means the storage item Something can store a 32 bits integer
 
 134
-00:05:46,566 --> 00:05:48,133
+00:05:46,533 --> 00:05:48,133
 所能存储的数据类型
-The type of data that can be stored
+here u32 means the storage item Something can store a 32 bits integer
 
 135
 00:05:48,133 --> 00:05:50,466
 也就是32位的整数类型
-That is, a 32-bit integer type
+here u32 means the storage item Something can store a 32 bits integer
 
 136
 00:05:50,600 --> 00:05:52,266
 第一个下划线泛型参数
-first underscore generic parameter
+the first underscore means there is a default prefix for the storage item
 
 137
 00:05:52,266 --> 00:05:53,733
 表示的是我们存储单元
-Represents our storage unit
+the first underscore means there is a default prefix for the storage item
 
 138
 00:05:53,733 --> 00:05:55,499
 对应的一个prefix
-corresponding to a prefix
+the first underscore means there is a prefix for the storage item
 
 139
 00:05:57,066 --> 00:05:58,166
-通常情况下我们用下划线
-Usually we use underscore
+通常情况下我们用下划线进行表示
+we use underscore to represent the default prefix implementation
 
 140
 00:05:58,166 --> 00:05:58,899
-进行表示
-express
+通常情况下我们用下划线进行表示
+we use underscore to represent the default prefix implementation
 
 141
 00:05:58,900 --> 00:06:00,400
 当我们需要去修改
-when we need to modify
+modify the underscore to a new prefix implementation if you want to change the default behavior
 
 142
-00:06:00,900 --> 00:06:03,366
+00:06:00,400 --> 00:06:03,366
 存储单元的prefix时候才需要去
-the prefix of the storage unit
+modify the underscore to a new prefix implementation if you want to change the default behavior
 
 143
-00:06:03,966 --> 00:06:05,533
+00:06:03,366 --> 00:06:05,533
 才需要去重新定义
-then we need to redefine
+modify the underscore to a new prefix implementation if you want to change the default behavior
 
 144
 00:06:07,000 --> 00:06:08,466
 那pallet::getter宏的话
-Then the pallet::getter macro
+Now let's see pallet::getter macro
 
 145
 00:06:08,466 --> 00:06:11,399
 是定义一个可选的get函数
-is to define an optional get function
+it defines an optional get function for the storage item
 
 146
 00:06:11,766 --> 00:06:13,333
 这里它的get函数是something
-Here its get function is something
+here the get function is named something
 
 147
 00:06:13,533 --> 00:06:15,166
-这样我们可以很方便的使用这个get
-In this way we can easily use this get
+这样我们可以很方便的使用这个get函数来获取对应的存储单元里面的内容
+we can easily use this get function to retrieve the value stored in the storage item
 
 148
 00:06:15,166 --> 00:06:15,966
-函数来
-function to
+这样我们可以很方便的使用这个get函数来获取对应的存储单元里面的内容
+we can easily use this get function to retrieve the value stored in the storage item
 
 149
-00:06:16,200 --> 00:06:17,566
-获取对应的
-Get the corresponding
+00:06:15,966 --> 00:06:17,566
+这样我们可以很方便的使用这个get函数来获取对应的存储单元里面的内容
+we can easily use this get function to retrieve the value stored in the storage item
 
 150
-00:06:18,300 --> 00:06:20,166
-存储单元里面的内容
-Contents of storage unit
+00:06:17,566 --> 00:06:20,166
+这样我们可以很方便的使用这个get函数来获取对应的存储单元里面的内容
+we can easily use this get function to retrieve the value stored in the storage item
 
 151
 00:06:20,766 --> 00:06:22,599
 另外一个点是我们
-Another point is that we
+Another point worth notion is
 
 152
 00:06:22,933 --> 00:06:23,899
-定义存储单元的时候
-When defining a storage unit
+定义存储单元的时候这个泛型T是不可缺省的
+the generic T can't be omitted when defining storage items
 
 153
-00:06:23,900 --> 00:06:25,966
-这个泛型T是不可缺少的
-This generic T is indispensable
+00:06:23,899 --> 00:06:25,966
+定义存储单元的时候这个泛型T是不可缺省的
+the generic T can't be omitted when defining storage items
 
 154
 00:06:27,200 --> 00:06:28,000
-它和
-it and
+它和标准的Rust语法可能稍微有些不一样
+it's slightly different with Rust standard syntax
 
 155
 00:06:28,000 --> 00:06:30,366
-标准的Rust语法可能稍微有些不一样
-Standard Rust syntax may be slightly different
+它和标准的Rust语法可能稍微有些不一样
+it's slightly different with Rust standard syntax
 
 156
 00:06:32,200 --> 00:06:34,333
-那除了我们刚才看到的StorageValue
-So in addition to the StorageValue we just saw
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 157
 00:06:34,333 --> 00:06:35,733
-这样的一个
-such a
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 158
-00:06:36,100 --> 00:06:38,733
-存储的数据类型之外
-Stored data types other than
+00:06:35,733 --> 00:06:38,733
+那除了我们刚才看到的StorageValue这样的一个存储数据类型之外
+In addition to the StorageValue we just saw
 
 159
 00:06:39,366 --> 00:06:42,366
 还可以有其他的存储类型
-There can also be other storage types
+there are also other types for storage items
 
 160
 00:06:42,400 --> 00:06:44,533
@@ -799,267 +800,267 @@ StorageValue is used to store a single value
 161
 00:06:46,533 --> 00:06:50,566
 另外的两个是一个是存出映射类型
-The other two are one is to store out the mapping type
+Another one is used to to store a mapping type for key value pairs
 
 162
 00:06:51,100 --> 00:06:52,733
 也就是一个key-value的键值对
-That is, a key-value key-value pair
+Another one is used to to store a mapping type for key value pairs
 
 163
 00:06:53,933 --> 00:06:55,499
 它的类型StorageMap
-It is of type StorageMap
+called StorageMap
 
 164
 00:06:56,866 --> 00:06:58,966
-还有一个是双键值类型
-There is also a double key value type
+还有一个是双键映射类型
+If there are two keys corresponding to a value
 
 165
 00:06:58,966 --> 00:07:01,199
 就是有两个键对应一个值
-There are two keys corresponding to a value
+If there are two keys corresponding to a value
 
 166
 00:07:02,066 --> 00:07:04,199
 它的类型是StorageDoubleMap
-Its type is StorageDoubleMap
+we can use StorageDoubleMap
 
 167
 00:07:05,500 --> 00:07:06,866
-在后面的课程
-in later courses
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 168
 00:07:06,866 --> 00:07:08,566
-我们会详细的介绍不同
-We will introduce the different
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 169
 00:07:08,566 --> 00:07:09,966
-的数据存储类型
-type of data storage
+在后面的课程我们会详细的介绍不同的数据存储类型
+In later courses, we will introduce the different types of data storage
 
 170
 00:07:11,133 --> 00:07:14,399
 还有一个键值的类型叫做StorageNMap
-There is also a key-value type called StorageNMap
+There is another one called StorageNMap
 
 171
 00:07:14,533 --> 00:07:17,066
-用来把多个键对应一个值的
-Used to map multiple keys to a single value
+用来把多个键对应一个值的map数据类型
+it's used to map multiple keys to a single value
 
 172
 00:07:17,066 --> 00:07:18,099
-map数据类型
-map data type
+用来把多个键对应一个值的map数据类型
+it's used to map multiple keys to a single value
 
 173
 00:07:18,100 --> 00:07:20,400
 比如可以有3个键或者4个键
-For example, there can be 3 keys or 4 keys
+For example, there can be 3 keys or 4 keys mapping to a value
 
 174
 00:07:20,400 --> 00:07:22,266
 他们来共同对应一个值
-They come together to correspond to a value
+For example, there can be 3 keys or 4 keys mapping to a value
 
 175
 00:07:22,733 --> 00:07:24,333
 这里我们也给出了文档链接
-Here we also give the documentation link
+Here is the documentation link, check it out
 
 176
 00:07:24,333 --> 00:07:25,599
 希望大家可以看一看
-I hope you can take a look
+Here is the documentation link, check it out
 
 177
 00:07:26,966 --> 00:07:28,333
-接着我们来看一下
-Let's take a look
+接着我们来看一下Substrate的call这样的一个宏
+Let's take a look at the pallet::call macro in Substrate
 
 178
-00:07:29,000 --> 00:07:32,133
-Substrate的call这样的一个宏
-A macro like Substrate's call
+00:07:28,333 --> 00:07:32,133
+接着我们来看一下Substrate的call这样的一个宏
+Let's take a look at the pallet::call macro in Substrate
 
 179
 00:07:32,700 --> 00:07:33,466
-大家知道
-Everybody knows
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 180
 00:07:33,466 --> 00:07:34,799
-区块链的链上状态
-On-chain state of the blockchain
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 181
-00:07:34,800 --> 00:07:37,166
-通常都是由交易进行触发的
-Usually triggered by a transaction
+00:07:34,799 --> 00:07:37,166
+大家知道区块链的链上状态通常都是由交易进行触发的
+You should aleady know that state transition of blockchain is triggered by transactions
 
 182
 00:07:37,466 --> 00:07:41,133
 那在Substrate里面不仅支持一些简单的
-Then in Substrate it not only supports some simple
+Substrate not only supports simple transactions like transfers
 
 183
-00:07:41,500 --> 00:07:44,300
+00:07:41,133 --> 00:07:44,300
 交易比如转账这样的简单交易
-Transactions Simple transactions such as transfers
+Substrate not only supports simple transactions like transfers
 
 184
 00:07:44,300 --> 00:07:47,333
 还可以支持自定义的一些交易类型
-It can also support some custom transaction types
+but also support custom transaction types like register onchain identity
 
 185
 00:07:47,333 --> 00:07:49,499
-比如你可以注册链上的身份
-For example, you can register an identity on the chain
+比如注册链上的身份
+but also support custom transaction types like register onchain identity
 
 186
 00:07:49,733 --> 00:07:51,933
 你可以进行治理相关的投票
-You can vote on governance
+you can also vote on governance
 
 187
 00:07:53,600 --> 00:07:54,466
 在Substrate的里面
-Inside the Substrate
+In Substrate, such transactions are usually called extrinsic
 
 188
 00:07:54,466 --> 00:07:57,266
 这样的交易通常叫做extrinsic
-Such transactions are usually called extrinsic
+In Substrate, such transactions are usually called extrinsic
 
 189
 00:07:57,266 --> 00:07:58,733
 表示外部交易
-Indicates external transactions
+Extrinsic means external transactions triggered by users
 
 190
-00:07:59,066 --> 00:08:00,866
+00:07:58,733 --> 00:08:00,866
 是由外部用户来触发的
-is triggered by an external user
+Extrinsic means external transactions triggered by users
 
 191
 00:08:02,666 --> 00:08:04,133
 每一个外部交易
-every external transaction
+Each extrinsic corresponds to a dispatchable function in runtime
 
 192
 00:08:04,133 --> 00:08:06,066
-都会对应一个可调的函数
-will correspond to an adjustable function
+都会对应一个可调用函数
+Each extrinsic corresponds to a dispatchable function in runtime
 
 193
 00:08:06,266 --> 00:08:08,466
-那可调的函数就是通过call
-The adjustable function is through call
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 194
-00:08:08,500 --> 00:08:09,300
-这样的一个宏
-such a macro
+00:08:08,466 --> 00:08:09,300
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 195
 00:08:09,300 --> 00:08:10,966
-在模块里面进行定义的
-defined in the module
+那可调用函数就是通过call这样的一个宏在模块里面进行定义的
+we can define a dispatchable function in a module through pallet::call macro
 
 196
 00:08:12,500 --> 00:08:15,566
-可调的函数会根据我们的函数参数
-The adjustable function will be based on our function parameters
+可调用函数会根据我们的函数参数
+The dispatchable will perform its own logic based on the parameters
 
 197
-00:08:16,100 --> 00:08:18,500
-进行我们自定的逻辑的处理
-to perform our own logic processing
+00:08:15,566 --> 00:08:18,500
+进行我们自定义逻辑的处理
+The dispatchable will perform its own logic based on the parameters
 
 198
 00:08:18,500 --> 00:08:20,466
-来对列上状态进行更新
-To update the state on the column
+来对链上状态进行更新
+then update the onchain state when finish executing the dispatchable
 
 199
 00:08:22,466 --> 00:08:25,466
 这里我们看一个call的例子
-Here we look at an example of a call
+Here let's look at an example of pallet::call macro
 
 200
 00:08:26,366 --> 00:08:27,266
-在之前
-before
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 201
 00:08:27,266 --> 00:08:29,299
-我们已经定义了一个pallet
-We have defined a pallet
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 202
-00:08:29,300 --> 00:08:30,333
-这样的一个结构体
-such a structure
+00:08:29,299 --> 00:08:30,333
+在之前我们已经定义了一个pallet这样的一个结构体
+we have defined a struct named Pallet in the module
 
 203
 00:08:30,333 --> 00:08:31,333
-表示我们
-showing us
+表示我们的功能模块
+it represents our module
 
 204
-00:08:31,566 --> 00:08:32,866
-功能模块
-the functional module
+00:08:31,333 --> 00:08:32,866
+表示我们的功能模块
+it represents our module
 
 205
 00:08:33,100 --> 00:08:34,000
 接着我们对pallet
-Then in the pallet struct
+Then we can add some implementations for the Pallet struct
 
 206
 00:08:34,000 --> 00:08:36,100
 结构体添加了一些功能实现
-we add some functional implementation
+Then we can add some implementations for the Pallet struct
 
 207
 00:08:36,533 --> 00:08:37,733
-在这个功能实现
-Outside the implementation
+在这个功能实现外面
+here it uses pallet::call macro to annotate the implementation
 
 208
-00:08:38,100 --> 00:08:38,966
-外面我们
-we use
+00:08:37,733 --> 00:08:38,966
+在这个功能实现外面
+here it uses pallet::call macro to annotate the implementation
 
 209
-00:08:39,100 --> 00:08:42,200
+00:08:38,966 --> 00:08:42,200
 应用了pallet::call这样的一个宏来表示
-a macro such as pallet::call to represent that
+here it uses pallet::call macro to annotate the implementation
 
 210
 00:08:42,366 --> 00:08:45,266
 这个实现里面是我们的可调用函数
-Inside this implementation is our callable function
+it means the implementation is used for defining dispatchable functions
 
 211
 00:08:45,866 --> 00:08:47,533
 对应的是不同的交易
-Corresponding to different transactions
+such dispatchables corresponds to different transactions
 
 212
 00:08:48,200 --> 00:08:48,666
 这里面
-here
+One of the dispatchables is named do_something
 
 213
 00:08:48,666 --> 00:08:50,733
 其中一个可调用函数的名字是do_something
-The name of one of the callable functions is do_something
+One of the dispatchables is named do_something
 
 214
 00:08:50,733 --> 00:08:51,966
@@ -1069,52 +1070,52 @@ It accepts two parameters
 215
 00:08:52,166 --> 00:08:53,799
 第一个参数是origin
-The first parameter is origin
+The first parameter is origin which indicates the sender of the transaction
 
 216
-00:08:54,066 --> 00:08:56,133
+00:08:53,799 --> 00:08:56,133
 表示交易的发送方
-which Indicates the sender of the transaction
+The first parameter is origin which indicates the sender of the transaction
 
 217
 00:08:56,766 --> 00:08:58,066
 它的类型是OriginFor
-Its type is OriginFor
+its type is OriginFor from the system module
 
 218
 00:08:58,066 --> 00:09:00,133
 来自我们的系统模块
-from our system modules
+its type is OriginFor from the system module
 
 219
 00:09:00,500 --> 00:09:02,400
 另外一个数据是something
-Another data is something
+Another parameter is something, an u32 integer
 
 220
-00:09:02,600 --> 00:09:04,600
+00:09:02,400 --> 00:09:04,600
 它是32位整数类型
-It is a 32-bit integer type
+Another parameter is something, an u32 integer
 
 221
 00:09:04,800 --> 00:09:07,266
 返回结果是DispatchResult
-The return result is DispatchResult
+The value returned from the dispatchable is DispatchResult
 
 222
 00:09:08,866 --> 00:09:13,133
-是一个Rust result类型的类型别名
-It is a type alias for the Rust result type
+是一个Rust Result类型的类型别名
+DispatchResult is a type alias for the Result type in Rust
 
 223
 00:09:13,733 --> 00:09:16,299
 包含了Substrates所返回的一些
-which contains some of the
+it contains some custom errors from runtime
 
 224
-00:09:16,333 --> 00:09:17,733
+00:09:16,299 --> 00:09:17,733
 自定义的错误信息
-custom error messages
+it contains some custom errors from runtime
 
 225
 00:09:18,900 --> 00:09:21,366
@@ -1124,807 +1125,808 @@ The macro pallet::weight will be introduced later
 226
 00:09:22,800 --> 00:09:23,933
 call_index宏
-call_index macro
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 227
 00:09:23,933 --> 00:09:25,599
-可以把可调用函数在code
-can fix the sequence
+可以把可调用函数在codec
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 228
 00:09:25,599 --> 00:09:26,399
-可以把可调用函数在code
- callable functions in code
+可以把可调用函数在codec
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 229
 00:09:26,399 --> 00:09:26,400
- callable functions in code
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 230
 00:09:26,400 --> 00:09:27,100
 编解码过程中的顺序
- callable functions in code
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 231
 00:09:27,100 --> 00:09:27,900
 编解码过程中的顺序
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 232
 00:09:27,900 --> 00:09:27,933
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 233
 00:09:27,933 --> 00:09:28,899
 固定下来
-in the encoding and decoding process
+call_index macro makes the index of the dispatchable fixed when doing some codec
 
 234
 00:09:29,100 --> 00:09:30,566
 比如do something
-such as do something
+such as do_something, its index is 0
 
 235
-00:09:30,700 --> 00:09:32,000
+00:09:30,566 --> 00:09:32,000
 它的序号是0
-its serial number is 0
+such as do_something, its index is 0
 
 236
 00:09:33,266 --> 00:09:35,699
 在这个可调用函数里面它的逻辑很简单
-Inside this callable function its logic is simple
+The logic of the dispatchable is very simple
 
 237
 00:09:35,800 --> 00:09:38,533
 首先是使用系统文化提供的ensure_signed
-The first is to use the ensure_signed provided by the system culture
+it first use ensure_signed provided by the system module to verify the origin
 
 238
-00:09:38,900 --> 00:09:41,300
+00:09:38,533 --> 00:09:41,300
 将origin进行较验
-to verify the origin
+it first use ensure_signed provided by the system module to verify the origin
 
 239
 00:09:41,366 --> 00:09:43,466
 看对应的交易发送方是不是
-See if the corresponding transaction sender is
+check if the transaction sender is signed or not
 
 240
-00:09:43,600 --> 00:09:44,733
+00:09:43,466 --> 00:09:44,733
 经过签名的
-signed
+check if the transaction sender is signed or not
 
 241
 00:09:45,866 --> 00:09:48,133
 如果是签名的话我们返回我
-If it's signed it returns
+if signed, ensure_signed returns the account id of the transaction sender
 
 242
 00:09:48,133 --> 00:09:50,566
 们交易的发送方对应的account
-the account corresponding to the sender of our transaction
+if signed, ensure_signed returns the account id of the transaction sender
 
 243
 00:09:51,300 --> 00:09:52,766
-接着我们交易完成之后
-Then after our transaction is completed
+接着我们校验完成之后
+After some verification, we can then modify the storage item
 
 244
 00:09:52,766 --> 00:09:54,766
 我们就可以对我们存储单元进行
-We can then modify
+After some verification, we can then modify the storage item
 
 245
-00:09:55,266 --> 00:09:56,333
+00:09:54,766 --> 00:09:56,333
 修改我们将something
- our storage unit
+After some verification, we can then modify the storage item
 
 246
 00:09:56,800 --> 00:09:59,133
 刚才提到的something这样一个存储单元
-The something just mentioned such a storage unit
+We just mentioned such a storage item named Something
 
 247
 00:09:59,300 --> 00:10:01,066
 里面存储值进行更新
-The value stored inside is updated
+to update its value in the storage, we can use put function
 
 248
 00:10:01,066 --> 00:10:02,933
 是使用put函数
-It is to use the put function
+to update its value in the storage, we can use put function
 
 249
 00:10:04,333 --> 00:10:04,699
 紧接着
-Immediately after
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 250
-00:10:04,700 --> 00:10:06,933
+00:10:04,699 --> 00:10:06,933
 我们就可以触发一个事件来表示
-we can trigger an event to indicate
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 251
 00:10:06,933 --> 00:10:08,766
 来告诉客户端我们的
-to tell the client our
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 252
-00:10:09,300 --> 00:10:10,666
+00:10:08,766 --> 00:10:10,666
 逻辑执行成功了
-logic execution succeeded
+Then an event is triggered to tell the client that the dispatchable is executed successfully
 
 253
 00:10:10,966 --> 00:10:13,366
 我们触发的事件是SomethingStored
-The event we trigger is SomethingStored
+the event is called SomethingStored
 
 254
 00:10:13,966 --> 00:10:14,699
 这样的一个事件
-such an event
+SomethingStored event provides two information, one is something indicating the updated data
 
 255
-00:10:14,700 --> 00:10:15,666
+00:10:14,699 --> 00:10:15,666
 它有两个数据
-it has two data
+SomethingStored event provides two information, one is something indicating the updated data
 
 256
 00:10:15,666 --> 00:10:16,466
 一个是something
-one is something
+SomethingStored event provides two information, one is something indicating the updated data
 
 257
 00:10:16,466 --> 00:10:18,133
 表示我们更新的数据信息
-Indicating our updated data information
+SomethingStored event provides two information, one is something indicating the updated data
 
 258
 00:10:18,133 --> 00:10:19,466
 以及who
-and who
+and who shows the account that updates the data
 
 259
-00:10:19,500 --> 00:10:22,533
+00:10:19,466 --> 00:10:22,533
 表示我们是谁来更新的这样的信息
-Indicating who we are to update such information
+and who shows the account that updates the data
 
 260
 00:10:23,000 --> 00:10:24,566
-最后我们就可以返回OK
-Finally we can return OK
+最后我们就可以返回Ok
+At the end, it returns Ok
 
 261
 00:10:25,600 --> 00:10:28,333
 那pallet::weight宏的话是表示我们
-The pallet::weight macro means that
+The pallet::weight macro is used to represent the excution time used by the dispatchable when building the block
 
 262
-00:10:28,500 --> 00:10:31,066
+00:10:28,333 --> 00:10:31,066
 当前交易或者说是可调用函数do_something
-The current transaction or callable do_something
+The pallet::weight macro is used to represent the excution time used by the dispatchable when building the block
 
 263
 00:10:31,600 --> 00:10:33,500
 所需要的执行的时间
-required execution time
+here it's fixed for demo purpose
 
 264
 00:10:33,966 --> 00:10:36,399
 大家知道对于区块链应用
-Everyone knows that for blockchain applications
+For blockchain, the time can be used to generate a block is usually limited
 
 265
-00:10:36,766 --> 00:10:39,166
+00:10:36,399 --> 00:10:39,166
 区块的生成时间通常都是有限的
-Block generation time is usually limited
+For blockchain, the time can be used to generate a block is usually limited
 
 266
 00:10:39,800 --> 00:10:40,966
 通常是几秒钟
-usually a few seconds
+the period is usually a few seconds
 
 267
 00:10:41,600 --> 00:10:44,200
 那在有限的区块生成时间里
-that in the limited block generation time
+Then we have to allocate the block time reasonably across different transactions
 
 268
 00:10:44,200 --> 00:10:44,366
-we need to make a reasonable allocation
+Then we have to allocate the block time reasonably across different transactions
 
 269
 00:10:44,366 --> 00:10:45,733
 我们就需要对这个时间
-we need to make a reasonable allocation
+Then we have to allocate the block time reasonably across different transactions
 
 270
 00:10:45,733 --> 00:10:46,766
 进行合理的分配
-to the time.
+Then we have to allocate the block time reasonably across different transactions
 
 271
 00:10:47,900 --> 00:10:51,066
 对应的分配的机制就是通过
-The corresponding allocation mechanism is through
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 272
-00:10:51,600 --> 00:10:52,466
+00:10:51,066 --> 00:10:52,466
 量化
-Quantify
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 273
-00:10:52,500 --> 00:10:55,266
+00:10:52,466 --> 00:10:55,266
 某一个可调用函数的执行时间来完成的
-the execution time of a callable function to complete
+the allocation mechanism is through quantifying the execution time of a dispatchable function
 
 274
 00:10:55,266 --> 00:10:58,533
 而量化的方式就是pallet::weight交易权重
-The quantification method is pallet::weight transaction weight
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 275
-00:10:58,600 --> 00:11:00,333
+00:10:58,533 --> 00:11:00,333
 来进行一个设置
-to make a setting
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 276
 00:11:00,333 --> 00:11:01,866
 设置一个合理的权重值
-Set a reasonable weight value
+the quantification method is setting the weight with pallet::weight macro in Substrate
 
 277
 00:11:01,866 --> 00:11:03,499
 也就是表示这个
-That is to say this
+that is to say, the value of the weight is the execution time of the dispatchable function
 
 278
 00:11:03,566 --> 00:11:06,099
 可调用函数的一个合理的执行时间
-A reasonable execution time for callable functions
+that is to say, the value of the weight is the execution time of the dispatchable function
 
 279
 00:11:07,300 --> 00:11:10,866
 进而将对应的权重值转换为交易费用
-Then convert the corresponding weight value into a transaction fee
+Further we can convert the weight value to the transaction fee
 
 280
 00:11:11,200 --> 00:11:12,866
 通过交易费用这种机制
-Through the transaction fee mechanism
+Through the transaction fee mechanism, the blockchain gets better protected from attacks like denial of service
 
 281
 00:11:12,866 --> 00:11:16,533
 来更好的避免拒绝服务类似的攻击
-To better avoid attacks like denial of service
+Through the transaction fee mechanism, the blockchain gets better protected from attacks like denial of service
 
 282
 00:11:18,700 --> 00:11:21,400
 我们接着来再看一个
-let's see one more
+Let's see another dispatchable named cause_error
 
 283
 00:11:21,400 --> 00:11:23,400
 另外一个可调用函数是cause_error
-Another callable function is cause_error
+Let's see another dispatchable named cause_error
 
 284
 00:11:23,400 --> 00:11:25,566
 同样它有一个weight值
-Also it has a weight value
+It has weight too, here give it a fixed value for simplicity
 
 285
-00:11:25,766 --> 00:11:28,599
+00:11:25,566 --> 00:11:28,599
 那这里都是为了方便起见
-it's all here for convenience
+It has weight too, here give it a fixed value for simplicity
 
 286
-00:11:28,600 --> 00:11:29,500
+00:11:28,599 --> 00:11:29,500
 给它一个固定的值
-to give it a fixed value
+It has weight too, here give it a fixed value for simplicity
 
 287
 00:11:29,500 --> 00:11:30,200
 通常情况下
-usually
+Usually different dispatchables have different logic
 
 288
 00:11:30,200 --> 00:11:31,733
 不同的可调用函数它有不同逻辑
-Different callable functions have different logic
+Usually different dispatchables have different logic
 
 289
 00:11:31,733 --> 00:11:34,799
 它的权重的计算也是会和
-Its weight calculation will also be relevant with
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 290
-00:11:35,066 --> 00:11:36,933
+00:11:34,799 --> 00:11:36,933
 逻辑里面所读取
-the specific information
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 291
-00:11:37,300 --> 00:11:39,300
+00:11:36,933 --> 00:11:39,300
 去操作存储单元的
-reading in logic
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 292
-00:11:39,700 --> 00:11:41,133
+00:11:39,300 --> 00:11:41,133
 具体信息会有关系
-to operate the storage unit.
+the calculation of weight is based on the logc, and relates to the operations on the storage items
 
 293
 00:11:41,666 --> 00:11:44,099
 我们本次课程并不会详细的介绍
-We will not introduce in detail in this course
+we will not cover the detail about how to set the transaction weight in this course
 
 294
-00:11:44,100 --> 00:11:44,875
+00:11:44,099 --> 00:11:44,875
 如何设置交易权重
-about how to set trade weight
+we will not cover the detail about how to set the transaction weight in this course
 
 295
 00:11:44,875 --> 00:11:46,800
 在后续的进阶课程
-In subsequent advanced courses
+there will be more such information in Substrate advanced course
 
 296
 00:11:46,800 --> 00:11:48,666
 我们会有更多的一些介绍
-We will have some more introductions
+there will be more such information in Substrate advanced course
 
 297
 00:11:49,266 --> 00:11:51,299
 这里我们定义一个另外可调用函数叫做
-Here we define an additional callable function called
+Here we define another dispatchable called cause_error
 
 298
 00:11:51,500 --> 00:11:53,800
 casue_error它只有一个参数就是origin
-Casue_error has only one parameter which is origin
+it has only one parameter which is origin
 
 299
 00:11:53,800 --> 00:11:55,200
 表示我们交易的发送方
-Indicating the sender of our transaction
+indicating the sender of our transaction
 
 300
 00:11:55,566 --> 00:11:58,966
 同样它也返回一个类型叫做DispatchResult
-It also returns a type called DispatchResult
+it also returns a value with type DispatchResult
 
 301
 00:11:59,333 --> 00:12:01,199
 我们也是使用ensure_signed
-We also use ensure_signed
+We use ensure_signed to verify that the sender is signed
 
 302
-00:12:01,200 --> 00:12:02,466
+00:12:01,199 --> 00:12:02,466
 来表示我们的交易
-to represent that our transaction
+We use ensure_signed to verify that the sender is signed
 
 303
 00:12:02,466 --> 00:12:03,999
 发送方是一个签名的
-sender is signed
+We use ensure_signed to verify that the sender is signed
 
 304
 00:12:04,900 --> 00:12:06,900
 接着我们调用get方法
-Then we call the get method
+then call the get method to retrieve the value inside the storage item Something
 
 305
 00:12:06,900 --> 00:12:08,533
-获取存储单元something
-to get storage unit something
+获取存储单元Something里面的值
+then call the get method to retrieve the value inside the storage item Something
 
 306
-00:12:08,666 --> 00:12:09,533
+00:12:08,533 --> 00:12:09,533
 里面的值
-the value inside
+then call the get method to retrieve the value inside the storage item Something
 
 307
 00:12:09,600 --> 00:12:11,133
 检查里面的值是不是None
-Check if the value inside is None
+Check if the value is None or not
 
 308
 00:12:11,300 --> 00:12:13,866
 如果是None的话我们就返回一个error
-If it is None we return an error
+if None, return an error NoneValue
 
 309
-00:12:14,066 --> 00:12:15,299
+00:12:13,866 --> 00:12:15,299
 是NoneValue
-is NoneValue
+if None, return an error NoneValue
 
 310
 00:12:16,133 --> 00:12:17,999
 如果是有值的话
-if it has a value
+if value exists, add 1 to the value
 
 311
-00:12:18,000 --> 00:12:20,966
-我们就对应里面的值进行加1
-We add 1 to the corresponding value inside
+00:12:17,999 --> 00:12:20,966
+我们就对里面的值进行加1
+if value exists, add 1 to the value
 
 312
 00:12:21,133 --> 00:12:22,166
 那加1的
-that plus 1
+checked_add returns an error if overflow, otherwise reuturn ok with the sum value
 
 313
-00:12:22,666 --> 00:12:23,899
+00:12:22,166 --> 00:12:23,899
 结果如果是溢出的话
-If the result is an overflow
+checked_add returns an error if overflow, otherwise reuturn ok with the sum value
 
 314
 00:12:23,900 --> 00:12:25,200
 我们就返回另外一个错误
-we return another error
+here it converts the error to a custom runtime error named StorageOverflow
 
 315
 00:12:25,200 --> 00:12:26,566
 叫StorageOverflow
-Called StorageOverflow
+here it converts the error to a custom runtime error named StorageOverflow
 
 316
 00:12:27,133 --> 00:12:28,099
 如果是正常情况下
-if it is normal
+We use put method to store the result if no error occurs 
 
 317
-00:12:28,100 --> 00:12:31,700
+00:12:28,099 --> 00:12:31,700
 我们就把对应加1之后的值进行存储
-We store the corresponding value after adding 1
+We use put method to store the result if no error occurs
 
 318
-00:12:31,766 --> 00:12:33,699
+00:12:31,700 --> 00:12:33,699
 我们是调用的是put方法
-We are calling the put method
+We use put method to store the result if no error occurs
 
 319
 00:12:33,733 --> 00:12:35,866
 最后我们返回我们所需要的
-Finally we return what we need
+In the end, return Ok
 
 320
-00:12:36,066 --> 00:12:37,599
+00:12:35,866 --> 00:12:37,599
 OK数据类型
-OK data type
+In the end, return Ok
 
 321
 00:12:39,300 --> 00:12:40,466
 看完了call
-finished calling
+After learning pallet::call macro
 
 322
 00:12:40,700 --> 00:12:43,500
 这样的一个宏之后我们来看event宏
-After such a macro, let's look at the event macro
+let's look at the pallet::event macro
 
 323
 00:12:43,766 --> 00:12:46,499
 大家知道区块链是一个异步系统
-Everyone knows that blockchain is an asynchronous system
+It's known that blockchain is an asynchronous system
 
 324
 00:12:47,366 --> 00:12:51,066
 Substrate链上逻辑通过触发事件的形式
-The logic on the Substrate chain is in the form of triggering events
+to notify offchain client of the transaction's execution result, Substrate runtime triggers events
 
 325
-00:12:51,300 --> 00:12:54,100
+00:12:51,066 --> 00:12:54,100
 来通知客户端交易的执行结果
-To notify the client of the execution result of the transaction
+to notify offchain client of the transaction's execution result, Substrate runtime triggers events
 
 326
 00:12:54,933 --> 00:12:55,866
 这里事件
-here event
+The definition of event uses pallet::event macro
 
 327
 00:12:55,866 --> 00:12:58,266
 的定义就是要使用pallet::event
-The definition is to use pallet::event
+The definition of event uses pallet::event macro
 
 328
 00:12:58,266 --> 00:12:59,133
 这样的一个宏
-such a macro
+The definition of event uses pallet::event macro
 
 329
 00:12:59,566 --> 00:13:01,699
 这里我们定义了一个枚举类型
-Here we define an enum type
+Here we define an enum named Event
 
 330
-00:13:01,700 --> 00:13:03,133
+00:13:01,699 --> 00:13:03,133
 enum Event
-enum Event
+Here we define an enum named Event
 
 331
 00:13:04,066 --> 00:13:05,299
 它有一个泛型参数T
-It has a generic parameter T
+it has a generic parameter T, and constaints to the config trait of our module
 
 332
-00:13:06,133 --> 00:13:09,166
+00:13:05,299 --> 00:13:09,166
 约束是我们当前模块化的config配置接口
-Constraints is our current modular config configuration trait
+it has a generic parameter T, and constaints to the config trait of our module
 
 333
 00:13:09,300 --> 00:13:10,966
 给我们定义了一个
-It defines an
+It defines an event variant named SomethingStored
 
 334
-00:13:11,500 --> 00:13:13,566
+00:13:10,966 --> 00:13:13,566
 事件类型是SomethingStored
-event type which is SomethingStored
+It defines an event variant named SomethingStored
 
 335
 00:13:14,400 --> 00:13:19,366
-第一个参数是U32表示我们操作的数据
-The first parameter is U32 representing the data we operate
+第一个参数是u32 表示我们操作的数据
+the first data in SomethingStored event is u32 which is the integer we operate
 
 336
 00:13:19,500 --> 00:13:21,400
-第二个参数是T::AccountID
-The second parameter is T::AccountID
+第二个参数是T::AccountId
+the second is T::AccountId which is a type provided by the system module
 
 337
 00:13:21,400 --> 00:13:24,166
 是系统模块所提供的类型
-which is the type provided by the system module
+the second is T::AccountId which is a type provided by the system module
 
 338
 00:13:24,166 --> 00:13:27,366
 表示我们的交易用户
-Representing our trading users
+it indicates the sender of the transaction
 
 339
 00:13:28,900 --> 00:13:31,733
 另外一个是generate_deposit这样的一个宏
-The other is a macro like generate_deposit
+The other macro is generate_deposit which defines a helper method named deposit_event
 
 340
 00:13:31,733 --> 00:13:34,266
 它定义了一个帮助方法deposit_event
-It defines a helper method deposit_event
+The other macro is generate_deposit which defines a helper method named deposit_event
 
 341
 00:13:34,400 --> 00:13:37,066
 可以方便的来触发事件
-It is convenient to trigger events
+it is conveniently used to trigger events in dispatchables
 
 342
 00:13:37,500 --> 00:13:38,133
 可以看到
-We can see
+Here you can see we are using Self::deposit_event to trigger the event
 
 343
 00:13:38,133 --> 00:13:42,133
 这里我们是调用模块Self::deposit_event
-Here we are calling the module Self::deposit_event
+Here you can see we are using Self::deposit_event to trigger the event
 
 344
 00:13:42,133 --> 00:13:45,266
 也就是我们刚才generate_deposit event
-That is, we just used generate_deposit event
+Here you can see we are using Self::deposit_event to trigger the event
 
 345
-00:13:45,466 --> 00:13:46,966
+00:13:45,266 --> 00:13:46,966
 定义一个帮助方法
-to define a helper method
+Here you can see we are using Self::deposit_event to trigger the event
 
 346
-00:13:47,766 --> 00:13:49,066
+00:13:46,966 --> 00:13:49,066
 来触发对应的事件
-to trigger the corresponding event
+Here you can see we are using Self::deposit_event to trigger the event
 
 347
 00:13:49,133 --> 00:13:50,733
 我们这里的事件是
-Our events here is
+the event here is Event::SomethingStored
 
 348
-00:13:50,933 --> 00:13:53,799
+00:13:50,733 --> 00:13:53,799
 Event枚举类型,子类型SomethingStored
-Event enumeration type, subtype SomethingStored
+the event here is Event::SomethingStored
 
 349
 00:13:54,366 --> 00:13:56,799
-它有两个数据一个是这个数据something
-It has two data one is this data something
+它有两个数据, 一个是这个数据something
+it has two data, one is integer something
 
 350
 00:13:57,066 --> 00:13:59,566
 另外一个是交易的发送者who
-The other is the sender who of the transaction
+the other is the sender of the transaction
 
 351
 00:14:01,533 --> 00:14:02,799
 当可调用函数
-when any error
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 352
 00:14:02,799 --> 00:14:02,966
-of the callable function occurs during execution
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 353
 00:14:02,966 --> 00:14:04,832
 在执行过程中发生任何错误时
-of the callable function occurs during execution
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 354
 00:14:04,832 --> 00:14:04,999
 在执行过程中发生任何错误时
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 355
-00:14:05,000 --> 00:14:08,666
+00:14:04,999 --> 00:14:08,666
 我们可以通过error信息来通知客户端
-We can notify the client through error information
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 356
-00:14:08,733 --> 00:14:10,399
-那需要使用的就是pallet
-Then you need to use the pallet
+00:14:08,666 --> 00:14:10,399
+那需要使用的就是pallet::error这样的一个宏
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 357
-00:14:10,400 --> 00:14:11,566
-error这样的一个宏
-error macro
+00:14:10,399 --> 00:14:11,566
+那需要使用的就是pallet::error这样的一个宏
+When error happens during the execution of dispatchable functions, we can return an error defined with pallet::error macro
 
 358
 00:14:11,600 --> 00:14:13,500
 同样呢我们定义了一个enum Error
-Similarly, we defined an enum Error
+Similarly, let's define an enum named Error
 
 359
 00:14:13,566 --> 00:14:15,333
 这样的一个枚举类型
-Such an enumerated type
+it has two variants
 
 360
-00:14:15,866 --> 00:14:17,699
+00:14:15,333 --> 00:14:17,699
 那这里我们有两个变体
-So here we have two variants
+it has two variants
 
 361
 00:14:17,700 --> 00:14:20,266
 一个是NoneValue表示没有值
-One is NoneValue means no value
+one is NoneValue, it means no value exists
 
 362
 00:14:20,266 --> 00:14:22,933
 另外一个变体是StorageOverflow
-Another variant is StorageOverflow
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 363
 00:14:22,933 --> 00:14:25,099
 表示了存储在计算的过程中
-indicating storage overflow happend
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 364
-00:14:25,166 --> 00:14:26,299
+00:14:25,099 --> 00:14:26,299
 发生了溢出
-in the process of calculation
+another is StorageOverflow, it indicates that there is overflow happend when calculating
 
 365
 00:14:26,566 --> 00:14:29,566
 通常情况下错误信息要有比较好的可读性
-In general, error messages should be more readable
+In general, the error variants should be readable
 
 366
 00:14:29,700 --> 00:14:32,266
 并且我们这里的Rust的注释文档
-And our Rust annotation documentation here
+the Rust doc coments here will also be exposed to the client through metadata
 
 367
 00:14:32,266 --> 00:14:33,733
 也会通过metadata
-Also through metadata
+the Rust doc coments here will also be exposed to the client through metadata
 
 368
-00:14:33,766 --> 00:14:35,133
+00:14:33,733 --> 00:14:35,133
 来暴露给客户端
-to be exposed to the client
+the Rust doc coments here will also be exposed to the client through metadata
 
 369
 00:14:36,600 --> 00:14:39,500
-对于可调用函数里面触发的错类型
-For the error type triggered in the callable function
+对于可调用函数里面触发的错误类型
+For the error variants triggered in the dispatchable, they are slightly different than event variants
 
 370
 00:14:39,500 --> 00:14:41,666
 他们和event有一些不一样
-They are a little different from event
+For the error variants triggered in the dispatchable, they are slightly different than event variants
 
 371
 00:14:41,900 --> 00:14:42,966
 event可以添加数据
-event can add data
+event variants can contain some data, but no extra data can be added in error variants
 
 372
 00:14:42,966 --> 00:14:44,766
 但是错误信息不能添加数据
-But the error message cannot add data
+event variants can contain some data, but no extra data can be added in error variants
 
 373
 00:14:45,333 --> 00:14:46,466
 我们刚才已经提到了
-we just mentioned
+We just mentioned that the error information will be exposed to the client through metadata
 
 374
 00:14:46,466 --> 00:14:48,266
 错误信息也会通过metadata
-Error information will also use metadata
+We just mentioned that the error information will be exposed to the client through metadata
 
 375
 00:14:48,266 --> 00:14:49,466
 暴露给客户端
-to be exposed to clients
+We just mentioned that the error information will be exposed to the client through metadata
 
 376
 00:14:49,933 --> 00:14:52,199
 那当错误真正发生时
-when the error actually occurs
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 377
-00:14:52,366 --> 00:14:54,399
+00:14:52,199 --> 00:14:54,399
 其实是触发了一个system
-In fact, it triggered a system
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 378
-00:14:54,533 --> 00:14:56,299
+00:14:54,399 --> 00:14:56,299
 ExtrinsicFailed的这样一个事件
-Such an event of ExtrinsicFailed
+when error occurs, the runtime actually triggers a system ExtrinsicFailed event
 
 379
 00:14:56,700 --> 00:14:59,333
 那这个事件里面就包含了对应错误的
-Then this event contains the corresponding error
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 380
-00:14:59,400 --> 00:15:00,133
+00:14:59,333 --> 00:15:00,133
 索引信息
-index information
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 381
 00:15:00,133 --> 00:15:01,866
 比如它是由哪个模块触发的
-For example, which module triggers it
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 382
 00:15:01,866 --> 00:15:03,733
 以及它触发的错误的index
-And the index of the error it triggered
+this ExtrinsicFailed event contains the index of the error, includes the module index number and the error index number
 
 383
 00:15:04,733 --> 00:15:07,166
 也就是错误的名字并不会真正的返回
-That is, the wrong name does not really return
+in fact, the error name is not included in the event
 
 384
 00:15:07,166 --> 00:15:07,966
 而是
-but
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 385
-00:15:08,166 --> 00:15:12,266
+00:15:07,966 --> 00:15:12,266
 具体在枚举定义的一个排序的顺序
-A sorted order specifically defined in the enumeration
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 386
 00:15:12,266 --> 00:15:14,333
 会返回给客户端
-will be returned to the client
+instead the sequence number of the error variants defined in the enum will be returned to the client
 
 387
 00:15:16,066 --> 00:15:18,133
 接着我们来看一下hooks宏
-Then let's take a look at the hooks macro
+Now let's take a look at the pallet::hooks macro
 
 388
 00:15:18,566 --> 00:15:21,866
@@ -1934,430 +1936,429 @@ There are some reserved functions in Substarte Runtime
 389
 00:15:22,366 --> 00:15:24,733
 可以用在特定的时间点
-can be used at a specific point in time
+such reserved functions can be used to execute custom logic at a specific time
 
 390
 00:15:24,733 --> 00:15:26,666
 执行一些自定义的逻辑
-to execute some custom logic
+such reserved functions can be used to execute custom logic at a specific time
 
 391
 00:15:27,133 --> 00:15:30,266
 比如on_initialize这样一个保留函数
-For example, a reserved function such as on_initialize
+For example, one reserved function is on_initialize, which is executed at the beginning of each block
 
 392
-00:15:30,300 --> 00:15:33,466
+00:15:30,266 --> 00:15:33,466
 它可以在每个区块的开头进行执行
-It can be executed at the beginning of each block
+For example, one reserved function is on_initialize, which is executed at the beginning of each block
 
 393
 00:15:33,966 --> 00:15:35,599
 另外一个是on_finalize
-The other one is on_finalize
+Another one is on_finalize, it will be executed at the end of each block
 
 394
-00:15:35,733 --> 00:15:38,266
+00:15:35,599 --> 00:15:38,266
 他会在每个区块结束时执行
-It will be execute at the end of each block
+Another one is on_finalize, it will be executed at the end of each block
 
 395
 00:15:38,700 --> 00:15:40,766
 还有一个是offchain_worker
-Another one is offchain_worker
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 396
 00:15:40,766 --> 00:15:43,533
 它也是在区块开头的时候就会执行
-It is also executed at the beginning of the block
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 397
 00:15:43,533 --> 00:15:47,366
 但是不同的是它会起一个新的线程
-But the difference is that it will start a new thread
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 398
-00:15:47,533 --> 00:15:50,566
+00:15:47,366 --> 00:15:50,566
 并不会占用链上的执行资源
-it does not occupy execution resources on the chain
+The offchain_worker function is executed at the beginning of each block, but it will start a new thread withouth taking the onchain execution resources
 
 399
 00:15:51,200 --> 00:15:53,000
 通常offchain_worker可以用来
-Usually offchain_worker can be used
+Usually the offchain worker can be used to perform tasks that require high computational power
 
 400
-00:15:53,333 --> 00:15:55,399
+00:15:53,000 --> 00:15:55,399
 执行一些计算量要求比较高
-Performing some calculations that are relatively demanding
+Usually the offchain worker can be used to perform tasks that require high computational power
 
 401
 00:15:55,400 --> 00:15:58,600
 或者与链外系统进行交互的一些操作
-Or some operations that interact with off-chain systems
+or interact with offchain systems like querying price and identity information, etc.
 
 402
-00:15:58,733 --> 00:16:01,399
+00:15:58,600 --> 00:16:01,399
 比如去获取一些链外的价格信息
-For example, to obtain some off-chain price information
+or interact with offchain systems like querying price and identity information, etc.
 
 403
-00:16:01,533 --> 00:16:02,866
+00:16:01,399 --> 00:16:02,866
 或者身份信息等等
-or identity information, etc.
+or interact with offchain systems like querying price and identity information, etc.
 
 404
 00:16:03,566 --> 00:16:05,099
 那on_runtime_upgrade的话
-Then on_runtime_upgrade
+The on_runtime_upgrade function only executes when there are runtime upgrades
 
 405
-00:16:05,100 --> 00:16:08,300
+00:16:05,099 --> 00:16:08,300
 是当有runtime升级的时候才会执行
-It will be executed when there is a runtime upgrade
+The on_runtime_upgrade function only executes when there are runtime upgrades
 
 406
 00:16:08,300 --> 00:16:12,200
 通常是用做遗留数据的数据迁移功能
-Usually used as a data migration function for legacy data
+use it to migrate legacy onchain data
 
 407
 00:16:13,100 --> 00:16:16,533
 最后一个用来开发Runtime功能模块的
-The last one is used to develop the Runtime function module
+The last macro that is used a lot for runtime development is construct_runtime
 
 408
-00:16:16,733 --> 00:16:18,699
+00:16:16,533 --> 00:16:18,699
 宏是construct_runtime
-The macro is construct_runtime
+The last macro that is used a lot for runtime development is construct_runtime
 
 409
 00:16:19,133 --> 00:16:21,066
 它可以用来加载我们的
-It can be used to load our
+it can be used to load the runtime modules that just developed
 
 410
-00:16:21,266 --> 00:16:22,966
+00:16:21,066 --> 00:16:22,966
 刚刚开发出来的功能模块
-Functional modules just developed
+it can be used to add modules to the runtime
 
 411
 00:16:23,466 --> 00:16:24,499
 在加载之前呢
-before loading
+Before adding a module, we need to implement the config trait of the module
 
 412
-00:16:24,500 --> 00:16:26,100
+00:16:24,499 --> 00:16:26,100
 首先我们要对我们的功能模块
-First we have to implement our function module
+Before adding a module, we need to implement the config trait of the module
 
 413
 00:16:26,100 --> 00:16:28,133
 配置接口进行实现
-configuration trait
+Before adding a module, we need to implement the config trait of the module
 
 414
 00:16:28,400 --> 00:16:30,933
 比如刚才我们看到的template的模块
-For example, the template module we saw just now
+For example, the template pallet we saw just now
 
 415
 00:16:31,400 --> 00:16:33,566
 我们对它的config配置接口进行实现
-We inplement its config configuration trait
+let's implement its config trait for runtime
 
 416
 00:16:33,566 --> 00:16:35,466
-它只有一个关键类型是event
-It has only one key type which is event
+它只有一个关联类型是event
+it has only one associate type which is RuntimeEvent
 
 417
 00:16:35,466 --> 00:16:36,866
 这里我们给它进行定义
-Here we define it
+it's defined here
 
 418
 00:16:37,000 --> 00:16:39,500
 接着我们就可以在construct_runtime宏里面
-Then we can in the construct_runtime macro
+Then we can add the new module in construct_runtime macro
 
 419
-00:16:39,533 --> 00:16:41,699
+00:16:39,500 --> 00:16:41,699
 添加我们对应的功能模块
-Add our corresponding function module
+Then we can add the new module in construct_runtime macro
 
 420
 00:16:41,733 --> 00:16:43,766
 这里我们功能模块的名字叫做
-Here the name of our function module is called
+the name of the new module is TemplateModule
 
 421
-00:16:43,800 --> 00:16:44,766
+00:16:43,766 --> 00:16:44,766
 TemplateModule
-TemplateModule
+the name of the new module is TemplateModule
 
 422
 00:16:45,133 --> 00:16:46,899
 那我们需要依赖的
-then we need to rely on
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 423
-00:16:47,166 --> 00:16:49,533
+00:16:46,899 --> 00:16:49,533
 pallet_template模块里的一些
-Something in the pallet_template module
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 424
-00:16:49,966 --> 00:16:52,466
+00:16:49,533 --> 00:16:52,466
 数据信息包括
-like Data informations that include
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 425
 00:16:52,466 --> 00:16:55,366
 模块定义module, 可调用函数定义call
-Module definition module, callable function definition call
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 426
-00:16:56,066 --> 00:16:59,133
+00:16:55,366 --> 00:16:59,133
 存储项的定义storage以及event的定义
-The definition of storage item storage and the definition of event
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 427
 00:17:00,000 --> 00:17:02,566
 现在我们就已经完成了一个基本的
-We have now completed a basic
+Now we have shown a simpile pallet which is used to store a single value
 
 428
-00:17:02,700 --> 00:17:03,666
+00:17:02,566 --> 00:17:03,666
 功能模块
-functional module
+Now we have shown a simpile pallet which is used to store a single value
 
 429
-00:17:03,700 --> 00:17:05,733
+00:17:03,666 --> 00:17:05,733
 用来存储一个简单的值
-that is used to store a simple value
+Now we have shown a simpile pallet which is used to store a single value
 
 430
 00:17:06,000 --> 00:17:07,300
 如果大家对
-if everyone is
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 431
-00:17:07,666 --> 00:17:09,599
+00:17:07,300 --> 00:17:09,599
 Substrate的内置的宏感兴趣的话
-interested in Substrate's built-in macros
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 432
-00:17:09,600 --> 00:17:11,733
+00:17:09,599 --> 00:17:11,733
 可以使用cargo expend的这个工具
-You can use this tool from cargo expend
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 433
-00:17:12,066 --> 00:17:14,899
+00:17:11,733 --> 00:17:14,899
 将我们宏所应用的代码进行展开
-to expand the code applied by our macro
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 434
 00:17:15,166 --> 00:17:18,566
 能够看到更加标准化的Rust语法
-and you will be able to see more standardized Rust syntax
+and you should be able to see the Rust standard syntax
 
 435
 00:17:19,166 --> 00:17:21,466
 从而也可以看到宏里面所
-So you can also see what is inside the macro
+You can also see what are the functions and data structures that are generated by the macros
 
 436
-00:17:21,900 --> 00:17:23,533
+00:17:21,466 --> 00:17:23,533
 生成的一些新的函数
-like some new functions generated
+You can also see what are the functions and data structures that are generated by the macros
 
 437
 00:17:23,533 --> 00:17:24,966
 一些帮助性的函数
-some helper functions
+You can also see what are the functions and data structures that are generated by the macros
 
 438
 00:17:26,200 --> 00:17:28,266
 另外大家可以去参考
-In addition, you can refer to
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 439
-00:17:28,533 --> 00:17:31,133
+00:17:28,266 --> 00:17:31,133
 pallet属性宏对应的文档
-documentation corresponding to the pallet property macro
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 440
 00:17:31,133 --> 00:17:34,299
 里面有一些详细的描述信息和
-There are some detailed description information and
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 441
-00:17:34,733 --> 00:17:35,999
+00:17:34,299 --> 00:17:35,999
 一些使用的例子
-some usage examples
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 442
 00:17:37,566 --> 00:17:38,733
 还有一些其他的宏
-and some other macros
+There are some other macros that you may also need when development runtime modules
 
 443
 00:17:38,733 --> 00:17:40,799
 在开发Runtime模块的时候
-When developing the Runtime module
+There are some other macros that you may also need when development runtime modules
 
 444
-00:17:40,800 --> 00:17:41,966
+00:17:40,799 --> 00:17:41,966
 有可能也会遇到
-you may also use them
+There are some other macros that you may also need when development runtime modules
 
 445
 00:17:42,733 --> 00:17:46,699
 第一类是decl_runtime_apis和impl_runtime_apis
-The first category is decl_runtime_apis and impl_runtime_apis
+one is decl_runtime_apis and impl_runtime_apis, which are used to add new runtime APIs
 
 446
-00:17:46,700 --> 00:17:48,666
+00:17:46,699 --> 00:17:48,666
 用来定义Runtime API
-that is used to define the Runtime API
+one is decl_runtime_apis and impl_runtime_apis, which are used to add new runtime APIs
 
 447
 00:17:49,400 --> 00:17:50,866
 也就是可以通过
-that is, through
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 448
-00:17:51,166 --> 00:17:53,699
+00:17:50,866 --> 00:17:53,699
 RPC被客户端进行调用
-RPC is called by the client
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 449
-00:17:53,766 --> 00:17:57,866
+00:17:53,699 --> 00:17:57,866
 对链上的一些存储项进行转换
-to convert some storage items on the chain
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 450
 00:17:57,866 --> 00:18:00,099
 然后返回一些特定的结果给我们的
-and then return some specific result to our
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 451
-00:18:00,100 --> 00:18:00,900
+00:18:00,099 --> 00:18:00,900
 客户端
-client
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 452
 00:18:01,766 --> 00:18:03,966
 另外一类宏是runtime_interface
-Another type of macro is runtime_interface
+Another one is runtime_interface
 
 453
 00:18:04,400 --> 00:18:06,900
 它可以定义Runtime里
-It can define
+runtime_interface is used to define the functions provided by the Host, and can be called in runtime
 
 454
-00:18:07,133 --> 00:18:09,166
+00:18:06,900 --> 00:18:09,166
 可以调用的Host所提供的函数
-functions provided by Host that can be called in Runtime
+runtime_interface is used to define the functions provided by the Host, and can be called in runtime
 
 455
 00:18:09,200 --> 00:18:10,900
 那大家知道Substrate
-Then everyone knows Substrate
+Remember that Substrate runtime is stored as WASM bytecode
 
 456
-00:18:11,066 --> 00:18:12,766
+00:18:10,900 --> 00:18:12,766
 的Runtime是以wasm字节码
-Runtime is stored as
+Remember that Substrate runtime is stored as WASM bytecode
 
 457
 00:18:12,766 --> 00:18:14,166
 形式进行存储的
-wasm bytecode
+Remember that Substrate runtime is stored as WASM bytecode
 
 458
 00:18:15,066 --> 00:18:17,566
 那这个wasm字节码执行的话
-If the wasm bytecode is executed
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 459
 00:18:17,566 --> 00:18:19,599
 是需要依赖一些
-is to rely on some
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 460
-00:18:20,100 --> 00:18:21,800
+00:18:19,599 --> 00:18:21,800
 外部的环境
-external environment
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 461
 00:18:21,800 --> 00:18:23,366
 也就是我们这里的host
-That is our host here
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 462
 00:18:24,066 --> 00:18:26,366
-那当我们需要一些自定义一些
-Then when we need some customized
+那当我们需要自定义一些
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 463
-00:18:26,733 --> 00:18:30,099
+00:18:26,366 --> 00:18:30,099
 host的方法供wasm来调用的时候
-host methods is called by wasm
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 464
-00:18:30,100 --> 00:18:31,400
+00:18:30,099 --> 00:18:31,400
 我们就需要用到runtime_interface
-We need to use runtime_interface
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 465
 00:18:31,400 --> 00:18:32,500
 这样一个宏
-Such a macro
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 466
 00:18:33,366 --> 00:18:35,899
 但是这样的一个宏所修改的
-But such a macro modifies
+But the new host methods must be discussed and updated in Substrate user groups
 
 467
-00:18:36,200 --> 00:18:36,800
+00:18:35,899 --> 00:18:36,800
 信息
-information
+But the new host methods must be discussed and updated in Substrate user groups
 
 468
 00:18:36,800 --> 00:18:40,366
 一定要在Substrate里面进行讨论和更新
-needed to be sure to be discussed and updated inside Substrate
+But the new host methods must be discussed and updated in Substrate user groups
 
 469
 00:18:40,366 --> 00:18:40,999
 不然的话
-otherwise
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 470
-00:18:41,000 --> 00:18:42,333
+00:18:40,999 --> 00:18:42,333
 你编写出来的Substrate链
-The Substrate chain you wrote
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 471
 00:18:42,333 --> 00:18:43,666
 有可能是没有办法
-there may be no way
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 472
 00:18:43,666 --> 00:18:46,299
 接入到Polkadot的跨链网络里面
-to be accessed to Polkadot's cross-chain network
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 473
 00:18:47,300 --> 00:18:49,400
 今天课程的内容到这里就结束了
-This is the end of today's lesson
+This is the end of today's course
 
 474
 00:18:49,400 --> 00:18:50,200
 谢谢大家
 thank you all
-
