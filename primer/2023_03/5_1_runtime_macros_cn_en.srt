@@ -2026,337 +2026,337 @@ use it to migrate legacy onchain data
 407
 00:16:13,100 --> 00:16:16,533
 最后一个用来开发Runtime功能模块的
-The last one is used to develop the Runtime function module
+The last macro that is used a lot for runtime development is construct_runtime
 
 408
-00:16:16,733 --> 00:16:18,699
+00:16:16,533 --> 00:16:18,699
 宏是construct_runtime
-The macro is construct_runtime
+The last macro that is used a lot for runtime development is construct_runtime
 
 409
 00:16:19,133 --> 00:16:21,066
 它可以用来加载我们的
-It can be used to load our
+it can be used to load the runtime modules that just developed
 
 410
-00:16:21,266 --> 00:16:22,966
+00:16:21,066 --> 00:16:22,966
 刚刚开发出来的功能模块
-Functional modules just developed
+it can be used to add modules to the runtime
 
 411
 00:16:23,466 --> 00:16:24,499
 在加载之前呢
-before loading
+Before adding a module, we need to implement the config trait of the module
 
 412
-00:16:24,500 --> 00:16:26,100
+00:16:24,499 --> 00:16:26,100
 首先我们要对我们的功能模块
-First we have to implement our function module
+Before adding a module, we need to implement the config trait of the module
 
 413
 00:16:26,100 --> 00:16:28,133
 配置接口进行实现
-configuration trait
+Before adding a module, we need to implement the config trait of the module
 
 414
 00:16:28,400 --> 00:16:30,933
 比如刚才我们看到的template的模块
-For example, the template module we saw just now
+For example, the template pallet we saw just now
 
 415
 00:16:31,400 --> 00:16:33,566
 我们对它的config配置接口进行实现
-We inplement its config configuration trait
+let's implement its config trait for runtime
 
 416
 00:16:33,566 --> 00:16:35,466
-它只有一个关键类型是event
-It has only one key type which is event
+它只有一个关联类型是event
+it has only one associate type which is RuntimeEvent
 
 417
 00:16:35,466 --> 00:16:36,866
 这里我们给它进行定义
-Here we define it
+it's defined here
 
 418
 00:16:37,000 --> 00:16:39,500
 接着我们就可以在construct_runtime宏里面
-Then we can in the construct_runtime macro
+Then we can add the new module in construct_runtime macro
 
 419
-00:16:39,533 --> 00:16:41,699
+00:16:39,500 --> 00:16:41,699
 添加我们对应的功能模块
-Add our corresponding function module
+Then we can add the new module in construct_runtime macro
 
 420
 00:16:41,733 --> 00:16:43,766
 这里我们功能模块的名字叫做
-Here the name of our function module is called
+the name of the new module is TemplateModule
 
 421
-00:16:43,800 --> 00:16:44,766
+00:16:43,766 --> 00:16:44,766
 TemplateModule
-TemplateModule
+the name of the new module is TemplateModule
 
 422
 00:16:45,133 --> 00:16:46,899
 那我们需要依赖的
-then we need to rely on
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 423
-00:16:47,166 --> 00:16:49,533
+00:16:46,899 --> 00:16:49,533
 pallet_template模块里的一些
-Something in the pallet_template module
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 424
-00:16:49,966 --> 00:16:52,466
+00:16:49,533 --> 00:16:52,466
 数据信息包括
-like Data informations that include
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 425
 00:16:52,466 --> 00:16:55,366
 模块定义module, 可调用函数定义call
-Module definition module, callable function definition call
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 426
-00:16:56,066 --> 00:16:59,133
+00:16:55,366 --> 00:16:59,133
 存储项的定义storage以及event的定义
-The definition of storage item storage and the definition of event
+it will import a few definitions in template pallet includes module struct, dispatchable calls, storage items, events, etc
 
 427
 00:17:00,000 --> 00:17:02,566
 现在我们就已经完成了一个基本的
-We have now completed a basic
+Now we have shown a simpile pallet which is used to store a single value
 
 428
-00:17:02,700 --> 00:17:03,666
+00:17:02,566 --> 00:17:03,666
 功能模块
-functional module
+Now we have shown a simpile pallet which is used to store a single value
 
 429
-00:17:03,700 --> 00:17:05,733
+00:17:03,666 --> 00:17:05,733
 用来存储一个简单的值
-that is used to store a simple value
+Now we have shown a simpile pallet which is used to store a single value
 
 430
 00:17:06,000 --> 00:17:07,300
 如果大家对
-if everyone is
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 431
-00:17:07,666 --> 00:17:09,599
+00:17:07,300 --> 00:17:09,599
 Substrate的内置的宏感兴趣的话
-interested in Substrate's built-in macros
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 432
-00:17:09,600 --> 00:17:11,733
+00:17:09,599 --> 00:17:11,733
 可以使用cargo expend的这个工具
-You can use this tool from cargo expend
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 433
-00:17:12,066 --> 00:17:14,899
+00:17:11,733 --> 00:17:14,899
 将我们宏所应用的代码进行展开
-to expand the code applied by our macro
+if you are interested in the magic behinds the macros, use the tool cargo-expand to get the detail of the generated code
 
 434
 00:17:15,166 --> 00:17:18,566
 能够看到更加标准化的Rust语法
-and you will be able to see more standardized Rust syntax
+and you should be able to see the Rust standard syntax
 
 435
 00:17:19,166 --> 00:17:21,466
 从而也可以看到宏里面所
-So you can also see what is inside the macro
+You can also see what are the functions and data structures that are generated by the macros
 
 436
-00:17:21,900 --> 00:17:23,533
+00:17:21,466 --> 00:17:23,533
 生成的一些新的函数
-like some new functions generated
+You can also see what are the functions and data structures that are generated by the macros
 
 437
 00:17:23,533 --> 00:17:24,966
 一些帮助性的函数
-some helper functions
+You can also see what are the functions and data structures that are generated by the macros
 
 438
 00:17:26,200 --> 00:17:28,266
 另外大家可以去参考
-In addition, you can refer to
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 439
-00:17:28,533 --> 00:17:31,133
+00:17:28,266 --> 00:17:31,133
 pallet属性宏对应的文档
-documentation corresponding to the pallet property macro
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 440
 00:17:31,133 --> 00:17:34,299
 里面有一些详细的描述信息和
-There are some detailed description information and
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 441
-00:17:34,733 --> 00:17:35,999
+00:17:34,299 --> 00:17:35,999
 一些使用的例子
-some usage examples
+In addition, you can get more detail explaination and examples in the reference doc of pallet::pallet macro
 
 442
 00:17:37,566 --> 00:17:38,733
 还有一些其他的宏
-and some other macros
+There are some other macros that you may also need when development runtime modules
 
 443
 00:17:38,733 --> 00:17:40,799
 在开发Runtime模块的时候
-When developing the Runtime module
+There are some other macros that you may also need when development runtime modules
 
 444
-00:17:40,800 --> 00:17:41,966
+00:17:40,799 --> 00:17:41,966
 有可能也会遇到
-you may also use them
+There are some other macros that you may also need when development runtime modules
 
 445
 00:17:42,733 --> 00:17:46,699
 第一类是decl_runtime_apis和impl_runtime_apis
-The first category is decl_runtime_apis and impl_runtime_apis
+one is decl_runtime_apis and impl_runtime_apis, which are used to add new runtime APIs
 
 446
-00:17:46,700 --> 00:17:48,666
+00:17:46,699 --> 00:17:48,666
 用来定义Runtime API
-that is used to define the Runtime API
+one is decl_runtime_apis and impl_runtime_apis, which are used to add new runtime APIs
 
 447
 00:17:49,400 --> 00:17:50,866
 也就是可以通过
-that is, through
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 448
-00:17:51,166 --> 00:17:53,699
+00:17:50,866 --> 00:17:53,699
 RPC被客户端进行调用
-RPC is called by the client
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 449
-00:17:53,766 --> 00:17:57,866
+00:17:53,699 --> 00:17:57,866
 对链上的一些存储项进行转换
-to convert some storage items on the chain
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 450
 00:17:57,866 --> 00:18:00,099
 然后返回一些特定的结果给我们的
-and then return some specific result to our
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 451
-00:18:00,100 --> 00:18:00,900
+00:18:00,099 --> 00:18:00,900
 客户端
-client
+runtime APIs are used to retrieve onchain data, transform it, and return the result to the client
 
 452
 00:18:01,766 --> 00:18:03,966
 另外一类宏是runtime_interface
-Another type of macro is runtime_interface
+Another one is runtime_interface
 
 453
 00:18:04,400 --> 00:18:06,900
 它可以定义Runtime里
-It can define
+runtime_interface is used to define the functions provided by the Host, and can be called in runtime
 
 454
-00:18:07,133 --> 00:18:09,166
+00:18:06,900 --> 00:18:09,166
 可以调用的Host所提供的函数
-functions provided by Host that can be called in Runtime
+runtime_interface is used to define the functions provided by the Host, and can be called in runtime
 
 455
 00:18:09,200 --> 00:18:10,900
 那大家知道Substrate
-Then everyone knows Substrate
+Remember that Substrate runtime is stored as WASM bytecode
 
 456
-00:18:11,066 --> 00:18:12,766
+00:18:10,900 --> 00:18:12,766
 的Runtime是以wasm字节码
-Runtime is stored as
+Remember that Substrate runtime is stored as WASM bytecode
 
 457
 00:18:12,766 --> 00:18:14,166
 形式进行存储的
-wasm bytecode
+Remember that Substrate runtime is stored as WASM bytecode
 
 458
 00:18:15,066 --> 00:18:17,566
 那这个wasm字节码执行的话
-If the wasm bytecode is executed
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 459
 00:18:17,566 --> 00:18:19,599
 是需要依赖一些
-is to rely on some
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 460
-00:18:20,100 --> 00:18:21,800
+00:18:19,599 --> 00:18:21,800
 外部的环境
-external environment
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 461
 00:18:21,800 --> 00:18:23,366
 也就是我们这里的host
-That is our host here
+To execute the WASM bytecode, it needs to depend on some external environment wchi is the Host
 
 462
 00:18:24,066 --> 00:18:26,366
 那当我们需要自定义一些
-Then when we need some customized
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 463
-00:18:26,733 --> 00:18:30,099
+00:18:26,366 --> 00:18:30,099
 host的方法供wasm来调用的时候
-host methods is called by wasm
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 464
-00:18:30,100 --> 00:18:31,400
+00:18:30,099 --> 00:18:31,400
 我们就需要用到runtime_interface
-We need to use runtime_interface
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 465
 00:18:31,400 --> 00:18:32,500
 这样一个宏
-Such a macro
+if our runtime WASM require some custom host methods, we need to use runtime_interface macro
 
 466
 00:18:33,366 --> 00:18:35,899
 但是这样的一个宏所修改的
-But such a macro modifies
+But the new host methods must be discussed and updated in Substrate user groups
 
 467
-00:18:36,200 --> 00:18:36,800
+00:18:35,899 --> 00:18:36,800
 信息
-information
+But the new host methods must be discussed and updated in Substrate user groups
 
 468
 00:18:36,800 --> 00:18:40,366
 一定要在Substrate里面进行讨论和更新
-needed to be sure to be discussed and updated inside Substrate
+But the new host methods must be discussed and updated in Substrate user groups
 
 469
 00:18:40,366 --> 00:18:40,999
 不然的话
-otherwise
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 470
-00:18:41,000 --> 00:18:42,333
+00:18:40,999 --> 00:18:42,333
 你编写出来的Substrate链
-The Substrate chain you wrote
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 471
 00:18:42,333 --> 00:18:43,666
 有可能是没有办法
-there may be no way
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 472
 00:18:43,666 --> 00:18:46,299
 接入到Polkadot的跨链网络里面
-to be accessed to Polkadot's cross-chain network
+otherwise the Substrate chain you wrote may not be able to access Polkadot's cross-chain network
 
 473
 00:18:47,300 --> 00:18:49,400
 今天课程的内容到这里就结束了
-This is the end of today's lesson
+This is the end of today's course
 
 474
 00:18:49,400 --> 00:18:50,200
