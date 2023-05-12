@@ -5,248 +5,249 @@ Hello everyone, I am Kaichao
 
 2
 00:00:03,166 --> 00:00:06,266
-我们今天课程内容是substrate runtime
-The content of our course today is Substrate Runtime
+我们今天课程内容是substrate runtime数据存储的设计
+The content of our course today is data storage design in Substrate runtime development
 
 3
-00:00:06,300 --> 00:00:07,566
-数据存储的设计
-Data Storage Design
+00:00:06,266 --> 00:00:07,566
+我们今天课程内容是substrate runtime数据存储的设计
+The content of our course today is data storage design in Substrate runtime development
 
 4
 00:00:08,966 --> 00:00:10,866
 本次课程内容主要包括了
-This course mainly includes
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 5
-00:00:11,166 --> 00:00:14,166
-区块链存储和传统互联网应用的存储
-Blockchain storage and storage of traditional Internet applications
+00:00:10,866 --> 00:00:14,166
+区块链存储和传统互联网应用的存储不同点和约束
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 6
 00:00:14,166 --> 00:00:15,199
-不同点和约束
-Differences and constraints between them
+区块链存储和传统互联网应用的存储不同点和约束
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 7
 00:00:15,766 --> 00:00:17,099
-以及substrate
-and substrate
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 8
-00:00:17,100 --> 00:00:19,566
-所提供的存储单元的数据类型
-of the provided storage unit by Substrate
+00:00:17,099 --> 00:00:19,566
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 9
-00:00:19,933 --> 00:00:21,066
-支持的有哪些
-Which types are supported
+00:00:19,566 --> 00:00:21,066
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 10
 00:00:21,500 --> 00:00:23,766
-接着我们会介绍如何使用
-Then we'll show you how to use
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 11
-00:00:23,900 --> 00:00:25,300
-substrate的存储单元
-Substrate storage unit
+00:00:23,766 --> 00:00:25,300
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 12
 00:00:25,300 --> 00:00:27,333
-进行一个创始区块的初始化
-to initialize a genesis block
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 13
 00:00:27,733 --> 00:00:30,999
-最后我们会介绍一下使用substrate进行
-Finally, we will introduce the use of substrate for
+最后我们会介绍一下使用substrate进行存储设计的时候一些最佳实践
+Finally, we will look at some best practices when designing storage in Substrate
 
 14
-00:00:31,333 --> 00:00:33,566
-存储设计的时候一些最佳实践
-some best practices in storage design
+00:00:30,999 --> 00:00:33,566
+最后我们会介绍一下使用substrate进行存储设计的时候一些最佳实践
+Finally, we will look at some best practices when designing storage in Substrate
 
 15
 00:00:34,866 --> 00:00:35,399
 大家知道
-Everybody knows
+You probably already know that blockchain usually has the following features
 
 16
-00:00:35,400 --> 00:00:37,766
+00:00:35,399 --> 00:00:37,766
 区块链通常有这样几个特点
-Blockchain usually has the following characteristics
+You probably already know that blockchain usually has the following features
 
 17
 00:00:37,766 --> 00:00:40,299
 第一个是它的代码是完全开源的
-The first is that its code is completely open source
+the first is that its code is completely open source and available for everyone to review
 
 18
-00:00:40,300 --> 00:00:42,466
+00:00:40,299 --> 00:00:42,466
 可以供所有人去审查
-It is available for everyone to review
+the first is that its code is completely open source and available for everyone to review
 
 19
 00:00:42,700 --> 00:00:44,500
 并且它是由对等网络组成的
-and it is made up of a peer-to-peer network
+and it is made up of a peer-to-peer network, or decentralized network
 
 20
 00:00:44,500 --> 00:00:46,666
 这样一个去中心的网络
-such a decentralized network.
+and it is made up of a peer-to-peer network, or decentralized network
 
 21
 00:00:47,333 --> 00:00:50,366
-那通过引入了延迟和随机来在
-That introduces delay and randomness to
+那通过引入了延迟和随机来在不同的节点之间达成共识
+Blockchain introduces delay and randomness to achieve consensus between different nodes
 
 22
-00:00:50,600 --> 00:00:52,533
-不同的节点之间达成共识
-achieve consensus  between different nodes
+00:00:50,366 --> 00:00:52,533
+那通过引入了延迟和随机来在不同的节点之间达成共识
+Blockchain introduces delay and randomness to achieve consensus between different nodes
 
 23
 00:00:52,800 --> 00:00:54,733
 那在这样的一个网络环境里面
-Then in such a network environment
+In such an environment, it stores data in a chained incremental manner
 
 24
-00:00:54,933 --> 00:00:56,366
-区块链使用了
-Blockchain
+00:00:54,733 --> 00:00:56,366
+区块链使用了链式的增量的形式来存储数据
+In such an environment, it stores data in a chained incremental manner
 
 25
 00:00:56,366 --> 00:00:59,133
 链式的增量的形式来存储数据
-stores data in the form of chained incremental manner.
+In such an environment, it stores data in a chained incremental manner
 
 26
 00:00:59,133 --> 00:01:03,299
 区块之间彼此是通过链式直接连接
-Blocks are directly connected to each other through chains
+and connects blocks one by one
 
 27
 00:01:03,900 --> 00:01:06,333
-并且所有的节点都会备份
-and all nodes will be backed up
+并且所有的节点都会备份链上的状态数据
+all the nodes will be backed up the onchain state
 
 28
 00:01:06,333 --> 00:01:07,933
-链上的状态数据
-state data on the chain.
+并且所有的节点都会备份链上的状态数据
+all the nodes will be backed up the onchain state
 
 29
 00:01:08,133 --> 00:01:09,899
-有一些Archive的节点
-There are some Archive nodes
+有一些Archive的节点甚至会保存所有的历史数据
+There are some archive nodes that save all the historical data of the blockchain
 
 30
-00:01:10,166 --> 00:01:12,333
-甚至会保存所有的历史数据
-even save all historical data
+00:01:09,899 --> 00:01:12,333
+有一些Archive的节点甚至会保存所有的历史数据
+There are some archive nodes that save all the historical data of the blockchain
 
 31
 00:01:12,366 --> 00:01:13,199
-这就对
-That needs that
+这就对节点的存储和性能都有比较高的要求
+This places relatively high demands on both the storage and compution of the node.
 
 32
-00:01:13,200 --> 00:01:16,466
-节点的存储和性能都有比较高的要求
-the node storage and performance have relatively high requirements
+00:01:13,199 --> 00:01:16,466
+这就对节点的存储和性能都有比较高的要求
+This places relatively high demands on both the storage and compution of the node.
 
 33
 00:01:17,400 --> 00:01:19,933
-区块链应用的程序
+区块链应用程序通常都会有高效的键值对数据库
 Programs for blockchain applications
+Blockchain applications typically have efficient key-value databases
 
 34
-00:01:20,133 --> 00:01:22,666
-它通常都会有高效的键值对数据库
-It usually has an efficient key-value pair database
+00:01:19,933 --> 00:01:22,666
+区块链应用程序通常都会有高效的键值对数据库
+Blockchain applications typically have efficient key-value databases
 
 35
 00:01:22,966 --> 00:01:25,566
 比如bitcoin里面使用的LevelDB
-For example, LevelDB used in bitcoin
+for example, LevelDB is used in Bitcoin
 
 36
 00:01:25,866 --> 00:01:28,333
 以太坊及Substrate里面使用的RocksDB
-RocksDB used in Ethereum and Substrate
+RocksDB is used in Ethereum and Substrate
 
 37
 00:01:29,766 --> 00:01:32,333
-当我们在使用区块链作为我们
-When we are using blockchain as our
+当我们在使用区块链作为我们Web 3.0业务的载体的时候
+When we use blockchain as the carrier for our Web 3.0 business
 
 38
-00:01:32,466 --> 00:01:34,866
-Web 3.0业务的载体的时候
-carrier of Web 3.0 business
+00:01:32,333 --> 00:01:34,866
+当我们在使用区块链作为我们Web 3.0业务的载体的时候
+When we use blockchain as the carrier for our Web 3.0 business
 
 39
 00:01:35,100 --> 00:01:37,300
 它的存储有这些限制
-Its storage has these limitations
+it has the following storage limitations
 
 40
 00:01:37,666 --> 00:01:38,566
-第一个是
-the first is
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 41
-00:01:38,766 --> 00:01:40,866
-大文件如果直接存储在链
-If large files are stored directly in the chain
+00:01:38,566 --> 00:01:40,866
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 42
 00:01:40,866 --> 00:01:42,733
-上的成本是非常高的
-The cost is very high.
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 43
 00:01:42,900 --> 00:01:45,133
-通常情况下我们需要选择一种
-Usually we need to choose a
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 44
-00:01:45,400 --> 00:01:47,400
-中心化的或者去中心的
-centralized or decentralized
+00:01:45,133 --> 00:01:47,400
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 45
 00:01:47,400 --> 00:01:49,133
-存储形式来存储
-storage form to store
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 46
 00:01:49,133 --> 00:01:49,966
-大的文件
-large files
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 47
 00:01:50,133 --> 00:01:52,999
-而只是在链上存储一个很小的
-Instead, just store a small
+而只是在链上存储一个很小的文件的哈希值
+and only store the hash of the file on the blockchain
 
 48
-00:01:53,500 --> 00:01:54,700
-文件的哈希值
-file hash on the chain.
+00:01:52,999 --> 00:01:54,700
+而只是在链上存储一个很小的文件的哈希值
+and only store the hash of the file on the blockchain
 
 49
 00:01:55,766 --> 00:01:56,899
-我们刚才已经提到了
-we just mentioned
+我们刚才已经提到了链式的区块存储结构
+we just mentioned blockchain employs a linked block storage structure
 
 50
-00:01:56,900 --> 00:01:58,600
-链式的区块存储结构
-chained block storage structure
+00:01:56,899 --> 00:01:58,600
+我们刚才已经提到了链式的区块存储结构
+we just mentioned blockchain employs a linked block storage structure
 
 51
 00:01:59,066 --> 00:01:59,799
