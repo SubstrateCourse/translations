@@ -513,97 +513,97 @@ We are using the pallet::storage macro and add an optional getter function named
 103
 00:03:59,366 --> 00:04:00,933
 除了我们刚才看到的32位
-In addition to the 32-bit we just saw
+In addition to store a single value like u32
 
 104
 00:04:00,933 --> 00:04:02,866
 无符号整数这样的一个单值类型
-A primitive type such as unsigned integers
+In addition to store a single value like u32
 
 105
 00:04:03,266 --> 00:04:05,366
 其实还有其他各种各样的单值类型
-In fact, there are various other single value types
+it can also store other types of a single value
 
 106
 00:04:05,366 --> 00:04:07,866
 那单值类型其实顾名思义就是
-The single-value type, as the name implies, is
+as the name implies, StorageValue can only be used to store one value of the defined type
 
 107
-00:04:07,966 --> 00:04:10,499
+00:04:07,866 --> 00:04:10,499
 只能用来存储某一种单一类型的值
-can only be used to store a single type of value
+as the name implies, StorageValue can only be used to store one value of the defined type
 
 108
 00:04:10,900 --> 00:04:12,800
 比如它是布尔值数值类型
-For example it is a boolean numeric type
+the defined type can be boolean, integer, enum, struct, etc
 
 109
-00:04:12,933 --> 00:04:14,766
+00:04:12,800 --> 00:04:14,766
 或者枚举或者结构体
-or enumeration or structure
+the defined type can be boolean, integer, enum, struct, etc
 
 110
 00:04:15,100 --> 00:04:17,266
 数值类型有8位
-Numeric types have 8 bits
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 111
-00:04:17,733 --> 00:04:20,966
+00:04:17,266 --> 00:04:20,966
 无符号有符号整数以及32位64位
-unsigned signed integer and 32-bit 64-bit
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 112
 00:04:20,966 --> 00:04:22,299
 128位等等
-128 bits etc.
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 113
 00:04:22,700 --> 00:04:26,500
-还有一些Substrate内置的大整数类型u256
-There are also some built-in large integer types in Substrate with 256
+还有一些Substrate内置的大整数类型U256 U512等等
+There are also some built-in types for large integer in Substrate like U256, U512
 
 114
-00:04:26,733 --> 00:04:28,199
-有512等等
-There are 512 and so on
+00:04:26,500 --> 00:04:28,199
+还有一些Substrate内置的大整数类型U256 U512等等
+There are also some built-in types for large integer in Substrate like U256, U512
 
 115
 00:04:28,700 --> 00:04:31,600
 布尔类型以及集合类型有vector
-Boolean types and collection types have vector
+other types like boolean, vector, BTreeMap, BTreeSet, etc
 
 116
-00:04:31,933 --> 00:04:33,566
+00:04:31,600 --> 00:04:33,566
 BTreeMap和BTreeSet
-BTreeMap and BTreeSet
+other types like boolean, vector, BTreeMap, BTreeSet, etc
 
 117
 00:04:34,766 --> 00:04:35,666
-我们刚才提到了
-we just mentioned
+我们刚才提到了区块链不能直接使用浮点数
+We just mentioned that Blockchain cannot use floating point numbers directly
 
 118
 00:04:35,666 --> 00:04:37,399
-区块链不能直接使用浮点数
-Blockchain cannot directly use floating point numbers
+我们刚才提到了区块链不能直接使用浮点数
+We just mentioned that Blockchain cannot use floating point numbers directly
 
 119
 00:04:37,533 --> 00:04:40,333
 那么取而代之的是定点小数
-Then instead of fixed-point decimals
+instead it uses fixed-point numbers
 
 120
 00:04:40,333 --> 00:04:41,666
-Substrate内置的有
-Substrate has built-in
+Substrate内置的有Percent, Permil, Perbill以及FixedU128
+Substrate provides fixed-point numbers like Percent, Permil, Perbill, FixedU128
 
 121
-00:04:42,100 --> 00:04:45,466
-Percent, Permil, Perbill以及FixedU128
-Percent, Permil, Perbill and FixedU128
+00:04:41,666 --> 00:04:45,466
+Substrate内置的有Percent, Permil, Perbill以及FixedU128
+Substrate provides fixed-point numbers like Percent, Permil, Perbill, FixedU128
 
 122
 00:04:46,466 --> 00:04:47,799
@@ -613,62 +613,62 @@ There are also some custom types
 123
 00:04:47,800 --> 00:04:50,800
 比如定长的哈希H128H256
-For example, the regular Hash H128H256
+For hash, there are H128 and H256 which can conveniently express the result of hashing algorithm
 
 124
 00:04:50,800 --> 00:04:54,266
 可以快速方便的去表示哈希的结果
-It can quickly and conveniently express the result of Hash
+For hash, there are H128 and H256 which can conveniently express the result of hashing algorithm
 
 125
 00:04:55,533 --> 00:04:57,899
 Substrate支持的其他的一些复杂类型
-Some other complex types supported by Substrate
+Some other complex types supported by Substrate includes
 
 126
 00:04:57,900 --> 00:04:59,900
 包括了Option
-include Option
+Option which can be used to represent a value exist or not
 
 127
 00:04:59,900 --> 00:05:02,400
 这样的一个有值或者无值
-such a value or no value
+Option which can be used to represent a value exist or not
 
 128
 00:05:02,400 --> 00:05:04,166
 这样的一个类型
-such a type
+Option which can be used to represent a value exist or not
 
 129
 00:05:04,166 --> 00:05:05,399
-Tuple元组
-Tuple
+tuple元组它可以包含多个元素
+tuple which contains multiple elements, potencially different type for each element
 
 130
-00:05:05,700 --> 00:05:07,566
-它可以包含多个元素
-it can contain multiple elements
+00:05:05,399 --> 00:05:07,566
+tuple元组它可以包含多个元素
+tuple which contains multiple elements, potencially different type for each element
 
 131
-00:05:08,366 --> 00:05:09,499
-这些不同的元素
-these different elements
+00:05:07,566 --> 00:05:09,499
+这些不同的元素的类型可以是不一样的
+tuple which contains multiple elements, potencially different type for each element
 
 132
-00:05:09,500 --> 00:05:11,166
-的类型可以是不一样的
-Their types can be different
+00:05:09,499 --> 00:05:11,166
+这些不同的元素的类型可以是不一样的
+tuple which contains multiple elements, potencially different type for each element
 
 133
 00:05:11,600 --> 00:05:12,700
-以及枚举
-and enumeration
+以及枚举以及结构体可以包含更多的属性信息
+enum and struct includes multiple variants or attributes information
 
 134
-00:05:13,333 --> 00:05:16,599
-以及结构体可以包含更多的属性信息
-And the structure can contain more attribute information
+00:05:12,700 --> 00:05:16,599
+以及枚举以及结构体可以包含更多的属性信息
+enum and struct includes multiple variants or attributes information
 
 135
 00:05:17,166 --> 00:05:20,866
@@ -678,82 +678,82 @@ There are also some specific built-in custom types
 136
 00:05:20,866 --> 00:05:22,466
 比如Timestamp
-Such as Timestamp
+such as the Moment type defined by timestamp pallet
 
 137
 00:05:22,466 --> 00:05:23,866
 模块会定义的Moment
-Moment defined by the module
+such as the Moment type defined by timestamp pallet
 
 138
 00:05:23,866 --> 00:05:26,399
 来表示我们当前区块的时间戳
-to represent the timestamp of our current block
+it represents the timestamp of our current block
 
 139
 00:05:27,000 --> 00:05:29,966
-以及系统模块提供的AccountId表示
-and the AccountId provided by the system module represents
+以及系统模块提供的AccountId表示用户的account标识
+and the AccountId provided by the system pallet which represents user's identifier
 
 140
-00:05:30,300 --> 00:05:32,333
-用户的account标识
-user's account ID
+00:05:29,966 --> 00:05:32,333
+以及系统模块提供的AccountId表示用户的account标识
+and the AccountId provided by the system pallet which represents user's identifier
 
 141
 00:05:32,866 --> 00:05:35,899
-通常情况下它是用户私钥所对应的
-Usually it is the user's private key corresponding to
+通常情况下它是用户私钥所对应的公钥信息
+usually it is the public key
 
 142
-00:05:36,066 --> 00:05:36,933
-公钥信息
-the public key information
+00:05:35,899 --> 00:05:36,933
+通常情况下它是用户私钥所对应的公钥信息
+usually it is the public key
 
 143
 00:05:38,466 --> 00:05:40,366
 我们先来看一下数值类型
-Let's take a look at the numeric types first
+Let's take a look at the integer first
 
 144
 00:05:40,500 --> 00:05:43,566
 这里我们以8位无符号整数来举例
-Here we take 8-bit unsigned integer as an example
+here take u8 as an example
 
 145
 00:05:43,900 --> 00:05:46,266
 我们定义了一个数据类型
-We define a data type
+the name of storage item is MyUnsignedNumber
 
 146
 00:05:46,266 --> 00:05:48,866
 它的名字叫做MyUnsignedNumber
-Its name is MyUnsignedNumber
+the name of storage item is MyUnsignedNumber
 
 147
 00:05:48,866 --> 00:05:51,166
 它的类型是一个StorageValue
-Its type is a StorageValue
+the type is StorageValue
 
 148
 00:05:51,366 --> 00:05:53,333
 那这个单值类型存储的
-Then this single value type stores
+the single value it can store is u8
 
 149
-00:05:53,866 --> 00:05:56,466
+00:05:53,333 --> 00:05:56,466
 类型是一个8位无符号的整数
-the type which is an 8-bit unsigned integer
+the single value it can store is u8
 
 150
 00:05:57,000 --> 00:05:58,900
 同样呢我们有一个可选的get函数
-Also we have a visible Get function
+it has an optional get function named my_unsigned_number
 
 151
 00:05:58,900 --> 00:06:00,100
 是my_unsigned_number
-It is my_unsigned_number
+it has an optional get function named my_unsigned_number
 
 152
 00:06:01,200 --> 00:06:02,666
