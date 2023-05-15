@@ -758,197 +758,197 @@ it has an optional get function named my_unsigned_number
 152
 00:06:01,200 --> 00:06:02,666
 这里我们又举了另外一个例子
-Here we give another example
+Here is another example of StorageValue with i8 integer
 
 153
 00:06:02,666 --> 00:06:04,999
 是一个有符号的8位整数
-It is a signed 8-bit integer
+Here is another example of StorageValue with i8 integer
 
 154
-00:06:05,100 --> 00:06:07,133
+00:06:04,999 --> 00:06:07,133
 同样的是一个StorageValue类型
-It is also a storageValue type
+Here is another example of StorageValue with i8 integer
 
 155
 00:06:07,333 --> 00:06:09,499
 里面存储元素是i8
-The storage element inside is i8
+which means the single value it stores is i8
 
 156
 00:06:09,800 --> 00:06:10,266
 可以看到
-We can see
+We can see that the third generic parameter is ValueQuery
 
 157
 00:06:10,266 --> 00:06:12,266
 这里我们给了第三个泛型参数
-Here we give the third generic parameter
+We can see that the third generic parameter is ValueQuery
 
 158
 00:06:12,266 --> 00:06:13,533
 叫做ValueQuery
-called ValueQuery
+We can see that the third generic parameter is ValueQuery
 
 159
 00:06:14,166 --> 00:06:16,199
 它表示的是我们是使用
-It means that we are using
+it means that we are using the ValueQuery when reading the onchain storage item
 
 160
-00:06:16,300 --> 00:06:17,666
+00:06:16,199 --> 00:06:17,666
 ValueQuery这种形式来
-ValueQuery of this form
+it means that we are using the ValueQuery when reading the onchain storage item
 
 161
 00:06:17,666 --> 00:06:19,466
 去读取链上存储单元
-to read the storage unit on the chain.
+it means that we are using the ValueQuery when reading the onchain storage item
 
 162
 00:06:19,533 --> 00:06:21,966
 如果不指定的话是默认的是OptionQuery
-If it is not specified, the default is OptionQuery
+the default is OptionQuery if not specified
 
 163
 00:06:21,966 --> 00:06:23,133
 也就是默认的话
-That is, the default
+OptionQuery will return a None if no value stored onchain
 
 164
-00:06:23,266 --> 00:06:25,666
+00:06:23,133 --> 00:06:25,666
 如果没有值会返回一个Option
-Returning an Option if there is no value
+OptionQuery will return a None if no value stored onchain
 
 165
 00:06:25,666 --> 00:06:27,133
 也就是None这样的一个值
-That is, a value like None
+OptionQuery will return a None if no value stored onchain
 
 166
 00:06:28,066 --> 00:06:30,333
 那如果使用ValueQuery的话
-Then if you use ValueQuery
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 167
-00:06:30,766 --> 00:06:33,399
+00:06:30,333 --> 00:06:33,399
 如果是没有值的话我们就会返回一个
-If there is no value, we will return a
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 168
-00:06:33,533 --> 00:06:34,733
+00:06:33,399 --> 00:06:34,733
 那么就会返回一个
-then it will return a
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 169
 00:06:34,733 --> 00:06:36,199
 所存储类型的一个默认值
-a default value for the stored type
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 170
-00:06:36,200 --> 00:06:38,733
+00:06:36,199 --> 00:06:38,733
 比如i8的话它的默认值就是0
-For example, for i8, its default value is 0
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 171
 00:06:39,766 --> 00:06:42,766
 对于单值类型一些常用的API有
-Some commonly used APIs for single value types are
+Commonly used APIs for StorageValue includes
 
 172
 00:06:43,100 --> 00:06:44,466
 比如我们可以使用put
-For example, we can use Put
+put method to update onchain storage items
 
 173
 00:06:44,466 --> 00:06:46,533
 方法来更新链上的存储单元
-method to update storage units on the chain
+put method to update onchain storage items
 
 174
 00:06:46,900 --> 00:06:48,900
 我们使用get方法获取
-We use the Get method to obtain
+get method to retrieve the value stored in the storage item
 
 175
-00:06:48,933 --> 00:06:51,699
+00:06:48,900 --> 00:06:51,699
 当前链上存储单元里面所存储的值
-the value stored in the storage unit on the current chain
+get method to retrieve the value stored in the storage item
 
 176
 00:06:52,166 --> 00:06:54,299
 要用mutate来更新一个
-To use mutate to update a
+and mutate method to update the stored value to a new one
 
 177
-00:06:54,700 --> 00:06:56,600
+00:06:54,299 --> 00:06:56,600
 存储的值变成一个新的值
-stored value to a new value
+and mutate method to update the stored value to a new one
 
 178
 00:06:56,866 --> 00:06:58,899
 我们还可以使用kill来删除
-We can also use q to delete
+we can also use kill method to delete the value stored
 
 179
-00:06:59,700 --> 00:07:02,200
+00:06:58,899 --> 00:07:02,200
 当前存储单元里面已经存储的值
-the value already stored in the current storage unit
+we can also use kill method to delete the value stored
 
 180
 00:07:02,733 --> 00:07:04,099
 这里我给到了一个链接
-here i gave a link
+here it's the link to the doc of StorageValue
 
 181
-00:07:04,100 --> 00:07:05,900
+00:07:04,099 --> 00:07:05,900
 是StorageValue的接口文档
-It is the interface document of StorageValue
+here it's the link to the doc of StorageValue
 
 182
 00:07:06,100 --> 00:07:08,366
 大家有兴趣的话可以看一下
-If you are interested, you can take a look
+take a look if you are interested to know more
 
 183
 00:07:09,500 --> 00:07:11,533
-那对于所存储的数
-That for the stored number
+那对于所存储的数值类型
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 184
 00:07:11,533 --> 00:07:12,333
-值类型
-value type
+那对于所存储的数值类型
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 185
-00:07:12,700 --> 00:07:14,533
+00:07:12,333 --> 00:07:14,533
 我们通常在区块链应用开发的时候
-We usually use some security operations
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 186
 00:07:14,533 --> 00:07:16,333
 要使用一些安全性的操作
-in developing blockchain applications
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 187
-00:07:16,733 --> 00:07:18,733
+00:07:16,333 --> 00:07:18,733
 来避免一些溢出性的错误
-to avoid some overflow errors
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 188
 00:07:19,400 --> 00:07:22,133
 比如会返回None类型的一些安全操作
-For example, some security operations that return None type
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 189
 00:07:22,133 --> 00:07:24,466
-包括checked_add checked_sub
-include checked_add checked_sub
+包括checked_add checked_sub, checked_mul以及checked_div
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 190
-00:07:24,800 --> 00:07:26,900
-checked_multiply以及checked_divide
-checked_multiply and checked_divide
+00:07:24,466 --> 00:07:26,900
+包括checked_add checked_sub, checked_mul以及checked_div
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 191
 00:07:27,866 --> 00:07:29,133
@@ -958,66 +958,67 @@ Let's take checked_add as an example
 192
 00:07:29,133 --> 00:07:32,499
 当我们相加之后的结果是溢出了
-When the result of adding is overflow
+if the result of adding overflows, it will return None and we can handle the error in time
 
 193
-00:07:32,500 --> 00:07:35,200
+00:07:32,499 --> 00:07:35,200
 那么我们会去返回一个错误信息
-Then we will return an error message
+if the result of adding overflows, it will return None and we can handle the error in time
 
 194
-00:07:35,666 --> 00:07:38,066
+00:07:35,200 --> 00:07:38,066
 从而我们可以很及时的去判断
-Thus we can judge the wrong scene
+if the result of adding overflows, it will return None and we can handle the error in time
 
 195
-00:07:38,166 --> 00:07:38,999
+00:07:38,066 --> 00:07:38,999
 错误的场景
-in a timely manner
+if the result of adding overflows, it will return None and we can handle the error in time
 
 196
 00:07:39,000 --> 00:07:41,600
 进而让我们的这这笔交易去失败
-and let our deal fail
+and fail the transaction on purpose
 
 197
 00:07:42,300 --> 00:07:43,566
-除了checked_*
-except checked_*
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 198
-00:07:43,733 --> 00:07:44,999
-这一类的返回results
-This kind of safe operation
+00:07:43,566 --> 00:07:44,999
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 199
 00:07:44,999 --> 00:07:45,000
-returning result
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 200
 00:07:45,000 --> 00:07:46,565
-类型的安全操作之外
-returning result
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 201
 00:07:46,966 --> 00:07:49,666
 还有一类安全操作是会返回饱和值
-Another type of safe operation is to return a saturation value
+Besides checked like operations, there are operations that return the saturation value
 
 202
 00:07:49,900 --> 00:07:52,100
 也就是溢出的时候返回最大值
-That is, when overflow, returning the maximum value
+that is, returning the maximum value when overflow
 
 203
 00:07:52,666 --> 00:07:54,766
-这些操作包括saturating_add
-These operations include saturating_add
+这些操作包括saturating_add, saturating_sub等等
+these operations include saturating_add, saturating_sub, etc.
 
 204
 00:07:54,766 --> 00:07:56,466
-saturating_sub等等
-saturating_sub etc.
+这些操作包括saturating_add, saturating_sub等等
+these operations include saturating_add, saturating_sub, etc.
 
 205
 00:07:57,300 --> 00:08:00,166
