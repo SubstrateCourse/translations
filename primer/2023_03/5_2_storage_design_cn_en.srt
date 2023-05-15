@@ -252,262 +252,263 @@ we just mentioned blockchain employs a linked block storage structure
 51
 00:01:59,066 --> 00:01:59,799
 那这种结构
-that structure
+In fact, such structure is not conducive to indexing historical data
 
 52
-00:01:59,800 --> 00:02:01,966
+00:01:59,799 --> 00:02:01,966
 其实并不利于对历史数据的索引
-In fact, it is not conducive to the indexing of historical data
+In fact, such structure is not conducive to indexing historical data
 
 53
 00:02:01,966 --> 00:02:03,166
 因为你如果想索引的话
-because if you want to index
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 54
 00:02:03,166 --> 00:02:03,966
 你就需要
-you have to
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 55
-00:02:04,200 --> 00:02:07,200
+00:02:03,966 --> 00:02:07,200
 遍历当前区块往前所有的区块
-traverse all blocks before the current block
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 56
 00:02:07,666 --> 00:02:10,199
 那这就要求我们通常会有一个
-Then this requires that we usually have a
+we usually have an offchain service for indexing
 
 57
 00:02:10,700 --> 00:02:13,333
 链下的这样的一个索引的服务
-such an off-chain index service
+we usually have an offchain service for indexing
 
 58
 00:02:13,733 --> 00:02:15,166
 通常也就是我们的
-Usually
+Block explorers is commonly used to provide convenient access to blockchain data
 
 59
 00:02:15,166 --> 00:02:17,066
 区块浏览器这样的一个基础设施
-It's an infrastructure such as a block explorer
+Block explorers is commonly used to provide convenient access to blockchain data
 
 60
 00:02:18,333 --> 00:02:19,266
-另外一个约束是
-Another constraint is
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 61
 00:02:19,266 --> 00:02:20,533
-由于区块链的逻辑
-that due to the logic of the blockchain
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 62
 00:02:20,533 --> 00:02:22,566
-是在不同的节点之间
-between different nodes
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 63
-00:02:23,133 --> 00:02:24,866
-都要去运行这样的一个逻辑
-has to be ran
+00:02:22,566 --> 00:02:24,866
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 64
 00:02:25,300 --> 00:02:28,200
-要求逻辑执行的结果必须是完全
-It is required that the result of logic execution must be completely
+要求逻辑执行的结果必须是完全一致的
+it requires that the execution results of the logic must be fully consistent
 
 65
-00:02:28,366 --> 00:02:29,766
-一致的
-consistent.
+00:02:28,200 --> 00:02:29,766
+要求逻辑执行的结果必须是完全一致的
+it requires that the execution results of the logic must be fully consistent
 
 66
 00:02:29,766 --> 00:02:30,966
-那浮点数的话
-For the floating point number
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 67
 00:02:30,966 --> 00:02:33,566
-它的运算结果跟编译器以及
-Its result has direct relationship with
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 68
-00:02:33,933 --> 00:02:36,266
-CPU的架构都有直接的关系
- the compiler and the architecture of the CPU.
+00:02:33,566 --> 00:02:36,266
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 69
 00:02:36,400 --> 00:02:38,466
-所以我们在区块链里面是不能使用
-So we cannot use float numbers
+所以我们在区块链里面是不能使用浮点数
+Therefore, we cannot use floating-point numbers within a blockchain because of the potential inconsistency
 
 70
 00:02:38,466 --> 00:02:39,066
-浮点数的
-in the blockchain
+所以我们在区块链里面是不能使用浮点数
+Therefore, we cannot use floating-point numbers within a blockchain because of the potential inconsistency
 
 71
 00:02:39,066 --> 00:02:41,299
-而是需要使用其他
-Instead, you need to use other
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 72
-00:02:41,600 --> 00:02:43,566
-固定点的小数来模拟浮点数
-fixed-point decimals to simulate
+00:02:41,299 --> 00:02:43,566
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 73
 00:02:43,566 --> 00:02:44,966
-这样的一个操作
-floating-point numbers.
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 74
 00:02:46,800 --> 00:02:49,900
-我们之前在课程中已经简单提到过
-We've briefly mentioned this earlier in the course
+我们之前在课程中已经简单提到过substrate链上的存储单元
+We've briefly mentioned this earlier 
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 75
-00:02:50,100 --> 00:02:51,966
-substrate链上的存储单元
-Well, the storage unit on the substrate chain
+00:02:49,900 --> 00:02:51,966
+我们之前在课程中已经简单提到过substrate链上的存储单元
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 76
 00:02:51,966 --> 00:02:53,766
 有单值类型StorageValue
-There is a single value type StorageValue
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 77
-00:02:54,133 --> 00:02:55,933
+00:02:53,766 --> 00:02:55,933
 简单映射类型StorageMap
-Simple mapping type StorageMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 78
 00:02:55,933 --> 00:02:57,399
-以及双键映射类型
-and the double keys mapping type
+以及双键映射类型StorageDoubleMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 79
-00:02:57,700 --> 00:02:59,133
-StorageDoubleMap
-StorageDoubleMap
+00:02:57,399 --> 00:02:59,133
+以及双键映射类型StorageDoubleMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 80
 00:02:59,400 --> 00:03:02,533
 以及多键映射类型StorageNMAP
-and the multi-key mapping type StorageNMAP
+there's also StorageNMap
 
 81
 00:03:02,766 --> 00:03:05,366
-那在开发链上的存储单元的时候
-When developing storage units on the chain
+那在开发链上的存储单元的时候有这些点需要去注意
+When developing onchain storage items, there are a few points to consider
 
 82
-00:03:05,466 --> 00:03:07,133
-有这些点需要去注意
-There are these points to pay attention to
+00:03:05,366 --> 00:03:07,133
+那在开发链上的存储单元的时候有这些点需要去注意
+When developing onchain storage items, there are a few points to consider
 
 83
 00:03:07,933 --> 00:03:10,733
 substrate支持了一些Rust的原生数据类型
-substrate supports some of Rust's native data types
+Substrate supports some of Rust's native data types
 
 84
 00:03:10,900 --> 00:03:11,666
-它是
-it is
+它是Rust的所有原生数据类型的一个子集
+it is a subset of Rust's native data types
 
 85
 00:03:11,666 --> 00:03:14,933
 Rust的所有原生数据类型的一个子集
-a subset of all of Rust's native data types.
+it is a subset of Rust's native data types
 
 86
 00:03:15,933 --> 00:03:18,866
-那这些子集是定义在Rust的核心库和
-Those subsets are defined in the Rust core library and
+那这些子集是定义在Rust的核心库和alloc库之中
+the supported types are defined in the Rust core and alloc library
 
 87
 00:03:19,333 --> 00:03:20,499
-Alloc库之中
-In the Alloc library
+那这些子集是定义在Rust的核心库和alloc库之中
+the supported types are defined in the Rust core and alloc library
 
 88
 00:03:21,466 --> 00:03:24,599
-进一步substrate支持的这样的原生类型
-Such native types supported by Substrate
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 89
-00:03:24,600 --> 00:03:26,966
-可以构成我们刚刚提到的
-can constitute what we just mentioned
+00:03:24,599 --> 00:03:26,966
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 90
-00:03:27,100 --> 00:03:28,100
-映射类型
-mapping type
+00:03:26,966 --> 00:03:28,100
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 91
 00:03:28,733 --> 00:03:31,333
-其实substrate支持的这些原生类型
-In fact, these native types supported by Substrate
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 92
 00:03:31,333 --> 00:03:32,966
-就是对
-is for that
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 93
-00:03:33,400 --> 00:03:36,533
-这些原生类型实现了一定的编解码的
-these native types implement a certain codec
+00:03:32,966 --> 00:03:36,533
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 94
-00:03:36,766 --> 00:03:37,566
-规则
-rule
+00:03:36,533 --> 00:03:37,566
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 95
 00:03:38,200 --> 00:03:39,766
 我们现在来回顾一下
-let's review now
+Now let's review the storage macro that we learned in the last lesson
 
 96
 00:03:39,766 --> 00:03:43,166
 上节课所了解到的storage宏
-the storage macro learned in the last lesson.
+Now let's review the storage macro that we learned in the last lesson
 
 97
 00:03:43,533 --> 00:03:45,966
 我们定义了一个something这样一个storage
-We define a storage like something
+it defines a storage item named Something
 
 98
 00:03:46,266 --> 00:03:48,099
 那它的类型是StorageValue
-Then its type is StorageValue
+its type is StorageValue
 
 99
 00:03:48,800 --> 00:03:51,800
 存储的值是一个32位无符号的整数
-The stored value is a 32-bit unsigned integer
+it stores a u32 integer
 
 100
 00:03:52,166 --> 00:03:54,066
 我们是使用的pallet::storage这个宏
-We are using the pallet::storage macro
+We are using the pallet::storage macro and add an optional getter function named something
 
 101
 00:03:54,066 --> 00:03:56,399
 并且我们有一个可选的getter函数
-and we have an optional getter function
+We are using the pallet::storage macro and add an optional getter function named something
 
 102
-00:03:56,766 --> 00:03:57,899
+00:03:56,399 --> 00:03:57,899
 名字叫做something
-the name is something
+We are using the pallet::storage macro and add an optional getter function named something
 
 103
 00:03:59,366 --> 00:04:00,933
