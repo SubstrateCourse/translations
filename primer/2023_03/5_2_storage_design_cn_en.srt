@@ -1273,245 +1273,247 @@ and it uses ValueQuery to return a default value if storage item does not set
 255
 00:09:54,266 --> 00:09:56,499
 对于BoundedVector有这些常用的操作
-There are these common operations for BoundedVector
+Here are some operations for BoundedVec
 
 256
 00:09:56,500 --> 00:09:59,266
 比如try_push可以去添加一个元素
-For example, try_push can add an element
+use try_push method to add an element
 
 257
 00:09:59,533 --> 00:10:01,599
 remove可以去删除一个元素
-remove can delete an element
+use remove method to delete an element
 
 258
 00:10:01,733 --> 00:10:03,166
-iter可以去
-iter can
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 259
-00:10:03,600 --> 00:10:04,466
-遍历
-traverse
+00:10:03,166 --> 00:10:04,466
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 260
-00:10:04,500 --> 00:10:06,733
-这样的一个BoundedVector集合数据类型
-such a BoundedVector collection data type
+00:10:04,466 --> 00:10:06,733
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 261
 00:10:07,300 --> 00:10:10,400
 这里我们给出了Substrate的文档链接
-Here we give the documentation link for Substrate
+here it's the documentation link for more details
 
 262
 00:10:11,200 --> 00:10:15,500
 那对于BoundedVec它的默认值是0x00
-The default value for BoundedVector is 0x00
+The default value for BoundedVec is 0x00 if use ValueQuery in definition
 
 263
 00:10:15,533 --> 00:10:17,466
 使用ValueQuery这种形式
-It is in the form of ValueQuery
+The default value for BoundedVec is 0x00 if use ValueQuery in definition
 
 264
 00:10:18,133 --> 00:10:19,733
 接着我们来看一下
-Let's take a look
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 265
-00:10:20,333 --> 00:10:22,299
+00:10:19,733 --> 00:10:22,299
 定点小数Percent Permill
-Fixed-point decimal Percent Permill
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 266
-00:10:22,300 --> 00:10:24,166
+00:10:22,299 --> 00:10:24,166
 Perbill这样的一个类型定义
-Perbill these types definitions
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 267
 00:10:24,500 --> 00:10:26,966
 我们需要首先引入对应的类型
-We need to first introduce the corresponding type
+We need to first import the type defined in sp_runtime
 
 268
 00:10:26,966 --> 00:10:28,499
 在sp_runtime里面
-inside sp_runtime
+We need to first import the type defined in sp_runtime
 
 269
 00:10:29,300 --> 00:10:31,266
 这里我们定义了一个存储项
-Here we define a storage item
+it defines a storage item named MyPermill
 
 270
 00:10:31,266 --> 00:10:33,299
 它的名字叫MyPermill
-Its name is MyPermill
+it defines a storage item named MyPermill
 
 271
 00:10:34,300 --> 00:10:35,466
 它是一个单值类型
-it is a single value type
+and uses StorageValue to store a Permill
 
 272
 00:10:35,466 --> 00:10:38,099
 存储的类型是Permill
-The storage type is Permill
+and uses StorageValue to store a Permill
 
 273
 00:10:39,166 --> 00:10:41,766
 对于这种定点小数类型
-For this fixed-point decimal type
+There are some built-in construction methods for the fixed-point numbers in Substrate
 
 274
-00:10:42,133 --> 00:10:44,666
+00:10:41,766 --> 00:10:44,666
 Substrate内置了一些构造方法
-Substrate has some built-in construction methods
+There are some built-in construction methods for the fixed-point numbers in Substrate
 
 275
 00:10:45,500 --> 00:10:48,700
-比如我们可以使用Percent来构建一个
-For example, we can use Percent to build a
+比如我们可以使用from_percent来构建一个
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 276
-00:10:49,100 --> 00:10:51,366
+00:10:48,700 --> 00:10:51,366
 包含百分之几这样的一个
-Permill data containing
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 277
-00:10:51,466 --> 00:10:52,533
+00:10:51,366 --> 00:10:52,533
 Permill的数据
-a few percent
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 278
 00:10:53,000 --> 00:10:54,933
-也可以使用from_parts
-You can also use from_parts
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 279
 00:10:54,933 --> 00:10:55,066
-to give a value to indicate
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 280
 00:10:55,066 --> 00:10:57,600
-来给定一个值来表示是
-to give a value to indicate
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 281
 00:10:57,600 --> 00:10:57,733
-来给定一个值来表示是
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 282
-00:10:57,900 --> 00:10:59,133
-100万分之几
-Parts per million
+00:10:57,733 --> 00:10:59,133
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 283
 00:10:59,133 --> 00:11:01,766
 比如我们这里可以给定1,000
-For example, we can give 1,000 here
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 284
-00:11:01,800 --> 00:11:03,733
+00:11:01,766 --> 00:11:03,733
 那我们如果value是1,000的话
-Then if the value is 1,000,
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 285
 00:11:03,733 --> 00:11:04,533
 那我们
-then we
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 286
-00:11:04,566 --> 00:11:08,666
+00:11:04,533 --> 00:11:08,666
 Permill::from_parts的话就是1,000/1,000,000
-Permill::from_parts is 1,000/1,000,000
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 287
 00:11:09,766 --> 00:11:12,733
 类似的我们还可以使用form_rational这种
-Similarly, we can also use form_rational
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 288
-00:11:12,900 --> 00:11:13,966
+00:11:12,733 --> 00:11:13,966
 给定分子p
-given molecule p
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 289
 00:11:13,966 --> 00:11:16,366
 和分母q这种机制来构造一个
-and denominator q this mechanism to construct a
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 290
-00:11:16,733 --> 00:11:17,999
+00:11:16,366 --> 00:11:17,999
 定点小数类型
-Fixed-point decimal type
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 291
 00:11:19,366 --> 00:11:20,166
 使用
-When
+There are some secure operations when calculating with Permill
 
 292
-00:11:20,900 --> 00:11:22,933
+00:11:20,166 --> 00:11:22,933
 Permill这种类型进行计算的时候
-using Permill type to calculate
+There are some secure operations when calculating with Permill
 
 293
-00:11:23,100 --> 00:11:24,200
+00:11:22,933 --> 00:11:24,200
 也有一些安全性操作
-There are also some binary operations
+There are some secure operations when calculating with Permill
 
 294
 00:11:24,200 --> 00:11:27,300
 比如是saturating_mul可以将两个
-For example, saturating_mul can multiply two
+for example, saturating_mul can be used to multiply two data of type Permill
 
 295
-00:11:27,566 --> 00:11:29,799
+00:11:27,300 --> 00:11:29,799
 Permill的数据类型进行相乘
-Permill data types
+for example, saturating_mul can be used to multiply two data of type Permill
 
 296
 00:11:30,533 --> 00:11:32,066
 我们也可以和一些
-we can also multiply with some
+we can also multiply it with integer directly and do some conversions
 
 297
-00:11:32,266 --> 00:11:34,333
+00:11:32,066 --> 00:11:34,333
 整数类型直接进行相乘
-Integer types directly
+we can also multiply it with integer directly and do some conversions
 
 298
 00:11:34,333 --> 00:11:35,799
 并且进行一些转换
-and do some conversions
+we can also multiply it with integer directly and do some conversions
 
 299
 00:11:36,900 --> 00:11:37,733
-但是我们要格外
-but we have to be extra
+但是我们要格外注意一些可能溢出的场景
+however, we need to pay attention to potential overflow scenarios
 
 300
 00:11:37,733 --> 00:11:39,566
-注意一些可能溢出的场景
-aware of some possible overflow scenarios
+但是我们要格外注意一些可能溢出的场景
+however, we need to pay attention to potential overflow scenarios
 
 301
 00:11:39,866 --> 00:11:42,266
 这里我们也给到了Permill的定义
-Here we also give the definition of Permill
+Here we also give the link of the Permill's definition
 
 302
 00:11:42,733 --> 00:11:45,466
 里面有一些帮助性的方法
-There are some helpful methods in it
+there are some helpful methods in the doc, refer to it if you need
 
 303
-00:11:45,766 --> 00:11:47,299
+00:11:45,466 --> 00:11:47,299
 大家可以去参考一下
-You can refer to it
+there are some helpful methods in the doc, refer to it if you need
 
 304
 00:11:48,100 --> 00:11:49,600
