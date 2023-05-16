@@ -1023,152 +1023,152 @@ these operations include saturating_add, saturating_sub, etc.
 205
 00:07:57,300 --> 00:08:00,166
 这里以saturating_add的为例我们对一个
-Here we take saturating_add as an example for an
+Here we take saturating_add as an example
 
 206
 00:08:01,000 --> 00:08:02,666
-无符号的8位整数
-unsigned 8-bit integer
+无符号的8位整数加了一个很大的整数1万
+adding a large integer 10,000 to u8
 
 207
-00:08:02,866 --> 00:08:05,499
-加了一个很大的整数1万
-Added a large integer 10,000
+00:08:02,666 --> 00:08:05,499
+无符号的8位整数加了一个很大的整数1万
+adding a large integer 10,000 to u8
 
 208
 00:08:05,566 --> 00:08:08,166
 那很明显它超过了它的最大值
-That's clearly over it's maximum
+clearly it has exceeded the maximum value of u8
 
 209
 00:08:08,300 --> 00:08:11,200
 那么我们就会去饱和值就是最大值255
-then we'll saturate the value to a maximum of 255
+then the result of saturating_add will be the maximum value which is 255
 
 210
 00:08:12,766 --> 00:08:14,199
-对于大整数类型
-For large integer types
+对于大整数类型, 和整数类型是很类似的
+For large integers, it is very similar to the integer types
 
 211
-00:08:14,733 --> 00:08:16,499
-和整数类型是很类似的
-Well, it is very similar to the integer type
+00:08:14,199 --> 00:08:16,499
+对于大整数类型, 和整数类型是很类似的
+For large integers, it is very similar to the integer types
 
 212
 00:08:16,500 --> 00:08:18,666
 不过我们需要去在我们的代码里
-But we need to go in our code
+but we need to first import the definition of the large integer type in our code
 
 213
-00:08:18,900 --> 00:08:21,400
+00:08:18,666 --> 00:08:21,400
 首先引入大整数类型的定义
-First introduce the definition of large integer type
+but we need to first import the definition of the large integer type in our code
 
 214
 00:08:21,400 --> 00:08:23,200
 它是在sp_core里面
-It is inside sp_core
+it's defined in sp_core
 
 215
 00:08:23,866 --> 00:08:24,133
 这里
-here
+Here we define a storage item named my_big_integer to store a large integer
 
 216
 00:08:24,133 --> 00:08:26,166
 我们定义了一个大整数类型的名字
-We define a large integer type with the name
+Here we define a storage item named my_big_integer to store a large integer
 
 217
 00:08:26,166 --> 00:08:27,599
 叫my_big_integer
-called my_big_integer
+Here we define a storage item named my_big_integer to store a large integer
 
 218
 00:08:28,500 --> 00:08:29,800
 那它是一个StorageValue
-then it is a StorageValue
+the storage item uses StorageValue type and the data stored inside it is U256
 
 219
 00:08:29,800 --> 00:08:31,000
 的这样一个存储类型
-Such a storage type of
+the storage item uses StorageValue type and the data stored inside it is U256
 
 220
 00:08:31,000 --> 00:08:33,600
 里面存储的数据类型是U256
-The data type stored in it is U256
+the storage item uses StorageValue type and the data stored inside it is U256
 
 221
 00:08:34,900 --> 00:08:37,466
 同样的对于大整数也提供了一些
-Similarly for large integers some
+Similarly for large integers, Substrate also provides some built-in secure operations
 
 222
 00:08:37,533 --> 00:08:39,533
 内置的安全性的操作的方法
-methods of operation with built-in security are provided
+Similarly for large integers, Substrate also provides some built-in secure operations
 
 223
 00:08:39,600 --> 00:08:42,666
 比如checked_add overflow_mul
-For example checked_add overflow multiply
+such as checked_add, overflow_mul, etc.
 
 224
 00:08:43,166 --> 00:08:45,566
 这里也给到了接口文档的链接
-Here is also a link to the interface documentation
+Here it's the link of the documentation
 
 225
 00:08:46,966 --> 00:08:48,933
 对于布尔类型是很类似的
-For boolean type is very similar
+The usage of boolean in storage is very similar to others
 
 226
 00:08:48,933 --> 00:08:51,866
 我们这里定义了一个存储单元
-Here we define a storage unit
+Here we define a storage item named MyBool
 
 227
 00:08:51,866 --> 00:08:52,766
 它的名字叫MyBool
-Its name is MyBool
+Here we define a storage item named MyBool
 
 228
 00:08:52,766 --> 00:08:55,566
 它是一个单值类型
-it is a single value type
+it uses StorageValue to store the single boolean
 
 229
-00:08:55,900 --> 00:08:59,266
+00:08:55,566 --> 00:08:59,266
 单值类型里面存储的类型是布尔类型
-The type stored in the single value type is Boolean type
+it uses StorageValue to store the single boolean
 
 230
 00:08:59,900 --> 00:09:02,166
 通常链上通过存储布尔类型
-Usually on-chain by storing boolean type
+Usually boolean types are used to store flag-like information on the blockchain
 
 231
 00:09:02,166 --> 00:09:04,066
 来存储一些标志性的信息
-To store some symbolic information
+Usually boolean types are used to store flag-like information on the blockchain
 
 232
 00:09:04,666 --> 00:09:07,766
 并且可以根据链上存储的标志性信息
-And it can be based on the iconic information stored on the chain
+and conditional statements can be executed based on such the onchain flags
 
 233
-00:09:08,100 --> 00:09:10,066
+00:09:07,766 --> 00:09:10,066
 在代码里进行逻辑判断
-to make logical judgments in the code
+and conditional statements can be executed based on such the onchain flags
 
 234
 00:09:10,600 --> 00:09:13,200
 同样的默认的是一个OptionQuery
-The same default is an OptionQuery
+the default query mechanism is OptionQuery
 
 235
 00:09:13,600 --> 00:09:16,500
@@ -1178,97 +1178,97 @@ For ValueQuery, its default value is false
 236
 00:09:17,566 --> 00:09:18,399
 在Substrate里面
-Inside Substrate
+In Substrate, you cannot use the Rust vector types directly
 
 237
-00:09:18,400 --> 00:09:20,866
-不能直接使用Rust内置的vector
-You cannot directly use Rust's built-in vector
+00:09:18,399 --> 00:09:20,866
+不能直接使用Rust内置的vector集合类型
+In Substrate, you cannot use the Rust vector types directly
 
 238
-00:09:21,100 --> 00:09:21,900
-集合类型
-collection type
+00:09:20,866 --> 00:09:21,900
+不能直接使用Rust内置的vector集合类型
+In Substrate, you cannot use the Rust vector types directly
 
 239
 00:09:21,900 --> 00:09:22,900
-而是使用
-Instead use
+而是使用自定义的BoundedVec这样一个集合类型
+instead you should use the custom vector type called BoundedVec
 
 240
 00:09:22,900 --> 00:09:25,766
-自定义的BoundedVec这样一个集合类型
-custom BoundedVec such a collection type
+而是使用自定义的BoundedVec这样一个集合类型
+instead you should use the custom vector type called BoundedVec
 
 241
 00:09:26,200 --> 00:09:27,100
 可以看到
-We can see
+Here it defines a storage item named my_string
 
 242
 00:09:27,300 --> 00:09:30,066
 这行代码我们定义了一个type MyString
-In this line of code we define a type MyString
+Here it defines a storage item named my_string
 
 243
 00:09:30,066 --> 00:09:31,866
 然后它是一个StorageValue
-Then it is a StorageValue
+it uses StorageValue to store a collection with BoundedVec type
 
 244
 00:09:31,866 --> 00:09:33,133
 也就是单值类型
-That is, single value type
+it uses StorageValue to store a collection with BoundedVec type
 
 245
 00:09:33,666 --> 00:09:34,666
 它的值是
-Its value is
+it uses StorageValue to store a collection with BoundedVec type
 
 246
 00:09:34,666 --> 00:09:36,599
 BoundedVector是一个集合
-BoundedVector which is a collection
+it uses StorageValue to store a collection with BoundedVec type
 
 247
 00:09:36,933 --> 00:09:38,933
-那BoundedVector有两个范型参数
-Then BoundedVector has two generic parameters
+BoundedVec有两个范型参数
+BoundedVec has two generic parameters, the first one is the type of data in the collection
 
 248
 00:09:38,933 --> 00:09:41,133
 第一个是集合里面的数据类型
-The first is the data type in the collection
+BoundedVec has two generic parameters, the first one is the type of data in the collection
 
 249
 00:09:41,300 --> 00:09:43,466
 这里是8位无符号整数
-Here is the 8 bit unsigned integer
+here it's u8 integers in the collection
 
 250
 00:09:43,933 --> 00:09:46,499
 然后集合内的最大长度是100
-Then the maximum length within the set is 100
+the second generic represents the maximum length of the collection, which is 100 here
 
 251
 00:09:47,166 --> 00:09:49,066
 然后它是一个ValueQuery
-Then it is a ValueQuery
+and it uses ValueQuery to return a default value if storage item does not set
 
 252
-00:09:49,533 --> 00:09:51,066
+00:09:49,066 --> 00:09:51,066
 就是会返回一个默认值
-it will return a default value
+and it uses ValueQuery to return a default value if storage item does not set
 
 253
 00:09:51,066 --> 00:09:51,866
 如果
-if
+and it uses ValueQuery to return a default value if storage item does not set
 
 254
-00:09:51,966 --> 00:09:53,399
+00:09:51,866 --> 00:09:53,399
 存储项不存在的话
-If the storage item does not exist
+and it uses ValueQuery to return a default value if storage item does not set
 
 255
 00:09:54,266 --> 00:09:56,499
