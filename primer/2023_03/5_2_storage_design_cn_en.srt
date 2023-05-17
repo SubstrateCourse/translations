@@ -1797,198 +1797,198 @@ the helper method is called ensure_signed
 
 360
 00:13:45,000 --> 00:13:45,933
-对于有
-For
+对于有存储复杂信息要求的这样的一些场景
+For scenarios that require storing complex information, we can use struct
 
 361
-00:13:46,100 --> 00:13:48,733
-存储复杂信息要求的这样的一些场景
-some scenarios such as storage complex information requirements
+00:13:45,933 --> 00:13:48,733
+对于有存储复杂信息要求的这样的一些场景
+For scenarios that require storing complex information, we can use struct
 
 362
 00:13:48,733 --> 00:13:50,499
 我们可以使用结构体
-We can use the structure
+For scenarios that require storing complex information, we can use struct
 
 363
 00:13:50,800 --> 00:13:53,366
-比如这里我们定了一个结构体是people
-For example, here we set a structure that is people
+比如这里我们定了一个结构体是people, 它有两个属性
+For example, here we define a struct called Person with two properties
 
 364
-00:13:53,566 --> 00:13:55,366
-它有两个属性一个是name
-It has two attributes one is name
+00:13:53,366 --> 00:13:55,366
+比如这里我们定了一个结构体是people, 它有两个属性
+For example, here we define a struct called Person with two properties
 
 365
 00:13:55,766 --> 00:13:57,866
-表示人的名字
-that Indicates the person's name
+一个是name表示人的名字
+name, representing a person's name, and age, representing a person's age.
 
 366
-00:13:57,966 --> 00:13:59,366
+00:13:57,866 --> 00:13:59,366
 age表示人的年龄
-age means the age of the person
+name, representing a person's name, and age, representing a person's age.
 
 367
 00:14:00,266 --> 00:14:02,166
 为了能够在链上存储这样一个结构体
-To be able to store such a structure on-chain
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 368
 00:14:02,166 --> 00:14:05,599
-我们需要让我们这个结构体实现
-We need to know how does a struct implement
+我们需要让我们这个结构体实现这些接口
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 369
-00:14:05,900 --> 00:14:06,933
-这些接口
-these interfaces
+00:14:05,599 --> 00:14:06,933
+我们需要让我们这个结构体实现这些接口
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 370
 00:14:07,266 --> 00:14:09,266
-我们是使用derive这种形式
-We use the form of derive
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 371
 00:14:09,266 --> 00:14:10,933
-去自动的帮我们生成
-to automatically generate
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 372
 00:14:11,333 --> 00:14:12,333
-对应的实现
-corresponding realization for us
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 373
 00:14:12,333 --> 00:14:13,733
-比如
-for example
+比如编解码所需要的encode的decode的实现
+for example, generate implementations for encoding and decoding by deriving Encode and Decode traits
 
 374
 00:14:13,733 --> 00:14:16,599
-编解码所需要的encode的decode的实现
-The implementation of decode required for encoding and decoding
+比如编解码所需要的encode的decode的实现
+for example, generate implementations for encoding and decoding by deriving Encode and Decode traits
 
 375
 00:14:16,933 --> 00:14:18,966
 以及默认值Default的实现
-and the implementation of the default value Default
+as well as the default value by deriving the Default trait
 
 376
 00:14:19,900 --> 00:14:21,133
-这里我们就可以定义
-Here we can define
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 377
 00:14:21,133 --> 00:14:22,099
-一个新的存储单元
-a new storage unit
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 378
-00:14:22,100 --> 00:14:23,400
-叫做MyStruct
-called MyStruct
+00:14:22,099 --> 00:14:23,400
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 379
 00:14:23,666 --> 00:14:24,666
-它是个单值类型
-it is a single value type
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 380
 00:14:24,666 --> 00:14:26,299
-里面存储的数据是People
-The data stored in it is People
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 381
-00:14:26,300 --> 00:14:27,300
-这样一个结构体
-such a structure
+00:14:26,299 --> 00:14:27,300
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 382
 00:14:28,400 --> 00:14:29,733
-那对于Enum类型
-That for the Enum type
+那对于Enum类型它和Struct是很类似的
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 383
 00:14:29,733 --> 00:14:31,866
-它和Struct是很类似的
-It is very similar to Struct
+那对于Enum类型它和Struct是很类似的
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 384
-00:14:32,000 --> 00:14:34,200
+00:14:31,866 --> 00:14:34,200
 只不过它需要手动的去实现
-But the default interface
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 385
 00:14:34,200 --> 00:14:35,766
 Default接口
-needs to be done manually.
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 386
 00:14:36,200 --> 00:14:39,100
-没有办法通过derive这种形式去
-There is no way to use this form of
+没有办法通过derive这种形式去派生出来
+it is not possible to derive it automatically using the derive attribute.
 
 387
-00:14:39,166 --> 00:14:40,066
-派生出来
-derive
+00:14:39,100 --> 00:14:40,066
+没有办法通过derive这种形式去派生出来
+it is not possible to derive it automatically using the derive attribute.
 
 388
 00:14:40,333 --> 00:14:41,933
 这里我给出来一个enum的例子
-Here I give an example of Enum
+Here, I'm providing an example of an enum
 
 389
 00:14:41,933 --> 00:14:43,533
 有兴趣的话大家也可以看一下
-If you are interested, you can also take a look
+feel free to take a look if you're interested
 
 390
 00:14:44,500 --> 00:14:47,100
 我们刚才已经看过了一些单值类型
-We have just looked at some single value types
+We have just looked at some of the single-value types supported by Substrate
 
 391
-00:14:47,300 --> 00:14:49,166
+00:14:47,100 --> 00:14:49,166
 Substrate所支持的一些单值类型
-Some single-value types supported by Substrate
+We have just looked at some of the single-value types supported by Substrate
 
 392
 00:14:49,166 --> 00:14:50,966
 现在我们来看一下
-now let's see
+now let's see how to construct a simple mapping type
 
 393
 00:14:50,966 --> 00:14:53,599
 如何构造简单的映射类型
-How to construct a simple mapped type
+now let's see how to construct a simple mapping type which is StorageMap
 
 394
-00:14:53,600 --> 00:14:55,666
+00:14:53,599 --> 00:14:55,666
 也就是我们这里的StorageMap
-That is our StorageMap here
+now let's see how to construct a simple mapping type which is StorageMap
 
 395
 00:14:55,866 --> 00:14:57,866
 它通常是用来保存键值对
-It is usually used to store key-value pairs
+it is used to store key-value pairs
 
 396
 00:14:58,466 --> 00:14:59,699
 那我们刚才提到的
-what we just mentioned
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 397
-00:14:59,933 --> 00:15:01,966
+00:14:59,699 --> 00:15:01,966
 单值类型都可以用作key
-Single-value types can be used as keys
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 398
-00:15:02,000 --> 00:15:04,100
+00:15:01,966 --> 00:15:04,100
 或者用作value来使用
-or use it as value
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 399
 00:15:04,966 --> 00:15:08,766
@@ -1998,257 +1998,257 @@ Here we define a storage item called MyMap
 400
 00:15:09,700 --> 00:15:10,866
 它是一个StorageMap
-It is a StorageMap
+it uses mapping type StorageMap
 
 401
 00:15:10,866 --> 00:15:12,133
 这样的一个映射类型
-such a mapping type
+it uses mapping type StorageMap
 
 402
 00:15:12,300 --> 00:15:14,466
 那map里面的key是一个u8
-The key in the map is a U8
+the key in the map is of type u8, and its value is defined as the hash type in system module
 
 403
 00:15:14,766 --> 00:15:17,399
 值是我们系统模块定义的哈希类型
-The value is the hash type defined by our system module
+the key in the map is of type u8, and its value is defined as the hash type in system module
 
 404
 00:15:17,400 --> 00:15:20,566
 这里Blake2_128Concat是一个哈希算法
-Here Blake2_128Concat is a hash algorithm
+Here, Blake2_128Concat refers to the hash algorithm used to hash our keys
 
 405
-00:15:21,300 --> 00:15:24,166
+00:15:20,566 --> 00:15:24,166
 它是用来对我们的key进行哈希
-It is used to hash our key
+Here, Blake2_128Concat refers to the hash algorithm used to hash our keys
 
 406
 00:15:24,333 --> 00:15:27,133
 进而使用哈希后的结果作为一个
-and then use the hashed result as a
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 407
-00:15:27,533 --> 00:15:29,699
+00:15:27,133 --> 00:15:29,699
 Key-value数据库真正
-key used for storage
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 408
-00:15:29,900 --> 00:15:32,000
+00:15:29,699 --> 00:15:32,000
 存储的时候所用到的那个key
-in the key-value database
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 409
 00:15:33,333 --> 00:15:35,266
 那对应的key算法
-The corresponding key algorithm
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 410
 00:15:35,266 --> 00:15:37,266
 除了Blake2_128Concat之外
-In addition to Blake2_128Concat
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 411
 00:15:37,266 --> 00:15:40,133
 还有Twox64Concat Identity
-There is also Twox64Concat Identity
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 412
 00:15:40,800 --> 00:15:42,366
 以及对应的非Concat
-and the corresponding non-Concat
+and their non-concatenated counterparts
 
 413
 00:15:42,400 --> 00:15:43,666
 这样的一个哈希算法
-Such a hash algorithm
+These hash algorithms have different characteristics
 
 414
 00:15:43,800 --> 00:15:45,733
 它们的区别是Blake2_128
-Their difference is Blake2_128
+Blake2_128 is a cryptographically secure hash algorithm that provides strong security guarantees
 
 415
-00:15:45,766 --> 00:15:48,866
+00:15:45,733 --> 00:15:48,866
 是一个密码学安全的哈希算法
-is a cryptographically secure hash algorithm
+Blake2_128 is a cryptographically secure hash algorithm that provides strong security guarantees
 
 416
 00:15:48,866 --> 00:15:51,733
 那Twox64的话它的速度会更快
-Then Twox64 will be faster
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 417
 00:15:51,733 --> 00:15:53,966
-但是它不是一个密码学安全的
-But it is not a cryptographically secure
+但是它不是一个密码学安全的哈希算法
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 418
 00:15:53,966 --> 00:15:54,766
-哈希算法
-Hash algorithm
+但是它不是一个密码学安全的哈希算法
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 419
 00:15:55,700 --> 00:15:57,300
 Identity通常是用在
-Identity is usually used in
+Identity is typically used when the key itself is already a hash result
 
 420
-00:15:57,800 --> 00:16:01,266
-当我们的key本身已经是一个哈希的
-When our key itself is already a Hash
+00:15:57,300 --> 00:16:01,266
+当我们的key本身已经是一个哈希的结果的时候
+Identity is typically used when the key itself is already a hash result
 
 421
 00:16:01,266 --> 00:16:02,166
-结果的时候
-result,
+当我们的key本身已经是一个哈希的结果的时候
+Identity is typically used when the key itself is already a hash result
 
 422
 00:16:02,166 --> 00:16:04,699
 我们可以使用Identity来避免一些
-We can use Identity to avoid some
+we can use Identity to avoid unnecessary computations
 
 423
-00:16:04,966 --> 00:16:06,399
+00:16:04,699 --> 00:16:06,399
 额外的不必要的计算
-additional unnecessary calculations
+we can use Identity to avoid unnecessary computations
 
 424
 00:16:07,700 --> 00:16:10,800
 对于storage map这样的一个类型
-For a type like storage map
+For the StorageMap type, there are several commonly used APIs
 
 425
-00:16:10,966 --> 00:16:12,666
+00:16:10,800 --> 00:16:12,666
 我们有这样一些常用的API
-We have some commonly used APIs like this
+For the StorageMap type, there are several commonly used APIs
 
 426
 00:16:12,666 --> 00:16:14,699
 比如我们可以通过insert方法去
-For example, we can use the insert method to
+For example, you can use the insert method to insert a key-value pair into the map
 
 427
-00:16:14,700 --> 00:16:16,066
+00:16:14,699 --> 00:16:16,066
 插入一个键值
-insert a key
+For example, you can use the insert method to insert a key-value pair into the map
 
 428
 00:16:16,900 --> 00:16:18,466
 我们可以通过get
-We can get
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 429
-00:16:18,766 --> 00:16:21,199
+00:16:18,466 --> 00:16:21,199
 来给定一个key来获取对应的
-to give a key to get the corresponding
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 430
-00:16:21,300 --> 00:16:22,800
+00:16:21,199 --> 00:16:22,800
 映射里面的值
-value in the map
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 431
 00:16:23,133 --> 00:16:25,199
 我们还可以通过remove方法给定key
-We can also give the key through the remove method
+the remove method allows you to delete an element by specifying its key
 
 432
-00:16:25,200 --> 00:16:26,666
+00:16:25,199 --> 00:16:26,666
 来删除某一个元素
-to delete an element
+the remove method allows you to delete an element by specifying its key
 
 433
 00:16:27,066 --> 00:16:28,733
 对于修改和覆盖
-For modification and overwriting
+to modify or overwrite an element, you can use insert to replace the existing value with a new one
 
 434
-00:16:29,066 --> 00:16:31,066
+00:16:28,733 --> 00:16:31,066
 元素我们可以使用insert进行覆盖
-elements, we can use insert to cover
+to modify or overwrite an element, you can use insert to replace the existing value with a new one
 
 435
 00:16:31,066 --> 00:16:34,266
 或者使用mutate来更改一个原有的值
-or use mutate to change an existing value
+or use mutate method to update the value to a new value based on a given closure
 
 436
-00:16:34,966 --> 00:16:36,199
+00:16:34,266 --> 00:16:36,199
 更新成一个新的值
-update to a new value
+or use mutate method to update the value to a new value based on a given closure
 
 437
 00:16:36,400 --> 00:16:37,366
 这里我们
-here
+Here is the API documentation for StorageMap
 
 438
 00:16:37,366 --> 00:16:39,733
 给到了一个StorageMap的接口文档
-a StorageMap interface document is given
+Here is the API documentation for StorageMap
 
 439
 00:16:40,166 --> 00:16:41,733
 还有一点需要说的是
-one more thing to say
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 440
 00:16:41,733 --> 00:16:42,999
 StorageMap实现了
-StorageMap implements
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 441
-00:16:43,000 --> 00:16:44,866
+00:16:42,999 --> 00:16:44,866
 IterableStorageMap这样一个接口
-IterableStorageMap such an interface
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 442
 00:16:45,066 --> 00:16:46,733
 可以用来迭代我们
-can be used to iterate
+which allows us to iterate over all key-value pairs in the StorageMap
 
 443
-00:16:47,333 --> 00:16:49,399
+00:16:46,733 --> 00:16:49,399
 StorageMap里面所有的key value
-all key values ​​in StorageMap
+which allows us to iterate over all key-value pairs in the StorageMap
 
 444
 00:16:49,400 --> 00:16:51,266
-但是在迭代的时候我们要
-But when iterating we have to especially
+但是在迭代的时候我们要格外注意
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 445
-00:16:51,333 --> 00:16:52,299
-格外注意
-pay extra attention
+00:16:51,266 --> 00:16:52,299
+但是在迭代的时候我们要格外注意
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 446
-00:16:52,933 --> 00:16:55,466
+00:16:52,299 --> 00:16:55,466
 不能让链上迭代的时间
-The time to iterate on the chain cannot be allowed
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 447
-00:16:55,600 --> 00:16:57,666
+00:16:55,466 --> 00:16:57,666
 超过我们区块的生成时间
-exceeding the generation time of our block
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 448
 00:16:57,933 --> 00:16:58,599
 这样的话
-In this case
+otherwise, it may disrupt the block production process
 
 449
-00:16:58,600 --> 00:17:01,333
+00:16:58,599 --> 00:17:01,333
 就有可能导致我们不能正常的出块
-It may cause us to fail to produce blocks normally
+otherwise, it may disrupt the block production process
 
 450
 00:17:01,466 --> 00:17:03,733
 所以在迭代的时候要格外的小心
-So be extra careful when iterating
+Therefore, extra care should be taken when iterating over StorageMap to avoid such issues
 
 451
 00:17:04,733 --> 00:17:06,299
