@@ -1,607 +1,609 @@
 ﻿1
 00:00:00,966 --> 00:00:02,933
-hello大家好我是凯超
+hello大家好 我是凯超
 Hello everyone, I am Kaichao
 
 2
 00:00:03,166 --> 00:00:06,266
-我们今天课程内容是substrate runtime
-The content of our course today is Substrate Runtime
+我们今天课程内容是substrate runtime数据存储的设计
+The content of our course today is data storage design in Substrate runtime development
 
 3
-00:00:06,300 --> 00:00:07,566
-数据存储的设计
-Data Storage Design
+00:00:06,266 --> 00:00:07,566
+我们今天课程内容是substrate runtime数据存储的设计
+The content of our course today is data storage design in Substrate runtime development
 
 4
 00:00:08,966 --> 00:00:10,866
 本次课程内容主要包括了
-This course mainly includes
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 5
-00:00:11,166 --> 00:00:14,166
-区块链存储和传统互联网应用的存储
-Blockchain storage and storage of traditional Internet applications
+00:00:10,866 --> 00:00:14,166
+区块链存储和传统互联网应用的存储不同点和约束
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 6
 00:00:14,166 --> 00:00:15,199
-不同点和约束
-Differences and constraints between them
+区块链存储和传统互联网应用的存储不同点和约束
+this course includes the differences and constraints between blockchain storage and traditional data storage
 
 7
 00:00:15,766 --> 00:00:17,099
-以及substrate
-and substrate
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 8
-00:00:17,100 --> 00:00:19,566
-所提供的存储单元的数据类型
-of the provided storage unit by Substrate
+00:00:17,099 --> 00:00:19,566
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 9
-00:00:19,933 --> 00:00:21,066
-知识的有哪些
-Which types are supported
+00:00:19,566 --> 00:00:21,066
+以及substrate所提供的存储单元的数据类型支持的有哪些
+we also introduce the storage data types supported by Substrate
 
 10
 00:00:21,500 --> 00:00:23,766
-接着我们会介绍如何使用
-Then we'll show you how to use
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 11
-00:00:23,900 --> 00:00:25,300
-substrate的存储单元
-Substrate storage unit
+00:00:23,766 --> 00:00:25,300
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 12
 00:00:25,300 --> 00:00:27,333
-进行一个创始区块的初始化
-to initialize a genesis block
+接着我们会介绍如何使用substrate的存储单元进行一个创始区块的初始化
+then I'll show you how to initialize the genesis block for storage items
 
 13
 00:00:27,733 --> 00:00:30,999
-最后我们会介绍一下使用substrate进行
-Finally, we will introduce the use of substrate for
+最后我们会介绍一下使用substrate进行存储设计的时候一些最佳实践
+Finally, we will look at some best practices when designing storage in Substrate
 
 14
-00:00:31,333 --> 00:00:33,566
-存储设计的时候一些最佳实践
-some best practices in storage design
+00:00:30,999 --> 00:00:33,566
+最后我们会介绍一下使用substrate进行存储设计的时候一些最佳实践
+Finally, we will look at some best practices when designing storage in Substrate
 
 15
 00:00:34,866 --> 00:00:35,399
 大家知道
-Everybody knows
+You probably already know that blockchain usually has the following features
 
 16
-00:00:35,400 --> 00:00:37,766
+00:00:35,399 --> 00:00:37,766
 区块链通常有这样几个特点
-Blockchain usually has the following characteristics
+You probably already know that blockchain usually has the following features
 
 17
 00:00:37,766 --> 00:00:40,299
 第一个是它的代码是完全开源的
-The first is that its code is completely open source
+the first is that its code is completely open source and available for everyone to review
 
 18
-00:00:40,300 --> 00:00:42,466
+00:00:40,299 --> 00:00:42,466
 可以供所有人去审查
-It is available for everyone to review
+the first is that its code is completely open source and available for everyone to review
 
 19
 00:00:42,700 --> 00:00:44,500
 并且它是由对等网络组成的
-and it is made up of a peer-to-peer network
+and it is made up of a peer-to-peer network, or decentralized network
 
 20
 00:00:44,500 --> 00:00:46,666
-这样一个区中心的网络
-such a decentralized network.
+这样一个去中心的网络
+and it is made up of a peer-to-peer network, or decentralized network
 
 21
 00:00:47,333 --> 00:00:50,366
-那通过引入了延迟和随机来在
-That introduces delay and randomness to
+那通过引入了延迟和随机来在不同的节点之间达成共识
+Blockchain introduces delay and randomness to achieve consensus between different nodes
 
 22
-00:00:50,600 --> 00:00:52,533
-不同的节点之间达成共识
-achieve consensus  between different nodes
+00:00:50,366 --> 00:00:52,533
+那通过引入了延迟和随机来在不同的节点之间达成共识
+Blockchain introduces delay and randomness to achieve consensus between different nodes
 
 23
 00:00:52,800 --> 00:00:54,733
 那在这样的一个网络环境里面
-Then in such a network environment
+In such an environment, it stores data in a chained incremental manner
 
 24
-00:00:54,933 --> 00:00:56,366
-区块链使用了
-Blockchain
+00:00:54,733 --> 00:00:56,366
+区块链使用了链式的增量的形式来存储数据
+In such an environment, it stores data in a chained incremental manner
 
 25
 00:00:56,366 --> 00:00:59,133
 链式的增量的形式来存储数据
-stores data in the form of chained incremental manner.
+In such an environment, it stores data in a chained incremental manner
 
 26
 00:00:59,133 --> 00:01:03,299
 区块之间彼此是通过链式直接连接
-Blocks are directly connected to each other through chains
+and connects blocks one by one
 
 27
 00:01:03,900 --> 00:01:06,333
-并且所有的节点都会备份
-and all nodes will be backed up
+并且所有的节点都会备份链上的状态数据
+all the nodes will be backed up the onchain state
 
 28
 00:01:06,333 --> 00:01:07,933
-链上的状态数据
-state data on the chain.
+并且所有的节点都会备份链上的状态数据
+all the nodes will be backed up the onchain state
 
 29
 00:01:08,133 --> 00:01:09,899
-有一些Archive的节点
-There are some Archive nodes
+有一些Archive的节点甚至会保存所有的历史数据
+There are some archive nodes that save all the historical data of the blockchain
 
 30
-00:01:10,166 --> 00:01:12,333
-甚至会保存所有的历史数据
-even save all historical data
+00:01:09,899 --> 00:01:12,333
+有一些Archive的节点甚至会保存所有的历史数据
+There are some archive nodes that save all the historical data of the blockchain
 
 31
 00:01:12,366 --> 00:01:13,199
-这就对
-That needs that
+这就对节点的存储和性能都有比较高的要求
+This places relatively high demands on both the storage and compution of the node.
 
 32
-00:01:13,200 --> 00:01:16,466
-节点的存储和性能都有比较高的要求
-the node storage and performance have relatively high requirements
+00:01:13,199 --> 00:01:16,466
+这就对节点的存储和性能都有比较高的要求
+This places relatively high demands on both the storage and compution of the node.
 
 33
 00:01:17,400 --> 00:01:19,933
-区块链应用的程序
+区块链应用程序通常都会有高效的键值对数据库
 Programs for blockchain applications
+Blockchain applications typically have efficient key-value databases
 
 34
-00:01:20,133 --> 00:01:22,666
-它通常都会有高效的键值对数据库
-It usually has an efficient key-value pair database
+00:01:19,933 --> 00:01:22,666
+区块链应用程序通常都会有高效的键值对数据库
+Blockchain applications typically have efficient key-value databases
 
 35
 00:01:22,966 --> 00:01:25,566
 比如bitcoin里面使用的LevelDB
-For example, LevelDB used in bitcoin
+for example, LevelDB is used in Bitcoin
 
 36
 00:01:25,866 --> 00:01:28,333
 以太坊及Substrate里面使用的RocksDB
-RocksDB used in Ethereum and Substrate
+RocksDB is used in Ethereum and Substrate
 
 37
 00:01:29,766 --> 00:01:32,333
-当我们在使用区块链作为我们
-When we are using blockchain as our
+当我们在使用区块链作为我们Web 3.0业务的载体的时候
+When we use blockchain as the carrier for our Web 3.0 business
 
 38
-00:01:32,466 --> 00:01:34,866
-Web 3.0业务的载体的时候
-carrier of Web 3.0 business
+00:01:32,333 --> 00:01:34,866
+当我们在使用区块链作为我们Web 3.0业务的载体的时候
+When we use blockchain as the carrier for our Web 3.0 business
 
 39
 00:01:35,100 --> 00:01:37,300
 它的存储有这些限制
-Its storage has these limitations
+it has the following storage limitations
 
 40
 00:01:37,666 --> 00:01:38,566
-第一个是
-the first is
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 41
-00:01:38,766 --> 00:01:40,866
-大文件如果直接存储在链
-If large files are stored directly in the chain
+00:01:38,566 --> 00:01:40,866
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 42
 00:01:40,866 --> 00:01:42,733
-上的成本是非常高的
-The cost is very high.
+第一个是大文件如果直接存储在链上的成本是非常高的
+the first is that storing large files directly on the blockchain incurs significant costs
 
 43
 00:01:42,900 --> 00:01:45,133
-通常情况下我们需要选择一种
-Usually we need to choose a
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 44
-00:01:45,400 --> 00:01:47,400
-中心化的或者去中心的
-centralized or decentralized
+00:01:45,133 --> 00:01:47,400
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 45
 00:01:47,400 --> 00:01:49,133
-存储形式来存储
-storage form to store
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 46
 00:01:49,133 --> 00:01:49,966
-大的文件
-large files
+通常情况下我们需要选择一种中心化的或者去中心的存储形式来存储大的文件
+in most cases, we need to choose a centralized or decentralized storage solution for large files
 
 47
 00:01:50,133 --> 00:01:52,999
-而只是在链上存储一个很小的
-Instead, just store a small
+而只是在链上存储一个很小的文件的哈希值
+and only store the hash of the file on the blockchain
 
 48
-00:01:53,500 --> 00:01:54,700
-文件的哈希值
-file hash on the chain.
+00:01:52,999 --> 00:01:54,700
+而只是在链上存储一个很小的文件的哈希值
+and only store the hash of the file on the blockchain
 
 49
 00:01:55,766 --> 00:01:56,899
-我们刚才已经提到了
-we just mentioned
+我们刚才已经提到了链式的区块存储结构
+we just mentioned blockchain employs a linked block storage structure
 
 50
-00:01:56,900 --> 00:01:58,600
-链式的区块存储结构
-chained block storage structure
+00:01:56,899 --> 00:01:58,600
+我们刚才已经提到了链式的区块存储结构
+we just mentioned blockchain employs a linked block storage structure
 
 51
 00:01:59,066 --> 00:01:59,799
 那这种结构
-that structure
+In fact, such structure is not conducive to indexing historical data
 
 52
-00:01:59,800 --> 00:02:01,966
+00:01:59,799 --> 00:02:01,966
 其实并不利于对历史数据的索引
-In fact, it is not conducive to the indexing of historical data
+In fact, such structure is not conducive to indexing historical data
 
 53
 00:02:01,966 --> 00:02:03,166
 因为你如果想索引的话
-because if you want to index
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 54
 00:02:03,166 --> 00:02:03,966
 你就需要
-you have to
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 55
-00:02:04,200 --> 00:02:07,200
+00:02:03,966 --> 00:02:07,200
 遍历当前区块往前所有的区块
-traverse all blocks before the current block
+because if you want to index data, you would need to traverse all the blocks before the current block
 
 56
 00:02:07,666 --> 00:02:10,199
 那这就要求我们通常会有一个
-Then this requires that we usually have a
+we usually have an offchain service for indexing
 
 57
 00:02:10,700 --> 00:02:13,333
 链下的这样的一个索引的服务
-such an off-chain index service
+we usually have an offchain service for indexing
 
 58
 00:02:13,733 --> 00:02:15,166
 通常也就是我们的
-Usually
+Block explorers is commonly used to provide convenient access to blockchain data
 
 59
 00:02:15,166 --> 00:02:17,066
 区块浏览器这样的一个基础设施
-It's an infrastructure such as a block explorer
+Block explorers is commonly used to provide convenient access to blockchain data
 
 60
 00:02:18,333 --> 00:02:19,266
-另外一个约束是
-Another constraint is
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 61
 00:02:19,266 --> 00:02:20,533
-由于区块链的逻辑
-that due to the logic of the blockchain
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 62
 00:02:20,533 --> 00:02:22,566
-是在不同的节点之间
-between different nodes
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 63
-00:02:23,133 --> 00:02:24,866
-都要去运行这样的一个逻辑
-has to be ran
+00:02:22,566 --> 00:02:24,866
+另外一个约束是由于区块链的逻辑是在不同的节点之间都要去运行这样的一个逻辑
+Another constraint is that due to the logic of the blockchain is designed to be executed among different nodes
 
 64
 00:02:25,300 --> 00:02:28,200
-要求逻辑执行的结果必须是完全
-It is required that the result of logic execution must be completely
+要求逻辑执行的结果必须是完全一致的
+it requires that the execution results of the logic must be fully consistent
 
 65
-00:02:28,366 --> 00:02:29,766
-一致的
-consistent.
+00:02:28,200 --> 00:02:29,766
+要求逻辑执行的结果必须是完全一致的
+it requires that the execution results of the logic must be fully consistent
 
 66
 00:02:29,766 --> 00:02:30,966
-那浮点数的话
-For the floating point number
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 67
 00:02:30,966 --> 00:02:33,566
-它的运算结果跟编译器以及
-Its result has direct relationship with
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 68
-00:02:33,933 --> 00:02:36,266
-CPU的架构都有直接的关系
- the compiler and the architecture of the CPU.
+00:02:33,566 --> 00:02:36,266
+那浮点数的话它的运算结果跟编译器以及CPU的架构都有直接的关系
+Computation results of floating-point numbers are directly influenced by the compiler and CPU architecture
 
 69
 00:02:36,400 --> 00:02:38,466
-所以我们在区块链里面是不能使用
-So we cannot use float numbers
+所以我们在区块链里面是不能使用浮点数
+Therefore, we cannot use floating-point numbers within a blockchain because of the potential inconsistency
 
 70
 00:02:38,466 --> 00:02:39,066
-浮点数的
-in the blockchain
+所以我们在区块链里面是不能使用浮点数
+Therefore, we cannot use floating-point numbers within a blockchain because of the potential inconsistency
 
 71
 00:02:39,066 --> 00:02:41,299
-而是需要使用其他
-Instead, you need to use other
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 72
-00:02:41,600 --> 00:02:43,566
-固定点的小数来模拟浮点数
-fixed-point decimals to simulate
+00:02:41,299 --> 00:02:43,566
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 73
 00:02:43,566 --> 00:02:44,966
-这样的一个操作
-floating-point numbers.
+而是需要使用其他固定点的小数来模拟浮点数这样的一个操作
+Instead, you need to use other fixed-point numbers to simulate floating-point numbers
 
 74
 00:02:46,800 --> 00:02:49,900
-我们之前在课程中已经简单提到过
-We've briefly mentioned this earlier in the course
+我们之前在课程中已经简单提到过substrate链上的存储单元
+We've briefly mentioned this earlier 
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 75
-00:02:50,100 --> 00:02:51,966
-嗯substrate链上的存储单元
-Well, the storage unit on the substrate chain
+00:02:49,900 --> 00:02:51,966
+我们之前在课程中已经简单提到过substrate链上的存储单元
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 76
 00:02:51,966 --> 00:02:53,766
 有单值类型StorageValue
-There is a single value type StorageValue
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 77
-00:02:54,133 --> 00:02:55,933
+00:02:53,766 --> 00:02:55,933
 简单映射类型StorageMap
-Simple mapping type StorageMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 78
 00:02:55,933 --> 00:02:57,399
-以及双键映射类型
-and the double keys mapping type
+以及双键映射类型StorageDoubleMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 79
-00:02:57,700 --> 00:02:59,133
-StorageDoubleMap
-StorageDoubleMap
+00:02:57,399 --> 00:02:59,133
+以及双键映射类型StorageDoubleMap
+Previously, we briefly mentioned that Substrate runtime storage supports StorageValue, StorageMap and StorageDoubleMap
 
 80
 00:02:59,400 --> 00:03:02,533
 以及多键映射类型StorageNMAP
-and the multi-key mapping type StorageNMAP
+there's also StorageNMap
 
 81
 00:03:02,766 --> 00:03:05,366
-那在开发链上的存储单元的时候
-When developing storage units on the chain
+那在开发链上的存储单元的时候有这些点需要去注意
+When developing onchain storage items, there are a few points to consider
 
 82
-00:03:05,466 --> 00:03:07,133
-有这些点需要去注意
-There are these points to pay attention to
+00:03:05,366 --> 00:03:07,133
+那在开发链上的存储单元的时候有这些点需要去注意
+When developing onchain storage items, there are a few points to consider
 
 83
 00:03:07,933 --> 00:03:10,733
 substrate支持了一些Rust的原生数据类型
-substrate supports some of Rust's native data types
+Substrate supports some of Rust's native data types
 
 84
 00:03:10,900 --> 00:03:11,666
-它是
-it is
+它是Rust的所有原生数据类型的一个子集
+it is a subset of Rust's native data types
 
 85
 00:03:11,666 --> 00:03:14,933
 Rust的所有原生数据类型的一个子集
-a subset of all of Rust's native data types.
+it is a subset of Rust's native data types
 
 86
 00:03:15,933 --> 00:03:18,866
-那这些子集是定义在Rust的核心库和
-Those subsets are defined in the Rust core library and
+那这些子集是定义在Rust的核心库和alloc库之中
+the supported types are defined in the Rust core and alloc library
 
 87
 00:03:19,333 --> 00:03:20,499
-Alloc库之中
-In the Alloc library
+那这些子集是定义在Rust的核心库和alloc库之中
+the supported types are defined in the Rust core and alloc library
 
 88
 00:03:21,466 --> 00:03:24,599
-进一步substrate支持的这样的原生类型
-Such native types supported by Substrate
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 89
-00:03:24,600 --> 00:03:26,966
-可以构成我们刚刚提到的
-can constitute what we just mentioned
+00:03:24,599 --> 00:03:26,966
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 90
-00:03:27,100 --> 00:03:28,100
-映射类型
-mapping type
+00:03:26,966 --> 00:03:28,100
+进一步substrate支持的这样的原生类型可以构成我们刚刚提到的映射类型
+such types can then constitute the mapping types we just mentioned
 
 91
 00:03:28,733 --> 00:03:31,333
-其实substrate支持的这些原生类型
-In fact, these native types supported by Substrate
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 92
 00:03:31,333 --> 00:03:32,966
-就是对
-is for that
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 93
-00:03:33,400 --> 00:03:36,533
-这些原生类型实现了一定的编解码的
-these native types implement a certain codec
+00:03:32,966 --> 00:03:36,533
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 94
-00:03:36,766 --> 00:03:37,566
-规则
-rule
+00:03:36,533 --> 00:03:37,566
+其实substrate支持的这些原生类型就是对这些原生类型实现了一定的编解码的规则
+Actually, Substrate supports these native types by implementing specific encoding and decoding rules for them
 
 95
 00:03:38,200 --> 00:03:39,766
 我们现在来回顾一下
-let's review now
+Now let's review the storage macro that we learned in the last lesson
 
 96
 00:03:39,766 --> 00:03:43,166
 上节课所了解到的storage宏
-the storage macro learned in the last lesson.
+Now let's review the storage macro that we learned in the last lesson
 
 97
 00:03:43,533 --> 00:03:45,966
 我们定义了一个something这样一个storage
-We define a storage like something
+it defines a storage item named Something
 
 98
 00:03:46,266 --> 00:03:48,099
 那它的类型是StorageValue
-Then its type is StorageValue
+its type is StorageValue
 
 99
 00:03:48,800 --> 00:03:51,800
 存储的值是一个32位无符号的整数
-The stored value is a 32-bit unsigned integer
+it stores a u32 integer
 
 100
 00:03:52,166 --> 00:03:54,066
 我们是使用的pallet::storage这个宏
-We are using the pallet::storage macro
+We are using the pallet::storage macro and add an optional getter function named something
 
 101
 00:03:54,066 --> 00:03:56,399
 并且我们有一个可选的getter函数
-and we have an optional getter function
+We are using the pallet::storage macro and add an optional getter function named something
 
 102
-00:03:56,766 --> 00:03:57,899
+00:03:56,399 --> 00:03:57,899
 名字叫做something
-the name is something
+We are using the pallet::storage macro and add an optional getter function named something
 
 103
 00:03:59,366 --> 00:04:00,933
 除了我们刚才看到的32位
-In addition to the 32-bit we just saw
+In addition to store a single value like u32
 
 104
 00:04:00,933 --> 00:04:02,866
-无符号整数这样的一个单质类型
-A primitive type such as unsigned integers
+无符号整数这样的一个单值类型
+In addition to store a single value like u32
 
 105
 00:04:03,266 --> 00:04:05,366
 其实还有其他各种各样的单值类型
-In fact, there are various other single value types
+it can also store other types of a single value
 
 106
 00:04:05,366 --> 00:04:07,866
 那单值类型其实顾名思义就是
-The single-value type, as the name implies, is
+as the name implies, StorageValue can only be used to store one value of the defined type
 
 107
-00:04:07,966 --> 00:04:10,499
+00:04:07,866 --> 00:04:10,499
 只能用来存储某一种单一类型的值
-can only be used to store a single type of value
+as the name implies, StorageValue can only be used to store one value of the defined type
 
 108
 00:04:10,900 --> 00:04:12,800
 比如它是布尔值数值类型
-For example it is a boolean numeric type
+the defined type can be boolean, integer, enum, struct, etc
 
 109
-00:04:12,933 --> 00:04:14,766
+00:04:12,800 --> 00:04:14,766
 或者枚举或者结构体
-or enumeration or structure
+the defined type can be boolean, integer, enum, struct, etc
 
 110
 00:04:15,100 --> 00:04:17,266
 数值类型有8位
-Numeric types have 8 bits
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 111
-00:04:17,733 --> 00:04:20,966
+00:04:17,266 --> 00:04:20,966
 无符号有符号整数以及32位64位
-unsigned signed integer and 32-bit 64-bit
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 112
 00:04:20,966 --> 00:04:22,299
 128位等等
-128 bits etc.
+Integer types includes u8, i8, u32, i32, u64, u128, etc
 
 113
 00:04:22,700 --> 00:04:26,500
-还有一些Substrate内置的大整数类型有256
-There are also some built-in large integer types in Substrate with 256
+还有一些Substrate内置的大整数类型U256 U512等等
+There are also some built-in types for large integer in Substrate like U256, U512
 
 114
-00:04:26,733 --> 00:04:28,199
-有512等等
-There are 512 and so on
+00:04:26,500 --> 00:04:28,199
+还有一些Substrate内置的大整数类型U256 U512等等
+There are also some built-in types for large integer in Substrate like U256, U512
 
 115
 00:04:28,700 --> 00:04:31,600
 布尔类型以及集合类型有vector
-Boolean types and collection types have vector
+other types like boolean, vector, BTreeMap, BTreeSet, etc
 
 116
-00:04:31,933 --> 00:04:33,566
+00:04:31,600 --> 00:04:33,566
 BTreeMap和BTreeSet
-BTreeMap and BTreeSet
+other types like boolean, vector, BTreeMap, BTreeSet, etc
 
 117
 00:04:34,766 --> 00:04:35,666
-我们刚才提到了
-we just mentioned
+我们刚才提到了区块链不能直接使用浮点数
+We just mentioned that Blockchain cannot use floating point numbers directly
 
 118
 00:04:35,666 --> 00:04:37,399
-区块链不能直接使用浮点数
-Blockchain cannot directly use floating point numbers
+我们刚才提到了区块链不能直接使用浮点数
+We just mentioned that Blockchain cannot use floating point numbers directly
 
 119
 00:04:37,533 --> 00:04:40,333
 那么取而代之的是定点小数
-Then instead of fixed-point decimals
+instead it uses fixed-point numbers
 
 120
 00:04:40,333 --> 00:04:41,666
-Substrate内置的有
-Substrate has built-in
+Substrate内置的有Percent, Permil, Perbill以及FixedU128
+Substrate provides fixed-point numbers like Percent, Permil, Perbill, FixedU128
 
 121
-00:04:42,100 --> 00:04:45,466
-Percent, Permil, Perbill以及FixedU128
-Percent, Permil, Perbill and FixedU128
+00:04:41,666 --> 00:04:45,466
+Substrate内置的有Percent, Permil, Perbill以及FixedU128
+Substrate provides fixed-point numbers like Percent, Permil, Perbill, FixedU128
 
 122
 00:04:46,466 --> 00:04:47,799
@@ -610,63 +612,63 @@ There are also some custom types
 
 123
 00:04:47,800 --> 00:04:50,800
-比如定常的哈西H128H256
-For example, the regular Hash H128H256
+比如定长的哈希H128H256
+For hash, there are H128 and H256 which can conveniently express the result of hashing algorithm
 
 124
 00:04:50,800 --> 00:04:54,266
-可以快速方便的去表示哈西的结果
-It can quickly and conveniently express the result of Hash
+可以快速方便的去表示哈希的结果
+For hash, there are H128 and H256 which can conveniently express the result of hashing algorithm
 
 125
 00:04:55,533 --> 00:04:57,899
 Substrate支持的其他的一些复杂类型
-Some other complex types supported by Substrate
+Some other complex types supported by Substrate includes
 
 126
 00:04:57,900 --> 00:04:59,900
 包括了Option
-include Option
+Option which can be used to represent a value exist or not
 
 127
 00:04:59,900 --> 00:05:02,400
 这样的一个有值或者无值
-such a value or no value
+Option which can be used to represent a value exist or not
 
 128
 00:05:02,400 --> 00:05:04,166
 这样的一个类型
-such a type
+Option which can be used to represent a value exist or not
 
 129
 00:05:04,166 --> 00:05:05,399
-Tuple元组
-Tuple
+tuple元组它可以包含多个元素
+tuple which contains multiple elements, potencially different type for each element
 
 130
-00:05:05,700 --> 00:05:07,566
-它可以包含多个元素
-it can contain multiple elements
+00:05:05,399 --> 00:05:07,566
+tuple元组它可以包含多个元素
+tuple which contains multiple elements, potencially different type for each element
 
 131
-00:05:08,366 --> 00:05:09,499
-这些不同的元素
-these different elements
+00:05:07,566 --> 00:05:09,499
+这些不同的元素的类型可以是不一样的
+tuple which contains multiple elements, potencially different type for each element
 
 132
-00:05:09,500 --> 00:05:11,166
-的类型可以是不一样的
-Their types can be different
+00:05:09,499 --> 00:05:11,166
+这些不同的元素的类型可以是不一样的
+tuple which contains multiple elements, potencially different type for each element
 
 133
 00:05:11,600 --> 00:05:12,700
-以及枚举
-and enumeration
+以及枚举以及结构体可以包含更多的属性信息
+enum and struct includes multiple variants or attributes information
 
 134
-00:05:13,333 --> 00:05:16,599
-以及结构体可以包含更多的属性信息
-And the structure can contain more attribute information
+00:05:12,700 --> 00:05:16,599
+以及枚举以及结构体可以包含更多的属性信息
+enum and struct includes multiple variants or attributes information
 
 135
 00:05:17,166 --> 00:05:20,866
@@ -676,277 +678,277 @@ There are also some specific built-in custom types
 136
 00:05:20,866 --> 00:05:22,466
 比如Timestamp
-Such as Timestamp
+such as the Moment type defined by timestamp pallet
 
 137
 00:05:22,466 --> 00:05:23,866
 模块会定义的Moment
-Moment defined by the module
+such as the Moment type defined by timestamp pallet
 
 138
 00:05:23,866 --> 00:05:26,399
 来表示我们当前区块的时间戳
-to represent the timestamp of our current block
+it represents the timestamp of our current block
 
 139
 00:05:27,000 --> 00:05:29,966
-以及系统模块提供的AccountId表示
-and the AccountId provided by the system module represents
+以及系统模块提供的AccountId表示用户的account标识
+and the AccountId provided by the system pallet which represents user's identifier
 
 140
-00:05:30,300 --> 00:05:32,333
-用户的account标识
-user's account ID
+00:05:29,966 --> 00:05:32,333
+以及系统模块提供的AccountId表示用户的account标识
+and the AccountId provided by the system pallet which represents user's identifier
 
 141
 00:05:32,866 --> 00:05:35,899
-通常情况下它是用户私钥所对应的
-Usually it is the user's private key corresponding to
+通常情况下它是用户私钥所对应的公钥信息
+usually it is the public key
 
 142
-00:05:36,066 --> 00:05:36,933
-公钥信息
-the public key information
+00:05:35,899 --> 00:05:36,933
+通常情况下它是用户私钥所对应的公钥信息
+usually it is the public key
 
 143
 00:05:38,466 --> 00:05:40,366
 我们先来看一下数值类型
-Let's take a look at the numeric types first
+Let's take a look at the integer first
 
 144
 00:05:40,500 --> 00:05:43,566
 这里我们以8位无符号整数来举例
-Here we take 8-bit unsigned integer as an example
+here take u8 as an example
 
 145
 00:05:43,900 --> 00:05:46,266
 我们定义了一个数据类型
-We define a data type
+the name of storage item is MyUnsignedNumber
 
 146
 00:05:46,266 --> 00:05:48,866
 它的名字叫做MyUnsignedNumber
-Its name is MyUnsignedNumber
+the name of storage item is MyUnsignedNumber
 
 147
 00:05:48,866 --> 00:05:51,166
 它的类型是一个StorageValue
-Its type is a StorageValue
+the type is StorageValue
 
 148
 00:05:51,366 --> 00:05:53,333
 那这个单值类型存储的
-Then this single value type stores
+the single value it can store is u8
 
 149
-00:05:53,866 --> 00:05:56,466
+00:05:53,333 --> 00:05:56,466
 类型是一个8位无符号的整数
-the type which is an 8-bit unsigned integer
+the single value it can store is u8
 
 150
 00:05:57,000 --> 00:05:58,900
-同样呢我们有一个可见的Get函数
-Also we have a visible Get function
+同样呢我们有一个可选的get函数
+it has an optional get function named my_unsigned_number
 
 151
 00:05:58,900 --> 00:06:00,100
 是my_unsigned_number
-It is my_unsigned_number
+it has an optional get function named my_unsigned_number
 
 152
 00:06:01,200 --> 00:06:02,666
 这里我们又举了另外一个例子
-Here we give another example
+Here is another example of StorageValue with i8 integer
 
 153
 00:06:02,666 --> 00:06:04,999
 是一个有符号的8位整数
-It is a signed 8-bit integer
+Here is another example of StorageValue with i8 integer
 
 154
-00:06:05,100 --> 00:06:07,133
-同样的是一个storageValue类型
-It is also a storageValue type
+00:06:04,999 --> 00:06:07,133
+同样的是一个StorageValue类型
+Here is another example of StorageValue with i8 integer
 
 155
 00:06:07,333 --> 00:06:09,499
 里面存储元素是i8
-The storage element inside is i8
+which means the single value it stores is i8
 
 156
 00:06:09,800 --> 00:06:10,266
 可以看到
-We can see
+We can see that the third generic parameter is ValueQuery
 
 157
 00:06:10,266 --> 00:06:12,266
 这里我们给了第三个泛型参数
-Here we give the third generic parameter
+We can see that the third generic parameter is ValueQuery
 
 158
 00:06:12,266 --> 00:06:13,533
 叫做ValueQuery
-called ValueQuery
+We can see that the third generic parameter is ValueQuery
 
 159
 00:06:14,166 --> 00:06:16,199
 它表示的是我们是使用
-It means that we are using
+it means that we are using the ValueQuery when reading the onchain storage item
 
 160
-00:06:16,300 --> 00:06:17,666
+00:06:16,199 --> 00:06:17,666
 ValueQuery这种形式来
-ValueQuery of this form
+it means that we are using the ValueQuery when reading the onchain storage item
 
 161
 00:06:17,666 --> 00:06:19,466
 去读取链上存储单元
-to read the storage unit on the chain.
+it means that we are using the ValueQuery when reading the onchain storage item
 
 162
 00:06:19,533 --> 00:06:21,966
 如果不指定的话是默认的是OptionQuery
-If it is not specified, the default is OptionQuery
+the default is OptionQuery if not specified
 
 163
 00:06:21,966 --> 00:06:23,133
 也就是默认的话
-That is, the default
+OptionQuery will return a None if no value stored onchain
 
 164
-00:06:23,266 --> 00:06:25,666
+00:06:23,133 --> 00:06:25,666
 如果没有值会返回一个Option
-Returning an Option if there is no value
+OptionQuery will return a None if no value stored onchain
 
 165
 00:06:25,666 --> 00:06:27,133
 也就是None这样的一个值
-That is, a value like None
+OptionQuery will return a None if no value stored onchain
 
 166
 00:06:28,066 --> 00:06:30,333
-那如果使用ValueQuarry的话
-Then if you use ValueQuery
+那如果使用ValueQuery的话
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 167
-00:06:30,766 --> 00:06:33,399
+00:06:30,333 --> 00:06:33,399
 如果是没有值的话我们就会返回一个
-If there is no value, we will return a
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 168
-00:06:33,533 --> 00:06:34,733
+00:06:33,399 --> 00:06:34,733
 那么就会返回一个
-then it will return a
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 169
 00:06:34,733 --> 00:06:36,199
 所存储类型的一个默认值
-a default value for the stored type
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 170
-00:06:36,200 --> 00:06:38,733
+00:06:36,199 --> 00:06:38,733
 比如i8的话它的默认值就是0
-For example, for i8, its default value is 0
+ValueQeury will return the default value for the stored type, for i8 the default value is 0
 
 171
 00:06:39,766 --> 00:06:42,766
 对于单值类型一些常用的API有
-Some commonly used APIs for single value types are
+Commonly used APIs for StorageValue includes
 
 172
 00:06:43,100 --> 00:06:44,466
-比如我们可以使用Put
-For example, we can use Put
+比如我们可以使用put
+put method to update onchain storage items
 
 173
 00:06:44,466 --> 00:06:46,533
 方法来更新链上的存储单元
-method to update storage units on the chain
+put method to update onchain storage items
 
 174
 00:06:46,900 --> 00:06:48,900
-我们使用Get方法获取
-We use the Get method to obtain
+我们使用get方法获取
+get method to retrieve the value stored in the storage item
 
 175
-00:06:48,933 --> 00:06:51,699
+00:06:48,900 --> 00:06:51,699
 当前链上存储单元里面所存储的值
-the value stored in the storage unit on the current chain
+get method to retrieve the value stored in the storage item
 
 176
 00:06:52,166 --> 00:06:54,299
 要用mutate来更新一个
-To use mutate to update a
+and mutate method to update the stored value to a new one
 
 177
-00:06:54,700 --> 00:06:56,600
+00:06:54,299 --> 00:06:56,600
 存储的值变成一个新的值
-stored value to a new value
+and mutate method to update the stored value to a new one
 
 178
 00:06:56,866 --> 00:06:58,899
-我们还可以使用q来删除
-We can also use q to delete
+我们还可以使用kill来删除
+we can also use kill method to delete the value stored
 
 179
-00:06:59,700 --> 00:07:02,200
+00:06:58,899 --> 00:07:02,200
 当前存储单元里面已经存储的值
-the value already stored in the current storage unit
+we can also use kill method to delete the value stored
 
 180
 00:07:02,733 --> 00:07:04,099
 这里我给到了一个链接
-here i gave a link
+here it's the link to the doc of StorageValue
 
 181
-00:07:04,100 --> 00:07:05,900
+00:07:04,099 --> 00:07:05,900
 是StorageValue的接口文档
-It is the interface document of StorageValue
+here it's the link to the doc of StorageValue
 
 182
 00:07:06,100 --> 00:07:08,366
 大家有兴趣的话可以看一下
-If you are interested, you can take a look
+take a look if you are interested to know more
 
 183
 00:07:09,500 --> 00:07:11,533
-那对于所存储的数
-That for the stored number
+那对于所存储的数值类型
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 184
 00:07:11,533 --> 00:07:12,333
-值类型
-value type
+那对于所存储的数值类型
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 185
-00:07:12,700 --> 00:07:14,533
+00:07:12,333 --> 00:07:14,533
 我们通常在区块链应用开发的时候
-We usually use some security operations
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 186
 00:07:14,533 --> 00:07:16,333
 要使用一些安全性的操作
-in developing blockchain applications
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 187
-00:07:16,733 --> 00:07:18,733
+00:07:16,333 --> 00:07:18,733
 来避免一些溢出性的错误
-to avoid some overflow errors
+For the calculation of integers stored onchain, it often uses secure operations to avoid overflows
 
 188
 00:07:19,400 --> 00:07:22,133
 比如会返回None类型的一些安全操作
-For example, some security operations that return None type
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 189
 00:07:22,133 --> 00:07:24,466
-包括checked_add checked_sub
-include checked_add checked_sub
+包括checked_add checked_sub, checked_mul以及checked_div
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 190
-00:07:24,800 --> 00:07:26,900
-checked_multiply以及checked_divide
-checked_multiply and checked_divide
+00:07:24,466 --> 00:07:26,900
+包括checked_add checked_sub, checked_mul以及checked_div
+the secure operations that return None if error happens include checked_add, checked_sub, checked_mul and checked_div
 
 191
 00:07:27,866 --> 00:07:29,133
@@ -956,216 +958,217 @@ Let's take checked_add as an example
 192
 00:07:29,133 --> 00:07:32,499
 当我们相加之后的结果是溢出了
-When the result of adding is overflow
+if the result of adding overflows, it will return None and we can handle the error in time
 
 193
-00:07:32,500 --> 00:07:35,200
+00:07:32,499 --> 00:07:35,200
 那么我们会去返回一个错误信息
-Then we will return an error message
+if the result of adding overflows, it will return None and we can handle the error in time
 
 194
-00:07:35,666 --> 00:07:38,066
+00:07:35,200 --> 00:07:38,066
 从而我们可以很及时的去判断
-Thus we can judge the wrong scene
+if the result of adding overflows, it will return None and we can handle the error in time
 
 195
-00:07:38,166 --> 00:07:38,999
+00:07:38,066 --> 00:07:38,999
 错误的场景
-in a timely manner
+if the result of adding overflows, it will return None and we can handle the error in time
 
 196
 00:07:39,000 --> 00:07:41,600
 进而让我们的这这笔交易去失败
-and let our deal fail
+and fail the transaction on purpose
 
 197
 00:07:42,300 --> 00:07:43,566
-除了checked_*
-except checked_*
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 198
-00:07:43,733 --> 00:07:44,999
-这一类的返回results
-This kind of safe operation
+00:07:43,566 --> 00:07:44,999
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 199
 00:07:44,999 --> 00:07:45,000
-returning result
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 200
 00:07:45,000 --> 00:07:46,565
-类型的安全操作之外
-returning result
+除了checked_*这一类的返回Option类型的安全操作之外
+Besides checked like operations, there are operations that return the saturation value
 
 201
 00:07:46,966 --> 00:07:49,666
 还有一类安全操作是会返回饱和值
-Another type of safe operation is to return a saturation value
+Besides checked like operations, there are operations that return the saturation value
 
 202
 00:07:49,900 --> 00:07:52,100
 也就是溢出的时候返回最大值
-That is, when overflow, returning the maximum value
+that is, returning the maximum value when overflow
 
 203
 00:07:52,666 --> 00:07:54,766
-这些操作包括saturating_add
-These operations include saturating_add
+这些操作包括saturating_add, saturating_sub等等
+these operations include saturating_add, saturating_sub, etc.
 
 204
 00:07:54,766 --> 00:07:56,466
-saturating_sub等等
-saturating_sub etc.
+这些操作包括saturating_add, saturating_sub等等
+these operations include saturating_add, saturating_sub, etc.
 
 205
 00:07:57,300 --> 00:08:00,166
 这里以saturating_add的为例我们对一个
-Here we take saturating_add as an example for an
+Here we take saturating_add as an example
 
 206
 00:08:01,000 --> 00:08:02,666
-无符号的8位整数
-unsigned 8-bit integer
+无符号的8位整数加了一个很大的整数1万
+adding a large integer 10,000 to u8
 
 207
-00:08:02,866 --> 00:08:05,499
-加了一个很大的整数1万
-Added a large integer 10,000
+00:08:02,666 --> 00:08:05,499
+无符号的8位整数加了一个很大的整数1万
+adding a large integer 10,000 to u8
 
 208
 00:08:05,566 --> 00:08:08,166
 那很明显它超过了它的最大值
-That's clearly over it's maximum
+clearly it has exceeded the maximum value of u8
 
 209
 00:08:08,300 --> 00:08:11,200
 那么我们就会去饱和值就是最大值255
-then we'll saturate the value to a maximum of 255
+then the result of saturating_add will be the maximum value which is 255
 
 210
 00:08:12,766 --> 00:08:14,199
-对于大整数类型
-For large integer types
+对于大整数类型, 和整数类型是很类似的
+For large integers, it is very similar to the integer types
 
 211
-00:08:14,733 --> 00:08:16,499
-嗯和整数类型是很类似的
-Well, it is very similar to the integer type
+00:08:14,199 --> 00:08:16,499
+对于大整数类型, 和整数类型是很类似的
+For large integers, it is very similar to the integer types
 
 212
 00:08:16,500 --> 00:08:18,666
 不过我们需要去在我们的代码里
-But we need to go in our code
+but we need to first import the definition of the large integer type in our code
 
 213
-00:08:18,900 --> 00:08:21,400
+00:08:18,666 --> 00:08:21,400
 首先引入大整数类型的定义
-First introduce the definition of large integer type
+but we need to first import the definition of the large integer type in our code
 
 214
 00:08:21,400 --> 00:08:23,200
 它是在sp_core里面
-It is inside sp_core
+it's defined in sp_core
 
 215
 00:08:23,866 --> 00:08:24,133
 这里
-here
+Here we define a storage item named my_big_integer to store a large integer
 
 216
 00:08:24,133 --> 00:08:26,166
 我们定义了一个大整数类型的名字
-We define a large integer type with the name
+Here we define a storage item named my_big_integer to store a large integer
 
 217
 00:08:26,166 --> 00:08:27,599
 叫my_big_integer
-called my_big_integer
+Here we define a storage item named my_big_integer to store a large integer
 
 218
 00:08:28,500 --> 00:08:29,800
 那它是一个StorageValue
-then it is a StorageValue
+the storage item uses StorageValue type and the data stored inside it is U256
 
 219
 00:08:29,800 --> 00:08:31,000
 的这样一个存储类型
-Such a storage type of
+the storage item uses StorageValue type and the data stored inside it is U256
 
 220
 00:08:31,000 --> 00:08:33,600
 里面存储的数据类型是U256
-The data type stored in it is U256
+the storage item uses StorageValue type and the data stored inside it is U256
 
 221
 00:08:34,900 --> 00:08:37,466
 同样的对于大整数也提供了一些
-Similarly for large integers some
+Similarly for large integers, Substrate also provides some built-in secure operations
 
 222
 00:08:37,533 --> 00:08:39,533
 内置的安全性的操作的方法
-methods of operation with built-in security are provided
+Similarly for large integers, Substrate also provides some built-in secure operations
 
 223
 00:08:39,600 --> 00:08:42,666
-比如checked_add overflow multiply
-For example checked_add overflow multiply
+比如checked_add overflow_mul
+such as checked_add, overflow_mul, etc.
 
 224
 00:08:43,166 --> 00:08:45,566
 这里也给到了接口文档的链接
-Here is also a link to the interface documentation
+Here it's the link of the documentation
 
 225
 00:08:46,966 --> 00:08:48,933
 对于布尔类型是很类似的
-For boolean type is very similar
+The usage of boolean in storage is very similar to others
 
 226
 00:08:48,933 --> 00:08:51,866
 我们这里定义了一个存储单元
-Here we define a storage unit
+Here we define a storage item named MyBool
 
 227
 00:08:51,866 --> 00:08:52,766
 它的名字叫MyBool
-Its name is MyBool
+Here we define a storage item named MyBool
 
 228
 00:08:52,766 --> 00:08:55,566
 它是一个单值类型
-it is a single value type
+it uses StorageValue to store the single boolean
 
 229
-00:08:55,900 --> 00:08:59,266
+00:08:55,566 --> 00:08:59,266
 单值类型里面存储的类型是布尔类型
-The type stored in the single value type is Boolean type
+it uses StorageValue to store the single boolean
 
 230
 00:08:59,900 --> 00:09:02,166
 通常链上通过存储布尔类型
-Usually on-chain by storing boolean type
+Usually boolean types are used to store flag-like information on the blockchain
 
 231
 00:09:02,166 --> 00:09:04,066
 来存储一些标志性的信息
-To store some symbolic information
+Usually boolean types are used to store flag-like information on the blockchain
 
 232
 00:09:04,666 --> 00:09:07,766
 并且可以根据链上存储的标志性信息
-And it can be based on the iconic information stored on the chain
+and conditional statements can be executed based on such the onchain flags
 
 233
-00:09:08,100 --> 00:09:10,066
+00:09:07,766 --> 00:09:10,066
 在代码里进行逻辑判断
-to make logical judgments in the code
+and conditional statements can be executed based on such the onchain flags
 
 234
 00:09:10,600 --> 00:09:13,200
 同样的默认的是一个OptionQuery
-The same default is an OptionQuery
+the default query mechanism is OptionQuery
 
 235
 00:09:13,600 --> 00:09:16,500
@@ -1175,340 +1178,342 @@ For ValueQuery, its default value is false
 236
 00:09:17,566 --> 00:09:18,399
 在Substrate里面
-Inside Substrate
+In Substrate, you cannot use the Rust vector types directly
 
 237
-00:09:18,400 --> 00:09:20,866
-不能直接使用Rust内置的vector
-You cannot directly use Rust's built-in vector
+00:09:18,399 --> 00:09:20,866
+不能直接使用Rust内置的vector集合类型
+In Substrate, you cannot use the Rust vector types directly
 
 238
-00:09:21,100 --> 00:09:21,900
-集合类型
-collection type
+00:09:20,866 --> 00:09:21,900
+不能直接使用Rust内置的vector集合类型
+In Substrate, you cannot use the Rust vector types directly
 
 239
 00:09:21,900 --> 00:09:22,900
-而是使用
-Instead use
+而是使用自定义的BoundedVec这样一个集合类型
+instead you should use the custom vector type called BoundedVec
 
 240
 00:09:22,900 --> 00:09:25,766
-自定义的BoundedVec这样一个集合类型
-custom BoundedVec such a collection type
+而是使用自定义的BoundedVec这样一个集合类型
+instead you should use the custom vector type called BoundedVec
 
 241
 00:09:26,200 --> 00:09:27,100
 可以看到
-We can see
+Here it defines a storage item named my_string
 
 242
 00:09:27,300 --> 00:09:30,066
 这行代码我们定义了一个type MyString
-In this line of code we define a type MyString
+Here it defines a storage item named my_string
 
 243
 00:09:30,066 --> 00:09:31,866
 然后它是一个StorageValue
-Then it is a StorageValue
+it uses StorageValue to store a collection with BoundedVec type
 
 244
 00:09:31,866 --> 00:09:33,133
 也就是单值类型
-That is, single value type
+it uses StorageValue to store a collection with BoundedVec type
 
 245
 00:09:33,666 --> 00:09:34,666
 它的值是
-Its value is
+it uses StorageValue to store a collection with BoundedVec type
 
 246
 00:09:34,666 --> 00:09:36,599
 BoundedVector是一个集合
-BoundedVector which is a collection
+it uses StorageValue to store a collection with BoundedVec type
 
 247
 00:09:36,933 --> 00:09:38,933
-那BoundedVector有两个范型参数
-Then BoundedVector has two generic parameters
+BoundedVec有两个范型参数
+BoundedVec has two generic parameters, the first one is the type of data in the collection
 
 248
 00:09:38,933 --> 00:09:41,133
 第一个是集合里面的数据类型
-The first is the data type in the collection
+BoundedVec has two generic parameters, the first one is the type of data in the collection
 
 249
 00:09:41,300 --> 00:09:43,466
 这里是8位无符号整数
-Here is the 8 bit unsigned integer
+here it's u8 integers in the collection
 
 250
 00:09:43,933 --> 00:09:46,499
 然后集合内的最大长度是100
-Then the maximum length within the set is 100
+the second generic represents the maximum length of the collection, which is 100 here
 
 251
 00:09:47,166 --> 00:09:49,066
 然后它是一个ValueQuery
-Then it is a ValueQuery
+and it uses ValueQuery to return a default value if storage item does not set
 
 252
-00:09:49,533 --> 00:09:51,066
+00:09:49,066 --> 00:09:51,066
 就是会返回一个默认值
-it will return a default value
+and it uses ValueQuery to return a default value if storage item does not set
 
 253
 00:09:51,066 --> 00:09:51,866
 如果
-if
+and it uses ValueQuery to return a default value if storage item does not set
 
 254
-00:09:51,966 --> 00:09:53,399
+00:09:51,866 --> 00:09:53,399
 存储项不存在的话
-If the storage item does not exist
+and it uses ValueQuery to return a default value if storage item does not set
 
 255
 00:09:54,266 --> 00:09:56,499
 对于BoundedVector有这些常用的操作
-There are these common operations for BoundedVector
+Here are some operations for BoundedVec
 
 256
 00:09:56,500 --> 00:09:59,266
 比如try_push可以去添加一个元素
-For example, try_push can add an element
+use try_push method to add an element
 
 257
 00:09:59,533 --> 00:10:01,599
 remove可以去删除一个元素
-remove can delete an element
+use remove method to delete an element
 
 258
 00:10:01,733 --> 00:10:03,166
-iter可以去
-iter can
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 259
-00:10:03,600 --> 00:10:04,466
-遍历
-traverse
+00:10:03,166 --> 00:10:04,466
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 260
-00:10:04,500 --> 00:10:06,733
-这样的一个BoundedVector集合数据类型
-such a BoundedVector collection data type
+00:10:04,466 --> 00:10:06,733
+iter可以去遍历这样的一个BoundedVec集合数据类型
+iter method can be used to traverse the data in the collection
 
 261
 00:10:07,300 --> 00:10:10,400
 这里我们给出了Substrate的文档链接
-Here we give the documentation link for Substrate
+here it's the documentation link for more details
 
 262
 00:10:11,200 --> 00:10:15,500
-那对于BoundedVector它的默认值是0x00
-The default value for BoundedVector is 0x00
+那对于BoundedVec它的默认值是0x00
+The default value for BoundedVec is 0x00 if use ValueQuery in definition
 
 263
 00:10:15,533 --> 00:10:17,466
-是用ValueQuery这种形式
-It is in the form of ValueQuery
+使用ValueQuery这种形式
+The default value for BoundedVec is 0x00 if use ValueQuery in definition
 
 264
 00:10:18,133 --> 00:10:19,733
 接着我们来看一下
-Let's take a look
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 265
-00:10:20,333 --> 00:10:22,299
+00:10:19,733 --> 00:10:22,299
 定点小数Percent Permill
-Fixed-point decimal Percent Permill
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 266
-00:10:22,300 --> 00:10:24,166
+00:10:22,299 --> 00:10:24,166
 Perbill这样的一个类型定义
-Perbill these types definitions
+Let's take a look at how to store fixed point number, such as Percent, Permill, Perbill
 
 267
 00:10:24,500 --> 00:10:26,966
 我们需要首先引入对应的类型
-We need to first introduce the corresponding type
+We need to first import the type defined in sp_runtime
 
 268
 00:10:26,966 --> 00:10:28,499
 在sp_runtime里面
-inside sp_runtime
+We need to first import the type defined in sp_runtime
 
 269
 00:10:29,300 --> 00:10:31,266
 这里我们定义了一个存储项
-Here we define a storage item
+it defines a storage item named MyPermill
 
 270
 00:10:31,266 --> 00:10:33,299
 它的名字叫MyPermill
-Its name is MyPermill
+it defines a storage item named MyPermill
 
 271
 00:10:34,300 --> 00:10:35,466
 它是一个单值类型
-it is a single value type
+and uses StorageValue to store a Permill
 
 272
 00:10:35,466 --> 00:10:38,099
 存储的类型是Permill
-The storage type is Permill
+and uses StorageValue to store a Permill
 
 273
 00:10:39,166 --> 00:10:41,766
 对于这种定点小数类型
-For this fixed-point decimal type
+There are some built-in construction methods for the fixed-point numbers in Substrate
 
 274
-00:10:42,133 --> 00:10:44,666
+00:10:41,766 --> 00:10:44,666
 Substrate内置了一些构造方法
-Substrate has some built-in construction methods
+There are some built-in construction methods for the fixed-point numbers in Substrate
 
 275
 00:10:45,500 --> 00:10:48,700
-比如我们可以使用Percent来构建一个
-For example, we can use Percent to build a
+比如我们可以使用from_percent来构建一个
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 276
-00:10:49,100 --> 00:10:51,366
+00:10:48,700 --> 00:10:51,366
 包含百分之几这样的一个
-Permill data containing
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 277
-00:10:51,466 --> 00:10:52,533
+00:10:51,366 --> 00:10:52,533
 Permill的数据
-a few percent
+For example, we can use from_percent to construct a Permill data type representing a percentage value
 
 278
 00:10:53,000 --> 00:10:54,933
-也可以使用from_parts
-You can also use from_parts
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 279
 00:10:54,933 --> 00:10:55,066
-to give a value to indicate
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 280
 00:10:55,066 --> 00:10:57,600
-来给定一个值来表示是
-to give a value to indicate
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 281
 00:10:57,600 --> 00:10:57,733
-来给定一个值来表示是
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 282
-00:10:57,900 --> 00:10:59,133
-100万分之几
-Parts per million
+00:10:57,733 --> 00:10:59,133
+也可以使用from_parts来给定一个值来表示100万分之几
+You can also use from_parts to specify a value representing the fraction out of a million
 
 283
 00:10:59,133 --> 00:11:01,766
 比如我们这里可以给定1,000
-For example, we can give 1,000 here
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 284
-00:11:01,800 --> 00:11:03,733
+00:11:01,766 --> 00:11:03,733
 那我们如果value是1,000的话
-Then if the value is 1,000,
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 285
 00:11:03,733 --> 00:11:04,533
 那我们
-then we
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 286
-00:11:04,566 --> 00:11:08,666
+00:11:04,533 --> 00:11:08,666
 Permill::from_parts的话就是1,000/1,000,000
-Permill::from_parts is 1,000/1,000,000
+we can give 1,000 here, then the result of Permill::from_parts(1000) is 1,000/1,000,000
 
 287
 00:11:09,766 --> 00:11:12,733
 类似的我们还可以使用form_rational这种
-Similarly, we can also use form_rational
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 288
-00:11:12,900 --> 00:11:13,966
+00:11:12,733 --> 00:11:13,966
 给定分子p
-given molecule p
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 289
 00:11:13,966 --> 00:11:16,366
 和分母q这种机制来构造一个
-and denominator q this mechanism to construct a
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 290
-00:11:16,733 --> 00:11:17,999
+00:11:16,366 --> 00:11:17,999
 定点小数类型
-Fixed-point decimal type
+There is also form_rational, which uses the given numerator p and denominator q to construct a fixed-point number
 
 291
 00:11:19,366 --> 00:11:20,166
 使用
-When
+There are some secure operations when calculating with Permill
 
 292
-00:11:20,900 --> 00:11:22,933
+00:11:20,166 --> 00:11:22,933
 Permill这种类型进行计算的时候
-using Permill type to calculate
+There are some secure operations when calculating with Permill
 
 293
-00:11:23,100 --> 00:11:24,200
-也有一些二进制操作
-There are also some binary operations
+00:11:22,933 --> 00:11:24,200
+也有一些安全性操作
+There are some secure operations when calculating with Permill
 
 294
 00:11:24,200 --> 00:11:27,300
 比如是saturating_mul可以将两个
-For example, saturating_mul can multiply two
+for example, saturating_mul can be used to multiply two data of type Permill
 
 295
-00:11:27,566 --> 00:11:29,799
+00:11:27,300 --> 00:11:29,799
 Permill的数据类型进行相乘
-Permill data types
+for example, saturating_mul can be used to multiply two data of type Permill
 
 296
 00:11:30,533 --> 00:11:32,066
 我们也可以和一些
-we can also multiply with some
+we can also multiply it with integer directly and do some conversions
 
 297
-00:11:32,266 --> 00:11:34,333
+00:11:32,066 --> 00:11:34,333
 整数类型直接进行相乘
-Integer types directly
+we can also multiply it with integer directly and do some conversions
 
 298
 00:11:34,333 --> 00:11:35,799
 并且进行一些转换
-and do some conversions
+we can also multiply it with integer directly and do some conversions
 
 299
 00:11:36,900 --> 00:11:37,733
-但是我们要格外
-but we have to be extra
+但是我们要格外注意一些可能溢出的场景
+however, we need to pay attention to potential overflow scenarios
 
 300
 00:11:37,733 --> 00:11:39,566
-注意一些可能溢出的场景
-aware of some possible overflow scenarios
+但是我们要格外注意一些可能溢出的场景
+however, we need to pay attention to potential overflow scenarios
 
 301
 00:11:39,866 --> 00:11:42,266
 这里我们也给到了Permill的定义
-Here we also give the definition of Permill
+Here we also give the link of the Permill's definition
 
 302
 00:11:42,733 --> 00:11:45,466
 里面有一些帮助性的方法
-There are some helpful methods in it
+there are some helpful methods in the doc, refer to it if you need
 
 303
-00:11:45,766 --> 00:11:47,299
+00:11:45,466 --> 00:11:47,299
 大家可以去参考一下
-You can refer to it
+there are some helpful methods in the doc, refer to it if you need
 
 304
 00:11:48,100 --> 00:11:49,600
@@ -1518,471 +1523,472 @@ During Substrate development
 305
 00:11:50,000 --> 00:11:53,400
 合理的使用API文档是特别关键的
-Reasonable use of API documentation is particularly critical
+Properly utilizing the API documentation is very helpful during the Substrate development
 
 306
 00:11:53,400 --> 00:11:54,366
 因为现在
-Because now
+Properly utilizing the API documentation is very helpful during the Substrate development
 
 307
 00:11:55,000 --> 00:11:55,966
 通常这些API
-Usually these APIs
+such API docs contain a lot of descriptive information and examples
 
 308
 00:11:55,966 --> 00:11:57,799
 文档里面有非常多的描述性信息
-There is a lot of descriptive information in the document
+such API docs contain a lot of descriptive information and examples
 
 309
-00:11:57,800 --> 00:11:59,366
+00:11:57,799 --> 00:11:59,366
 以及使用的例子
-and examples of using
+such API docs contain a lot of descriptive information and examples
 
 310
 00:11:59,500 --> 00:12:01,266
-结合API文档以及
-Combining API documentation and
+结合API文档以及现有的substrate内置的一些代码示例
+By combining the API documentation with existing built-in code examples in Substrate
 
 311
-00:12:01,666 --> 00:12:04,699
-现有的substrate内置的一些代码示例
-Some code examples built into existing Substrate
+00:12:01,266 --> 00:12:04,699
+结合API文档以及现有的substrate内置的一些代码示例
+By combining the API documentation with existing built-in code examples in Substrate
 
 312
 00:12:04,699 --> 00:12:04,700
-we'll be fine to
+我们就可以很好的去理解和使用对应的存储数据类型
+we can effectively understand and utilize the corresponding storage data types
 
 313
 00:12:04,700 --> 00:12:06,199
-我们就可以很好的去
-we'll be fine to
+我们就可以很好的去理解和使用对应的存储数据类型
+we can effectively understand and utilize the corresponding storage data types
 
 314
-00:12:06,366 --> 00:12:08,166
-理解和使用对应的
-understand and use the corresponding
+00:12:06,199 --> 00:12:08,166
+我们就可以很好的去理解和使用对应的存储数据类型
+we can effectively understand and utilize the corresponding storage data types
 
 315
-00:12:08,533 --> 00:12:09,699
-存储数据类型
-storage data type
+00:12:08,166 --> 00:12:09,699
+我们就可以很好的去理解和使用对应的存储数据类型
+we can effectively understand and utilize the corresponding storage data types
 
 316
 00:12:11,133 --> 00:12:12,766
-这里我们再看一个
-Here we look at another
+这里我们再看一个自定义的类型叫做Moment
+Let's look at another custom data type called Moment which represents onchain time
 
 317
-00:12:13,166 --> 00:12:15,266
-自定义的类型叫做moment
-custom type which is called moment
+00:12:12,766 --> 00:12:15,266
+这里我们再看一个自定义的类型叫做Moment
+Let's look at another custom data type called Moment which represents onchain time
 
 318
 00:12:15,266 --> 00:12:16,599
 表示我们的时间
-showing our time
+Let's look at another custom data type called Moment which represents onchain time
 
 319
 00:12:17,300 --> 00:12:18,066
 我们刚才讲到
-we just talked about
+we just mentioned that Moment is defined in the timestamp module
 
 320
 00:12:18,066 --> 00:12:20,866
 它是在timestamp模块里面去定义的
-It is defined in the timestamp module
+we just mentioned that Moment is defined in the timestamp module
 
 321
 00:12:21,100 --> 00:12:22,366
 当我们想使用
-when we want to use
+To use the Moment type, we can make the config trait of our module inherit from the config trait of Timestamp module
 
 322
 00:12:22,366 --> 00:12:24,166
 timestamp模块所定义的moment类型的时候
-the moment type defined by the timestamp module
+To use the Moment type, we can make the config trait of our module inherit from the config trait of Timestamp module
 
 323
 00:12:24,166 --> 00:12:26,733
 我们可以让我们的配置接口去
-We can let our config interface to
+To use the Moment type, we can make the config trait of our module inherit from the config trait of Timestamp module
 
 324
-00:12:27,000 --> 00:12:28,266
+00:12:26,733 --> 00:12:28,266
 继承自timestamp
-inherit from the configuration interface 
+To use the Moment type, we can make the config trait of our module inherit from the config trait of Timestamp module
 
 325
 00:12:28,266 --> 00:12:29,666
 里面的配置接口
-inside the timestamp.
+To use the Moment type, we can make the config trait of our module inherit from the config trait of Timestamp module
 
 326
 00:12:30,733 --> 00:12:31,799
 这样我们的
-so our
+so that Moment type gets available within our module
 
 327
-00:12:32,000 --> 00:12:33,966
+00:12:31,799 --> 00:12:33,966
 当前模块就可以拥有
-current module can have
+so that Moment type gets available within our module
 
 328
 00:12:33,966 --> 00:12:35,466
 moment的这样一个类型定义
-such a type definition of moment
+so that Moment type gets available within our module
 
 329
 00:12:36,466 --> 00:12:39,699
 这里我们定了一个存储单元叫做MyTime
-Here we set a storage unit called MyTime
+Here, we define a storage item called MyTime, which uses StorageValue
 
 330
-00:12:40,166 --> 00:12:42,499
+00:12:39,699 --> 00:12:42,499
 它的类型是一个单值类型
-Its type is a single value type
+Here, we define a storage item called MyTime, which uses StorageValue
 
 331
 00:12:42,500 --> 00:12:45,333
 它存储的数据是T::Moment
-The data it stores is T::Moment
+the data it stores is T::Moment which is from timestamp module
 
 332
 00:12:45,333 --> 00:12:46,666
 也就是来源于我们的
-That is from our
+the data it stores is T::Moment which is from timestamp module
 
 333
 00:12:46,666 --> 00:12:49,099
 Timestamp模块里面定义的这样moment类型
-the moment type defined in the Timestamp module.
+the data it stores is T::Moment which is from timestamp module
 
 334
 00:12:50,066 --> 00:12:51,166
 通常情况下
-Usually
+Typically, the Moment type is implemented as a type alias for u64
 
 335
-00:12:51,300 --> 00:12:55,200
-moment类型在实现的时候就是一个U64
-the moment type is a U64 when it is implemented
+00:12:51,166 --> 00:12:55,200
+moment类型在实现的时候就是一个u64
+Typically, the Moment type is implemented as a type alias for u64
 
 336
 00:12:55,200 --> 00:12:56,500
 这样的一个类型别名
-A type alias like this
+Typically, the Moment type is implemented as a type alias for u64
 
 337
 00:12:56,700 --> 00:12:59,000
 我们可以通过这种方式来获取
-We can get time on chain
+To retrieve the current timestamp stored in the timestamp module on the blockchain
 
 338
 00:12:59,000 --> 00:12:59,966
 链上的时间
-by this way.
+To retrieve the current timestamp stored in the timestamp module on the blockchain
 
 339
 00:13:00,000 --> 00:13:02,666
 通过调用pallet_timestamp模块下的
-By calling the public exposed method get
+you can call the public method get from the pallet_timestamp module
 
 340
-00:13:03,100 --> 00:13:04,800
+00:13:02,666 --> 00:13:04,800
 公共暴露的方法get
-under the pallet_timestamp module
+you can call the public method get from the pallet_timestamp module
 
 341
-00:13:05,200 --> 00:13:06,700
+00:13:04,800 --> 00:13:06,700
 来获取当前
-to get the current
+you can call the public method get from the pallet_timestamp module
 
 342
-00:13:06,900 --> 00:13:09,466
+00:13:06,700 --> 00:13:09,466
 timestamp模块里面所存储的链上时间
-on-chain time stored in the timestamp module
+you can call the public method get from the pallet_timestamp module
 
 343
 00:13:10,133 --> 00:13:12,499
 还有一类自定义的类型是
-There is also a class of custom types that is
+Another custom type is AccountId which is provided by the system module
 
 344
-00:13:12,666 --> 00:13:14,566
+00:13:12,499 --> 00:13:14,566
 系统模块所提供的AccountId
-AccountId provided by the system module
+Another custom type is AccountId which is provided by the system module
 
 345
 00:13:14,800 --> 00:13:16,566
 这里我们定义了一个存储单元类型
-Here we define a storage unit type
+Here we define a storage item called MyAccountId
 
 346
 00:13:16,566 --> 00:13:17,799
 叫做MyAccountId
-called MyAccountId
+Here we define a storage item called MyAccountId
 
 347
 00:13:18,733 --> 00:13:20,133
 然后它是一个单值类型
-Then it is a single value type
+it uses StorageValue and stores a single AccountId
 
 348
 00:13:20,133 --> 00:13:22,766
 它的存储数据是T::AccountId
-Its storage data is T::AccountId
+it uses StorageValue and stores a single AccountId
 
 349
 00:13:22,766 --> 00:13:24,066
-也就是由我们系统模块
-That is, Provided by our system module
+也就是由我们系统模块提供的这样一个关联类型AccountId
+which is an associated type defined in the system module
 
 350
 00:13:24,066 --> 00:13:25,466
-提供的这样一个关联类型
-such an association type
+也就是由我们系统模块提供的这样一个关联类型AccountId
+which is an associated type defined in the system module
 
 351
 00:13:25,466 --> 00:13:26,399
-AccountId
-AccountId
+也就是由我们系统模块提供的这样一个关联类型AccountId
+which is an associated type defined in the system module
 
 352
 00:13:27,200 --> 00:13:28,400
 我们刚才也已经说过了
-we just said
+we just mentioned that it's defined in the system module
 
 353
 00:13:28,400 --> 00:13:30,200
 它是在系统模块里面定义
-It is defined in the system module
+we just mentioned that it's defined in the system module
 
 354
 00:13:30,300 --> 00:13:31,766
-并且通常是
-and usually
+并且通常是用户私钥所对应的公匙信息
+and it usually uses the public key corresponding to a user's private key
 
 355
-00:13:32,300 --> 00:13:34,800
-用户私钥所对应的公匙信息
-The public key information corresponding to the user's private key
+00:13:31,766 --> 00:13:34,800
+并且通常是用户私钥所对应的公匙信息
+and it usually uses the public key corresponding to a user's private key
 
 356
 00:13:35,400 --> 00:13:37,266
 系统模块还提供了一个帮助方法
-The system module also provides a helper method
+The system module provides a helper method that allows us to easily retrieve the AccountId from the sender of a transaction
 
 357
 00:13:37,266 --> 00:13:38,566
 可以很好的从
-which can get our AccountId
+The system module provides a helper method that allows us to easily retrieve the AccountId from the sender of a transaction
 
 358
-00:13:39,000 --> 00:13:41,500
+00:13:38,566 --> 00:13:41,500
 我们的交易发送方获取我们的AccountId
-from our transaction sender
+The system module provides a helper method that allows us to easily retrieve the AccountId from the sender of a transaction
 
 359
 00:13:41,500 --> 00:13:44,333
 就是ensure_signed这样的一个帮助方法
-It is a helper method like ensure_signed
+the helper method is called ensure_signed
 
 360
 00:13:45,000 --> 00:13:45,933
-对于有
-For
+对于有存储复杂信息要求的这样的一些场景
+For scenarios that require storing complex information, we can use struct
 
 361
-00:13:46,100 --> 00:13:48,733
-存储复杂信息要求的这样的一些场景
-some scenarios such as storage complex information requirements
+00:13:45,933 --> 00:13:48,733
+对于有存储复杂信息要求的这样的一些场景
+For scenarios that require storing complex information, we can use struct
 
 362
 00:13:48,733 --> 00:13:50,499
 我们可以使用结构体
-We can use the structure
+For scenarios that require storing complex information, we can use struct
 
 363
 00:13:50,800 --> 00:13:53,366
-比如这里我们定了一个结构体是people
-For example, here we set a structure that is people
+比如这里我们定了一个结构体是people, 它有两个属性
+For example, here we define a struct called Person with two properties
 
 364
-00:13:53,566 --> 00:13:55,366
-它有两个属性一个是name
-It has two attributes one is name
+00:13:53,366 --> 00:13:55,366
+比如这里我们定了一个结构体是people, 它有两个属性
+For example, here we define a struct called Person with two properties
 
 365
 00:13:55,766 --> 00:13:57,866
-表示人的名字
-that Indicates the person's name
+一个是name表示人的名字
+name, representing a person's name, and age, representing a person's age.
 
 366
-00:13:57,966 --> 00:13:59,366
+00:13:57,866 --> 00:13:59,366
 age表示人的年龄
-age means the age of the person
+name, representing a person's name, and age, representing a person's age.
 
 367
 00:14:00,266 --> 00:14:02,166
 为了能够在链上存储这样一个结构体
-To be able to store such a structure on-chain
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 368
 00:14:02,166 --> 00:14:05,599
-我们需要让我们讲一个结构体实现
-We need to know how does a struct implement
+我们需要让我们这个结构体实现这些接口
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 369
-00:14:05,900 --> 00:14:06,933
-这些接口
-these interfaces
+00:14:05,599 --> 00:14:06,933
+我们需要让我们这个结构体实现这些接口
+In order to store a struct on the blockchain, we need to make our struct implement these traits 
 
 370
 00:14:07,266 --> 00:14:09,266
-我们是使用derive这种形式
-We use the form of derive
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 371
 00:14:09,266 --> 00:14:10,933
-去自动的帮我们生成
-to automatically generate
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 372
 00:14:11,333 --> 00:14:12,333
-对应的实现
-corresponding realization for us
+我们是使用derive这种形式去自动的帮我们生成对应的实现
+we can use the derive attribute to automatically generate the corresponding implementations for us
 
 373
 00:14:12,333 --> 00:14:13,733
-比如
-for example
+比如编解码所需要的encode的decode的实现
+for example, generate implementations for encoding and decoding by deriving Encode and Decode traits
 
 374
 00:14:13,733 --> 00:14:16,599
-编解码所需要的encode的decode的实现
-The implementation of decode required for encoding and decoding
+比如编解码所需要的encode的decode的实现
+for example, generate implementations for encoding and decoding by deriving Encode and Decode traits
 
 375
 00:14:16,933 --> 00:14:18,966
 以及默认值Default的实现
-and the implementation of the default value Default
+as well as the default value by deriving the Default trait
 
 376
 00:14:19,900 --> 00:14:21,133
-这里我们就可以定义
-Here we can define
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 377
 00:14:21,133 --> 00:14:22,099
-一个新的存储单元
-a new storage unit
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 378
-00:14:22,100 --> 00:14:23,400
-叫做MyStruct
-called MyStruct
+00:14:22,099 --> 00:14:23,400
+这里我们就可以定义一个新的存储单元叫做MyStruct
+Let's define a new storage item called MyStruct
 
 379
 00:14:23,666 --> 00:14:24,666
-它是个单值类型
-it is a single value type
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 380
 00:14:24,666 --> 00:14:26,299
-里面存储的数据是People
-The data stored in it is People
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 381
-00:14:26,300 --> 00:14:27,300
-这样一个结构体
-such a structure
+00:14:26,299 --> 00:14:27,300
+它是个单值类型里面存储的数据是People这样一个结构体
+it uses StorageValue to store a single People object
 
 382
 00:14:28,400 --> 00:14:29,733
-那对于Enum类型
-That for the Enum type
+那对于Enum类型它和Struct是很类似的
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 383
 00:14:29,733 --> 00:14:31,866
-它和Struct是很类似的
-It is very similar to Struct
+那对于Enum类型它和Struct是很类似的
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 384
-00:14:32,000 --> 00:14:34,200
-只不过它需要手动的去实行
-But the default interface
+00:14:31,866 --> 00:14:34,200
+只不过它需要手动的去实现
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 385
 00:14:34,200 --> 00:14:35,766
-default接口
-needs to be done manually.
+Default接口
+For enum types, they are similar to structs, but you need to manually implement the Default trait
 
 386
 00:14:36,200 --> 00:14:39,100
-没有办法通过derive这种形式去
-There is no way to use this form of
+没有办法通过derive这种形式去派生出来
+it is not possible to derive it automatically using the derive attribute.
 
 387
-00:14:39,166 --> 00:14:40,066
-派生出来
-derive
+00:14:39,100 --> 00:14:40,066
+没有办法通过derive这种形式去派生出来
+it is not possible to derive it automatically using the derive attribute.
 
 388
 00:14:40,333 --> 00:14:41,933
-这里我给出来一个Enum的例子
-Here I give an example of Enum
+这里我给出来一个enum的例子
+Here, I'm providing an example of an enum
 
 389
 00:14:41,933 --> 00:14:43,533
 有兴趣的话大家也可以看一下
-If you are interested, you can also take a look
+feel free to take a look if you're interested
 
 390
 00:14:44,500 --> 00:14:47,100
 我们刚才已经看过了一些单值类型
-We have just looked at some single value types
+We have just looked at some of the single-value types supported by Substrate
 
 391
-00:14:47,300 --> 00:14:49,166
+00:14:47,100 --> 00:14:49,166
 Substrate所支持的一些单值类型
-Some single-value types supported by Substrate
+We have just looked at some of the single-value types supported by Substrate
 
 392
 00:14:49,166 --> 00:14:50,966
 现在我们来看一下
-now let's see
+now let's see how to construct a simple mapping type
 
 393
 00:14:50,966 --> 00:14:53,599
 如何构造简单的映射类型
-How to construct a simple mapped type
+now let's see how to construct a simple mapping type which is StorageMap
 
 394
-00:14:53,600 --> 00:14:55,666
+00:14:53,599 --> 00:14:55,666
 也就是我们这里的StorageMap
-That is our StorageMap here
+now let's see how to construct a simple mapping type which is StorageMap
 
 395
 00:14:55,866 --> 00:14:57,866
 它通常是用来保存键值对
-It is usually used to store key-value pairs
+it is used to store key-value pairs
 
 396
 00:14:58,466 --> 00:14:59,699
 那我们刚才提到的
-what we just mentioned
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 397
-00:14:59,933 --> 00:15:01,966
+00:14:59,699 --> 00:15:01,966
 单值类型都可以用作key
-Single-value types can be used as keys
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 398
-00:15:02,000 --> 00:15:04,100
+00:15:01,966 --> 00:15:04,100
 或者用作value来使用
-or use it as value
+the supported single-value types that we just mentioned can be used as the key or value of StorageMap
 
 399
 00:15:04,966 --> 00:15:08,766
@@ -1992,567 +1998,567 @@ Here we define a storage item called MyMap
 400
 00:15:09,700 --> 00:15:10,866
 它是一个StorageMap
-It is a StorageMap
+it uses mapping type StorageMap
 
 401
 00:15:10,866 --> 00:15:12,133
 这样的一个映射类型
-such a mapping type
+it uses mapping type StorageMap
 
 402
 00:15:12,300 --> 00:15:14,466
-那map里面的key是一个U8
-The key in the map is a U8
+那map里面的key是一个u8
+the key in the map is of type u8, and its value is defined as the hash type in system module
 
 403
 00:15:14,766 --> 00:15:17,399
-值是我们系统模块定义的哈西类型
-The value is the hash type defined by our system module
+值是我们系统模块定义的哈希类型
+the key in the map is of type u8, and its value is defined as the hash type in system module
 
 404
 00:15:17,400 --> 00:15:20,566
-这里Blake2_128Concat是一个哈西算法
-Here Blake2_128Concat is a hash algorithm
+这里Blake2_128Concat是一个哈希算法
+Here, Blake2_128Concat refers to the hash algorithm used to hash our keys
 
 405
-00:15:21,300 --> 00:15:24,166
-它是用来对我们的key进行哈西
-It is used to hash our key
+00:15:20,566 --> 00:15:24,166
+它是用来对我们的key进行哈希
+Here, Blake2_128Concat refers to the hash algorithm used to hash our keys
 
 406
 00:15:24,333 --> 00:15:27,133
-进而使用哈西后的结果作为一个
-and then use the hashed result as a
+进而使用哈希后的结果作为一个
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 407
-00:15:27,533 --> 00:15:29,699
+00:15:27,133 --> 00:15:29,699
 Key-value数据库真正
-key used for storage
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 408
-00:15:29,900 --> 00:15:32,000
+00:15:29,699 --> 00:15:32,000
 存储的时候所用到的那个key
-in the key-value database
+the hashed result is then used as the key for storing data in the underlying key-value database
 
 409
 00:15:33,333 --> 00:15:35,266
 那对应的key算法
-The corresponding key algorithm
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 410
 00:15:35,266 --> 00:15:37,266
 除了Blake2_128Concat之外
-In addition to Blake2_128Concat
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 411
 00:15:37,266 --> 00:15:40,133
 还有Twox64Concat Identity
-There is also Twox64Concat Identity
+In addition to Blake2_128Concat, there are other hash algorithms available, such as Twox64Concat, Identity
 
 412
 00:15:40,800 --> 00:15:42,366
 以及对应的非Concat
-and the corresponding non-Concat
+and their non-concatenated counterparts
 
 413
 00:15:42,400 --> 00:15:43,666
-这样的一个哈西算法
-Such a hash algorithm
+这样的一个哈希算法
+These hash algorithms have different characteristics
 
 414
 00:15:43,800 --> 00:15:45,733
 它们的区别是Blake2_128
-Their difference is Blake2_128
+Blake2_128 is a cryptographically secure hash algorithm that provides strong security guarantees
 
 415
-00:15:45,766 --> 00:15:48,866
-是一个密码学安全的哈西算法
-is a cryptographically secure hash algorithm
+00:15:45,733 --> 00:15:48,866
+是一个密码学安全的哈希算法
+Blake2_128 is a cryptographically secure hash algorithm that provides strong security guarantees
 
 416
 00:15:48,866 --> 00:15:51,733
 那Twox64的话它的速度会更快
-Then Twox64 will be faster
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 417
 00:15:51,733 --> 00:15:53,966
-但是它不是一个密码学安全的
-But it is not a cryptographically secure
+但是它不是一个密码学安全的哈希算法
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 418
 00:15:53,966 --> 00:15:54,766
-哈西算法
-Hash algorithm
+但是它不是一个密码学安全的哈希算法
+Twox64 is much faster compared with Blake2_128 but is not considered cryptographically secure
 
 419
 00:15:55,700 --> 00:15:57,300
 Identity通常是用在
-Identity is usually used in
+Identity is typically used when the key itself is already a hash result
 
 420
-00:15:57,800 --> 00:16:01,266
-当我们的key本身已经是一个哈西的
-When our key itself is already a Hash
+00:15:57,300 --> 00:16:01,266
+当我们的key本身已经是一个哈希的结果的时候
+Identity is typically used when the key itself is already a hash result
 
 421
 00:16:01,266 --> 00:16:02,166
-结果的时候
-result,
+当我们的key本身已经是一个哈希的结果的时候
+Identity is typically used when the key itself is already a hash result
 
 422
 00:16:02,166 --> 00:16:04,699
 我们可以使用Identity来避免一些
-We can use Identity to avoid some
+we can use Identity to avoid unnecessary computations
 
 423
-00:16:04,966 --> 00:16:06,399
+00:16:04,699 --> 00:16:06,399
 额外的不必要的计算
-additional unnecessary calculations
+we can use Identity to avoid unnecessary computations
 
 424
 00:16:07,700 --> 00:16:10,800
 对于storage map这样的一个类型
-For a type like storage map
+For the StorageMap type, there are several commonly used APIs
 
 425
-00:16:10,966 --> 00:16:12,666
+00:16:10,800 --> 00:16:12,666
 我们有这样一些常用的API
-We have some commonly used APIs like this
+For the StorageMap type, there are several commonly used APIs
 
 426
 00:16:12,666 --> 00:16:14,699
 比如我们可以通过insert方法去
-For example, we can use the insert method to
+For example, you can use the insert method to insert a key-value pair into the map
 
 427
-00:16:14,700 --> 00:16:16,066
+00:16:14,699 --> 00:16:16,066
 插入一个键值
-insert a key
+For example, you can use the insert method to insert a key-value pair into the map
 
 428
 00:16:16,900 --> 00:16:18,466
 我们可以通过get
-We can get
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 429
-00:16:18,766 --> 00:16:21,199
+00:16:18,466 --> 00:16:21,199
 来给定一个key来获取对应的
-to give a key to get the corresponding
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 430
-00:16:21,300 --> 00:16:22,800
+00:16:21,199 --> 00:16:22,800
 映射里面的值
-value in the map
+by using the get method and providing a key, you can retrieve the corresponding value from the map
 
 431
 00:16:23,133 --> 00:16:25,199
 我们还可以通过remove方法给定key
-We can also give the key through the remove method
+the remove method allows you to delete an element by specifying its key
 
 432
-00:16:25,200 --> 00:16:26,666
+00:16:25,199 --> 00:16:26,666
 来删除某一个元素
-to delete an element
+the remove method allows you to delete an element by specifying its key
 
 433
 00:16:27,066 --> 00:16:28,733
 对于修改和覆盖
-For modification and overwriting
+to modify or overwrite an element, you can use insert to replace the existing value with a new one
 
 434
-00:16:29,066 --> 00:16:31,066
+00:16:28,733 --> 00:16:31,066
 元素我们可以使用insert进行覆盖
-elements, we can use insert to cover
+to modify or overwrite an element, you can use insert to replace the existing value with a new one
 
 435
 00:16:31,066 --> 00:16:34,266
 或者使用mutate来更改一个原有的值
-or use mutate to change an existing value
+or use mutate method to update the value to a new value based on a given closure
 
 436
-00:16:34,966 --> 00:16:36,199
+00:16:34,266 --> 00:16:36,199
 更新成一个新的值
-update to a new value
+or use mutate method to update the value to a new value based on a given closure
 
 437
 00:16:36,400 --> 00:16:37,366
 这里我们
-here
+Here is the API documentation for StorageMap
 
 438
 00:16:37,366 --> 00:16:39,733
 给到了一个StorageMap的接口文档
-a StorageMap interface document is given
+Here is the API documentation for StorageMap
 
 439
 00:16:40,166 --> 00:16:41,733
 还有一点需要说的是
-one more thing to say
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 440
 00:16:41,733 --> 00:16:42,999
 StorageMap实现了
-StorageMap implements
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 441
-00:16:43,000 --> 00:16:44,866
-Iterable StorageMap这样一个接口
-Iterable StorageMap such an interface
+00:16:42,999 --> 00:16:44,866
+IterableStorageMap这样一个接口
+Another point to mention is that StorageMap implements the IterableStorageMap trait
 
 442
 00:16:45,066 --> 00:16:46,733
 可以用来迭代我们
-can be used to iterate
+which allows us to iterate over all key-value pairs in the StorageMap
 
 443
-00:16:47,333 --> 00:16:49,399
+00:16:46,733 --> 00:16:49,399
 StorageMap里面所有的key value
-all key values ​​in StorageMap
+which allows us to iterate over all key-value pairs in the StorageMap
 
 444
 00:16:49,400 --> 00:16:51,266
-但是在迭代的时候我们要尤其
-But when iterating we have to especially
+但是在迭代的时候我们要格外注意
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 445
-00:16:51,333 --> 00:16:52,299
-格外注意
-pay extra attention
+00:16:51,266 --> 00:16:52,299
+但是在迭代的时候我们要格外注意
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 446
-00:16:52,933 --> 00:16:55,466
+00:16:52,299 --> 00:16:55,466
 不能让链上迭代的时间
-The time to iterate on the chain cannot be allowed
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 447
-00:16:55,600 --> 00:16:57,666
+00:16:55,466 --> 00:16:57,666
 超过我们区块的生成时间
-exceeding the generation time of our block
+However, when iterating, we need to be cautious not to exceed the block generation time of the chain
 
 448
 00:16:57,933 --> 00:16:58,599
 这样的话
-In this case
+otherwise, it may disrupt the block production process
 
 449
-00:16:58,600 --> 00:17:01,333
+00:16:58,599 --> 00:17:01,333
 就有可能导致我们不能正常的出块
-It may cause us to fail to produce blocks normally
+otherwise, it may disrupt the block production process
 
 450
 00:17:01,466 --> 00:17:03,733
 所以在迭代的时候要格外的小心
-So be extra careful when iterating
+Therefore, extra care should be taken when iterating over StorageMap to avoid such issues
 
 451
 00:17:04,733 --> 00:17:06,299
 接着我们就可以看一下
-Then we can see
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 452
-00:17:06,733 --> 00:17:09,699
+00:17:06,299 --> 00:17:09,699
 双键形式类型StorageDoubleMap
-Double key form type StorageDoubleMap
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 453
-00:17:10,566 --> 00:17:13,499
-那顾名思义它就是用了两个key来索引
-As the name implies, it uses two keys to index
+00:17:09,699 --> 00:17:13,499
+那顾名思义它就是用了两个key来索引一个value
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 454
-00:17:13,733 --> 00:17:14,533
-一个value
-a value
+00:17:13,499 --> 00:17:14,533
+那顾名思义它就是用了两个key来索引一个value
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 455
 00:17:15,066 --> 00:17:17,933
 它的好处是你可以快速的去删除
-Its advantage is that you can quickly delete
+the advantages of using StorageDoubleMap is that we can efficiently remove any record associated with the first key (key1)
 
 456
-00:17:18,666 --> 00:17:21,499
+00:17:17,933 --> 00:17:21,499
 第一个key也就是key1所对应的任意记录
-The first key is any record corresponding to key1
+the advantages of using StorageDoubleMap is that we can efficiently remove any record associated with the first key (key1)
 
 457
 00:17:21,700 --> 00:17:24,800
 也可以快速遍历key1所对应的所有记录
-You can also quickly traverse all records corresponding to key1
+you can also quickly traverse all records associated with key1
 
 458
 00:17:25,533 --> 00:17:28,333
-这里我们定义了一个存储项叫做
-Here we define a storage item called
+这里我们定义了一个存储项叫做MyDoubleMap
+Here we define a storage item called MyDoubleMap
 
 459
-00:17:28,533 --> 00:17:29,666
-MyDoubleMap
-MyDoubleMap
+00:17:28,333 --> 00:17:29,666
+这里我们定义了一个存储项叫做MyDoubleMap
+Here we define a storage item called MyDoubleMap
 
 460
 00:17:30,400 --> 00:17:32,700
 它是StorageDoubleMap这样一个类型
-It is a type of StorageDoubleMap
+its type is StorageDoubleMap
 
 461
 00:17:32,700 --> 00:17:35,866
 它的key1是AccountId
-Its key1 is AccountId
+key1 is AccountId, key2 is u32, value is a hash result
 
 462
-00:17:36,200 --> 00:17:40,466
-key2是U32 所存储的值是一个哈西
-key2 is U32 and the stored value is a Hash
+00:17:35,866 --> 00:17:40,466
+key2是u32 所存储的值是一个哈希
+key1 is AccountId, key2 is u32, value is a hash result
 
 463
 00:17:40,666 --> 00:17:41,733
 这里为大家简单起见
-Here for the sake of simplicity
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 464
 00:17:41,733 --> 00:17:44,299
 我们都是使用Blake2_128
-We are all using Blake2_128
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 465
-00:17:44,366 --> 00:17:45,733
-这样的一个哈西算法
-such a hash algorithm
+00:17:44,299 --> 00:17:45,733
+这样的一个哈希算法
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 466
 00:17:46,266 --> 00:17:47,766
 在正式的代码中的话
-In formal code
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 467
 00:17:47,766 --> 00:17:49,699
 我们通常是要根据上下文
-We usually want to use the context
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 468
-00:17:50,000 --> 00:17:52,133
+00:17:49,699 --> 00:17:52,133
 根据key的类型以及
-according to the type of key and
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 469
-00:17:52,700 --> 00:17:54,100
+00:17:52,133 --> 00:17:54,100
 它的输入来源
-its input source
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 470
 00:17:54,100 --> 00:17:56,300
-来去选择一个合适的哈西算法
-to choose a suitable hash algorithm
+来去选择一个合适的哈希算法
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 471
 00:17:56,533 --> 00:17:58,099
 通常情况下是当
-Usually
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 472
 00:17:58,333 --> 00:18:00,599
 输入是由用户控制的时候
-When the input is controlled by the user
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 473
 00:18:01,166 --> 00:18:03,099
 我们需要用一个密码学安全的
-We need to use a cryptographically secure
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 474
 00:18:03,300 --> 00:18:03,733
-哈西算法
-Hash algorithm
+哈希算法
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 475
 00:18:03,733 --> 00:18:05,933
 比如是Blake2_128
-For example, Blake2_128
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 476
 00:18:06,266 --> 00:18:08,599
 但是如果这个数据本身是由
-But if this data itself is composed of
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 477
-00:18:08,933 --> 00:18:09,799
+00:18:08,599 --> 00:18:09,799
 系统所控制
-controlled by the system
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 478
-00:18:09,800 --> 00:18:12,333
+00:18:09,799 --> 00:18:12,333
 能够保证它不会被任意的输入
-which can guarantee that it will not be arbitrarily entered
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 479
 00:18:12,333 --> 00:18:13,966
 那我们就可以使用更快的
-Then we can use the faster
+then we can use a faster hash algorithm like Twox64
 
 480
 00:18:13,966 --> 00:18:16,099
-Twox64这样一个哈西算法
-Hash algorithm such as Twox64
+Twox64这样一个哈希算法
+then we can use a faster hash algorithm like Twox64
 
 481
 00:18:16,933 --> 00:18:18,299
 刚才我们已提到过了
-We just mentioned
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 482
-00:18:18,366 --> 00:18:20,599
+00:18:18,299 --> 00:18:20,599
 如果这个key本身已经是一个
-If we can already guarantee that
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 483
-00:18:20,600 --> 00:18:22,700
+00:18:20,599 --> 00:18:22,700
 我们已经可以保证它是一个
-the key itself is
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 484
-00:18:23,100 --> 00:18:25,766
+00:18:22,700 --> 00:18:25,766
 密码学安全的输出或者一个
-a cryptographically secure output or a
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 485
-00:18:26,266 --> 00:18:27,333
-哈西结果的输出
-output of the hash result
+00:18:25,766 --> 00:18:27,333
+哈希结果的输出
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 486
 00:18:27,333 --> 00:18:28,966
 我们就可以直接使用
-we can directly use
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 487
-00:18:29,266 --> 00:18:30,666
+00:18:28,966 --> 00:18:30,666
 identity这种机制
-identity mechanism
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 488
 00:18:30,666 --> 00:18:32,799
-来避免额外的哈西计算的开销
-to avoid the overhead of additional hash calculations
+来避免额外的哈希计算的开销
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 489
 00:18:34,266 --> 00:18:35,066
 对于
-for
+For StorageDoubleMap, we have the following APIs available
 
 490
-00:18:35,500 --> 00:18:38,300
+00:18:35,066 --> 00:18:38,300
 StorageDoubleMap这种类型我们有这些API
-StorageDoubleMap this type we have these APIs
+For StorageDoubleMap, we have the following APIs available
 
 491
 00:18:38,600 --> 00:18:41,866
 我们可以使用insert的方法来插入key1
-We can use the insert method to insert key1
+use the insert method to insert key1, key2, and the associated value
 
 492
 00:18:41,866 --> 00:18:43,699
 key2以及对应的value值
-key2 and the corresponding value
+use the insert method to insert key1, key2, and the associated value
 
 493
 00:18:44,266 --> 00:18:46,566
 然后我们还可以通过Get的方法给定key1
-Then we can also give key1 through the method of Get
+use the get method to retrieve the value based on key1 and key2
 
 494
 00:18:46,566 --> 00:18:48,533
 key2来获取对应的元素值
-key2 to get the corresponding element value
+use the get method to retrieve the value based on key1 and key2
 
 495
 00:18:49,300 --> 00:18:50,966
 使用remove方法来删除key1
-Use the remove method to delete
+to delete the value corresponding to key1 and key2, you can use the remove method
 
 496
 00:18:50,966 --> 00:18:52,166
 key2对应的元素值
-The elements values corresponding to key 1 and key2
+to delete the value corresponding to key1 and key2, you can use the remove method
 
 497
 00:18:53,000 --> 00:18:54,133
 那我们刚才提到了
-then we just mentioned
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 498
-00:18:54,400 --> 00:18:55,966
+00:18:54,133 --> 00:18:55,966
 StorageDoubleMap的一个好处是
-One benefit of StorageDoubleMap is that
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 499
 00:18:55,966 --> 00:18:58,366
 可以快速的删除key1所有的元素
-it can quickly delete all elements of key1
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 500
 00:18:58,500 --> 00:19:01,133
-那这样的API就是remove prefix
-Then such an API is remove prefix
+那这样的API就是remove_prefix
+the method used is remove_prefix
 
 501
 00:19:01,866 --> 00:19:04,899
 这里我也给出了StorageDoubleMap的API文档
-Here I also give the API documentation for StorageDoubleMap
+Here, I have also provided the API documentation for StorageDoubleMap
 
 502
 00:19:05,100 --> 00:19:06,666
-大家有时间的话一定要读
-If you have time, you can
+大家有时间的话一定要读一读
+it is highly recommended for everyone to take the time to read and get familiar with it
 
 503
 00:19:06,666 --> 00:19:07,466
-一读
-read it
+大家有时间的话一定要读一读
+it is highly recommended for everyone to take the time to read and get familiar with it
 
 504
 00:19:08,400 --> 00:19:10,466
 和StorageMap很类似
-Similar to StorageMap
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 505
-00:19:10,800 --> 00:19:13,733
+00:19:10,466 --> 00:19:13,733
 StorageDoubleMap也实现了一个叫做
-StorageDoubleMap also implements a method called
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 506
-00:19:14,133 --> 00:19:16,333
-iterable storage double map这样的一个接口
-an interface like iterable storage double map
+00:19:13,733 --> 00:19:16,333
+IterableStorageDoubleMap这样的一个接口
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 507
 00:19:16,333 --> 00:19:18,699
 能够对我们的双键映射类型里面
-which is able to traverse all elements in
+which allows iteration over all elements in the "double key" mapping
 
 508
-00:19:18,700 --> 00:19:20,800
+00:19:18,699 --> 00:19:20,800
 所有的元素进行一个迭代
-the double bond type
+which allows iteration over all elements in the "double key" mapping
 
 509
 00:19:21,100 --> 00:19:21,500
 同样的
-same
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 510
 00:19:21,500 --> 00:19:23,666
 我们在迭代的时候要格外的小心
-We have to be extra careful when iterating
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 511
 00:19:23,666 --> 00:19:25,133
 不能让迭代的时间
-we can't let iteration time
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 512
 00:19:25,133 --> 00:19:27,133
-超过我们的区块实证时间
-exceed our block verification time
+超过我们的区块生成时间
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 513
 00:19:28,900 --> 00:19:31,900
@@ -2562,485 +2568,484 @@ Next, let's look at the initialization of the storage
 514
 00:19:32,166 --> 00:19:33,866
 那通常在创始区块的时候
-usually at the time of the genesis block
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 515
 00:19:33,866 --> 00:19:37,199
 我们对于某些模块要初始化一些
-For some modules we want to initialize some
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 516
-00:19:37,400 --> 00:19:38,500
+00:19:37,199 --> 00:19:38,500
 需要的数据
-required data
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 517
 00:19:38,900 --> 00:19:41,300
 那我们是定义这样的一个GenesisConfig
-Then we define such a GenesisConfig
+for that, we need to define a struct called GenesisConfig
 
 518
 00:19:41,300 --> 00:19:43,300
 这样的一个结构体
-such a structure
+for that, we need to define a struct called GenesisConfig
 
 519
 00:19:43,933 --> 00:19:46,299
 那这样的一个需要的数据
-Then such a required data
+in this demo, the required data is called value and is type of u8.
 
 520
-00:19:46,300 --> 00:19:47,533
+00:19:46,299 --> 00:19:47,533
 它的名字就是value
-its name is value
+in this demo, the required data is called value and is type of u8.
 
 521
 00:19:47,533 --> 00:19:50,166
-它数据类型是一个U8类型
-Its data type is a U8 type
+它数据类型是一个u8类型
+in this demo, the required data is called value and is type of u8.
 
 522
 00:19:50,333 --> 00:19:53,299
 这是我们以这样一个简单的类型举例
-Here is our example with such a simple type
+Here is the code
 
 523
 00:19:54,300 --> 00:19:56,466
 那我们还需要使用genesis_config
-Then we also need to use genesis_config
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 524
 00:19:56,466 --> 00:19:57,966
 这样一个宏来表示
-Such a macro to represent
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 525
-00:19:58,266 --> 00:20:00,666
+00:19:57,966 --> 00:20:00,666
 这个结构体是需要在创始
-that this structure is needed in the initial
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 526
-00:20:00,766 --> 00:20:02,099
+00:20:00,666 --> 00:20:02,099
 区块里面进行配置的
-configured in the block
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 527
 00:20:02,533 --> 00:20:05,699
-配置是通常发生在Chainspec文件里面
-Configuration usually happens in the Chainspec file
+配置是通常发生在chain spec文件里面
+the configuration typically happens in the chain spec file
 
 528
 00:20:06,166 --> 00:20:09,466
 我们还需要去实现一个Default接口
-We also need to implement a Default interface
+and we also need to implement the Default trait
 
 529
 00:20:09,666 --> 00:20:11,699
 这里它Default值很简单
-Here its Default value is very simple
+in this demo, the default value is straightforward, which is 0 for the u8
 
 530
-00:20:11,700 --> 00:20:12,566
+00:20:11,699 --> 00:20:12,566
 就是我们
-it's
+in this demo, the default value is straightforward, which is 0 for the u8
 
 531
-00:20:12,700 --> 00:20:14,500
-U8这样一个数值类型的Default值
-Default value of a numeric type such as U8
+00:20:12,566 --> 00:20:14,500
+u8这样一个数值类型的Default值
+in this demo, the default value is straightforward, which is 0 for the u8
 
 532
 00:20:14,500 --> 00:20:15,400
 也就是0
-That is 0
+in this demo, the default value is straightforward, which is 0 for the u8
 
 533
 00:20:15,800 --> 00:20:17,300
 我们还需要去
-we still need to
+we also need to implement the genesis_build trait
 
 534
-00:20:17,666 --> 00:20:20,599
+00:20:17,300 --> 00:20:20,599
 实现genesis_build这样的一个接口
-implement an interface like genesis_build
+we also need to implement the genesis_build trait
 
 535
 00:20:21,300 --> 00:20:23,766
 当我们在初始化的时候对我们的
-When we initialize our
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 536
-00:20:24,266 --> 00:20:27,566
+00:20:23,766 --> 00:20:27,566
 chainspec里面的初始化的值进行
-value in the chainspec, we need to do
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 537
-00:20:27,900 --> 00:20:28,700
+00:20:27,566 --> 00:20:28,700
 一系列操作
-series of operations
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 538
 00:20:28,700 --> 00:20:30,733
 来更新我们链上的存储单元
-to update storage units on our chain
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 539
 00:20:30,733 --> 00:20:32,599
 比如这里我们在build的时候
-For example, here when we are building
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 540
-00:20:32,800 --> 00:20:33,733
+00:20:32,599 --> 00:20:33,733
 我们将
-we will
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 541
-00:20:34,700 --> 00:20:36,533
+00:20:33,733 --> 00:20:36,533
 Chainspec里面所配置的
-take out the initial value
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 542
-00:20:37,000 --> 00:20:38,566
+00:20:36,533 --> 00:20:38,566
 初始值value拿出来
-configured in Chainspec
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 543
 00:20:38,566 --> 00:20:39,766
 然后放在我们
-then put in
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 544
-00:20:39,900 --> 00:20:41,700
+00:20:39,766 --> 00:20:41,700
 MyValue这样的一个存储项里面
-a storage item like MyValue
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 545
 00:20:42,666 --> 00:20:45,133
 大家可以去参考Substrate内置的
-You can refer to Substrate's built-in
+You can refer to the implementation in the built-in sudo module of Substrate
 
 546
-00:20:45,466 --> 00:20:47,766
+00:20:45,133 --> 00:20:47,766
 Sudo模块里面的一些实现
-implementations in the Sudo module
+You can refer to the implementation in the built-in sudo module of Substrate
 
 547
 00:20:48,266 --> 00:20:50,133
 它里面定义了一个
-It defines a
+it provides a simple example of genesis configuration
 
 548
 00:20:50,333 --> 00:20:52,533
 很简单的初始化的配置
-Very simple initial configuration
+it provides a simple example of genesis configuration
 
 549
 00:20:53,933 --> 00:20:54,933
 这里我还想给大家
-Here I also want to share with you
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 550
 00:20:54,933 --> 00:20:56,066
 分享一些在
-some
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 551
-00:20:56,333 --> 00:20:58,133
+00:20:56,066 --> 00:20:58,133
 Substrate进行链上存储设计的时候
-best practices
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 552
 00:20:58,133 --> 00:20:59,466
 一些最佳实践
-when Substrate is designing on-chain storage
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 553
 00:21:00,000 --> 00:21:01,366
 我们刚才已经提到过了
-we just mentioned
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 554
 00:21:01,366 --> 00:21:04,199
 链上的存储资源是相对比较昂贵的
-On-chain storage resources are relatively expensive
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 555
-00:21:04,600 --> 00:21:06,066
+00:21:04,199 --> 00:21:06,066
 因为它会在
-because it will
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 556
 00:21:06,066 --> 00:21:08,299
 成千上万个节点里面进行一个备份
-make a backup in thousands of nodes
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 557
 00:21:08,933 --> 00:21:10,933
 所以通常情况下我们要把一些
-So usually we'll take some
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 558
-00:21:11,400 --> 00:21:12,366
-源信息
-source information
+00:21:10,933 --> 00:21:12,366
+元信息
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 559
 00:21:12,366 --> 00:21:15,133
 或者说大文件的信息要存储在一个
-In other words, the information of large files should be stored by a
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 560
-00:21:15,400 --> 00:21:18,000
+00:21:15,133 --> 00:21:18,000
 更有利的去中心的存储机制
-more favorable decentralized storage mechanism
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 561
 00:21:18,000 --> 00:21:19,700
 或者中心化存储机制里面
-or in the centralized storage mechanism
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 562
 00:21:19,700 --> 00:21:22,333
-链上只存储一个小的哈西值
-Only a small hash value is stored on the chain
+链上只存储一个小的哈希值
+only store the hash of the raw data on the blockchain
 
 563
 00:21:23,300 --> 00:21:24,400
 还有一个就是
-Another one is
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 564
 00:21:24,400 --> 00:21:26,366
 当我们有集合类的数据类型的时候
-When we have a data type of collection class
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 565
 00:21:26,366 --> 00:21:27,333
 我们要去
-we are going to
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 566
-00:21:27,800 --> 00:21:29,700
+00:21:27,333 --> 00:21:29,700
 设置这样一个集合所
-set up the maximum capacity that can be carried
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 567
-00:21:29,933 --> 00:21:31,333
+00:21:29,700 --> 00:21:31,333
 能承载的最大容量
-in such a collection
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 568
 00:21:31,333 --> 00:21:33,666
 来保证他不会占用过多的空间
-to make sure it doesn't take up too much space
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 569
 00:21:34,933 --> 00:21:36,399
 另外一个比较好的实践是
-Another good practice is that
+And we should validate all possible error scenarios at the beginning
 
 570
-00:21:36,400 --> 00:21:38,000
+00:21:36,399 --> 00:21:38,000
 我们尽可能的在
-we try our best to
+And we should validate all possible error scenarios at the beginning
 
 571
-00:21:38,100 --> 00:21:39,100
+00:21:38,000 --> 00:21:39,100
 开始的时候
-check all possible error scenarios
+And we should validate all possible error scenarios at the beginning
 
 572
 00:21:39,100 --> 00:21:41,566
 校验所有的可能错误的场景
-at the beginning
+And we should validate all possible error scenarios at the beginning
 
 573
 00:21:42,000 --> 00:21:43,000
 那校验完成之后
-After the verification is completed
+perform storage updates after the validation is complete
 
 574
 00:21:43,000 --> 00:21:45,733
 我们再进行我们存储项的更新操作
-Let's update our storage items again
+perform storage updates after the validation is complete
 
 575
 00:21:45,733 --> 00:21:49,066
 也就是verify first write last
-That is verify first write last
+this principle is often referred to as "verify first, write last"
 
 576
 00:21:49,900 --> 00:21:52,500
 那在substrate的最新的版本也就是
-The latest version in substrate is
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 577
-00:21:52,966 --> 00:21:54,899
-frame V2新的语法里面
-inside the new syntax of frame V2
+00:21:52,500 --> 00:21:54,899
+frame v2新的语法里面
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 578
-00:21:55,066 --> 00:21:57,799
+00:21:54,899 --> 00:21:57,799
 提供了一个transactional这样一个宏
-It provides a transactional such a macro
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 579
 00:21:58,166 --> 00:21:59,733
 它可以保证我们
-it guarantees us
+it guarantees that the execution of dispatchable function is atomic
 
 580
-00:21:59,800 --> 00:22:01,733
+00:21:59,733 --> 00:22:01,733
 可调函数的这样的一个
-atomic operations
+it guarantees that the execution of dispatchable function is atomic
 
 581
-00:22:02,100 --> 00:22:03,266
+00:22:01,733 --> 00:22:03,266
 原子化的操作
-of callable functions
+it guarantees that the execution of dispatchable function is atomic
 
 582
 00:22:03,333 --> 00:22:05,166
 也就是说当有错误发生的时候
-That is, when an error occurs
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 583
 00:22:05,166 --> 00:22:06,266
 我们可以保证
-we can guarantee that
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 584
-00:22:06,466 --> 00:22:09,599
+00:22:06,266 --> 00:22:09,599
 之前对存储项的操作会去回滚
-previous operations on storage items will be rolled back
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 585
 00:22:10,166 --> 00:22:12,366
 尽管我们有这样的一个原子性操作的
-Although we have such an atomic operation
+Although there is such an atomic operation macro
 
 586
 00:22:12,366 --> 00:22:15,333
 宏那我们还是希望大家能够在
-Macro, we still hope that when operating
+we still encourage everyone to validate potential error scenarios before update any storage
 
 587
-00:22:15,566 --> 00:22:16,366
+00:22:15,333 --> 00:22:16,366
 操作的时候
-everyone can
+we still encourage everyone to validate potential error scenarios before update any storage
 
 588
 00:22:16,366 --> 00:22:18,499
 先去对错误的场景进行的校验
-check the wrong scene first
+we still encourage everyone to validate potential error scenarios before update any storage
 
 589
-00:22:18,500 --> 00:22:20,666
+00:22:18,499 --> 00:22:20,666
 然后最终再去更新
-and finally update
+we still encourage everyone to validate potential error scenarios before update any storage
 
 590
 00:22:22,400 --> 00:22:25,166
 另外一些其他的点
-some other points
+Some other points I'd like to share are
 
 591
 00:22:25,166 --> 00:22:26,499
 我想分享的是
-what i want to share is
+Some other points I'd like to share are
 
 592
 00:22:26,500 --> 00:22:27,766
 我们可以在
-we can
+we can use the pub keyword to set the visibility of storage items for different modules
 
 593
-00:22:27,866 --> 00:22:30,166
+00:22:27,766 --> 00:22:30,166
 对存储单元使用pub关键字
-use the pub keyword for storage units
+we can use the pub keyword to set the visibility of storage items for different modules
 
 594
-00:22:30,866 --> 00:22:31,666
+00:22:30,166 --> 00:22:31,666
 来设置这样的
-to set the
+we can use the pub keyword to set the visibility of storage items for different modules
 
 595
 00:22:31,666 --> 00:22:34,333
 存储单元对不同模块的可见范围
-visibility range of storage unit to different modules
+we can use the pub keyword to set the visibility of storage items for different modules
 
 596
 00:22:34,800 --> 00:22:36,500
 然后我们的ValueQuery
-Then our ValueQuery
+Additionally, we can customize the default values for ValueQuery
 
 597
 00:22:36,700 --> 00:22:39,466
 也可以设置一些自定义的默认值
-It is also possible to set some custom default values
+Additionally, we can customize the default values for ValueQuery
 
 598
 00:22:39,566 --> 00:22:42,099
 这里我给到了一个例子
-Here I give an example
+here's an example
 
 599
 00:22:43,100 --> 00:22:46,066
 那当大家对某些存储的API
-Then when everyone doesn't know certain storage APIs
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 600
-00:22:46,166 --> 00:22:47,466
+00:22:46,066 --> 00:22:47,466
 不是很了解的时候
-that well
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 601
 00:22:47,466 --> 00:22:48,733
 我们可以去参考
-we can refer to
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 602
-00:22:48,966 --> 00:22:52,533
-substrate frame目录下的不同的pallets
-different pallets under the substrate frame directory
+00:22:48,733 --> 00:22:52,533
+substrate/frame目录下的不同的pallets
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 603
-00:22:52,766 --> 00:22:55,266
+00:22:52,533 --> 00:22:55,266
 来查找一些最新的使用方法
-to find some of the newest ways to use
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 604
 00:22:55,966 --> 00:22:58,266
 还可以结合API文档
-We can also read API documentations
+you can also read API documentations such as the doc of pallet::storage macro
 
 605
 00:22:58,266 --> 00:23:01,299
-比如这里的palettes::storage是宏的
-For example, palettes::storage here is a macro
+比如这里的pallet::storage是宏的
+you can also read API documentations such as the doc of pallet::storage macro
 
 606
 00:23:01,300 --> 00:23:03,066
 接口文档以及我们刚才
-documentation and what we just
+as well as the API doc for different storage data types we discussed earlier
 
 607
-00:23:03,466 --> 00:23:05,866
+00:23:03,066 --> 00:23:05,866
 列出的不同的存储数据类型
-list the different storage data types
+as well as the API doc for different storage data types we discussed earlier
 
 608
 00:23:05,866 --> 00:23:07,333
 它的API文档
-its API documentation
+as well as the API doc for different storage data types we discussed earlier
 
 609
 00:23:08,466 --> 00:23:10,799
 今天课程内容到这里就结束了
-Today's course content is over here
+Today's lesson concludes here
 
 610
 00:23:10,800 --> 00:23:11,666
 谢谢大家
-thank you all
-
+Thank you, everyone
