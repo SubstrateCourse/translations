@@ -2253,312 +2253,312 @@ Therefore, extra care should be taken when iterating over StorageMap to avoid su
 451
 00:17:04,733 --> 00:17:06,299
 接着我们就可以看一下
-Then we can see
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 452
-00:17:06,733 --> 00:17:09,699
+00:17:06,299 --> 00:17:09,699
 双键形式类型StorageDoubleMap
-Double key form type StorageDoubleMap
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 453
-00:17:10,566 --> 00:17:13,499
-那顾名思义它就是用了两个key来索引
-As the name implies, it uses two keys to index
+00:17:09,699 --> 00:17:13,499
+那顾名思义它就是用了两个key来索引一个value
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 454
-00:17:13,733 --> 00:17:14,533
-一个value
-a value
+00:17:13,499 --> 00:17:14,533
+那顾名思义它就是用了两个key来索引一个value
+Let's take a look at the type StorageDoubleMap, which uses two keys to index a value
 
 455
 00:17:15,066 --> 00:17:17,933
 它的好处是你可以快速的去删除
-Its advantage is that you can quickly delete
+the advantages of using StorageDoubleMap is that we can efficiently remove any record associated with the first key (key1)
 
 456
-00:17:18,666 --> 00:17:21,499
+00:17:17,933 --> 00:17:21,499
 第一个key也就是key1所对应的任意记录
-The first key is any record corresponding to key1
+the advantages of using StorageDoubleMap is that we can efficiently remove any record associated with the first key (key1)
 
 457
 00:17:21,700 --> 00:17:24,800
 也可以快速遍历key1所对应的所有记录
-You can also quickly traverse all records corresponding to key1
+you can also quickly traverse all records associated with key1
 
 458
 00:17:25,533 --> 00:17:28,333
-这里我们定义了一个存储项叫做
-Here we define a storage item called
+这里我们定义了一个存储项叫做MyDoubleMap
+Here we define a storage item called MyDoubleMap
 
 459
-00:17:28,533 --> 00:17:29,666
-MyDoubleMap
-MyDoubleMap
+00:17:28,333 --> 00:17:29,666
+这里我们定义了一个存储项叫做MyDoubleMap
+Here we define a storage item called MyDoubleMap
 
 460
 00:17:30,400 --> 00:17:32,700
 它是StorageDoubleMap这样一个类型
-It is a type of StorageDoubleMap
+its type is StorageDoubleMap
 
 461
 00:17:32,700 --> 00:17:35,866
 它的key1是AccountId
-Its key1 is AccountId
+key1 is AccountId, key2 is u32, value is a hash result
 
 462
-00:17:36,200 --> 00:17:40,466
+00:17:35,866 --> 00:17:40,466
 key2是u32 所存储的值是一个哈希
-key2 is U32 and the stored value is a Hash
+key1 is AccountId, key2 is u32, value is a hash result
 
 463
 00:17:40,666 --> 00:17:41,733
 这里为大家简单起见
-Here for the sake of simplicity
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 464
 00:17:41,733 --> 00:17:44,299
 我们都是使用Blake2_128
-We are all using Blake2_128
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 465
-00:17:44,366 --> 00:17:45,733
+00:17:44,299 --> 00:17:45,733
 这样的一个哈希算法
-such a hash algorithm
+For simplicity, we are using Blake2_128 hash algorithm in this demo
 
 466
 00:17:46,266 --> 00:17:47,766
 在正式的代码中的话
-In formal code
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 467
 00:17:47,766 --> 00:17:49,699
 我们通常是要根据上下文
-We usually want to use the context
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 468
-00:17:50,000 --> 00:17:52,133
+00:17:49,699 --> 00:17:52,133
 根据key的类型以及
-according to the type of key and
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 469
-00:17:52,700 --> 00:17:54,100
+00:17:52,133 --> 00:17:54,100
 它的输入来源
-its input source
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 470
 00:17:54,100 --> 00:17:56,300
 来去选择一个合适的哈希算法
-to choose a suitable hash algorithm
+However, in production, you need to choose the hash algorithms based on the context, the type of the key, and its input source.
 
 471
 00:17:56,533 --> 00:17:58,099
 通常情况下是当
-Usually
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 472
 00:17:58,333 --> 00:18:00,599
 输入是由用户控制的时候
-When the input is controlled by the user
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 473
 00:18:01,166 --> 00:18:03,099
 我们需要用一个密码学安全的
-We need to use a cryptographically secure
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 474
 00:18:03,300 --> 00:18:03,733
 哈希算法
-Hash algorithm
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 475
 00:18:03,733 --> 00:18:05,933
 比如是Blake2_128
-For example, Blake2_128
+In general, when the input is controlled by users, we need to use a cryptographically secure hash algorithm like Blake2_128
 
 476
 00:18:06,266 --> 00:18:08,599
 但是如果这个数据本身是由
-But if this data itself is composed of
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 477
-00:18:08,933 --> 00:18:09,799
+00:18:08,599 --> 00:18:09,799
 系统所控制
-controlled by the system
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 478
-00:18:09,800 --> 00:18:12,333
+00:18:09,799 --> 00:18:12,333
 能够保证它不会被任意的输入
-which can guarantee that it will not be arbitrarily entered
+if the data itself is controlled by the system and we can ensure that it won't be arbitrarily tampered with
 
 479
 00:18:12,333 --> 00:18:13,966
 那我们就可以使用更快的
-Then we can use the faster
+then we can use a faster hash algorithm like Twox64
 
 480
 00:18:13,966 --> 00:18:16,099
 Twox64这样一个哈希算法
-Hash algorithm such as Twox64
+then we can use a faster hash algorithm like Twox64
 
 481
 00:18:16,933 --> 00:18:18,299
 刚才我们已提到过了
-We just mentioned
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 482
-00:18:18,366 --> 00:18:20,599
+00:18:18,299 --> 00:18:20,599
 如果这个key本身已经是一个
-If we can already guarantee that
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 483
-00:18:20,600 --> 00:18:22,700
+00:18:20,599 --> 00:18:22,700
 我们已经可以保证它是一个
-the key itself is
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 484
-00:18:23,100 --> 00:18:25,766
+00:18:22,700 --> 00:18:25,766
 密码学安全的输出或者一个
-a cryptographically secure output or a
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 485
-00:18:26,266 --> 00:18:27,333
+00:18:25,766 --> 00:18:27,333
 哈希结果的输出
-output of the hash result
+As mentioned earlier, if the key itself is already a cryptographically secure output or a hash result
 
 486
 00:18:27,333 --> 00:18:28,966
 我们就可以直接使用
-we can directly use
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 487
-00:18:29,266 --> 00:18:30,666
+00:18:28,966 --> 00:18:30,666
 identity这种机制
-identity mechanism
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 488
 00:18:30,666 --> 00:18:32,799
 来避免额外的哈希计算的开销
-to avoid the overhead of additional hash calculations
+we can directly use the Identity mechanism to avoid the extra computational cost of hashing
 
 489
 00:18:34,266 --> 00:18:35,066
 对于
-for
+For StorageDoubleMap, we have the following APIs available
 
 490
-00:18:35,500 --> 00:18:38,300
+00:18:35,066 --> 00:18:38,300
 StorageDoubleMap这种类型我们有这些API
-StorageDoubleMap this type we have these APIs
+For StorageDoubleMap, we have the following APIs available
 
 491
 00:18:38,600 --> 00:18:41,866
 我们可以使用insert的方法来插入key1
-We can use the insert method to insert key1
+use the insert method to insert key1, key2, and the associated value
 
 492
 00:18:41,866 --> 00:18:43,699
 key2以及对应的value值
-key2 and the corresponding value
+use the insert method to insert key1, key2, and the associated value
 
 493
 00:18:44,266 --> 00:18:46,566
 然后我们还可以通过Get的方法给定key1
-Then we can also give key1 through the method of Get
+use the get method to retrieve the value based on key1 and key2
 
 494
 00:18:46,566 --> 00:18:48,533
 key2来获取对应的元素值
-key2 to get the corresponding element value
+use the get method to retrieve the value based on key1 and key2
 
 495
 00:18:49,300 --> 00:18:50,966
 使用remove方法来删除key1
-Use the remove method to delete
+to delete the value corresponding to key1 and key2, you can use the remove method
 
 496
 00:18:50,966 --> 00:18:52,166
 key2对应的元素值
-The elements values corresponding to key 1 and key2
+to delete the value corresponding to key1 and key2, you can use the remove method
 
 497
 00:18:53,000 --> 00:18:54,133
 那我们刚才提到了
-then we just mentioned
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 498
-00:18:54,400 --> 00:18:55,966
+00:18:54,133 --> 00:18:55,966
 StorageDoubleMap的一个好处是
-One benefit of StorageDoubleMap is that
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 499
 00:18:55,966 --> 00:18:58,366
 可以快速的删除key1所有的元素
-it can quickly delete all elements of key1
+As mentioned earlier, one advantage of StorageDoubleMap is the ability to quickly delete all elements associated with key1
 
 500
 00:18:58,500 --> 00:19:01,133
 那这样的API就是remove_prefix
-Then such an API is remove prefix
+the method used is remove_prefix
 
 501
 00:19:01,866 --> 00:19:04,899
 这里我也给出了StorageDoubleMap的API文档
-Here I also give the API documentation for StorageDoubleMap
+Here, I have also provided the API documentation for StorageDoubleMap
 
 502
 00:19:05,100 --> 00:19:06,666
-大家有时间的话一定要读
-If you have time, you can
+大家有时间的话一定要读一读
+it is highly recommended for everyone to take the time to read and get familiar with it
 
 503
 00:19:06,666 --> 00:19:07,466
-一读
-read it
+大家有时间的话一定要读一读
+it is highly recommended for everyone to take the time to read and get familiar with it
 
 504
 00:19:08,400 --> 00:19:10,466
 和StorageMap很类似
-Similar to StorageMap
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 505
-00:19:10,800 --> 00:19:13,733
+00:19:10,466 --> 00:19:13,733
 StorageDoubleMap也实现了一个叫做
-StorageDoubleMap also implements a method called
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 506
-00:19:14,133 --> 00:19:16,333
-iterable storage double map这样的一个接口
-an interface like iterable storage double map
+00:19:13,733 --> 00:19:16,333
+IterableStorageDoubleMap这样的一个接口
+Similar to StorageMap, StorageDoubleMap implements a trait called IterableStorageDoubleMap
 
 507
 00:19:16,333 --> 00:19:18,699
 能够对我们的双键映射类型里面
-which is able to traverse all elements in
+which allows iteration over all elements in the "double key" mapping
 
 508
-00:19:18,700 --> 00:19:20,800
+00:19:18,699 --> 00:19:20,800
 所有的元素进行一个迭代
-the double bond type
+which allows iteration over all elements in the "double key" mapping
 
 509
 00:19:21,100 --> 00:19:21,500
 同样的
-same
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 510
 00:19:21,500 --> 00:19:23,666
 我们在迭代的时候要格外的小心
-We have to be extra careful when iterating
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 511
 00:19:23,666 --> 00:19:25,133
 不能让迭代的时间
-we can't let iteration time
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 512
 00:19:25,133 --> 00:19:27,133
-超过我们的区块实证时间
-exceed our block verification time
+超过我们的区块生成时间
+we need to be cautious when iterating to ensure that the execution time does not exceed the block generation time
 
 513
 00:19:28,900 --> 00:19:31,900
@@ -2568,484 +2568,484 @@ Next, let's look at the initialization of the storage
 514
 00:19:32,166 --> 00:19:33,866
 那通常在创始区块的时候
-usually at the time of the genesis block
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 515
 00:19:33,866 --> 00:19:37,199
 我们对于某些模块要初始化一些
-For some modules we want to initialize some
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 516
-00:19:37,400 --> 00:19:38,500
+00:19:37,199 --> 00:19:38,500
 需要的数据
-required data
+Typically, when creating the genesis block, we need to initialize certain data for specific modules
 
 517
 00:19:38,900 --> 00:19:41,300
 那我们是定义这样的一个GenesisConfig
-Then we define such a GenesisConfig
+for that, we need to define a struct called GenesisConfig
 
 518
 00:19:41,300 --> 00:19:43,300
 这样的一个结构体
-such a structure
+for that, we need to define a struct called GenesisConfig
 
 519
 00:19:43,933 --> 00:19:46,299
 那这样的一个需要的数据
-Then such a required data
+in this demo, the required data is called value and is type of u8.
 
 520
-00:19:46,300 --> 00:19:47,533
+00:19:46,299 --> 00:19:47,533
 它的名字就是value
-its name is value
+in this demo, the required data is called value and is type of u8.
 
 521
 00:19:47,533 --> 00:19:50,166
 它数据类型是一个u8类型
-Its data type is a U8 type
+in this demo, the required data is called value and is type of u8.
 
 522
 00:19:50,333 --> 00:19:53,299
 这是我们以这样一个简单的类型举例
-Here is our example with such a simple type
+Here is the code
 
 523
 00:19:54,300 --> 00:19:56,466
 那我们还需要使用genesis_config
-Then we also need to use genesis_config
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 524
 00:19:56,466 --> 00:19:57,966
 这样一个宏来表示
-Such a macro to represent
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 525
-00:19:58,266 --> 00:20:00,666
+00:19:57,966 --> 00:20:00,666
 这个结构体是需要在创始
-that this structure is needed in the initial
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 526
-00:20:00,766 --> 00:20:02,099
+00:20:00,666 --> 00:20:02,099
 区块里面进行配置的
-configured in the block
+we also need to use genesis_config macro to identify that this struct needs to be configured in genesis
 
 527
 00:20:02,533 --> 00:20:05,699
-配置是通常发生在Chainspec文件里面
-Configuration usually happens in the Chainspec file
+配置是通常发生在chain spec文件里面
+the configuration typically happens in the chain spec file
 
 528
 00:20:06,166 --> 00:20:09,466
 我们还需要去实现一个Default接口
-We also need to implement a Default interface
+and we also need to implement the Default trait
 
 529
 00:20:09,666 --> 00:20:11,699
 这里它Default值很简单
-Here its Default value is very simple
+in this demo, the default value is straightforward, which is 0 for the u8
 
 530
-00:20:11,700 --> 00:20:12,566
+00:20:11,699 --> 00:20:12,566
 就是我们
-it's
+in this demo, the default value is straightforward, which is 0 for the u8
 
 531
-00:20:12,700 --> 00:20:14,500
+00:20:12,566 --> 00:20:14,500
 u8这样一个数值类型的Default值
-Default value of a numeric type such as U8
+in this demo, the default value is straightforward, which is 0 for the u8
 
 532
 00:20:14,500 --> 00:20:15,400
 也就是0
-That is 0
+in this demo, the default value is straightforward, which is 0 for the u8
 
 533
 00:20:15,800 --> 00:20:17,300
 我们还需要去
-we still need to
+we also need to implement the genesis_build trait
 
 534
-00:20:17,666 --> 00:20:20,599
+00:20:17,300 --> 00:20:20,599
 实现genesis_build这样的一个接口
-implement an interface like genesis_build
+we also need to implement the genesis_build trait
 
 535
 00:20:21,300 --> 00:20:23,766
 当我们在初始化的时候对我们的
-When we initialize our
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 536
-00:20:24,266 --> 00:20:27,566
+00:20:23,766 --> 00:20:27,566
 chainspec里面的初始化的值进行
-value in the chainspec, we need to do
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 537
-00:20:27,900 --> 00:20:28,700
+00:20:27,566 --> 00:20:28,700
 一系列操作
-series of operations
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 538
 00:20:28,700 --> 00:20:30,733
 来更新我们链上的存储单元
-to update storage units on our chain
+which allows us to perform a series of operations on the initialized values from the chain spec file to update the onchain storage
 
 539
 00:20:30,733 --> 00:20:32,599
 比如这里我们在build的时候
-For example, here when we are building
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 540
-00:20:32,800 --> 00:20:33,733
+00:20:32,599 --> 00:20:33,733
 我们将
-we will
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 541
-00:20:34,700 --> 00:20:36,533
+00:20:33,733 --> 00:20:36,533
 Chainspec里面所配置的
-take out the initial value
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 542
-00:20:37,000 --> 00:20:38,566
+00:20:36,533 --> 00:20:38,566
 初始值value拿出来
-configured in Chainspec
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 543
 00:20:38,566 --> 00:20:39,766
 然后放在我们
-then put in
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 544
-00:20:39,900 --> 00:20:41,700
+00:20:39,766 --> 00:20:41,700
 MyValue这样的一个存储项里面
-a storage item like MyValue
+here in the build function, we get the initial value configured in chain spec and store it in our MyValue storage item
 
 545
 00:20:42,666 --> 00:20:45,133
 大家可以去参考Substrate内置的
-You can refer to Substrate's built-in
+You can refer to the implementation in the built-in sudo module of Substrate
 
 546
-00:20:45,466 --> 00:20:47,766
+00:20:45,133 --> 00:20:47,766
 Sudo模块里面的一些实现
-implementations in the Sudo module
+You can refer to the implementation in the built-in sudo module of Substrate
 
 547
 00:20:48,266 --> 00:20:50,133
 它里面定义了一个
-It defines a
+it provides a simple example of genesis configuration
 
 548
 00:20:50,333 --> 00:20:52,533
 很简单的初始化的配置
-Very simple initial configuration
+it provides a simple example of genesis configuration
 
 549
 00:20:53,933 --> 00:20:54,933
 这里我还想给大家
-Here I also want to share with you
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 550
 00:20:54,933 --> 00:20:56,066
 分享一些在
-some
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 551
-00:20:56,333 --> 00:20:58,133
+00:20:56,066 --> 00:20:58,133
 Substrate进行链上存储设计的时候
-best practices
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 552
 00:20:58,133 --> 00:20:59,466
 一些最佳实践
-when Substrate is designing on-chain storage
+When designing on-chain storage in Substrate, there are some best practices that I would like to share
 
 553
 00:21:00,000 --> 00:21:01,366
 我们刚才已经提到过了
-we just mentioned
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 554
 00:21:01,366 --> 00:21:04,199
 链上的存储资源是相对比较昂贵的
-On-chain storage resources are relatively expensive
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 555
-00:21:04,600 --> 00:21:06,066
+00:21:04,199 --> 00:21:06,066
 因为它会在
-because it will
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 556
 00:21:06,066 --> 00:21:08,299
 成千上万个节点里面进行一个备份
-make a backup in thousands of nodes
+as we mentioned earlier, onchain storage are very expensive because they are replicated across thousands of nodes
 
 557
 00:21:08,933 --> 00:21:10,933
 所以通常情况下我们要把一些
-So usually we'll take some
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 558
-00:21:11,400 --> 00:21:12,366
+00:21:10,933 --> 00:21:12,366
 元信息
-source information
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 559
 00:21:12,366 --> 00:21:15,133
 或者说大文件的信息要存储在一个
-In other words, the information of large files should be stored by a
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 560
-00:21:15,400 --> 00:21:18,000
+00:21:15,133 --> 00:21:18,000
 更有利的去中心的存储机制
-more favorable decentralized storage mechanism
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 561
 00:21:18,000 --> 00:21:19,700
 或者中心化存储机制里面
-or in the centralized storage mechanism
+therefore, it is recommended to store raw data in a more cost efficient environment like IPFS
 
 562
 00:21:19,700 --> 00:21:22,333
 链上只存储一个小的哈希值
-Only a small hash value is stored on the chain
+only store the hash of the raw data on the blockchain
 
 563
 00:21:23,300 --> 00:21:24,400
 还有一个就是
-Another one is
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 564
 00:21:24,400 --> 00:21:26,366
 当我们有集合类的数据类型的时候
-When we have a data type of collection class
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 565
 00:21:26,366 --> 00:21:27,333
 我们要去
-we are going to
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 566
-00:21:27,800 --> 00:21:29,700
+00:21:27,333 --> 00:21:29,700
 设置这样一个集合所
-set up the maximum capacity that can be carried
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 567
-00:21:29,933 --> 00:21:31,333
+00:21:29,700 --> 00:21:31,333
 能承载的最大容量
-in such a collection
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 568
 00:21:31,333 --> 00:21:33,666
 来保证他不会占用过多的空间
-to make sure it doesn't take up too much space
+Another practice is to set a maximum capacity for collection data types to ensure they don't occupy too much resources
 
 569
 00:21:34,933 --> 00:21:36,399
 另外一个比较好的实践是
-Another good practice is that
+And we should validate all possible error scenarios at the beginning
 
 570
-00:21:36,400 --> 00:21:38,000
+00:21:36,399 --> 00:21:38,000
 我们尽可能的在
-we try our best to
+And we should validate all possible error scenarios at the beginning
 
 571
-00:21:38,100 --> 00:21:39,100
+00:21:38,000 --> 00:21:39,100
 开始的时候
-check all possible error scenarios
+And we should validate all possible error scenarios at the beginning
 
 572
 00:21:39,100 --> 00:21:41,566
 校验所有的可能错误的场景
-at the beginning
+And we should validate all possible error scenarios at the beginning
 
 573
 00:21:42,000 --> 00:21:43,000
 那校验完成之后
-After the verification is completed
+perform storage updates after the validation is complete
 
 574
 00:21:43,000 --> 00:21:45,733
 我们再进行我们存储项的更新操作
-Let's update our storage items again
+perform storage updates after the validation is complete
 
 575
 00:21:45,733 --> 00:21:49,066
 也就是verify first write last
-That is verify first write last
+this principle is often referred to as "verify first, write last"
 
 576
 00:21:49,900 --> 00:21:52,500
 那在substrate的最新的版本也就是
-The latest version in substrate is
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 577
-00:21:52,966 --> 00:21:54,899
+00:21:52,500 --> 00:21:54,899
 frame v2新的语法里面
-inside the new syntax of frame V2
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 578
-00:21:55,066 --> 00:21:57,799
+00:21:54,899 --> 00:21:57,799
 提供了一个transactional这样一个宏
-It provides a transactional such a macro
+In the latest version of Substrate, which is FRAME v2, a new macro called transactional is provided
 
 579
 00:21:58,166 --> 00:21:59,733
 它可以保证我们
-it guarantees us
+it guarantees that the execution of dispatchable function is atomic
 
 580
-00:21:59,800 --> 00:22:01,733
+00:21:59,733 --> 00:22:01,733
 可调函数的这样的一个
-atomic operations
+it guarantees that the execution of dispatchable function is atomic
 
 581
-00:22:02,100 --> 00:22:03,266
+00:22:01,733 --> 00:22:03,266
 原子化的操作
-of callable functions
+it guarantees that the execution of dispatchable function is atomic
 
 582
 00:22:03,333 --> 00:22:05,166
 也就是说当有错误发生的时候
-That is, when an error occurs
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 583
 00:22:05,166 --> 00:22:06,266
 我们可以保证
-we can guarantee that
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 584
-00:22:06,466 --> 00:22:09,599
+00:22:06,266 --> 00:22:09,599
 之前对存储项的操作会去回滚
-previous operations on storage items will be rolled back
+meaning that when an error occurs, the previous operations on storage items will be rolled back
 
 585
 00:22:10,166 --> 00:22:12,366
 尽管我们有这样的一个原子性操作的
-Although we have such an atomic operation
+Although there is such an atomic operation macro
 
 586
 00:22:12,366 --> 00:22:15,333
 宏那我们还是希望大家能够在
-Macro, we still hope that when operating
+we still encourage everyone to validate potential error scenarios before update any storage
 
 587
-00:22:15,566 --> 00:22:16,366
+00:22:15,333 --> 00:22:16,366
 操作的时候
-everyone can
+we still encourage everyone to validate potential error scenarios before update any storage
 
 588
 00:22:16,366 --> 00:22:18,499
 先去对错误的场景进行的校验
-check the wrong scene first
+we still encourage everyone to validate potential error scenarios before update any storage
 
 589
-00:22:18,500 --> 00:22:20,666
+00:22:18,499 --> 00:22:20,666
 然后最终再去更新
-and finally update
+we still encourage everyone to validate potential error scenarios before update any storage
 
 590
 00:22:22,400 --> 00:22:25,166
 另外一些其他的点
-some other points
+Some other points I'd like to share are
 
 591
 00:22:25,166 --> 00:22:26,499
 我想分享的是
-what i want to share is
+Some other points I'd like to share are
 
 592
 00:22:26,500 --> 00:22:27,766
 我们可以在
-we can
+we can use the pub keyword to set the visibility of storage items for different modules
 
 593
-00:22:27,866 --> 00:22:30,166
+00:22:27,766 --> 00:22:30,166
 对存储单元使用pub关键字
-use the pub keyword for storage units
+we can use the pub keyword to set the visibility of storage items for different modules
 
 594
-00:22:30,866 --> 00:22:31,666
+00:22:30,166 --> 00:22:31,666
 来设置这样的
-to set the
+we can use the pub keyword to set the visibility of storage items for different modules
 
 595
 00:22:31,666 --> 00:22:34,333
 存储单元对不同模块的可见范围
-visibility range of storage unit to different modules
+we can use the pub keyword to set the visibility of storage items for different modules
 
 596
 00:22:34,800 --> 00:22:36,500
 然后我们的ValueQuery
-Then our ValueQuery
+Additionally, we can customize the default values for ValueQuery
 
 597
 00:22:36,700 --> 00:22:39,466
 也可以设置一些自定义的默认值
-It is also possible to set some custom default values
+Additionally, we can customize the default values for ValueQuery
 
 598
 00:22:39,566 --> 00:22:42,099
 这里我给到了一个例子
-Here I give an example
+here's an example
 
 599
 00:22:43,100 --> 00:22:46,066
 那当大家对某些存储的API
-Then when everyone doesn't know certain storage APIs
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 600
-00:22:46,166 --> 00:22:47,466
+00:22:46,066 --> 00:22:47,466
 不是很了解的时候
-that well
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 601
 00:22:47,466 --> 00:22:48,733
 我们可以去参考
-we can refer to
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 602
-00:22:48,966 --> 00:22:52,533
+00:22:48,733 --> 00:22:52,533
 substrate/frame目录下的不同的pallets
-different pallets under the substrate frame directory
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 603
-00:22:52,766 --> 00:22:55,266
+00:22:52,533 --> 00:22:55,266
 来查找一些最新的使用方法
-to find some of the newest ways to use
+if you don't know to use some APIs, you can refer to the pallets in the substrate/frame directory to find the latest example
 
 604
 00:22:55,966 --> 00:22:58,266
 还可以结合API文档
-We can also read API documentations
+you can also read API documentations such as the doc of pallet::storage macro
 
 605
 00:22:58,266 --> 00:23:01,299
 比如这里的pallet::storage是宏的
-For example, palettes::storage here is a macro
+you can also read API documentations such as the doc of pallet::storage macro
 
 606
 00:23:01,300 --> 00:23:03,066
 接口文档以及我们刚才
-documentation and what we just
+as well as the API doc for different storage data types we discussed earlier
 
 607
-00:23:03,466 --> 00:23:05,866
+00:23:03,066 --> 00:23:05,866
 列出的不同的存储数据类型
-list the different storage data types
+as well as the API doc for different storage data types we discussed earlier
 
 608
 00:23:05,866 --> 00:23:07,333
 它的API文档
-its API documentation
+as well as the API doc for different storage data types we discussed earlier
 
 609
 00:23:08,466 --> 00:23:10,799
 今天课程内容到这里就结束了
-Today's course content is over here
+Today's lesson concludes here
 
 610
 00:23:10,800 --> 00:23:11,666
 谢谢大家
-thank you all
+Thank you, everyone
