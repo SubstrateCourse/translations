@@ -1001,467 +1001,467 @@ and it is the event type of the system module
 201
 00:08:42,466 --> 00:08:43,766
 定义完配置接口之后
-After defining the configuration interface
+Once the Config trait is defined, let's define the module's struct named Pallet
 
 202
 00:08:43,766 --> 00:08:45,133
-我们就可以去
-we can
+我们就可以去定义模块所需要的结构体
+Once the Config trait is defined, let's define the module's struct named Pallet
 
 203
-00:08:45,500 --> 00:08:46,666
-定义我们的
-define
+00:08:45,133 --> 00:08:46,666
+我们就可以去定义模块所需要的结构体
+Once the Config trait is defined, let's define the module's struct named Pallet
 
 204
-00:08:46,966 --> 00:08:48,866
-模块所需要的结构体
-the structure required by the module
+00:08:46,666 --> 00:08:48,866
+我们就可以去定义模块所需要的结构体
+Once the Config trait is defined, let's define the module's struct named Pallet
 
 205
 00:08:48,866 --> 00:08:50,499
 pallet这样一个结构体
-called Pallet
+Once the Config trait is defined, let's define the module's struct named Pallet
 
 206
 00:08:51,100 --> 00:08:53,700
-这里我们需要使用
-Here we need to use
+这里我们需要使用pallet宏
+here we need to use pallet::pallet macro
 
 207
-00:08:53,966 --> 00:08:55,366
-pallet宏
-pallet::pallet macro
+00:08:53,700 --> 00:08:55,366
+这里我们需要使用pallet宏
+here we need to use pallet::pallet macro
 
 208
 00:08:56,100 --> 00:08:57,800
-因为我们的模块会定义
-Because our module will define
+因为我们的模块会定义自己所需要的存储项
+since our module will has its own storage items
 
 209
-00:08:57,900 --> 00:09:00,333
-自己所需要的存储项
-storage items we need
+00:08:57,800 --> 00:09:00,333
+因为我们的模块会定义自己所需要的存储项
+since our module will has its own storage items
 
 210
 00:09:00,366 --> 00:09:02,466
 所以我们需要另外一个
-So we need another
+it require another macro called generate_store to help us generate the Store trait that includes all the storage items
 
 211
-00:09:02,500 --> 00:09:04,666
+00:09:02,466 --> 00:09:04,666
 generate_store这样的宏来帮助我们
-generate_store to help us
+it require another macro called generate_store to help us generate the Store trait that includes all the storage items
 
 212
-00:09:05,000 --> 00:09:07,566
+00:09:04,666 --> 00:09:07,566
 生成包含所有存储项的
-generate
+it require another macro called generate_store to help us generate the Store trait that includes all the storage items
 
 213
-00:09:07,733 --> 00:09:09,533
+00:09:07,566 --> 00:09:09,533
 trait Store这样的一个接口
-an interface like trait Store
+it require another macro called generate_store to help us generate the Store trait that includes all the storage items
 
 214
 00:09:10,000 --> 00:09:10,400
-接着
-Then
+接着我们就可以定义我们所使用的存储项Proofs
+We can then define the storage items Proofs
 
 215
 00:09:10,400 --> 00:09:12,766
-我们就可以定义我们所使用的存储项
-we can then define the storage items we use
+接着我们就可以定义我们所使用的存储项Proofs
+We can then define the storage items Proofs
 
 216
-00:09:12,933 --> 00:09:13,766
-Proofs
-Proofs
+00:09:12,766 --> 00:09:13,766
+接着我们就可以定义我们所使用的存储项Proofs
+We can then define the storage items Proofs
 
 217
 00:09:15,800 --> 00:09:18,000
 它是一个StorageMap类型
-It is a StorageMap type
+its type is StorageMap
 
 218
 00:09:18,700 --> 00:09:19,500
 在Substrate里面
-Inside Substrate
+StorageMap is used to store key-value pairs in Substrate
 
 219
 00:09:19,500 --> 00:09:21,866
 我们用StorageMap表示一个键值对
-We use StorageMap to represent a key-value pair
+StorageMap is used to store key-value pairs in Substrate
 
 220
 00:09:21,966 --> 00:09:25,933
 这里我们的键是BoundedVector u8
-Here our key is BoundedVector u8
+here the key is a bounded vector of u8
 
 221
 00:09:26,133 --> 00:09:29,166
 也就是u8的一个长度受限的集合
-That is, a length-restricted set of u8
+that is, the vector is limited in length
 
 222
 00:09:29,866 --> 00:09:30,799
 在新的版本里面
-in the new version
+In the latest version, the runtime cannot use Vec dircectly
 
 223
-00:09:30,800 --> 00:09:31,266
+00:09:30,799 --> 00:09:31,266
 Runtime
-runtime
+In the latest version, the runtime cannot use Vec dircectly
 
 224
 00:09:31,266 --> 00:09:33,733
 不能直接使用vector集的集合类型
-cannot use the collection type of the vector set directly
+In the latest version, the runtime cannot use Vec dircectly
 
 225
 00:09:33,733 --> 00:09:35,299
 而是使用BoundedVector
-Instead use BoundedVector
+instead, it uses BoundedVec, which is a safer length-limited collection type
 
 226
-00:09:35,300 --> 00:09:36,500
+00:09:35,299 --> 00:09:36,500
 这样一个更安全的
-such a safer
+instead, it uses BoundedVec, which is a safer length-limited collection type
 
 227
-00:09:36,966 --> 00:09:38,299
+00:09:36,500 --> 00:09:38,299
 长度受限的集合类型
-length-restricted collection type
+instead, it uses BoundedVec, which is a safer length-limited collection type
 
 228
 00:09:38,566 --> 00:09:40,199
 它有两个范型参数
-It takes two generic parameters
+BoundedVec takes two generic parameters
 
 229
 00:09:40,200 --> 00:09:42,600
 第一个是集合内的元素类型
-The first is the element type within the collection
+the first one represents the element type within the collection, which is u8 in this case
 
 230
 00:09:42,600 --> 00:09:44,000
-这里我们是U8
-Here it is u8
+这里我们是u8
+the first one represents the element type within the collection, which is u8 in this case
 
 231
 00:09:44,500 --> 00:09:46,133
 以及第二个范型参数
-and the second generic parameter
+and the second one represents the maximum length allowd by BoundedVec
 
 232
 00:09:46,133 --> 00:09:48,933
 是BoundedVector所接受的最大长度
-is the maximum length accepted by BoundedVector
+and the second one represents the maximum length allowd by BoundedVec
 
 233
 00:09:48,933 --> 00:09:51,199
-这里我们是使用我们的关联类型
-Here we are using our associated type
+这里我们是使用我们的关联类型MaxClaimLength来去指定
+here we use the associated type MaxClaimLength to specify the maximum length
 
 234
-00:09:51,200 --> 00:09:52,300
-MaxClaimLength
-MaxClaimLength
+00:09:51,199 --> 00:09:52,300
+这里我们是使用我们的关联类型MaxClaimLength来去指定
+here we use the associated type MaxClaimLength to specify the maximum length
 
 235
 00:09:52,300 --> 00:09:53,733
-来去指定
-to specify
+这里我们是使用我们的关联类型MaxClaimLength来去指定
+here we use the associated type MaxClaimLength to specify the maximum length
 
 236
 00:09:54,300 --> 00:09:55,766
 注意这里只能接受
-Note that it only accepts
+note that it can only accept a type that implements the Get<u32> trait
 
 237
-00:09:55,933 --> 00:09:57,766
-get u32这样的一个类型
-a type like get u32
+00:09:55,766 --> 00:09:57,766
+Get<u32>这样的一个类型
+note that it can only accept a type that implements the Get<u32> trait
 
 238
 00:09:58,333 --> 00:09:58,666
-StorageMap
-StorageMap
+StorageMap的value是一个包含两个元素的Tuple
+The value of the StorageMap is a tuple with two elements
 
 239
 00:09:58,666 --> 00:10:01,799
-的value是一个包含两个元素的Tuple
-The value is a Tuple containing two elements
+StorageMap的value是一个包含两个元素的Tuple
+The value of the StorageMap is a tuple with two elements
 
 240
 00:10:01,966 --> 00:10:04,166
 第一个元素是AccountId
-The first element is AccountId
+its first element is AccountId, representing the user to whom the proof belongs
 
 241
 00:10:04,166 --> 00:10:05,866
 第二个元素是BlockNumber
-The second element is BlockNumber
+and second element is BlockNumber, indicating the block in which the proof is stored onchain
 
 242
-00:10:06,366 --> 00:10:09,133
+00:10:05,866 --> 00:10:09,133
 表示我们的存证是属于哪个用户
-It indicates which user PoE belongs to
+and second element is BlockNumber, indicating the block in which the proof is stored onchain
 
 243
 00:10:09,133 --> 00:10:10,866
-是在哪一个区块存储
-Which block is stored in
+是在哪一个区块存储进入我们的链上的
+and second element is BlockNumber, indicating the block in which the proof is stored onchain
 
 244
 00:10:10,866 --> 00:10:12,099
-进入我们的链上的
-on chain
+是在哪一个区块存储进入我们的链上的
+and second element is BlockNumber, indicating the block in which the proof is stored onchain
 
 245
 00:10:13,266 --> 00:10:14,799
 这里Blake2_128Concat
-Here Blake2_128Concat
+Blake2_128Concat is a hash algorithm used to calculate the storage location of our storage item in the underlying database
 
 246
-00:10:14,800 --> 00:10:16,966
+00:10:14,799 --> 00:10:16,966
 这样是一个哈希算法
-This is a hash algorithm
+Blake2_128Concat is a hash algorithm used to calculate the storage location of our storage item in the underlying database
 
 247
 00:10:16,966 --> 00:10:19,266
 用来将我们的存储项存储到
-which is used to when we store our storage items in
+Blake2_128Concat is a hash algorithm used to calculate the storage location of our storage item in the underlying database
 
 248
-00:10:19,500 --> 00:10:20,966
+00:10:19,266 --> 00:10:20,966
 底层数据库的时候
-in the underlying database
+Blake2_128Concat is a hash algorithm used to calculate the storage location of our storage item in the underlying database
 
 249
 00:10:20,966 --> 00:10:24,133
 对它的存储的位置进行哈希计算
-to perform a hash calculation on its stored location
+Blake2_128Concat is a hash algorithm used to calculate the storage location of our storage item in the underlying database
 
 250
-00:10:24,766 --> 00:10:26,066
+00:10:24,133 --> 00:10:26,066
 我们之前在课程中提到过
-We mentioned earlier in the course
+as mentioned in previous lessons, Blake2_128Concat is a cryptographically secure hash algorithm
 
 251
 00:10:26,066 --> 00:10:28,999
 Blake2_128Concat是一个密码安全的哈希算法
-Blake2_128Concat is a cryptographically secure hash algorithm
+as mentioned in previous lessons, Blake2_128Concat is a cryptographically secure hash algorithm
 
 252
 00:10:29,133 --> 00:10:31,399
 还有一些更快速的哈希算法
-There are also some faster hashing algorithms
+there are also other faster hash algorithms available, such as TwoX hash
 
 253
-00:10:31,400 --> 00:10:32,700
+00:10:31,399 --> 00:10:32,700
 比如TwoX hash
-Such as TwoX hash
+there are also other faster hash algorithms available, such as TwoX hash
 
 254
 00:10:33,100 --> 00:10:34,766
 它们的区别大家可以参考文档
-You can refer to the documentation for their differences
+For more details, you can refer to the documentation or the previous lessons
 
 255
 00:10:34,766 --> 00:10:36,066
 或者参考之前的课程
-or refer to previous courses
+For more details, you can refer to the documentation or the previous lessons
 
 256
 00:10:37,600 --> 00:10:38,466
 定义完存储之后
-After defining storage
+After defining the storage, we can now define the events that can be triggered during the execution of transactions
 
 257
 00:10:38,466 --> 00:10:41,499
 我们就可以定义我们所需要的事件
-We can define the events we need
+After defining the storage, we can now define the events that can be triggered during the execution of transactions
 
 258
-00:10:42,166 --> 00:10:44,699
+00:10:41,499 --> 00:10:44,699
 可以在交易执行的过程中进行触发
-They can be triggered during transaction execution
+After defining the storage, we can now define the events that can be triggered during the execution of transactions
 
 259
 00:10:44,700 --> 00:10:47,566
 我们使用generate_deposit这样一个宏
-We use a macro like generate_deposit
+it uses the generate_deposit macro to generate a helper method called deposit_event
 
 260
 00:10:47,566 --> 00:10:48,966
 生成一个帮助方法
-to generate a helper method
+it uses the generate_deposit macro to generate a helper method called deposit_event
 
 261
 00:10:48,966 --> 00:10:51,399
 deposit_event可以方便来调用
-deposit_event can be conveniently called
+which makes it convenient to create events
 
 262
-00:10:51,566 --> 00:10:54,099
+00:10:51,399 --> 00:10:54,099
 生成事件这样的一个方式
-A way to generate events like this
+which makes it convenient to create events
 
 263
 00:10:55,266 --> 00:10:57,899
 这里我们定义了两个event一个
-Here we define two events. One
+Here, we define two events: ClaimCreated and ClaimRevoked
 
 264
-00:10:57,900 --> 00:10:59,533
+00:10:57,899 --> 00:10:59,533
 是ClaimCreated
-Is ClaimCreated
+Here, we define two events: ClaimCreated and ClaimRevoked
 
 265
 00:10:59,700 --> 00:11:03,000
 包含了AccountId信息和我们claim
-which contains AccountId information and our claim
+ClaimCreated contains AccountId and the claim BoundedVec of u8
 
 266
-00:11:03,266 --> 00:11:04,699
+00:11:03,000 --> 00:11:04,699
 vector u8这样的信息
-informations such as vector u8
+ClaimCreated contains AccountId and the claim BoundedVec of u8
 
 267
 00:11:04,800 --> 00:11:06,333
 以及ClaimRevoked
-and ClaimRevoked
+ClaimRevoked contains similar information
 
 268
-00:11:06,566 --> 00:11:08,933
+00:11:06,333 --> 00:11:08,933
 同样的包含了AccountId和vector u8信息
-The same it contains AccountId and vector u8 information
+ClaimRevoked contains similar information
 
 269
 00:11:09,600 --> 00:11:13,066
 一个事件是在claim创建的时候触发的
-An event is triggered when the claim is created
+the ClaimCreated event is triggered when a claim is created
 
 270
 00:11:13,066 --> 00:11:16,933
 一个事件是在claim吊销之后触发的
-An event is triggered after a claim is revoked
+while the ClaimRevoked event is triggered after the claim is revoked
 
 271
 00:11:17,666 --> 00:11:20,599
 接着我们来定义我们的错误信息
-Next we define our error messages
+Next, let's define different error types using the pallet::error macro
 
 272
-00:11:20,800 --> 00:11:22,300
+00:11:20,599 --> 00:11:22,300
 我们使用pallet::error
-We use pallet::error
+Next, let's define different error types using the pallet::error macro
 
 273
 00:11:22,300 --> 00:11:24,900
 这样的宏来定义不同的错误类型
-macros like this to define different error types
+Next, let's define different error types using the pallet::error macro
 
 274
 00:11:24,900 --> 00:11:27,400
-这里我们定义了几种错误一个是
-Here we define several kinds of errors. One is
+这里我们定义了几种错误一个是ProofAlreadyExist
+the errors includes ProofAlreadyExist, ClaimTooLong, ClaimNotExist, and NotClaimOwner
 
 275
-00:11:28,000 --> 00:11:29,166
-ProofAlreadyExist
-ProofAlreadyExist
+00:11:27,400 --> 00:11:29,166
+这里我们定义了几种错误一个是ProofAlreadyExist
+the errors includes ProofAlreadyExist, ClaimTooLong, ClaimNotExist, and NotClaimOwner
 
 276
 00:11:29,166 --> 00:11:30,999
 另外一个是ClaimTooLong
-The other one is ClaimTooLong
+the errors includes ProofAlreadyExist, ClaimTooLong, ClaimNotExist, and NotClaimOwner
 
 277
-00:11:31,266 --> 00:11:33,566
+00:11:30,999 --> 00:11:33,566
 还有ClaimNotExist以及NotClaimOwner
-ClaimNotExist and NotClaimOwner
+the errors includes ProofAlreadyExist, ClaimTooLong, ClaimNotExist, and NotClaimOwner
 
 278
 00:11:33,566 --> 00:11:35,299
 这样的错误我们会在后面的
-These errors
+These errors can be used in the dispatchable functions later
 
 279
 00:11:35,400 --> 00:11:36,866
 可调用函数里面进行使用
-can be used inside a callable function later
+These errors can be used in the dispatchable functions later
 
 280
 00:11:36,866 --> 00:11:38,699
 这里我们提前进行声明
-Here we declare in advance
+here we declare the errors in advance
 
 281
 00:11:39,500 --> 00:11:41,800
 当然大家在开发的时候其实是在
-Of course, when you are developing,
+you may raise new errors during development and add them to the Error enum
 
 282
-00:11:42,100 --> 00:11:43,866
+00:11:41,800 --> 00:11:43,866
 编写可调用函数的时候
-When writing a callable function
+you may raise new errors during development and add them to the Error enum
 
 283
-00:11:44,066 --> 00:11:46,366
+00:11:43,866 --> 00:11:46,366
 发现了有哪些新的错误类型
-What new types of errors were discovered
+you may raise new errors during development and add them to the Error enum
 
 284
 00:11:46,366 --> 00:11:50,166
 然后添加到Error这样的一个enum里面
-Then add it to an enum like Error
+you may raise new errors during development and add them to the Error enum
 
 285
 00:11:51,533 --> 00:11:54,399
 这里我们使用了pallet::hooks这样一个宏
-Here we use a macro such as pallet::hooks
+Additionally, we use the pallet::hooks macro to define reserved functions
 
 286
-00:11:54,400 --> 00:11:56,966
+00:11:54,399 --> 00:11:56,966
 来定义一些保留的函数
-to define some reserved functions
+Additionally, we use the pallet::hooks macro to define reserved functions
 
 287
 00:11:56,966 --> 00:11:57,866
 因为我们
-because
+Since our PoE module doesn't use any reserved functions, we leave it empty
 
 288
 00:11:57,866 --> 00:12:00,866
 存证模块并没有使用任何保留函数
-PoE module does not use any reserved functions
+Since our PoE module doesn't use any reserved functions, we leave it empty
 
 289
 00:12:00,866 --> 00:12:02,866
 所以我们这里把它置空
-So we leave it blank here
+Since our PoE module doesn't use any reserved functions, we leave it empty
 
 290
 00:12:03,500 --> 00:12:06,700
 那些保留的函数通常包括on_initialize
-Those reserved functions usually include on_initialize
+reserved functions typically include on_initialize, on_finalize, on_runtime_upgrade, etc.
 
 291
 00:12:06,700 --> 00:12:08,733
-on_finalize on_time_upgrade等等
-on_finalize on_time_upgrade etc.
+on_finalize on_runtime_upgrade等等
+reserved functions typically include on_initialize, on_finalize, on_runtime_upgrade, etc.
 
 292
 00:12:08,733 --> 00:12:11,666
 在区块的不同时机进行执行
-They are executed at different times in the block
+which are executed at different stages of block processing
 
 293
 00:12:13,166 --> 00:12:15,533
 现在我们就来定义我们的可调函数
-Now let's define our callable functions
+Now let's define our dispatchable functions
 
 294
 00:12:15,733 --> 00:12:16,899
