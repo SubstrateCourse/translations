@@ -510,433 +510,433 @@ and automatically exports them for frontend use
 
 103
 00:04:27,166 --> 00:04:29,166
-Frame-support依赖添加了
-Frame-support dependency added
+frame-support依赖添加了
+frame-support adds some macros and traits required for runtime development
 
 104
-00:04:29,500 --> 00:04:32,600
+00:04:29,166 --> 00:04:32,600
 runtime开发所需要的一些宏和接口
-some macros and interfaces needed for runtime development
+frame-support adds some macros and traits required for runtime development
 
 105
 00:04:32,866 --> 00:04:36,166
 frame-system定义了系统接口
-frame-system defines the system interface
+frame-system defines the system config trait which includes some common data types such as BlockNumber and Hash
 
 106
 00:04:36,166 --> 00:04:38,499
-包含了一些常用的数据类型比如
-It contains some commonly used data types such as
+包含了一些常用的数据类型比如区块数BlockNumber以及哈希这样的数据类型
+frame-system defines the system config trait which includes some common data types such as BlockNumber and Hash
 
 107
-00:04:38,966 --> 00:04:40,333
-区块数block number
-block number
+00:04:38,499 --> 00:04:40,333
+包含了一些常用的数据类型比如区块数BlockNumber以及哈希这样的数据类型
+frame-system defines the system config trait which includes some common data types such as BlockNumber and Hash
 
 108
-00:04:40,733 --> 00:04:43,999
-以及哈西这样的数据类型
-and data types like Hash
+00:04:40,333 --> 00:04:43,999
+包含了一些常用的数据类型比如区块数BlockNumber以及哈希这样的数据类型
+frame-system defines the system config trait which includes some common data types such as BlockNumber and Hash
 
 109
 00:04:44,800 --> 00:04:45,800
-frame-benchmarking
-frame-benchmarking
+frame-benchmarking可以用来方便的去进行基准测试
+frame-benchmarking can be used to facilitate benchmarking
 
 110
 00:04:45,800 --> 00:04:48,300
-可以用来方便的去进行基准测试
-can be used to facilitate benchmarking
+frame-benchmarking可以用来方便的去进行基准测试
+frame-benchmarking can be used to facilitate benchmarking
 
 111
 00:04:48,300 --> 00:04:50,566
 我们会在后面的课程中进行介绍
-We'll cover that later in the course
+we'll cover that later in the course
 
 112
 00:04:50,933 --> 00:04:54,333
-以及用于测试的dev-dependencies
-Plus, dev-dependencies for testing
+以及用于测试的dev dependencies
+There are also dev dependencies for testing
 
 113
 00:04:54,966 --> 00:04:57,099
-接着我们添加我们的模块儿代码
-Then we add our module code
+接着我们添加我们的模块代码
+Next let's add our module's code
 
 114
 00:05:00,600 --> 00:05:03,600
-我们需要先new一个folder是src
-We need to new a folder first which is src
+我们需要先创建一个folder是src
+we need to create a new folder called "src" and place the lib.rs file inside the src folder
 
 115
-00:05:03,800 --> 00:05:08,000
+00:05:03,600 --> 00:05:08,000
 然后把lib.rs原文件放在src目录下面
-Then put the lib.rs original file under the src directory
+we need to create a new folder called "src" and place the lib.rs file inside the src folder
 
 116
 00:05:08,333 --> 00:05:11,599
 这里因为我们新的版本跟之前
-Here because our new version is different from
+Here the code may be slightly different with previous versions because of the version updates
 
 117
 00:05:11,766 --> 00:05:13,699
 入门课的版本可能有比较大出入
-the previous version of the introductory course
+Here the code may be slightly different with previous versions because of the version updates
 
 118
 00:05:13,700 --> 00:05:14,566
 所以我们
-so
+let's go through the source code of the proof of existence module together
 
 119
-00:05:14,766 --> 00:05:17,366
+00:05:14,566 --> 00:05:17,366
 这里带大家一起来敲一下
-I will type here showing everyone
+let's go through the source code of the proof of existence module together
 
 120
 00:05:17,366 --> 00:05:18,799
 存证模块的源代码
-the source code of PoE
+let's go through the source code of the proof of existence module together
 
 121
 00:05:19,700 --> 00:05:22,566
 同样的我们要添加编译标签
-Similarly, we need to add the compile tag
+Here we need to add the feature for conditional compilation
 
 122
 00:05:23,133 --> 00:05:26,399
-如果不是使用std标签的话
-If not using the std tag
+如果不是使用std feature编译的话那么就使用no_std属性
+it means if the build is not using the std feature then use the no_std attribute
 
 123
-00:05:26,500 --> 00:05:28,300
-那么就使用no_std标签
-Then use the no_std tag
+00:05:26,399 --> 00:05:28,300
+如果不是使用std feature编译的话那么就使用no_std属性
+it means if the build is not using the std feature then use the no_std attribute
 
 124
 00:05:29,100 --> 00:05:32,166
 接着我们使用pub use这样的方式来
-Then we use the method of pub use to
+Then, we use the "pub use" syntax to export the content defined in the poe module
 
 125
-00:05:32,766 --> 00:05:34,766
+00:05:32,166 --> 00:05:34,766
 导出poe模块定义的内容
-export the content defined by the poe module
+Then, we use the "pub use" syntax to export the content defined in the poe module
 
 126
 00:05:34,766 --> 00:05:37,299
 比如存储单元给外部来使用
-such as storage unit for external use
+such as storage items for external use
 
 127
 00:05:38,666 --> 00:05:40,999
 接着我们来定义我们的Poe模块
-Next we define our Poe module
+Next, let's define our PoE module and place it within a module namespace called pallet
 
 128
-00:05:41,066 --> 00:05:44,299
+00:05:40,999 --> 00:05:44,299
 我们把它放在一个模块空间pallet里
-We put it in a module space pallet
+Next, let's define our PoE module and place it within a module namespace called pallet
 
 129
 00:05:44,766 --> 00:05:46,733
-我们需要添加我们所需要的
-We need to add what we need
+我们需要添加所需要的
+We need to add frame_support::pallet macro
 
 130
-00:05:46,800 --> 00:05:48,900
+00:05:46,733 --> 00:05:48,900
 frame_support::pallet这样的一个宏
-which is a macro like frame_support::pallet
+We need to add frame_support::pallet macro
 
 131
 00:05:49,800 --> 00:05:51,466
 我们把字体进行放大
-We enlarge the font
+let's increse the font size for better view
 
 132
-00:05:51,566 --> 00:05:53,366
+00:05:51,466 --> 00:05:53,366
 现在应该会看得比较清楚
-It should be clearer now
+let's increse the font size for better view
 
 133
 00:05:54,166 --> 00:05:56,133
 我们引入frame_support的依赖
-We introduce the dependency of frame_support
+Import the dependencies from frame_support using the path frame_support::pallet_prelude::*
 
 134
-00:05:56,466 --> 00:05:57,699
-使用frame_support::
-Use frame_support::
+00:05:56,133 --> 00:05:57,699
+使用frame_support::pallet_prelude::*这样的路径来引入
+Import the dependencies from frame_support using the path frame_support::pallet_prelude::*
 
 135
-00:05:57,733 --> 00:06:00,999
-pallet_prelude::*这样的路径来引入
-pallet_prelude::* such a path to introduce
+00:05:57,699 --> 00:06:00,999
+使用frame_support::pallet_prelude::*这样的路径来引入
+Import the dependencies from frame_support using the path frame_support::pallet_prelude::*
 
 136
-00:06:01,066 --> 00:06:02,399
+00:06:00,999 --> 00:06:02,399
 预定义的一些依赖
-some predefined dependencies
+Import the dependencies from frame_support using the path frame_support::pallet_prelude::*
 
 137
 00:06:03,700 --> 00:06:05,533
 比如我们刚才提到的frame_support
-For example, the frame_support we just mentioned
+such as some common traits like Get, and macros
 
 138
-00:06:06,333 --> 00:06:07,999
-提供的一些接口
-some interfaces provided like
+00:06:05,533 --> 00:06:07,999
+提供的一些通用接口比如Get接口
+such as some common traits like Get, and macros
 
 139
-00:06:08,000 --> 00:06:11,166
-get接口以及一些常用的宏
-get interface and some commonly used macros
+00:06:07,999 --> 00:06:11,166
+以及一些常用的宏
+such as some common traits like Get, and macros
 
 140
 00:06:12,466 --> 00:06:16,066
 同样我们引入frame_system这样的依赖
-Similarly, we introduce dependencies such as frame_system
+Similarly, we introduce dependencies from frame_system
 
 141
 00:06:17,400 --> 00:06:19,933
-它的prelude里面包含了ensure_signed
-Its prelude contains ensure_signed
+它的prelude里面包含了ensure_signed, ensure_none
+in its prelude, there are helper functions like ensure_signed, ensure_none
 
 142
 00:06:19,933 --> 00:06:20,666
-ensure_none
-ensure_none
+它的prelude里面包含了ensure_signed, ensure_none
+in its prelude, there are helper functions like ensure_signed, ensure_none
 
 143
 00:06:20,666 --> 00:06:21,599
-这样的一个
-such a
+这样的一个方便地进行签名验证的方法
+which are convenient for transaction verification
 
 144
-00:06:21,666 --> 00:06:24,133
-方便性的进行签名验证
-way for convenient signature
+00:06:21,599 --> 00:06:24,133
+这样的一个方便地进行签名验证的方法
+which are convenient for transaction verification
 
 145
-00:06:24,200 --> 00:06:25,700
-的这样的方式方法
-verification.
+00:06:24,133 --> 00:06:25,700
+这样的一个方便地进行签名验证的方法
+which are convenient for transaction verification
 
 146
 00:06:26,300 --> 00:06:26,933
 引入依赖之后
-After importing dependencies
+After importing the dependencies, now we can define the module's config trait
 
 147
 00:06:26,933 --> 00:06:29,333
-我们就可以去定义我们的模块
-we can then define our module
+我们就可以去定义我们的模块配置接口
+After importing the dependencies, now we can define the module's config trait
 
 148
 00:06:29,333 --> 00:06:30,199
-配置接口
-configuration interface
+我们就可以去定义我们的模块配置接口
+After importing the dependencies, now we can define the module's config trait
 
 149
 00:06:30,300 --> 00:06:33,766
 我们是使用rust里面的trait来定义的
-We using traits in rust to define
+it's defined with Rust trait syntax
 
 150
 00:06:33,800 --> 00:06:34,500
 trait config
-trait config
+the trait is named Config
 
 151
 00:06:34,500 --> 00:06:37,200
 我们的模块接口叫做Config
-Our module interface is called Config
+the trait is named Config
 
 152
 00:06:37,333 --> 00:06:41,366
 然后它继承自frame system的Config接口
-Then it inherits from frame_system::Config
+it inherits from the Config trait of the frame_system module
 
 153
 00:06:41,400 --> 00:06:41,933
 这样的话
-In this case
+by doing this
 
 154
 00:06:41,933 --> 00:06:44,599
-我们的config接口里面就拥有了
-we have it in our config interface
+我们的config接口里面就拥有了system config接口里面定义的一些数据类型
+our Config trait inherits the data types defined in the frame_system module's Config trait
 
 155
-00:06:44,800 --> 00:06:45,400
-system
-some
+00:06:44,599 --> 00:06:45,400
+我们的config接口里面就拥有了system config接口里面定义的一些数据类型
+our Config trait inherits the data types defined in the frame_system module's Config trait
 
 156
 00:06:45,400 --> 00:06:47,800
-config接口里面定义的一些数据类型
-data types defined in the system config interface
+我们的config接口里面就拥有了system config接口里面定义的一些数据类型
+our Config trait inherits the data types defined in the frame_system module's Config trait
 
 157
 00:06:47,900 --> 00:06:50,500
-比如我们刚提到的block number表示
-For example, the block number we just mentioned means
+比如我们刚提到的BlockNumber表示区块数量
+such as BlockNumber, Hash, AccountId types we just mentioned
 
 158
-00:06:50,933 --> 00:06:55,299
-区块数量以及hash这样的一些hash类型
-the number of blocks and some hash types such as hash
+00:06:50,500 --> 00:06:55,299
+以及hash这样的一些hash类型
+such as BlockNumber, Hash, AccountId types we just mentioned
 
 159
-00:06:56,000 --> 00:06:59,466
+00:06:55,299 --> 00:06:59,466
 还有AccountId用来表示用户的ID
-There is also AccountId used to represent the user's ID
+such as BlockNumber, Hash, AccountId types we just mentioned
 
 160
-00:06:59,866 --> 00:07:01,699
-也是定义在系统模块内的
-also defined in the system module
+00:06:59,466 --> 00:07:01,699
+也是定义在系统模块内的config接口里
+such as BlockNumber, Hash, AccountId types we just mentioned
 
 161
-00:07:01,700 --> 00:07:02,733
-config接口里
-config interface
+00:07:01,699 --> 00:07:02,733
+也是定义在系统模块内的config接口里
+such as BlockNumber, Hash, AccountId types we just mentioned
 
 162
 00:07:03,133 --> 00:07:06,799
 同样的我们不要忘记添加所需要的宏
-Similarly, we don't forget to add the required macros
+Let's not forget to add the necessary macros
 
 163
 00:07:06,800 --> 00:07:09,500
 这里用到的是pallet::config的宏
-The macro of pallet::config is used here
+here we use the pallet::config macro
 
 164
 00:07:10,100 --> 00:07:10,366
 接着
-then
+Then, we add some associated types to the module's Config trait
 
 165
 00:07:10,366 --> 00:07:12,666
 我们添加我们需要的一些关联类型
-we add some association types we need
+Then, we add some associated types to the module's Config trait
 
 166
-00:07:12,866 --> 00:07:14,999
+00:07:12,666 --> 00:07:14,999
 到模块的config接口里面
-to the config interface of the module
+Then, we add some associated types to the module's Config trait
 
 167
 00:07:15,000 --> 00:07:18,933
 这里我们需要用到一个MaxClaimLength
-Here we need to use a MaxClaimLength
+One of the associated types is MaxClaimLength
 
 168
 00:07:19,566 --> 00:07:22,599
 它是我们存证最大所接受长度限制
-It is the maximum length limit we accept for PoE
+which represents the maximum accepted length for a claim in our PoE module
 
 169
 00:07:22,600 --> 00:07:25,400
-也就是说你的存证不能超过一定的
-That is to say, your PoE cannot exceed a certain
+也就是说你的存证不能超过一定的长度
+in other words, it limits the length of a claim
 
 170
-00:07:25,533 --> 00:07:26,666
-长度
-length
+00:07:25,400 --> 00:07:26,666
+也就是说你的存证不能超过一定的长度
+in other words, it limits the length of a claim
 
 171
 00:07:26,733 --> 00:07:29,333
 如果太长会导致链上的状态爆炸
-If it is too long, the state on the chain will explode
+as having excessively long claim could cause an explosion of onchain state
 
 172
 00:07:29,866 --> 00:07:30,899
 通常情况下
-Usually
+In general, we only store the hash of the original content
 
 173
-00:07:30,900 --> 00:07:34,266
-我们在链上只存储原始内容的哈西值
-we only store the hash value of the original content on the chain
+00:07:30,899 --> 00:07:34,266
+我们在链上只存储原始内容的哈希值
+In general, we only store the hash of the original content
 
 174
 00:07:34,466 --> 00:07:37,399
-而哈西值的长度是固定的
-The length of the hash value is fixed
+而哈希值的长度是固定的
+the length of the hash value is fixed
 
 175
 00:07:38,066 --> 00:07:38,866
 这里可以看到
-We can see here
+Here, you can see that we use a u32 integer type associated with the Get trait
 
 176
 00:07:38,866 --> 00:07:40,466
-我们使用的是一个get
-We are using a
+我们使用的是一个Get
+Here, you can see that we use a u32 integer type associated with the Get trait
 
 177
 00:07:40,466 --> 00:07:42,666
-接口对应的U32整数类型
-U32 integer type corresponding to the Get interface
+接口对应的u32整数类型
+Here, you can see that we use a u32 integer type associated with the Get trait
 
 178
 00:07:43,200 --> 00:07:45,566
-这个类型后续会在我们的
-This type will be used in a
+这个类型后续会在我们的存储项BoundedVec
+this type will be used later in the BoundedVec of our storage item 
 
 179
-00:07:45,700 --> 00:07:48,066
-存储项BoundedVector这样一个
-length-restricted collection called
+00:07:45,566 --> 00:07:48,066
+这个类型后续会在我们的存储项BoundedVec
+this type will be used later in the BoundedVec of our storage item 
 
 180
 00:07:48,333 --> 00:07:50,799
-长度受限的集合类型中进行使用
-BoundedVector.
+这样一个长度受限的集合类型中进行使用
+which is a collection type with a limited length
 
 181
 00:07:51,266 --> 00:07:53,733
-注意这里我们需要使用U32类型
-Note that here we need to use the U32 type
+注意这里我们需要使用u32类型
+Note that here we need to use the u32 type because BoundedVec only accept such a type for now
 
 182
-00:07:53,766 --> 00:07:56,733
+00:07:53,733 --> 00:07:56,733
 因为BoundedVector目前的
-because the BoundedVector's current
+Note that here we need to use the u32 type because BoundedVec only accept such a type for now
 
 183
-00:07:56,800 --> 00:07:59,866
-长度限制是接受U32这样的数据类型
-length limit is to accept data types such as U32
+00:07:56,733 --> 00:07:59,866
+长度限制是接受u32这样的数据类型
+Note that here we need to use the u32 type because BoundedVec only accept such a type for now
 
 184
 00:08:00,800 --> 00:08:02,000
 因为它是一个常量
-Because it is a constant
+Since it is a constant, we need to use the pallet::constant macro to declare it as a constant type
 
 185
 00:08:02,000 --> 00:08:05,266
 所以我们需要使用到pallet::constant这个宏
-so we need to use the pallet::constant macro
+Since it is a constant, we need to use the pallet::constant macro to declare it as a constant type
 
 186
-00:08:05,733 --> 00:08:08,333
+00:08:05,266 --> 00:08:08,333
 来声明这样的类型是链上的常量
-to declare that such types are constants on the chain
+Since it is a constant, we need to use the pallet::constant macro to declare it as a constant type
 
 187
 00:08:09,533 --> 00:08:11,866
-我们还可以添加一些有意义的注释
-We can also add some meaningful annotations
+我们还可以添加一些有意义的注释比如这里的
+We can also add some meaningful comments such as
 
 188
 00:08:11,866 --> 00:08:13,066
-比如这里的
-such as here
+我们还可以添加一些有意义的注释比如这里的
+We can also add some meaningful comments such as
 
 189
 00:08:13,066 --> 00:08:15,533
@@ -946,57 +946,57 @@ maximum length of claim that can be added
 190
 00:08:15,933 --> 00:08:17,999
 这样的内容可以在前端进行显示
-Such content can be displayed on the front end
+such content can be displayed on the frontend
 
 191
 00:08:18,700 --> 00:08:19,600
 在配置接口里面
-In the configuration interface
+In the config trait, we need another associated type called RuntimeEvent
 
 192
 00:08:19,600 --> 00:08:21,566
 我们还需要一个通用的
-we also need a generic
+In the config trait, we need another associated type called RuntimeEvent
 
 193
-00:08:21,933 --> 00:08:23,733
+00:08:21,566 --> 00:08:23,733
 关联类型是叫做Event
-associate type is called Event
+In the config trait, we need another associated type called RuntimeEvent
 
 194
 00:08:24,000 --> 00:08:26,533
 在runtime进行配置接口实现的时候
-When the configuration interface is implemented at runtime
+when implementing the Config trait in the runtime, it will be set to the RuntimeEvent defined in the runtime
 
 195
 00:08:26,533 --> 00:08:28,899
-会把runtime定的event
-the event of runtime
+会把runtime定义的Event
+when implementing the Config trait in the runtime, it will be set to the RuntimeEvent defined in the runtime
 
 196
 00:08:29,133 --> 00:08:30,899
 设置在这样的一个类型里
-will be set in a type like this
+when implementing the Config trait in the runtime, it will be set to the RuntimeEvent defined in the runtime
 
 197
 00:08:31,500 --> 00:08:34,200
 我们所要求的event满足这些条件
-The event we require meets these conditions
+The event required should meet following conditions
 
 198
 00:08:34,200 --> 00:08:35,966
 它可以从当前模块
-It can be transformed
+it can be converted from the current module's Event type
 
 199
-00:08:36,100 --> 00:08:38,466
+00:08:35,966 --> 00:08:38,466
 Event类型转换过去
-from the current module.
+it can be converted from the current module's Event type
 
 200
 00:08:38,666 --> 00:08:41,599
 同时它是系统模块的event类型
-At the same time it is the event type of the system module
+and it is the event type of the system module
 
 201
 00:08:42,466 --> 00:08:43,766
@@ -1225,7 +1225,7 @@ Here Blake2_128Concat
 
 246
 00:10:14,800 --> 00:10:16,966
-这样是一个哈西算法
+这样是一个哈希算法
 This is a hash algorithm
 
 247
@@ -1240,7 +1240,7 @@ in the underlying database
 
 249
 00:10:20,966 --> 00:10:24,133
-对它的存储的位置进行哈西计算
+对它的存储的位置进行哈希计算
 to perform a hash calculation on its stored location
 
 250
@@ -1250,12 +1250,12 @@ We mentioned earlier in the course
 
 251
 00:10:26,066 --> 00:10:28,999
-Blake2_128Concat是一个密码安全的哈西算法
+Blake2_128Concat是一个密码安全的哈希算法
 Blake2_128Concat is a cryptographically secure hash algorithm
 
 252
 00:10:29,133 --> 00:10:31,399
-还有一些更快速的哈西算法
+还有一些更快速的哈希算法
 There are also some faster hashing algorithms
 
 253
@@ -1510,7 +1510,7 @@ The second is the content of our PoE claim
 
 303
 00:12:36,000 --> 00:12:38,933
-我们刚才提到它通常是一个哈西值
+我们刚才提到它通常是一个哈希值
 We just mentioned that it is usually a hash
 
 304
@@ -1520,7 +1520,7 @@ We use Max here
 
 305
 00:12:39,866 --> 00:12:42,299
-U8来表示这样一个哈西的数据内容
+U8来表示这样一个哈希的数据内容
 u8 to represent the data content of such a Hash
 
 306
@@ -1873,7 +1873,7 @@ The first is the sender origin of the transaction
 
 376
 00:15:12,566 --> 00:15:16,266
-另外一个是存证的哈西值Vector u8来表示
+另外一个是存证的哈希值Vector u8来表示
 The other is the hash value Vector u8 of the PoE
 
 377
@@ -2228,8 +2228,8 @@ Another one is MaxClaimLength
 
 447
 00:17:50,300 --> 00:17:54,066
-这里我们使用ConstU32是由我们的
-Here we use ConstU32
+这里我们使用Constu32是由我们的
+Here we use Constu32
 
 448
 00:17:55,300 --> 00:17:58,966
@@ -2238,12 +2238,12 @@ such a helper data type provided by sp-runtime
 
 449
 00:17:59,066 --> 00:18:00,766
-ConstU32表示
-ConstU32 represents that it
+Constu32表示
+Constu32 represents that it
 
 450
 00:18:00,933 --> 00:18:04,366
-是一个满足get接口的U32类型
+是一个满足get接口的u32类型
 is a u32 type that satisfies the get interface
 
 451
@@ -2623,7 +2623,7 @@ The first parameter is the sender of the transaction
 
 526
 00:21:04,533 --> 00:21:07,333
-那另外一个是我们存证内容的哈西值
+那另外一个是我们存证内容的哈希值
 The other one is the hash value of our certificate content
 
 527
