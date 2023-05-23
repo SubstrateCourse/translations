@@ -1461,550 +1461,552 @@ which are executed at different stages of block processing
 293
 00:12:13,166 --> 00:12:15,533
 现在我们就来定义我们的可调函数
-Now let's define our dispatchable functions
+Now let's define the dispatchable functions
 
 294
 00:12:15,733 --> 00:12:16,899
 我们是在
-In
+by applying the pallet::call macro to the implementation of the Pallet struct
 
 295
-00:12:17,766 --> 00:12:20,666
+00:12:16,899 --> 00:12:20,666
 pallet结构体的实现里面添加了
-the implementation of the pallet structure, we has added
+by applying the pallet::call macro to the implementation of the Pallet struct
 
 296
-00:12:20,866 --> 00:12:22,133
+00:12:20,666 --> 00:12:22,133
 pallet::call这样一个宏
-pallet::call such a macro
+by applying the pallet::call macro to the implementation of the Pallet struct
 
 297
 00:12:22,133 --> 00:12:24,133
 来去定义我们的可调函数
-to define our callable functions
+the public functions defined inside it is the dispatchable functions
 
 298
 00:12:24,666 --> 00:12:26,733
-这里我们定义了我们第一个可调函数
-Here we define our first callable function
+这里我们定义了我们第一个可调函数是create_claim
+Here the first dispatchalbe function is create_claim which accepts two parameters
 
 299
 00:12:26,733 --> 00:12:28,399
-是create_claim
-That is create_claim
+这里我们定义了我们第一个可调函数是create_claim
+Here the first dispatchalbe function is create_claim which accepts two parameters
 
 300
 00:12:28,866 --> 00:12:30,866
 它有两个参数第一个是origin
-It has two parameters. The first is origin
+the first is origin, representing the sender of the transaction
 
 301
 00:12:30,866 --> 00:12:32,299
 表示交易的发送方
-It Indicates the sender of the transaction
+the first is origin, representing the sender of the transaction
 
 302
 00:12:32,300 --> 00:12:35,900
 第二个是我们存证的内容claim
-The second is the content of our PoE claim
+the second is claim, which points to the source content of the claim, typically a hash value as we mentioned earlier
 
 303
-00:12:36,000 --> 00:12:38,933
+00:12:35,900 --> 00:12:38,933
 我们刚才提到它通常是一个哈希值
-We just mentioned that it is usually a hash
+the second is claim, which points to the source content of the claim, typically a hash value as we mentioned earlier
 
 304
 00:12:38,933 --> 00:12:39,866
-我们这里用Max
-We use Max here
+我们这里用BoundedVec u8来表示这样一个哈希的数据内容
+Here, we use BoundedVec u8 to represent the hash of claim data
 
 305
 00:12:39,866 --> 00:12:42,299
-U8来表示这样一个哈希的数据内容
-u8 to represent the data content of such a Hash
+我们这里用BoundedVec u8来表示这样一个哈希的数据内容
+Here, we use BoundedVec u8 to represent the hash of claim data
 
 306
 00:12:42,500 --> 00:12:44,866
 返回一个DispatchResultWithPostInfo
-It returns a DispatchResultWithPostInfo
+the dispatchable returns a DispatchResultWithPostInfo
 
 307
 00:12:45,600 --> 00:12:47,366
-这里我们还使用了
-Here we also use
+这里我们还使用了pallet::weight这样的宏
+Additionally, we use the pallet::weight macro to specify a weight value for the dispatchable function
 
 308
-00:12:47,533 --> 00:12:48,866
-pallet::weight这样的宏
-macros like pallet::weight
+00:12:47,366 --> 00:12:48,866
+这里我们还使用了pallet::weight这样的宏
+Additionally, we use the pallet::weight macro to specify a weight value for the dispatchable function
 
 309
 00:12:48,866 --> 00:12:50,966
-给我们的电话函数指定一个权重
-to assign a weight to our callable function
+给我们的可调用函数指定一个权重
+Additionally, we use the pallet::weight macro to specify a weight value for the dispatchable function
 
 310
 00:12:50,966 --> 00:12:52,466
-这里我们给定了一个默认的
-Here we have given a default
+这里我们给定了一个默认的0这样的权重
+in this case, we provide a default weight of 0
 
 311
 00:12:52,466 --> 00:12:53,566
-0这样的权重
-0 such weight
+这里我们给定了一个默认的0这样的权重
+in this case, we provide a default weight of 0
 
 312
 00:12:53,800 --> 00:12:55,900
 之后的课程我们会介绍如何使用
-Later in the course we will introduce how to use
+In future lessons, we will explore how to appropriately define weights using benchmarks
 
 313
 00:12:55,900 --> 00:12:56,133
-benchmark to give weight a
+之后的课程我们会介绍如何使用
+In future lessons, we will explore how to appropriately define weights using benchmarks
 
 314
 00:12:56,133 --> 00:12:58,033
-benchmark来对权重进行
-benchmark to give weight a
+benchmark来对权重进行合适的定义
+In future lessons, we will explore how to appropriately define weights using benchmarks
 
 315
 00:12:58,033 --> 00:12:58,266
-benchmark来对权重进行
+benchmark来对权重进行合适的定义
+In future lessons, we will explore how to appropriately define weights using benchmarks
 
 316
-00:12:58,700 --> 00:12:59,700
-合适的定义
-suitable definition
+00:12:58,266 --> 00:12:59,700
+benchmark来对权重进行合适的定义
+In future lessons, we will explore how to appropriately define weights using benchmarks
 
 317
 00:13:01,300 --> 00:13:02,700
-pallet call index宏
-pallet call index macro
+pallet::call_index宏定义了可调函数在模块里的顺序
+The pallet::call_index macro defines the order of the dispatchable functions within the module
 
 318
 00:13:02,700 --> 00:13:05,700
-定义了可调函数在模块里的
-defines the order of the callable function
+pallet::call_index宏定义了可调函数在模块里的顺序
+The pallet::call_index macro defines the order of the dispatchable functions within the module
 
 319
-00:13:06,400 --> 00:13:07,200
-顺序
-in the module.
+00:13:05,700 --> 00:13:07,200
+pallet::call_index宏定义了可调函数在模块里的顺序
+The pallet::call_index macro defines the order of the dispatchable functions within the module
 
 320
 00:13:07,666 --> 00:13:10,166
 首先我们在create_claim可调函数里面
-First of all, in the create_claim callable function
+In the create_claim function, we first need to verify the sender of the transaction
 
 321
 00:13:10,166 --> 00:13:14,399
 需要去校验我们的交易的发送方
-we need to verify the sender of our transaction
+In the create_claim function, we first need to verify the sender of the transaction
 
 322
 00:13:14,500 --> 00:13:16,500
 我们的交易是一笔签名的交易
-Our transaction is a signed transaction
+our transaction is a signed transaction
 
 323
 00:13:17,400 --> 00:13:18,666
-同时我们要
-At the same time we want
+同时我们要校验存证的存储项
+Next, we need to verify that the storage item Proofs does not contain a key for the input claim
 
 324
-00:13:19,300 --> 00:13:20,733
-校验我们的
-to check our
+00:13:18,666 --> 00:13:20,733
+同时我们要校验存证的存储项
+Next, we need to verify that the storage item Proofs does not contain a key for the input claim
 
 325
-00:13:21,066 --> 00:13:21,999
-存证的存储项
-storage item
+00:13:20,733 --> 00:13:21,999
+同时我们要校验存证的存储项
+Next, we need to verify that the storage item Proofs does not contain a key for the input claim
 
 326
-00:13:22,000 --> 00:13:26,200
-proof里面不包含Bounded claim这样一个键
-that the proof does not contain such a key as Bounded claim
+00:13:21,999 --> 00:13:26,200
+Proofs里面不包含Bounded claim这样一个键
+Next, we need to verify that the storage item Proofs does not contain a key for the input claim
 
 327
 00:13:26,933 --> 00:13:28,466
 也就是说我们这样的claim
-That is to say, our claim
+this means that the claim has not been stored in the Proofs storage yet
 
 328
 00:13:28,466 --> 00:13:30,199
 还没有存储到我们的
-has not been saved to our
+this means that the claim has not been stored in the Proofs storage yet
 
 329
-00:13:30,366 --> 00:13:32,299
+00:13:30,199 --> 00:13:32,299
 proof存证存储项里面
-the proof storage item
+this means that the claim has not been stored in the Proofs storage yet
 
 330
 00:13:32,866 --> 00:13:35,199
-如果存在我们返回一个错误
-If it exists we return an error
+如果存在我们返回一个错误ProofAlreadyExist证明
+if the key exists, it returns an error ProofAlreadyExist to indicate that the proof has already been claimed by someone else
 
 331
-00:13:35,200 --> 00:13:36,000
-ProofAlreadyExist
-ProofAlreadyExist
+00:13:35,199 --> 00:13:36,000
+如果存在我们返回一个错误ProofAlreadyExist证明
+if the key exists, it returns an error ProofAlreadyExist to indicate that the proof has already been claimed by someone else
 
 332
-00:13:36,133 --> 00:13:36,933
-证明
-to prove
+00:13:36,000 --> 00:13:36,933
+如果存在我们返回一个错误ProofAlreadyExist证明
+if the key exists, it returns an error ProofAlreadyExist to indicate that the proof has already been claimed by someone else
 
 333
-00:13:37,000 --> 00:13:41,300
+00:13:36,933 --> 00:13:41,300
 这样的一个proof已经被别人去申请过
-that such a proof has already been gotten by others
+if the key exists, it returns an error ProofAlreadyExist to indicate that the proof has already been claimed by someone else
 
 334
 00:13:42,866 --> 00:13:45,566
 接着我们就可以使用proofs::::insert方法
-Then we can use the proofs::::insert method
+After the verification, we can use the Proofs::insert method to insert our key-value pair
 
 335
-00:13:45,800 --> 00:13:47,000
+00:13:45,566 --> 00:13:47,000
 来插入我们的键值对
-to insert our key-value pairs
+After the verification, we can use the Proofs::insert method to insert our key-value pair
 
 336
 00:13:47,100 --> 00:13:49,966
 这里我们的键是BoundedVector
-Here our key is BoundedVector
+the key is a bounded vector which is claim here
 
 337
 00:13:49,966 --> 00:13:52,333
-也就是我们这里的Bounded claim
-That is our Bounded claim here
+也就是我们这里的claim
+the key is a bounded vector which is claim here
 
 338
 00:13:52,600 --> 00:13:54,866
-以及它的值是一个2元素
-and its value is a 2-element
+以及它的值是一个2元素的元组
+and its value is a tuple of two elements
 
 339
 00:13:54,866 --> 00:13:56,466
-Tuple是交易的发送方
-Tuple that is the sender of the transaction
+是交易的发送方sender, AccoutId表示我们的用户账户
+the first element is the sender of the transaction which is AccountId
 
 340
 00:13:56,466 --> 00:13:59,099
-sender AccoutId表示我们的AccountId
-sender AccoutId represents our AccountId
+是交易的发送方sender, AccoutId表示我们的用户账户
+the first element is the sender of the transaction which is AccountId
 
 341
 00:13:59,533 --> 00:14:01,799
 另外一个是我们的当前的区块数
-The other is our current block number
+the other is the current block number obtained using the block_number method provided by the system module
 
 342
-00:14:01,800 --> 00:14:03,800
-我们使用系统模块提供的block_number
-We use the block_number provided by the system module
+00:14:01,799 --> 00:14:03,800
+我们使用系统模块提供的block_number这样的一个方法
+the other is the current block number obtained using the block_number method provided by the system module
 
 343
 00:14:03,800 --> 00:14:04,600
-这样的一个方法
-such a method
+我们使用系统模块提供的block_number这样的一个方法
+the other is the current block number obtained using the block_number method provided by the system module
 
 344
 00:14:05,766 --> 00:14:06,699
 成功的存储之后
-After successful storage
+Once the insertion is successful, we can trigger the ClaimCreated event to indicate that the claim has been successfully created
 
 345
-00:14:06,700 --> 00:14:09,333
-我们就可以触发一个事件
-we can trigger an event
+00:14:06,699 --> 00:14:09,333
+我们就可以触发一个事件ClaimCreated
+Once the insertion is successful, we can trigger the ClaimCreated event to indicate that the claim has been successfully created
 
 346
-00:14:09,366 --> 00:14:10,366
-ClaimCreated
-ClaimCreated
+00:14:09,333 --> 00:14:10,366
+我们就可以触发一个事件ClaimCreated
+Once the insertion is successful, we can trigger the ClaimCreated event to indicate that the claim has been successfully created
 
 347
-00:14:10,400 --> 00:14:13,533
+00:14:10,366 --> 00:14:13,533
 表示我们的存证已经成功的被创建
-It indicates that our PoE has been successfully created
+Once the insertion is successful, we can trigger the ClaimCreated event to indicate that the claim has been successfully created
 
 348
 00:14:14,066 --> 00:14:15,999
 紧接着我们返回一个OK
-Then we return an OK
+Finally, we return Ok(()) to signify that the creation of the claim is complete
 
 349
-00:14:17,333 --> 00:14:18,199
-这样我们
-So
+00:14:15,999 --> 00:14:18,199
+这样我们创建存证的功能就已经完成了
+Finally, we return Ok(()) to signify that the creation of the claim is complete
 
 350
-00:14:18,200 --> 00:14:20,500
-创建存证的功能就已经完成了
-the function of creating a PoE has been completed
+00:14:18,199 --> 00:14:20,500
+这样我们创建存证的功能就已经完成了
+Finally, we return Ok(()) to signify that the creation of the claim is complete
 
 351
 00:14:21,100 --> 00:14:22,733
-我们可以看一下编译是不
-We can see if the compilation is
+我们可以看一下编译是不是通过
+Let's check if the compilation is successful
 
 352
 00:14:22,733 --> 00:14:24,533
-是通过在编译之前
-passed. Before compiling
+在编译之前我们需要把我们的存证模块
+before compiling, we need to add the proof-of-existence module to the Cargo.toml file in our node template
 
 353
 00:14:24,533 --> 00:14:26,899
-我们需要把我们的存证模块
-we need to add our certificate module
+在编译之前我们需要把我们的存证模块
+before compiling, we need to add the proof-of-existence module to the Cargo.toml file in our node template
 
 354
-00:14:27,100 --> 00:14:29,200
-添加到我们的node template
-to a space in Cargo.toml
+00:14:26,899 --> 00:14:29,200
+添加到我们的node template所对应的Cargo.toml这样一个space里面
+before compiling, we need to add the proof-of-existence module to the Cargo.toml file in our node template
 
 355
 00:14:29,200 --> 00:14:31,166
-所对应的Cargo.toml这样一个
-that our node template
+添加到我们的node template所对应的Cargo.toml这样一个space里面
+before compiling, we need to add the proof-of-existence module to the Cargo.toml file in our node template
 
 356
-00:14:31,266 --> 00:14:32,133
-space里面
-corresponds to.
+00:14:31,166 --> 00:14:32,133
+添加到我们的node template所对应的Cargo.toml这样一个space里面
+before compiling, we need to add the proof-of-existence module to the Cargo.toml file in our node template
 
 357
 00:14:32,333 --> 00:14:35,299
 我们这里要添加我们的pallet poe
-We're going to add our pallet poe here
+let's add our pallet-poe here
 
 358
 00:14:36,333 --> 00:14:38,099
 我们现在来编译一下
-Let's compile it now
+Now let's compile the code by running cargo build --release to confirm if our code can be compiled successfully
 
 359
-00:14:39,100 --> 00:14:40,533
-cargo build --release
-cargo build --release
+00:14:38,099 --> 00:14:40,533
+cargo build --release 来确认一下我们的代码是不是能够成功编译
+Now let's compile the code by running cargo build --release to confirm if our code can be compiled successfully
 
 360
 00:14:40,533 --> 00:14:41,366
-来确认一下
-to confirm
+cargo build --release 来确认一下我们的代码是不是能够成功编译
+Now let's compile the code by running cargo build --release to confirm if our code can be compiled successfully
 
 361
 00:14:41,366 --> 00:14:43,466
-我们的代码是不是能够成功编译
-does our code compile successfully
+cargo build --release 来确认一下我们的代码是不是能够成功编译
+Now let's compile the code by running cargo build --release to confirm if our code can be compiled successfully
 
 362
 00:14:44,300 --> 00:14:44,866
-可以看到
-We can see
+可以看到我们现在就已经成功的编译了
+As we can see, the compilation was successful
 
 363
 00:14:44,866 --> 00:14:46,966
-我们现在就已经成功的编译了
-it have now successfully compiled
+可以看到我们现在就已经成功的编译了
+As we can see, the compilation was successful
 
 364
 00:14:47,966 --> 00:14:50,333
 接着我们来添加其他的可调用函数
-Then let's add other callable functions
+Next, let's add other dispatchable functions
 
 365
 00:14:51,133 --> 00:14:52,799
 我们这里已经有了创建存证
-We already have PoE creation
+we have already implemented the "create_claim" function
 
 366
 00:14:52,800 --> 00:14:53,866
-我们现在来添加
-we will now add
+我们现在来添加删除存证这样的一个可调用函数
+now let's add the dispatchable function for revoking a claim
 
 367
-00:14:54,733 --> 00:14:57,966
-删除存证这样的一个可调用函数
-a callable function such as delete PoE
+00:14:53,866 --> 00:14:57,966
+我们现在来添加删除存证这样的一个可调用函数
+now let's add the dispatchable function for revoking a claim
 
 368
 00:14:58,200 --> 00:14:59,066
 为了节省时间
-To save time
+To save time, we'll just put the code here and review it together
 
 369
 00:14:59,066 --> 00:15:01,533
 我们就直接把代码一起放在这里
-We'll just put the code together here
+To save time, we'll just put the code here and review it together
 
 370
 00:15:01,533 --> 00:15:02,766
 我们一起来看一下代码
-Let's take a look at the code
+let's take a look at the code of the revoke_claim function
 
 371
 00:15:03,200 --> 00:15:04,266
-删除存证
-delete PoE
+删除存证同样的我们给它一个pallet::weight(0)
+Similarly, it uses pallet::weight(0) to set the weight for demo purpose
 
 372
 00:15:04,266 --> 00:15:06,133
-同样的我们给它一个pallet::weight(0)
-Similarly we give it a pallet::weight(0)
+删除存证同样的我们给它一个pallet::weight(0)
+Similarly, it uses pallet::weight(0) to set the weight for demo purpose
 
 373
 00:15:06,133 --> 00:15:08,199
 来做一个默认的权重
-to make a default weight
+Similarly, it uses pallet::weight(0) to set the weight for demo purpose
 
 374
 00:15:08,200 --> 00:15:10,866
 revoke_claim它有两个参数
-revoke_claim which has two parameters
+revoke_claim takes two parameters: origin, which represents the sender of the transaction
 
 375
 00:15:10,866 --> 00:15:12,566
 第一个是交易的发送方origin
-The first is the sender origin of the transaction
+revoke_claim takes two parameters: origin, which represents the sender of the transaction
 
 376
 00:15:12,566 --> 00:15:16,266
-另外一个是存证的哈希值Vector u8来表示
-The other is the hash value Vector u8 of the PoE
+另外一个是存证的哈希值vector u8来表示
+and claim, which is a BoundedVec<u8, T::MaxClaimLength> representing the claim hash
 
 377
 00:15:16,800 --> 00:15:18,133
 我们首先也是校验
-We also check
+First, we validate that the transaction is signed and retrieve the sender of the transaction
 
 378
 00:15:18,133 --> 00:15:19,733
 我们的交易是经过签名的
-our transactions are signed
+First, we validate that the transaction is signed and retrieve the sender of the transaction
 
 379
 00:15:19,733 --> 00:15:22,266
 并且获得我们的交易的发送方sender
-and get the sender of our transaction sender
+First, we validate that the transaction is signed and retrieve the sender of the transaction
 
 380
 00:15:22,733 --> 00:15:24,099
-接着我们要校验
-Next we have to verify
+接着我们要校验我们的存证
+then, verify that the claim exists in our Proofs storage item
 
 381
-00:15:24,533 --> 00:15:25,699
-我们的存证
-that our PoE
+00:15:24,099 --> 00:15:25,699
+接着我们要校验我们的存证
+then, verify that the claim exists in our Proofs storage item
 
 382
-00:15:25,700 --> 00:15:28,333
+00:15:25,699 --> 00:15:28,333
 已经存在在我们的proof存储项里面
-has already existed in our proof storage item
+then, verify that the claim exists in our Proofs storage item
 
 383
 00:15:28,333 --> 00:15:29,799
 不然的话我们就会报一个错误
-Otherwise it will report an error
+Otherwise, it will return an error
 
 384
 00:15:29,800 --> 00:15:30,700
-因为只有
-because only
+因为只有已经存储的存证才可以被吊销
+as only existing claims can be revoked
 
 385
-00:15:30,866 --> 00:15:33,333
-已经存储的存证才可以被吊销
-stored PoE can be revoked
+00:15:30,700 --> 00:15:33,333
+因为只有已经存储的存证才可以被吊销
+as only existing claims can be revoked
 
 386
 00:15:33,366 --> 00:15:35,299
 我们使用Proofs::get的方法
-We use the Proofs::get method
+it use the Proofs::<T>::get method, passing the key claim, to retrieve the associated value from our storage
 
 387
-00:15:35,600 --> 00:15:38,766
-传入我们的Bounded claim键来获取
-to pass in our Bounded claim key to get
+00:15:35,299 --> 00:15:38,766
+传入我们的bounded claim键来获取我们的Proofs的值
+it use the Proofs::<T>::get method, passing the key claim, to retrieve the associated value from our storage
 
 388
-00:15:39,166 --> 00:15:41,333
-我们的proofs的值
-the value of our proofs
+00:15:38,766 --> 00:15:41,333
+传入我们的Bounded claim键来获取我们的proofs的值
+it use the Proofs::<T>::get method, passing the key claim, to retrieve the associated value from our storage
 
 389
 00:15:41,666 --> 00:15:43,099
-如果不存在这样的一个
-If there is no such a
+如果不存在这样的一个键所对应的值的话
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 390
-00:15:43,100 --> 00:15:44,133
-键所对应的值的话
-value corresponding to the key
+00:15:43,099 --> 00:15:44,133
+如果不存在这样的一个键所对应的值的话
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 391
 00:15:44,133 --> 00:15:44,999
 我们就
-we will then
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 392
-00:15:45,000 --> 00:15:46,966
-证明我们的存储项里面并没有存储
-prove that there is no claim stored
+00:15:44,999 --> 00:15:46,966
+证明我们的存储项里面并没有存储这样的一个claim
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 393
-00:15:47,066 --> 00:15:49,066
-这样的一个claim
-in our storage item.
+00:15:46,966 --> 00:15:49,066
+证明我们的存储项里面并没有存储这样的一个claim
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 394
-00:15:49,133 --> 00:15:50,966
+00:15:49,066 --> 00:15:50,966
 我们返回一个ClaimNotExist的错误
-We return a ClaimNotExist error
+if the given key has no associated value, it means that the claim is not stored, and return a ClaimNotExist error
 
 395
 00:15:51,133 --> 00:15:54,099
 如果存储了这样的一个存证的话
-If such PoE is stored
+if the claim exists, we return the corresponding value of the storage item
 
 396
-00:15:54,100 --> 00:15:56,933
+00:15:54,099 --> 00:15:56,933
 我们就返回对应的存储项的值
-It returns the value of the corresponding storage item
+if the claim exists, we return the corresponding value of the storage item
 
 397
 00:15:56,933 --> 00:15:58,799
-它是两个元素中的Tuple第一
-It is a Tuple of two elements. First
+它是两个元素中的元组
+which is a tuple containing two elements
 
 398
 00:15:58,800 --> 00:16:00,066
-个元素是owner
-element is owner
+第一个元素是owner, 是我们的存证的拥有人
+owner which is the owner of the claim
 
 399
-00:16:00,266 --> 00:16:02,733
-是我们的存证的拥有人。第二个
-It represents the owner of the PoE. The second
+00:16:00,066 --> 00:16:02,733
+第一个元素是owner, 是我们的存证的拥有人
+owner which is the owner of the claim
 
 400
 00:16:02,733 --> 00:16:04,166
-元素是区块数
-element is the number of blocks
+第二个元素是区块数block number
+and second element is block number
 
 401
 00:16:04,166 --> 00:16:04,733
-包括number
-including number
+第二个元素是区块数block number
+and second element is block number
 
 402
 00:16:04,733 --> 00:16:07,333
 这里我们不关心所以用下划线
-Here we don't care so use underscore
+since we don't care about block_number, we use an underscore (_) as a placeholder
 
 403
 00:16:07,766 --> 00:16:08,899
