@@ -2010,548 +2010,548 @@ since we don't care about block_number, we use an underscore (_) as a placeholde
 
 403
 00:16:07,766 --> 00:16:08,899
-我们需要校验
-we need to varify that
+我们需要校验交易的发送方sender
+We need to verify that the sender of the transaction is the same as the owner of the claim
 
 404
-00:16:08,900 --> 00:16:11,100
-我们交易的发送方sender
-sender of our transaction
+00:16:08,899 --> 00:16:11,100
+我们需要校验交易的发送方sender
+We need to verify that the sender of the transaction is the same as the owner of the claim
 
 405
-00:16:11,300 --> 00:16:13,666
-是和我们的存证的拥有人owner
-is the same with
+00:16:11,100 --> 00:16:13,666
+是和我们的存证的拥有人owner是一致的
+We need to verify that the sender of the transaction is the same as the owner of the claim
 
 406
 00:16:13,666 --> 00:16:14,499
-是一致的
-the owner of the PoE
+是和我们的存证的拥有人owner是一致的
+We need to verify that the sender of the transaction is the same as the owner of the claim
 
 407
 00:16:14,500 --> 00:16:17,166
 不然的话我们就返回错误NotClaimOwner
-Otherwise we return the error NotClaimOwner
+otherwise it will return the error NotClaimOwner
 
 408
 00:16:17,933 --> 00:16:19,299
 接着我们就可以调用
-Then we can call
+After that, we can call the remove method on the Proofs storage to delete the proof associated with the key (claim)
 
 409
-00:16:19,400 --> 00:16:22,866
+00:16:19,299 --> 00:16:22,866
 Proofs存储项的remove方法来去删除
-the remove method of the Proofs storage item to delete
+After that, we can call the remove method on the Proofs storage to delete the proof associated with the key (claim)
 
 410
-00:16:22,966 --> 00:16:24,766
-对应key所
-corresponding to the key
+00:16:22,866 --> 00:16:24,766
+key所对应的存证
+After that, we can call the remove method on the Proofs storage to delete the proof associated with the key (claim)
 
 411
-00:16:25,133 --> 00:16:26,066
-对应的存证
-corresponding to the PoE
+00:16:24,766 --> 00:16:26,066
+key所对应的存证
+After that, we can call the remove method on the Proofs storage to delete the proof associated with the key (claim)
 
 412
 00:16:26,066 --> 00:16:27,966
-我们这样的key是Bounded claim
-The key is Bounded claim
+我们这的key是claim
+After that, we can call the remove method on the Proofs storage to delete the proof associated with the key (claim)
 
 413
 00:16:28,533 --> 00:16:30,766
-接着我们就可以触发一个事件
-Then we can trigger an event
+接着我们就可以触发一个事件ClaimRevoked
+Then trigger a ClaimRevoked event and return Ok(())
 
 414
-00:16:30,900 --> 00:16:32,000
-ClaimRevoked
-ClaimRevoked
+00:16:30,766 --> 00:16:32,000
+接着我们就可以触发一个事件ClaimRevoked
+Then trigger a ClaimRevoked event and return Ok(())
 
 415
-00:16:32,866 --> 00:16:35,866
-才会OK我现在把我们的poe模块
-It will be OK. I will now put our poe module
+00:16:32,000 --> 00:16:35,866
+返回Ok
+Then trigger a ClaimRevoked event and return Ok(())
 
 416
 00:16:35,866 --> 00:16:37,133
-引入到我们的
-into
+我现在把我们的poe模块引入到我们的runtime里面
+Now, let's import our poe module into the runtime
 
 417
-00:16:37,466 --> 00:16:38,266
-runtime里面
-the runtime
+00:16:37,133 --> 00:16:38,266
+我现在把我们的poe模块引入到我们的runtime里面
+Now, let's import our poe module into the runtime
 
 418
 00:16:38,266 --> 00:16:39,566
-我们在runtime
-In runtime
+我们在runtime Cargo.toml里面
+In the Cargo.toml file of our runtime, we need to make the following modifications
 
 419
-00:16:40,000 --> 00:16:41,333
-Cargo.toml里面
-Cargo.toml
+00:16:39,566 --> 00:16:41,333
+我们在runtime Cargo.toml里面
+In the Cargo.toml file of our runtime, we need to make the following modifications
 
 420
 00:16:41,333 --> 00:16:44,866
 首先去引入pallet-poe模块
-First import the pallet-poe module
+first import the pallet-poe module
 
 421
 00:16:46,500 --> 00:16:48,933
 因为它和pallet-template的很相似
-Because it is very similar to pallet-template's
+since it is very similar to pallet-template
 
 422
 00:16:48,933 --> 00:16:50,266
-我们直接把
-we directly
+我们直接把pallet-template复制一份并且修改必要的信息
+we can duplicate the pallet-template section and update the necessary information
 
 423
 00:16:50,266 --> 00:16:52,733
-pallet-template复制一份并且修改必要的信息
-copy the pallet-template and modify the necessary information
+我们直接把pallet-template复制一份并且修改必要的信息
+we can duplicate the pallet-template section and update the necessary information
 
 424
 00:16:52,733 --> 00:16:54,299
 我们的模块是pallet-poe
-Our module is pallet-poe
+our module name is pallet-poe, and its corresponding path is pallets/poe within the project directory
 
 425
-00:16:55,200 --> 00:17:00,166
+00:16:54,299 --> 00:17:00,166
 它所对应的路径是pallets目录下的poe
-Its corresponding path is poe in the pallets directory
+our module name is pallet-poe, and its corresponding path is pallets/poe within the project directory
 
 426
 00:17:00,733 --> 00:17:04,499
 目录接着我们添加我们的编译标签
-directory. Next we add our compile tag
+we also need to add the compilation feature for our module
 
 427
 00:17:04,866 --> 00:17:08,066
 我们在这里我们修改成pallet-poe
-Here we modify it into pallet-poe
+here we modify it to pallet-poe
 
 428
 00:17:09,066 --> 00:17:10,199
 因为我们并没有
-because we didn't
+since we don't add benchmarks for poe module, thus do not require the runtime-benchmark feature
 
 429
-00:17:10,200 --> 00:17:12,766
+00:17:10,199 --> 00:17:12,766
 对pallet-poe进行runtime benchmark
-use runtime benchmark for pallet-poe
+since we don't add benchmarks for poe module, thus do not require the runtime-benchmark feature
 
 430
 00:17:12,766 --> 00:17:14,166
 所以我们不需要填
-so we don't need to fill
+since we don't add benchmarks for poe module, thus do not require the runtime-benchmark feature
 
 431
-00:17:14,500 --> 00:17:16,000
+00:17:14,166 --> 00:17:16,000
 runtime-benchmark标签
-runtime-benchmark tag
+since we don't add benchmarks for poe module, thus do not require the runtime-benchmark feature
 
 432
 00:17:17,533 --> 00:17:20,299
 try-runtime目前也不需要它是用来测试
-try-runtime is not currently needed. It is used
+similarly, we don't need the try-runtime feature, which is used for testing onchain data during runtime upgrades
 
 433
-00:17:20,800 --> 00:17:22,900
+00:17:20,299 --> 00:17:22,900
 链上的runtime升级的时候去
-when the runtime on the chain is upgraded, go to
+similarly, we don't need the try-runtime feature, which is used for testing onchain data during runtime upgrades
 
 434
-00:17:23,500 --> 00:17:25,533
+00:17:22,900 --> 00:17:25,533
 做一些链上数据的测试
-to do some tests on the data on the chain
+similarly, we don't need the try-runtime feature, which is used for testing onchain data during runtime upgrades
 
 435
 00:17:25,533 --> 00:17:26,799
 我们目前也不需要
-We don't need it yet
+similarly, we don't need the try-runtime feature, which is used for testing onchain data during runtime upgrades
 
 436
 00:17:27,400 --> 00:17:28,500
 添加完依赖之后
-After adding dependencies
+After adding the dependencies, we can now add the implementation of our poe module in the runtime lib.rs file
 
 437
 00:17:28,500 --> 00:17:30,133
 我们就可以在我们的runtime lib.rs
-in our runtime lib.rs
+After adding the dependencies, we can now add the implementation of our poe module in the runtime lib.rs file
 
 438
 00:17:30,133 --> 00:17:32,499
-源文件里面添加我们对应的
-in the source file,  we can add our corresponding
+源文件里面添加我们对应的poe模块实现
+After adding the dependencies, we can now add the implementation of our poe module in the runtime lib.rs file
 
 439
-00:17:32,866 --> 00:17:33,933
-poe模块实现
-Poe module implementation
+00:17:32,499 --> 00:17:33,933
+源文件里面添加我们对应的poe模块实现
+After adding the dependencies, we can now add the implementation of our poe module in the runtime lib.rs file
 
 440
 00:17:35,866 --> 00:17:38,566
-为了简单起见我们把template模块实现
-For simplicity, we make a copy of the template module
+为了简单起见我们把template模块实现复制一份
+For simplicity, we can duplicate the template module implementation and modify it for pallet-poe module
 
 441
-00:17:39,100 --> 00:17:39,966
-复制一份
-implementation
+00:17:38,566 --> 00:17:39,966
+为了简单起见我们把template模块实现复制一份
+For simplicity, we can duplicate the template module implementation and modify it for pallet-poe module
 
 442
-00:17:40,100 --> 00:17:41,400
-然后把它修改为我
-and then modify it to
+00:17:39,966 --> 00:17:41,400
+然后把它修改为我们的pallet-poe模块
+For simplicity, we can duplicate the template module implementation and modify it for pallet-poe module
 
 443
 00:17:41,400 --> 00:17:43,600
-们的pallet-poe模块
-pallet-poe module
+然后把它修改为我们的pallet-poe模块
+For simplicity, we can duplicate the template module implementation and modify it for pallet-poe module
 
 444
 00:17:43,600 --> 00:17:45,533
-跟这个接口里面有两个类型
-There are two types in this interface
+这个接口里面有两个类型
+There are two assocated types in the implementation of poe module trait
 
 445
 00:17:45,533 --> 00:17:47,666
-第一个是Event我们这里已经有了
-The first one is Event we already have here
+第一个是RuntimeEvent我们这里已经有了
+the first one is RuntimeEvent, which we already have defined
 
 446
 00:17:47,700 --> 00:17:50,133
 还有一个是MaxClaimLength
-Another one is MaxClaimLength
+the second one is MaxClaimLength, for which we can use Const<u32> provided by sp-runtime
 
 447
-00:17:50,300 --> 00:17:54,066
-这里我们使用Constu32是由我们的
-Here we use Constu32
+00:17:50,133 --> 00:17:54,066
+这里我们使用Const u32
+the second one is MaxClaimLength, for which we can use Const<u32> provided by sp-runtime
 
 448
-00:17:55,300 --> 00:17:58,966
-sp-runtime提供的这样一个帮助数据类型
-such a helper data type provided by sp-runtime
+00:17:54,066 --> 00:17:58,966
+是由sp-runtime提供的这样一个帮助数据类型
+the second one is MaxClaimLength, for which we can use Const<u32> provided by sp-runtime
 
 449
 00:17:59,066 --> 00:18:00,766
-Constu32表示
-Constu32 represents that it
+Const u32表示是一个满足Get接口的u32类型
+Const<u32> represents a u32 type that satisfies the Get trait
 
 450
-00:18:00,933 --> 00:18:04,366
-是一个满足get接口的u32类型
-is a u32 type that satisfies the get interface
+00:18:00,766 --> 00:18:04,366
+Const u32表示是一个满足Get接口的u32类型
+Const<u32> represents a u32 type that satisfies the Get trait
 
 451
 00:18:04,733 --> 00:18:07,466
 它的长度是我们这里给的是512
-Its length is 512 as we give here
+Here, we set the maximum length to 512, which is the maximum length for the bounded vector
 
 452
 00:18:07,466 --> 00:18:11,299
-我们Bonded vector它的最大长度是512
-Our Bonded vector has a maximum length of 512
+我们bounded vector它的最大长度是512
+Here, we set the maximum length to 512, which is the maximum length for the bounded vector
 
 453
 00:18:12,166 --> 00:18:13,099
 接着我们把
-Then we import
+Next, we'll include the poe module in the Runtime enum inside the construct_runtime macro
 
 454
-00:18:13,133 --> 00:18:15,733
+00:18:13,099 --> 00:18:15,733
 poe模块引入到我们的construct_runtime
-the poe module into our construct_runtime
+Next, we'll include the poe module in the Runtime enum inside the construct_runtime macro
 
 455
 00:18:15,733 --> 00:18:16,933
-里面的Runtime
-inside the Runtime
+里面的Runtime枚举里
+Next, we'll include the poe module in the Runtime enum inside the construct_runtime macro
 
 456
 00:18:16,933 --> 00:18:17,799
-枚举里面
-inside the enum
+里面的Runtime枚举里
+Next, we'll include the poe module in the Runtime enum inside the construct_runtime macro
 
 457
 00:18:18,066 --> 00:18:18,899
-这里是
-Here
+这里是PoeModule
+here it adds PoeModule
 
 458
-00:18:19,933 --> 00:18:21,099
-PoeModule
-PoeModule
+00:18:18,899 --> 00:18:21,099
+这里是PoeModule
+here it adds PoeModule
 
 459
 00:18:22,000 --> 00:18:23,100
 pallet_poe
-pallet_poe
+and refer to pallet_poe
 
 460
 00:18:25,733 --> 00:18:26,999
 现在我们来编译
-Now let's compile
+let's compile the code
 
 461
 00:18:29,533 --> 00:18:30,999
 可以看到现在已经编译成功了
-You can see that the compilation is successful now
+you can see that the compilation is successful
 
 462
 00:18:31,000 --> 00:18:34,100
-我们来在polkadot.js.apps的前端页面里面进行
-Let's test it in the front-end page of
+我们来在polkadot.js.apps的前端页面里面进行我们模块测试
+Now, let's test our module in the frontend page of polkadot.js/apps
 
 463
-00:18:34,166 --> 00:18:35,333
-我们模块测试
-polkadot.js.apps
+00:18:34,100 --> 00:18:35,333
+我们来在polkadot.js.apps的前端页面里面进行我们模块测试
+Now, let's test our module in the frontend page of polkadot.js/apps
 
 464
 00:18:35,566 --> 00:18:38,399
 我们首先运行我们的节点程序
-We first run our node program
+first, we need to run the node program using the target/release/node-template binary file
 
 465
-00:18:38,400 --> 00:18:39,200
-在
-in
+00:18:38,399 --> 00:18:39,200
+在target/release/node-template这样一个二进制可编译文件里
+first, we need to run the node program using the target/release/node-template binary file
 
 466
-00:18:39,866 --> 00:18:43,999
-target/release/node-template这样一个二进制
-a binary like target/release/node-template
+00:18:39,200 --> 00:18:43,999
+在target/release/node-template这样一个二进制可编译文件里
+first, we need to run the node program using the target/release/node-template binary file
 
 467
-00:18:44,200 --> 00:18:45,133
-可编译文件里面
-such a the compilable file
+00:18:43,999 --> 00:18:45,133
+在target/release/node-template这样一个二进制可编译文件里
+first, we need to run the node program using the target/release/node-template binary file
 
 468
 00:18:45,133 --> 00:18:45,999
 我们运行
-we run
+run it with the --dev flag to indicate that we're using the development mode
 
 469
-00:18:46,000 --> 00:18:48,733
+00:18:45,999 --> 00:18:48,733
 它要使用--dev这样的一个标签
-We need to use a label like --dev
+run it with the --dev flag to indicate that we're using the development mode
 
 470
-00:18:48,966 --> 00:18:50,799
+00:18:48,733 --> 00:18:50,799
 来表示我们使用dev模式
-to indicate that we use dev mode
+run it with the --dev flag to indicate that we're using the development mode
 
 471
 00:18:51,700 --> 00:18:54,466
 可以看到现在节点已经启动起来了
-You can see that the node is now started
+you should see the node is started
 
 472
 00:18:54,466 --> 00:18:57,966
-并且有新的模块进行引入
-and there are new modules to be imported
+并且有新的区块生成
+and there are new blocks to be generated
 
 473
 00:18:57,966 --> 00:19:01,566
-我们现在来进入我们的前端页面
-Let's now go to our front-end page
+我们现在来进入我们的前端页面polkadot.js.apps
+Let's now go to our frontend page of polkadot.js/apps
 
 474
-00:19:01,600 --> 00:19:03,666
-polkadot.js.apps
-polkadot.js.apps
+00:19:01,566 --> 00:19:03,666
+我们现在来进入我们的前端页面polkadot.js/apps
+Let's now go to our frontend page of polkadot.js/apps
 
 475
 00:19:05,466 --> 00:19:07,699
-我们使用我们的本地节点
-We use our local node
+我们使用我们的本地节点Local Node 9944 switch
+select our local node using the "Local Node 9944"
 
 476
-00:19:08,000 --> 00:19:10,500
-Local Node 9944 switch
-Local Node 9944 switch
+00:19:07,699 --> 00:19:10,500
+我们使用我们的本地节点Local Node 9944 switch
+select our local node using the "Local Node 9944"
 
 477
 00:19:10,966 --> 00:19:13,666
 可以看到我们现在的区块正在生成
-You can see that our current block is being generated
+you can see that new blocks are being generated with a target block time of 6 seconds
 
 478
 00:19:13,666 --> 00:19:16,599
 它的目标block time是6秒
-Its target block time is 6 seconds
+you can see that new blocks are being generated with a target block time of 6 seconds
 
 479
 00:19:16,700 --> 00:19:18,933
-然后我们在我们的chain state
-Then in our chain state
+然后我们在我们的chain state里面可以看我们的Poe模块
+In the chain state section, we can find our PoE module
 
 480
-00:19:19,066 --> 00:19:20,966
-里面可以看我们的Poe模块
-You can see our PoE module
+00:19:18,933 --> 00:19:20,966
+然后我们在我们的chain state里面可以看我们的Poe模块
+In the chain state section, we can find our PoE module
 
 481
 00:19:21,800 --> 00:19:25,333
-然后它的Proofs给一个字节数
-Then for its Proofs we give a byte count
+然后它的Proofs给一个字节数,以0x来开头
+to read the state of Proofs storage, we nee to input the bytes in hex which start with 0x
 
 482
 00:19:25,733 --> 00:19:30,266
-以0X来开头 0X01
-Start with 0X, 0X01
+然后它的Proofs给一个字节数,以0x来开头
+here use 0x01 for key and check if the corresponding value exists
 
 483
 00:19:30,266 --> 00:19:31,999
-我们可以看一下这样的一个
-We can take a look at that
+0x01, 我们可以看一下这样的一个key对应的值是不是存在
+here use 0x01 for key and check if the corresponding value exists
 
 484
-00:19:32,000 --> 00:19:33,733
-key对应的值是不是存在
-does the value corresponding to the key exist?
+00:19:31,999 --> 00:19:33,733
+0x01, 我们可以看一下这样的一个key对应的值是不是存在
+here use 0x01 for key and check if the corresponding value exists
 
 485
 00:19:34,400 --> 00:19:35,533
-可以查询
-We can query
+查询可以看到它是None
+the result is None
 
 486
-00:19:35,900 --> 00:19:36,900
-可以看到它是None
-You can see that it is None
+00:19:35,533 --> 00:19:36,900
+查询可以看到它是None
+the result is None
 
 487
 00:19:37,000 --> 00:19:40,200
 表示我们key对应的值是不存在的
-which indicates that the value corresponding to our key does not exist
+indicating that the value for the key does not exist
 
 488
 00:19:40,200 --> 00:19:42,266
 我们现在来发送一笔交易
-Let's send a transaction now
+Now we will send a transaction using Alice, who has a pre-funded balance
 
 489
-00:19:42,566 --> 00:19:44,366
-我们使用Alice
-We use Alice
+00:19:42,266 --> 00:19:44,366
+我们使用Alice 她有预置的余额
+Now we will send a transaction using Alice, who has a pre-funded balance
 
 490
-00:19:44,533 --> 00:19:46,099
-它有预制的余额
-It has prefab balance
+00:19:44,366 --> 00:19:46,099
+我们使用Alice 她有预置的余额
+Now we will send a transaction using Alice, who has a pre-funded balance
 
 491
 00:19:46,900 --> 00:19:49,866
 进入Poe模块create claim我们来
-Enter the poeModule to create claim
+Use PoE module and call the "createClaim" function with the key 0x01
 
 492
-00:19:50,400 --> 00:19:52,600
-对应key x等于1
-Corresponding key x is equal to 1
+00:19:49,866 --> 00:19:52,600
+对应key 0x01
+Use PoE module and call the "createClaim" function with the key 0x01
 
 493
 00:19:52,600 --> 00:19:55,133
 我们现在来去创建一个claim
-Let's create a claim now
+it will create a proof, which will be stored on the chain
 
 494
-00:19:55,300 --> 00:19:56,800
+00:19:55,133 --> 00:19:56,800
 那么它会存储到链上
-Then it will be stored on the chain
+it will create a proof, which will be stored on the chain
 
 495
 00:19:56,800 --> 00:19:59,100
 待会我们去查询的话它应该就存在
-It should exist if we check later
+when we query it later, it should exist in state
 
 496
 00:19:59,533 --> 00:20:01,066
-我们submit transaction
-We submit transaction
+我们submit transaction 等待交易确认
+submit the transaction and wait for it to be confirmed
 
 497
-00:20:02,200 --> 00:20:03,766
-等待交易确认
-Waiting for transaction confirmation
+00:20:01,066 --> 00:20:03,766
+我们submit transaction 等待交易确认
+submit the transaction and wait for it to be confirmed
 
 498
 00:20:04,300 --> 00:20:06,366
 可以看到现在交易已经确认了
-You can see that the transaction has now been confirmed
+you can see that the transaction has been confirmed
 
 499
 00:20:06,900 --> 00:20:08,966
 再回到我们的chain state里面
-Go back to our chain state
+Go back to the chain state
 
 500
 00:20:09,766 --> 00:20:10,799
-Poe模块
-Poe module
+Poe模块 Proofs 0x01
+PoE module Proofs storage with key 0x01
 
 501
-00:20:11,200 --> 00:20:12,166
-Proofs
-Proofs
+00:20:10,799 --> 00:20:12,166
+Poe模块 Proofs 0x01
+PoE module Proofs storage with key 0x01
 
 502
-00:20:12,800 --> 00:20:13,766
-0x01
-0x01
+00:20:12,166 --> 00:20:13,766
+Poe模块 Proofs 0x01
+PoE module Proofs storage with key 0x01
 
 503
 00:20:13,766 --> 00:20:15,966
 这样的key对应的值现在是否存在呢
-Does the value corresponding to such a key exist now?
+Does the value exist for the given key?
 
 504
 00:20:16,133 --> 00:20:18,866
 可以看到这时候它已经有了对应的值
-You can see that it already has the corresponding value at this time
+At this point, we can see that the value exists
 
 505
 00:20:18,866 --> 00:20:21,133
-但是它的owner是这样一个地址
-but its owner is such an address
+它的owner是这样一个地址
+its owner is an address which is Alice's AccountId
 
 506
 00:20:21,133 --> 00:20:23,266
-也就是Alice的accountId
-That is Alice's accountId
+也就是Alice的account id
+its owner is an address which is Alice's AccountId
 
 507
 00:20:23,266 --> 00:20:24,999
-以及它的区块数是在
-and its block number is
+以及它的区块数是在20的时候进行存储的
+and the block number indicating when it was stored, which is 20 in this case
 
 508
-00:20:25,566 --> 00:20:27,866
-20的时候进行存储的
-stored at 20
+00:20:24,999 --> 00:20:27,866
+以及它的区块数是在20的时候进行存储的
+and the block number indicating when it was stored, which is 20 in this case
 
 509
 00:20:27,866 --> 00:20:28,566
 大家感兴趣的话
-If you are interested
+If you're interested, you can test the functionalities of revoke claim and transfer claim
 
 510
 00:20:28,566 --> 00:20:31,099
-可以去测试一下revoke claim和
-You can test revoke claim and
+可以去测试一下revoke claim和transfer claim这样的一个功能
+If you're interested, you can test the functionalities of revoke claim and transfer claim
 
 511
-00:20:31,100 --> 00:20:32,800
-transfer claim这样的一个功能
-a function such as transfer claim
+00:20:31,099 --> 00:20:32,800
+可以去测试一下revoke claim和transfer claim这样的一个功能
+If you're interested, you can test the functionalities of revoke claim and transfer claim
 
 512
 00:20:33,066 --> 00:20:35,299
@@ -2560,88 +2560,88 @@ Our homework for today's class is
 
 513
 00:20:35,366 --> 00:20:38,133
-第一题是列出三个常用的宏
-The first question is to list three commonly used macros
+第一题是列出三个常用的宏以及3个常用的存储数据结构
+Question 1: list three commonly used macros and 3 commonly used storage data types
 
 514
-00:20:38,333 --> 00:20:41,199
-以及3个常用的存储数据结构
-and 3 commonly used storage data structures
+00:20:38,133 --> 00:20:41,199
+第一题是列出三个常用的宏以及3个常用的存储数据结构
+Question 1: list three commonly used macros and 3 commonly used storage data types
 
 515
 00:20:41,366 --> 00:20:42,499
-第2题是
-Question 2 is
+第2题是实现存证模块所需的基本功能
+Question 2: implement the basic functionalities required for the PoE module
 
 516
-00:20:42,700 --> 00:20:45,666
-实现存证模块所需的基本功能
-that implement the basic functions required by PoE
+00:20:42,499 --> 00:20:45,666
+第2题是实现存证模块所需的基本功能
+Question 2: implement the basic functionalities required for the PoE module
 
 517
 00:20:45,966 --> 00:20:48,366
 包括了创建存证和撤销存证
-including creating PoE and revoking PoE
+including creating a claim and revoking a claim
 
 518
 00:20:48,366 --> 00:20:51,466
 我们刚才在课程上已经一起写过
-We have just written together in the course
+we have already worked on this together earlier
 
 519
 00:20:51,500 --> 00:20:52,733
-第3题是
-Question 3 is
+第3题是为存证模块添加一个新的功能也就是转移存证
+Question 3: add a new functionality to the PoE module, which is transferring a claim
 
 520
-00:20:52,866 --> 00:20:55,299
-为存证模块添加一个新的功能
-to add a new function to the PoE
+00:20:52,733 --> 00:20:55,299
+第3题是为存证模块添加一个新的功能也就是转移存证
+Question 3: add a new functionality to the PoE module, which is transferring a claim
 
 521
-00:20:55,300 --> 00:20:57,000
-也就是转移存证
-to transfer PoE
+00:20:55,299 --> 00:20:57,000
+第3题是为存证模块添加一个新的功能也就是转移存证
+Question 3: add a new functionality to the PoE module, which is transferring a claim
 
 522
 00:20:57,566 --> 00:20:59,533
 那这样的一个转移存证的可调用函数
-Then such a callable function that transfers the PoE
+it has three input parameters
 
 523
 00:20:59,533 --> 00:21:00,499
 有两个参数
-has two parameters
+it has three input parameters
 
 524
-00:21:01,166 --> 00:21:02,733
+00:21:00,499 --> 00:21:02,733
 那其实是3个参数
-That's actually 3 parameters
+it has three input parameters
 
 525
 00:21:02,733 --> 00:21:04,499
 第一个参数是交易的发送方
-The first parameter is the sender of the transaction
+the sender of the transaction, the hash value of the claim content
 
 526
-00:21:04,533 --> 00:21:07,333
+00:21:04,499 --> 00:21:07,333
 那另外一个是我们存证内容的哈希值
-The other one is the hash value of our certificate content
+the sender of the transaction, the hash value of the claim content
 
 527
 00:21:07,500 --> 00:21:09,800
-第三个参数是我们所需要
-The third parameter is what we need
+第三个参数是我们所需要将存证所转移的一个目标地址
+and the target address where the claim will be transferred to
 
 528
-00:21:09,900 --> 00:21:12,600
-将存证所转移的一个目标地址
-a target address to which the certificate will be transferred
+00:21:09,800 --> 00:21:12,600
+第三个参数是我们所需要将存证所转移的一个目标地址
+and the target address where the claim will be transferred to
 
 529
-00:21:12,933 --> 00:21:15,699
+00:21:12,600 --> 00:21:15,699
 也就是接收存证这样的一个账户地址
-That is, an account address that receives PoE
+and the target address where the claim will be transferred to
 
 530
 00:21:16,666 --> 00:21:18,733
